@@ -1,0 +1,137 @@
+baseurl = "/"
+title = "rOpenGov Home"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+
+# Pagination
+paginate = 6
+paginatePath = "page"
+
+# Theme to use
+theme = "hugo-bootstrap"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# Google analytics
+# googleAnalytics = ""
+
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/ropengov/"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/ropengov"
+
+
+[languages.en]
+  languageName = "English"
+
+  # Replace the default footer message with a localized message
+  # copyright = "Hugo template made with ❤ by Xzya"
+
+  #[[languages.en.menu.main]]
+  #  url = "/"
+  #  name = "Home"
+  #  weight = 1
+  [[languages.en.menu.main]]
+    url = "/about/"
+    name = "About"
+    weight = 2
+
+  [[languages.en.menu.main]]
+    url = "/projects/"
+    name = "Projects"
+    weight = 3
+
+  [[languages.en.menu.main]]
+    url = "/community/"
+    name = "Community"
+    weight = 4
+
+
+[languages.fi]
+  languageName = "Suomi"
+
+  #[[languages.fi.menu.main]]
+  #  url = "/"
+  #  name = "Koti"
+    weight = 1
+  [[languages.fi.menu.main]]
+    url = "/about/"
+    name = "Lisätietoja"
+    weight = 2
+
+  [[languages.fi.menu.main]]
+    url = "/projects/"
+    name = "Projektit"
+    weight = 3
+
+  [[languages.fi.menu.main]]
+    url = "/community/"
+    name = "Yhteisö"
+    weight = 4
+
+# Links format
+
+[permalinks]
+  post = "/:year/:month/:title/"
+
+[params]
+  # Main sections (currently used for the recent posts in the sidebar)
+  mainSections = ["post"]
+
+  # Default author
+  # author = "John Doe"
+
+  # Date format (default: Jan 2, 2006)
+  # date_format = "Jan 2, 2006"
+
+  # Display post summaries instead of content in list templates (default: true)
+  # truncate = false
+
+   description = "rOpenGov is a community of R package developers on open government data analytics and related topics"
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.ico"
+
+    customJS = ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"]
+
+  [params.sidebar]
+    # Whether to show the recent posts or not (default: true)
+    # showRecent = false
+
+    # Whether to show the taxonomies or not (default: true)
+    # showTaxonomy = false
+
+    # How many posts to show on the sidebar (Default: 5)
+    # num_recent_posts = 5
+
+   [params.logo]
+    url = "images/ropengov2.png"
+    width = 50
+    #height = 50
+    alt = "rOpenGov"
+
+   [params.header]
+    # Color scheme for the header (default: "light")
+    colorScheme = "light"
+
+  [params.footer]
+    # Color scheme for the footer (default: "light")
+    # colorScheme = "dark"

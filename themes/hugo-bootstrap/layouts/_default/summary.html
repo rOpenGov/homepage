@@ -5,9 +5,10 @@
         {{ partial "post-tags" . }}
         {{ partial "post-categories" . }}
     </header>
-    {{ .Summary }}
+    <hr>
+    <!--{{ .Summary }}
     {{ if .Truncated }}
     <p></p>
     <a href="{{ .RelPermalink }}">{{ i18n "readMore" }}</a>
-    {{ end }}
+    {{ end }}-->
 </article>

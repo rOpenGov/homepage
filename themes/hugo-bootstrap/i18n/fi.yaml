@@ -1,0 +1,29 @@
+- id: by
+  translation: "tekijä"
+
+- id: tags
+  translation: "Tägit"
+
+- id: categories
+  translation: "Kategoriat"
+
+- id: readMore
+  translation: "Lue lisää →"
+
+- id: translations
+  translation: "Käännökset"
+
+- id: related
+  translation: "Katso myös"
+
+- id: recentPosts
+  translation: "Uusimmat postaukset"
+
+- id: backToTop
+  translation: "Takaisin ylös"
+
+- id: language
+  translation: "Kieli"
+
+- id: thanks
+  translation: "Hugo templaatti jonka ❤ tehnyt {{.Xzya}}, inspiroituneena {{.HugoThemeBootstrap4Blog}}"
