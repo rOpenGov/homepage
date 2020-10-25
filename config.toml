@@ -130,7 +130,7 @@ theme = "hugo-bootstrap"
 
    [params.header]
     # Color scheme for the header (default: "light")
-    colorScheme = "light"
+    colorScheme = "dark"
 
   [params.footer]
     # Color scheme for the footer (default: "light")
