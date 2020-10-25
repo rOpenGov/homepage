@@ -1,7 +1,7 @@
 baseurl = "/"
 title = "rOpenGov Home"
 languageCode = "en-us"
-defaultContentLanguage = "en"
+#defaultContentLanguage = "en"
 
 googleAnalytics = ""
 disqusShortname = ""
@@ -64,17 +64,17 @@ theme = "hugo-bootstrap"
   #  name = "Koti"
     weight = 1
   [[languages.fi.menu.main]]
-    url = "/about/"
+    url = "/about_fi/"
     name = "Lisätietoja"
     weight = 2
 
   [[languages.fi.menu.main]]
-    url = "/projects/"
+    url = "/projects_fi/"
     name = "Projektit"
     weight = 3
 
   [[languages.fi.menu.main]]
-    url = "/community/"
+    url = "/community_fi/"
     name = "Yhteisö"
     weight = 4
 
@@ -114,7 +114,7 @@ theme = "hugo-bootstrap"
 
   [params.sidebar]
     # Whether to show the recent posts or not (default: true)
-    # showRecent = false
+    showRecent = false
 
     # Whether to show the taxonomies or not (default: true)
     # showTaxonomy = false
