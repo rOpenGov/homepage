@@ -8,7 +8,7 @@ tags: ["Finland"]
 
 ## Yleistä
 
-Hetu-paketti on tarkoitettu suomalaisten henkilötunnusten algoritmiseen käsittelyyn. Paketista on erityisesti hyötyä, mikäli halutaan poimia informaatiota suuresta määrästä henkilötunnuksia, kuten tunnuksen haltijoiden iät tai sukupuolet. Henkilötunnusten käsittelyyn tarkoitettujen työkalujen kehitystyö alkoi osana sorvi-pakettia, mutta ne eriytettiin omaksi paketikseen vuonna 2013. Syksyllä 2020 hetu-paketti saatettiin julkaisukelpoiseen kuntoon.
+Hetu-paketti on tarkoitettu suomalaisten henkilötunnusten algoritmiseen käsittelyyn. Paketista on erityisesti hyötyä, mikäli halutaan poimia informaatiota suuresta määrästä henkilötunnuksia, kuten tunnuksen haltijoiden iät tai sukupuolet. Henkilötunnusten käsittelyyn tarkoitettujen työkalujen kehitystyö alkoi osana sorvi-pakettia, mutta ne eriytettiin omaksi paketikseen vuonna 2013. Syksyllä 2020 hetu-paketti saatettiin julkaisukelpoiseen kuntoon ja se on saatavissa [CRANista](https://CRAN.R-project.org/package=hetu). 
 
 Hetu-paketin esikuvana on toiminut [sweidnumbr-paketti]( https://CRAN.R-project.org/package=sweidnumbr) ja pakettien käyttämät funktiot on mahdollisuuksien mukaan nimetty samalla tavalla.
 
@@ -20,7 +20,7 @@ Henkilötunnusta käytetään laajalti julkisella ja yksityisellä sektorilla. H
 
 Henkilötunnus ei sinänsä ole salassapidettävää tietoa, mutta sen, kuten muidenkin henkilötietojen, käsittelyyn liittyy rajoituksia: henkilötunnusta saa käsitellä rekisteröidyn yksiselitteisesti antamalla suostumuksella tai mikäli rekisteröidyn yksiselitteinen yksilöiminen on tärkeää.[^2] Rajoitukset eivät todennäköisesti ole täysin aiheettomia, sillä henkilötunnusten käyttö ei ole täysin ongelmatonta. Tähän palataan blogin loppupuolella.
 
-## Henkilötunnusten algoritminen käsittely
+## Henkilötunnusten algoritminen käsittely hetu-paketilla
 
 Henkilötunnusten sisältämän tiedon käsittely onnistuu melko hyvin ilman mitään apuvälineitä. Syntymäajan ja sukupuolen määrittämiseksi ei tarvitse suorittaa minkäänlaisia laskutoimituksia ja henkilötunnuksen muodon oikeellisuuden arviointi, etenkin päivämäärän, pituuden ja yksilönumeron osalta, onnistuu hyvin silmämääräisestikin. Tarkistusmerkin tarkistaminen ja laskeminen vaatii enemmän vaivaa ja todennäköisesti myös laskimen, kynää ja paperia. Tehtävä on kuitenkin suoritettavissa.
 
@@ -38,6 +38,43 @@ Hetu-paketti mahdollistaa satunnaisesti muodostettujen, tietylle aikavälille os
 Henkilötunnuksesta poimittua tietoa voidaan käyttää myös validoimaan ihmisten itse ilmoittamaa tietoa. Rhetu-funktio tuottaa pelkästään valideja henkilötunnuksia, mutta todellisessa aineistossa henkilötunnuksen kirjaamisessa tai tallentamisessa on saattanut tapahtua näppäily- tai lukuvirheitä. Hetu-pakettia voidaankin käyttää validoimaan ihmisistä tallennettujen tietojen laatua tai tehdä vertailua käyttäjien ilmoittamien syntymäaikojen ja henkilötunnuksen syntymäajan välillä. 
 
 Suomalaisen henkilötunnuksen tarkistusmerkki on erilaisten lyöntivirheiden kannalta vikaherkkä. Esimerkiksi päivien, kuukausien ja vuosien järjestyksen vaihtuminen tai päivämäärän väärin merkitsemisen tarkistusmerkin pysyessä samana saa sen, että henkilötunnus ei enää mene läpi tarkistuksessa. Esimerkiksi ruotsalaisen henkilötunnuksen tapauksessa päivien ja kuukausien järjestyksen vaihtuminen ei vaikuta tarkistusmerkin laskentaan.
+
+### Käytännön esimerkkejä
+
+Paketin asentaminen R-ympäristöön ja perustietojen tulostaminen onnistuu seuraavanlaisesti:
+
+```{r, results='asis'}
+library(hetu)
+example_pins <- c("010101-0101", "111111-111C")
+knitr::kable(hetu(example_pins))
+```
+
+Perustietojen tarkistaminen onnistuu joko hetu-funktion extract-parametrin avulla tai siihen erikoistuneiden funktioiden avulla:
+
+```{r, eval = TRUE}
+example_pins <- c("010101-0101", "111111-111C")
+# Hetujen omistajien sukupuolen poiminta
+hetu(example_pins, extract = "sex")
+hetu_sex(example_pins)
+# Hetujen sisältämän päivämäärän poimiminen
+hetu(example_pins, extract = "date")
+hetu_date(example_pins)
+# Hetujen oikeellisuuden tarkistus
+hetu(example_pins, extract = "valid.pin")
+hetu_ctrl(example_pins)
+```
+
+Muista toiminnoista poiketen ikää ei saa suoraan määritettyä hetu-funktiota käyttämällä vaan se täytyy erikseen laskea haluamassaan aikamääreessä ja haluamanaan ajankohtana. Perusasetus on ikä vuosina kysymisajankohtana, mutta myös ikä kuukausina tai päivinä on mahdollinen. 
+
+```{r, eval = TRUE}
+example_pins <- c("010101-0101", "111111-111C")
+# Ikä vuosina
+hetu_age(example_pins)
+# Ikä kuukasina
+hetu_age(example_pins, timespan = "months")
+# Minkä ikäisiä hetujen omistajat olivat 1950-luvun puolivälissä?
+hetu_age(example_pins, date = "1955-01-01")
+```
 
 ## Yritys- ja yhteisötunnusten (Y-tunnus) käsittely
 
