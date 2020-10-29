@@ -1,11 +1,11 @@
 baseurl = "/"
-title = "rOpenGov Home"
+title = "rOpenGov - R packages for open government data analytics"
 languageCode = "en-us"
 #defaultContentLanguage = "en"
 
 googleAnalytics = ""
 disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
 
 
 # Pagination
@@ -36,10 +36,10 @@ theme = "hugo-bootstrap"
   # Replace the default footer message with a localized message
   # copyright = "Hugo template made with ❤ by Xzya"
 
-  #[[languages.en.menu.main]]
-  #  url = "/"
-  #  name = "Home"
-  #  weight = 1
+  [[languages.en.menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
   [[languages.en.menu.main]]
     url = "/about/"
     name = "About"
@@ -59,22 +59,22 @@ theme = "hugo-bootstrap"
 [languages.fi]
   languageName = "Suomi"
 
-  #[[languages.fi.menu.main]]
-  #  url = "/"
-  #  name = "Koti"
+  [[languages.fi.menu.main]]
+    url = "/"
+    name = "Koti"
     weight = 1
   [[languages.fi.menu.main]]
-    url = "/about_fi/"
+    url = "/about/"
     name = "Lisätietoja"
     weight = 2
 
   [[languages.fi.menu.main]]
-    url = "/projects_fi/"
+    url = "/projects/"
     name = "Projektit"
     weight = 3
 
   [[languages.fi.menu.main]]
-    url = "/community_fi/"
+    url = "/community/"
     name = "Yhteisö"
     weight = 4
 
@@ -114,13 +114,13 @@ theme = "hugo-bootstrap"
 
   [params.sidebar]
     # Whether to show the recent posts or not (default: true)
-    showRecent = false
+    showRecent = true
 
     # Whether to show the taxonomies or not (default: true)
-    # showTaxonomy = false
+    showTaxonomy = true
 
     # How many posts to show on the sidebar (Default: 5)
-    # num_recent_posts = 5
+    num_recent_posts = 5
 
    [params.logo]
     url = "images/ropengov2.png"
