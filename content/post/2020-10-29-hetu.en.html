@@ -1,0 +1,159 @@
+---
+title: Hetu-package for handling of Finnish personal identity codes
+author: Pyry Kantanen
+date: 2020-10-29
+slug: "hetu"
+categories:
+  - R
+tags:
+  - Finland
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="general-information" class="section level2">
+<h2>General information</h2>
+<p>Hetu-package for R is meant for algorithmic handling of Finnish personal identity numbers (PINs). The package is especially useful for those who wish to extract information from or validate a large number of PINs at a time.</p>
+<p>The toolset for analyzing Finnish PINs was initially developed as a part of sorvi-package, but was later made into a separate package. The development of the hetu-package reached an important milestone in Fall 2020 when it was published in <a href="https://CRAN.R-project.org/package=hetu">CRAN</a>.</p>
+<p>The development of hetu-package is closely related to <a href="https://CRAN.R-project.org/package=sweidnumbr">sweidnumbr</a>, a similar package meant for analyzing Swedish personal identity numbers (PINs) and organizational identity numbers (OINs). Hetu-package shares similar function names with sweidnumbr, when applicable.</p>
+</div>
+<div id="finnish-personal-identification-code-hetu" class="section level2">
+<h2>Finnish personal identification code, hetu</h2>
+<p>Personal identification code (or: national identification number, national identity number, personal identification number or PIN) is meant to be a unique identifier for individuals. Finnish personal identification number (henkilötunnus, hetu for short) consists of date (DDMMYY), century marker (-, + or A), personal number (NNN) and checkmark (C). Males have an odd personal number and females an even personal number.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Personal identity codes are widely used in public and private sectors alike. They are not confidential or secret information, but like every personal information, handling hetu-codes requires consent from the individual or a valid reason.</p>
+</div>
+<div id="algorithmic-handling-of-hetu-pins" class="section level2">
+<h2>Algorithmic handling of hetu-pins</h2>
+<p>Analyzing and extracting Finnish personal identity numbers is rather straightforward even with a naked eye. However, hetu-package is best suited for handling large number of PINs, which would be cumbersome by hand.</p>
+<p>Hetu-package can extract the following information from hundreds of thousands of PINs:</p>
+<ul>
+<li>hetu_date / pin_date: date of birth</li>
+<li>hetu_sex / pin_sex: sex, Male or Female</li>
+<li>hetu_age / pin_age: age in years, months or days (at the time of the query or at a desired date)</li>
+<li>hetu_ctrl / pin_ctrl: validity check for the PIN, TRUE or FALSE</li>
+</ul>
+<div id="practical-examples" class="section level3">
+<h3>Practical examples</h3>
+<p>Installing the package in R:</p>
+<pre class="r"><code>install.packages(&quot;hetu&quot;)</code></pre>
+<p>Loading the package and setting a few imaginary example PINs:</p>
+<pre class="r"><code>library(hetu)
+example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)</code></pre>
+<p>Hetu-function is the backbone of the package and lots of information can be extracted in data frame format:</p>
+<pre class="r"><code>knitr::kable(hetu(example_pins))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">hetu</th>
+<th align="left">sex</th>
+<th align="left">p.num</th>
+<th align="left">checksum</th>
+<th align="left">date</th>
+<th align="right">day</th>
+<th align="right">month</th>
+<th align="right">year</th>
+<th align="left">century</th>
+<th align="left">valid.pin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">010101-0101</td>
+<td align="left">Female</td>
+<td align="left">010</td>
+<td align="left">1</td>
+<td align="left">1901-01-01</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1901</td>
+<td align="left">-</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">111111-111C</td>
+<td align="left">Male</td>
+<td align="left">111</td>
+<td align="left">C</td>
+<td align="left">1911-11-11</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">1911</td>
+<td align="left">-</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>The information in the data frame can be extracted with extract-parameter or, for the convenience of the end user, by using specialized functions:</p>
+<pre class="r"><code># Extracting sex
+hetu(example_pins, extract = &quot;sex&quot;)</code></pre>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<pre class="r"><code>hetu_sex(example_pins)</code></pre>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<pre class="r"><code># Extracting date of birth
+hetu(example_pins, extract = &quot;date&quot;)</code></pre>
+<pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
+<pre class="r"><code>hetu_date(example_pins)</code></pre>
+<pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
+<pre class="r"><code># Extracting information on validity
+hetu(example_pins, extract = &quot;valid.pin&quot;)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<pre class="r"><code>hetu_ctrl(example_pins)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<pre class="r"><code># Information that can be extracted only with extract-parameter
+hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
+<pre><code>## [1] &quot;010&quot; &quot;111&quot;</code></pre>
+<p>Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function. All PINs are meant only for temporary use:</p>
+<pre class="r"><code>example_pins2 &lt;- rhetu(5, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;)
+# Age in years
+hetu_age(example_pins2)</code></pre>
+<pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
+<pre><code>## [1] 29 68 32 43 63</code></pre>
+<pre class="r"><code># Age in months
+hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
+<pre><code>## The age in months has been calculated at 2020-10-29.</code></pre>
+<pre><code>## [1] 357 823 387 525 766</code></pre>
+<pre class="r"><code># Age in 2011
+hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
+<pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
+<pre><code>## [1] 19 58 22 33 54</code></pre>
+<pre class="r"><code># Visualization: boxplot
+boxplot(hetu_age(example_pins2))</code></pre>
+<pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
+<p><img src="/post/2020-10-29-hetu.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>In some cases diagnostics information for invalid PINs might be useful:</p>
+<pre class="r"><code>hetu_diagnostic(&quot;321399-000G&quot;)</code></pre>
+<pre><code>##           hetu is.temp valid.p.num valid.checksum correct.checksum valid.date
+## 21 321399-000G   FALSE       FALSE          FALSE            FALSE      FALSE
+##    valid.day valid.month valid.year valid.length valid.century
+## 21     FALSE       FALSE       TRUE         TRUE          TRUE</code></pre>
+<pre class="r"><code># Print only certain columns
+hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &quot;valid.length&quot;))</code></pre>
+<pre><code>##           hetu valid.p.num valid.length
+## 21 321399-000G       FALSE         TRUE</code></pre>
+</div>
+</div>
+<div id="business-identity-numbers-y-tunnus-bid" class="section level2">
+<h2>Business Identity Numbers (Y-tunnus, BID)</h2>
+<p>As in sweidnumbr, hetu-package has two functions that can be used with Finnish Business Identity Numbers (y-tunnus). Finnish business identity numbers have the form 1234567-8, where the last number is a checknumber.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> The following functions are available:</p>
+<ul>
+<li>bid_ctrl(bid): checks the valiity of the BID, TRUE or FALSE</li>
+<li>rbid(n): generates n BIDs</li>
+</ul>
+<pre class="r"><code>example_bids &lt;- rbid(2)
+example_bids</code></pre>
+<pre><code>## [1] &quot;5941223-7&quot; &quot;6207030-3&quot;</code></pre>
+<pre class="r"><code>bid_ctrl(example_bids)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<p>No additional information can be extracted from BIDs.</p>
+</div>
+<div id="lähdeviitteet" class="section level2">
+<h2>Lähdeviitteet</h2>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Digi- ja väestötietovirasto. Henkilötunnus. URL: <a href="https://dvv.fi/henkilotunnus" class="uri">https://dvv.fi/henkilotunnus</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: <a href="https://www.ytj.fi/index/y-tunnus.html" class="uri">https://www.ytj.fi/index/y-tunnus.html</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

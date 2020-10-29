@@ -1,0 +1,114 @@
+---
+title: Hetu-package for handling of Finnish personal identity codes
+author: Pyry Kantanen
+date: 2020-10-29
+slug: "hetu"
+categories:
+  - R
+tags:
+  - Finland
+---
+
+## General information
+
+Hetu-package for R is meant for algorithmic handling of Finnish personal identity numbers (PINs). The package is especially useful for those who wish to extract information from or validate a large number of PINs at a time.
+
+The toolset for analyzing Finnish PINs was initially developed as a part of sorvi-package, but was later made into a separate package. The development of the hetu-package reached an important milestone in Fall 2020 when it was published in [CRAN](https://CRAN.R-project.org/package=hetu).
+
+The development of hetu-package is closely related to [sweidnumbr]( https://CRAN.R-project.org/package=sweidnumbr), a similar package meant for analyzing Swedish personal identity numbers (PINs) and organizational identity numbers (OINs). Hetu-package shares similar function names with sweidnumbr, when applicable.
+
+## Finnish personal identification code, hetu
+
+Personal identification code (or: national identification number, national identity number, personal identification number or PIN) is meant to be a unique identifier for individuals. Finnish personal identification number (henkilötunnus, hetu for short) consists of date (DDMMYY), century marker (-, + or A), personal number (NNN) and checkmark (C). Males have an odd personal number and females an even personal number.[^1]
+
+Personal identity codes are widely used in public and private sectors alike. They are not confidential or secret information, but like every personal information, handling hetu-codes requires consent from the individual or a valid reason.
+
+## Algorithmic handling of hetu-pins
+
+Analyzing and extracting Finnish personal identity numbers is rather straightforward even with a naked eye. However, hetu-package is best suited for handling large number of PINs, which would be cumbersome by hand.
+
+Hetu-package can extract the following information from hundreds of thousands of PINs:
+
+* hetu_date / pin_date: date of birth
+* hetu_sex / pin_sex: sex, Male or Female
+* hetu_age / pin_age: age in years, months or days (at the time of the query or at a desired date)
+* hetu_ctrl / pin_ctrl: validity check for the PIN, TRUE or FALSE
+
+### Practical examples
+
+Installing the package in R:
+```{r, eval = FALSE}
+install.packages("hetu")
+```
+
+Loading the package and setting a few imaginary example PINs:
+
+```{r setup, include=TRUE}
+library(hetu)
+example_pins <- c("010101-0101", "111111-111C")
+```
+
+Hetu-function is the backbone of the package and lots of information can be extracted in data frame format:
+
+```{r, eval = TRUE}
+knitr::kable(hetu(example_pins))
+```
+
+The information in the data frame can be extracted with extract-parameter or, for the convenience of the end user, by using specialized functions:
+
+```{r, eval = TRUE}
+# Extracting sex
+hetu(example_pins, extract = "sex")
+hetu_sex(example_pins)
+# Extracting date of birth
+hetu(example_pins, extract = "date")
+hetu_date(example_pins)
+# Extracting information on validity
+hetu(example_pins, extract = "valid.pin")
+hetu_ctrl(example_pins)
+# Information that can be extracted only with extract-parameter
+hetu(example_pins, extract = "p.num")
+```
+
+Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function. All PINs are meant only for temporary use:
+
+```{r, eval = TRUE}
+example_pins2 <- rhetu(5, start = "1950-01-01", end = "1995-05-07")
+# Age in years
+hetu_age(example_pins2)
+# Age in months
+hetu_age(example_pins2, timespan = "months")
+# Age in 2011
+hetu_age(example_pins2, date = "2011-01-01")
+# Visualization: boxplot
+boxplot(hetu_age(example_pins2))
+```
+
+In some cases diagnostics information for invalid PINs might be useful:  
+
+```{r, eval = TRUE}
+hetu_diagnostic("321399-000G")
+# Print only certain columns
+hetu_diagnostic("321399-000G", extract = c("valid.p.num", "valid.length"))
+```
+
+## Business Identity Numbers (Y-tunnus, BID)
+
+As in sweidnumbr, hetu-package has two functions that can be used with Finnish Business Identity Numbers (y-tunnus). Finnish business identity numbers have the form 1234567-8, where the last number is a checknumber.[^2] The following functions are available:
+
+* bid_ctrl(bid): checks the valiity of the BID, TRUE or FALSE
+* rbid(n): generates n BIDs
+
+```{r, eval = TRUE}
+example_bids <- rbid(2)
+example_bids
+bid_ctrl(example_bids)
+```
+
+No additional information can be extracted from BIDs.
+
+## Lähdeviitteet
+
+[^1]: Digi- ja väestötietovirasto. Henkilötunnus. URL: https://dvv.fi/henkilotunnus
+
+[^2]: Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: https://www.ytj.fi/index/y-tunnus.html
