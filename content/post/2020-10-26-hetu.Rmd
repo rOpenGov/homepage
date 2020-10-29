@@ -1,9 +1,9 @@
 ---
 title: "Hetu-paketti suomalaisten henkilötunnusten käsittelyyn"
 author: "Pyry Kantanen"
-date: '2020-10-26'
-categories: R
-tags: Finland
+date: "2020-10-26"
+categories: ["R"]
+tags: ["Finland"]
 ---
 
 ## Yleistä
