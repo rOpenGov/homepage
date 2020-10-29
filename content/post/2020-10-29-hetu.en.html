@@ -16,11 +16,11 @@ tags:
 <h2>General information</h2>
 <p>Hetu-package for R is meant for algorithmic handling of Finnish personal identity numbers (PINs). The package is especially useful for those who wish to extract information from or validate a large number of PINs at a time.</p>
 <p>The toolset for analyzing Finnish PINs was initially developed as a part of sorvi-package, but was later made into a separate package. The development of the hetu-package reached an important milestone in Fall 2020 when it was published in <a href="https://CRAN.R-project.org/package=hetu">CRAN</a>.</p>
-<p>The development of hetu-package is closely related to <a href="https://CRAN.R-project.org/package=sweidnumbr">sweidnumbr</a>, a similar package meant for analyzing Swedish personal identity numbers (PINs) and organizational identity numbers (OINs). Hetu-package shares similar function names with sweidnumbr, when applicable.</p>
+<p>The development of hetu-package is closely related to <a href="https://CRAN.R-project.org/package=sweidnumbr">sweidnumbr</a>, a similar package meant for analyzing Swedish personal identity numbers (PINs) and organizational identity numbers (OINs). Hetu-package shares similar function names with sweidnumbr, when applicable.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div id="finnish-personal-identification-code-hetu" class="section level2">
 <h2>Finnish personal identification code, hetu</h2>
-<p>Personal identification code (or: national identification number, national identity number, personal identification number or PIN) is meant to be a unique identifier for individuals. Finnish personal identification number (henkilötunnus, hetu for short) consists of date (DDMMYY), century marker (-, + or A), personal number (NNN) and checkmark (C). Males have an odd personal number and females an even personal number.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Personal identification code (or: national identification number, national identity number, personal identification number or PIN) is meant to be a unique identifier for individuals. Finnish personal identification number (henkilötunnus, hetu for short) consists of date (DDMMYY), century marker (-, + or A), personal number (NNN) and checkmark (C). Males have an odd personal number and females an even personal number.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>Personal identity codes are widely used in public and private sectors alike. They are not confidential or secret information, but like every personal information, handling hetu-codes requires consent from the individual or a valid reason.</p>
 </div>
 <div id="algorithmic-handling-of-hetu-pins" class="section level2">
@@ -103,22 +103,23 @@ hetu(example_pins, extract = &quot;valid.pin&quot;)</code></pre>
 <pre class="r"><code># Information that can be extracted only with extract-parameter
 hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
 <pre><code>## [1] &quot;010&quot; &quot;111&quot;</code></pre>
-<p>Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function. All PINs are meant only for temporary use:</p>
+<p>Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:</p>
 <pre class="r"><code>example_pins2 &lt;- rhetu(5, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;)
 # Age in years
 hetu_age(example_pins2)</code></pre>
 <pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
-<pre><code>## [1] 29 68 32 43 63</code></pre>
+<pre><code>## [1] 33 56 52 41 70</code></pre>
 <pre class="r"><code># Age in months
 hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
 <pre><code>## The age in months has been calculated at 2020-10-29.</code></pre>
-<pre><code>## [1] 357 823 387 525 766</code></pre>
+<pre><code>## [1] 402 672 627 492 847</code></pre>
 <pre class="r"><code># Age in 2011
 hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 19 58 22 33 54</code></pre>
-<pre class="r"><code># Visualization: boxplot
-boxplot(hetu_age(example_pins2))</code></pre>
+<pre><code>## [1] 23 46 42 31 60</code></pre>
+<pre class="r"><code># Visualization: boxplot grouped by sex
+example_pins3 &lt;- rhetu(20, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;, p.male = 0.5)
+boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = &quot;&quot;, ylab = &quot;Age in years&quot;, col=c(&quot;cyan&quot;, &quot;magenta&quot;))</code></pre>
 <pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
 <p><img src="/post/2020-10-29-hetu.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In some cases diagnostics information for invalid PINs might be useful:</p>
@@ -135,14 +136,14 @@ hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &q
 </div>
 <div id="business-identity-numbers-y-tunnus-bid" class="section level2">
 <h2>Business Identity Numbers (Y-tunnus, BID)</h2>
-<p>As in sweidnumbr, hetu-package has two functions that can be used with Finnish Business Identity Numbers (y-tunnus). Finnish business identity numbers have the form 1234567-8, where the last number is a checknumber.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> The following functions are available:</p>
+<p>As in sweidnumbr, hetu-package has two functions that can be used with Finnish Business Identity Numbers (y-tunnus). Finnish business identity numbers have the form 1234567-8, where the last number is a checknumber.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> The following functions are available:</p>
 <ul>
 <li>bid_ctrl(bid): checks the valiity of the BID, TRUE or FALSE</li>
 <li>rbid(n): generates n BIDs</li>
 </ul>
 <pre class="r"><code>example_bids &lt;- rbid(2)
 example_bids</code></pre>
-<pre><code>## [1] &quot;5941223-7&quot; &quot;6207030-3&quot;</code></pre>
+<pre><code>## [1] &quot;6151590-5&quot; &quot;1312093-3&quot;</code></pre>
 <pre class="r"><code>bid_ctrl(example_bids)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>
@@ -153,7 +154,8 @@ example_bids</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Digi- ja väestötietovirasto. Henkilötunnus. URL: <a href="https://dvv.fi/henkilotunnus" class="uri">https://dvv.fi/henkilotunnus</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: <a href="https://www.ytj.fi/index/y-tunnus.html" class="uri">https://www.ytj.fi/index/y-tunnus.html</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>More information about sweidnumbr can be read e.g. from this blogpost: Magnusson, Mans &amp; Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: <a href="http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/" class="uri">http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Digital and Population Data Services Agency (Digi- ja väestötietovirasto). The personal identity code. URL: <a href="https://dvv.fi/en/personal-identity-code" class="uri">https://dvv.fi/en/personal-identity-code</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Finnish Patent and Registration Office. The Business Information System (BIS). URL: <a href="https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html" class="uri">https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

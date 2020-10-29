@@ -13,15 +13,15 @@ tags:
 
 Hetu-paketti on tarkoitettu suomalaisten henkilötunnusten algoritmiseen käsittelyyn. Paketista on erityisesti hyötyä, mikäli halutaan poimia informaatiota suuresta määrästä henkilötunnuksia, kuten tunnuksen haltijoiden iät tai sukupuolet. Henkilötunnusten käsittelyyn tarkoitettujen työkalujen kehitystyö alkoi osana sorvi-pakettia, mutta ne eriytettiin omaksi paketikseen vuonna 2013. Syksyllä 2020 hetu-paketti saatettiin julkaisukelpoiseen kuntoon ja se on saatavissa [CRANista](https://CRAN.R-project.org/package=hetu). 
 
-Hetu-paketin esikuvana on toiminut [sweidnumbr-paketti]( https://CRAN.R-project.org/package=sweidnumbr) ja pakettien käyttämät funktiot on mahdollisuuksien mukaan nimetty samalla tavalla.
+Hetu-paketin esikuvana on toiminut [sweidnumbr-paketti]( https://CRAN.R-project.org/package=sweidnumbr) ja pakettien käyttämät funktiot on mahdollisuuksien mukaan nimetty samalla tavalla.[^1]
 
 ## Suomalainen henkilötunnus
 
-Henkilötunnus on henkilöiden yksilöintiin tarkoitettu tunnus, joka koostuu syntymäajasta (PP/KK/VV), syntymävuosisataa kuvaavasta merkistä (-, + tai A), yksilönumerosta (NNN) sekä tarkistusmerkistä (C). Käytännössä henkilötunnuksen yksilönumeron avulla pystytään pystytään erottamaan toisistaan samana päivänä syntyneet henkilöt sekä tehdä päätelmiä henkilön sukupuolesta. Naisilla numero on parillinen ja miehillä pariton.[^1]
+Henkilötunnus on henkilöiden yksilöintiin tarkoitettu tunnus, joka koostuu syntymäajasta (PP/KK/VV), syntymävuosisataa kuvaavasta merkistä (-, + tai A), yksilönumerosta (NNN) sekä tarkistusmerkistä (C). Käytännössä henkilötunnuksen yksilönumeron avulla pystytään pystytään erottamaan toisistaan samana päivänä syntyneet henkilöt sekä tehdä päätelmiä henkilön sukupuolesta. Naisilla numero on parillinen ja miehillä pariton.[^2]
 
 Henkilötunnusta käytetään laajalti julkisella ja yksityisellä sektorilla. Henkilötunnus toimii usein sen yksilöivyyden vuoksi rekisteritietokannoissa ns. avaimena, jonka avulla rekistereiden sisältämät tietotaulut pystytään yhdistämään tiettyyn käyttäjään ja toisaalta eri rekistereistä löytyvää dataa voidaan yhdistellä toisiinsa. 
 
-Henkilötunnus ei sinänsä ole salassapidettävää tietoa, mutta sen, kuten muidenkin henkilötietojen, käsittelyyn liittyy rajoituksia: henkilötunnusta saa käsitellä rekisteröidyn yksiselitteisesti antamalla suostumuksella tai mikäli rekisteröidyn yksiselitteinen yksilöiminen on tärkeää.[^2] Rajoitukset eivät todennäköisesti ole täysin aiheettomia, sillä henkilötunnusten käyttö ei ole täysin ongelmatonta. Tähän palataan blogin loppupuolella.
+Henkilötunnus ei sinänsä ole salassapidettävää tietoa, mutta sen, kuten muidenkin henkilötietojen, käsittelyyn liittyy rajoituksia: henkilötunnusta saa käsitellä rekisteröidyn yksiselitteisesti antamalla suostumuksella tai mikäli rekisteröidyn yksiselitteinen yksilöiminen on tärkeää.[^3] Rajoitukset eivät todennäköisesti ole täysin aiheettomia, sillä henkilötunnusten käyttö ei ole täysin ongelmatonta. Tähän palataan blogin loppupuolella.
 
 ## Henkilötunnusten algoritminen käsittely hetu-paketilla
 
@@ -81,14 +81,19 @@ hetu(example_pins, extract = "p.num")
 
 Muista tiedoista poiketen ikää ei saa suoraan poimittua hetu-funktion extract-parametria käyttämällä. Ikä halutussa aikamääreessä ja haluttuna ajankohtana saadaan hetu_age-funktion avulla. Perusasetus on ikä vuosina kysymisajankohtana, mutta myös ikä kuukausina tai päivinä on mahdollinen. 
 
+Tässä esimerkissä käytetään myös rhetu-funktiota, jonka avulla voidaan generoida haluttu määrä keinotekoisia henkilötunnuksia esimerkiksi paketin ominaisuuksien testaamiseksi.
+
 ```{r, eval = TRUE}
-example_pins <- c("010101-0101", "111111-111C")
+example_pins2 <- rhetu(5, start = "1950-01-01", end = "1995-05-07")
 # Ikä vuosina
-hetu_age(example_pins)
+hetu_age(example_pins2)
 # Ikä kuukasina
-hetu_age(example_pins, timespan = "months")
-# Minkä ikäisiä hetujen omistajat olivat 1950-luvun puolivälissä?
-hetu_age(example_pins, date = "1955-01-01")
+hetu_age(example_pins2, timespan = "months")
+# Minkä ikäisiä hetujen omistajat olivat 2011 puolivälissä?
+hetu_age(example_pins2, date = "2011-01-01")
+# Visualisointi: laatikkojanakuvaaja sukupuolen mukaan ryhmiteltynä
+example_pins3 <- rhetu(20, start = "1950-01-01", end = "1995-05-07", p.male = 0.5)
+boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = "", ylab = "Ikä vuosina", col=c("gold", "darkgreen"))
 ```
 
 Joissakin tapauksissa voi olla hyödyllistä tarkastella epävalidien hetujen diagnostiikkatietoa. Tiedot saadaan hetu_diagnostic -funktion avulla, jota demonstroimme monella tavalla virheellisen henkilötunnuksen avulla:  
@@ -101,7 +106,7 @@ hetu_diagnostic("321399-000G", extract = c("valid.p.num", "valid.length"))
 
 ## Yritys- ja yhteisötunnusten (Y-tunnus) käsittely
 
-Hetu-paketissa on myös sweidnumbr-pakettia vastaavalla tavalla mahdollisuus generoida ja validoida suomalaisia yritys- ja yhteisötunnuksia. Suomalainen Y-tunnus koostuu seitsemästä numerosta, väliviivasta ja tarkistusmerkistä ja on muotoa 1234567-8.[^3] Y-tunnus on englanniksi Business Identity Code, mistä johtuen tässä paketissa y-tunnusten käsittelyyn tarkoitettujen funktioiden etuliitteenä käytetään lyhennettä bid:
+Hetu-paketissa on myös sweidnumbr-pakettia vastaavalla tavalla mahdollisuus generoida ja validoida suomalaisia yritys- ja yhteisötunnuksia. Suomalainen Y-tunnus koostuu seitsemästä numerosta, väliviivasta ja tarkistusmerkistä ja on muotoa 1234567-8.[^4] Y-tunnus on englanniksi Business Identity Code, mistä johtuen tässä paketissa y-tunnusten käsittelyyn tarkoitettujen funktioiden etuliitteenä käytetään lyhennettä bid:
 
 * bid_ctrl(bid): tarkastaa y-tunnuksen oikeellisuuden, TRUE tai FALSE
 * rbid(n): generoi n kappaletta y-tunnuksia
@@ -116,22 +121,24 @@ Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitää
 
 ## Henkilötunnusten tulevaisuus ja tietoturvallisuus
 
-Henkilötunnusten uudistamisesta on käyty viime vuosina runsaasti julkista keskustelua. Nykymuotoisen henkilötunnuksen ongelmana on pidetty esimerkiksi henkilötunnusten rajallista määrää sekä sitä, että henkilötunnuksesta ilmenee henkilötietoja kuten sukupuoli ja ikä. Toisaalta uudistusta vastaan puhuu julkisen ja yksityisen sektorin toimijoiden tietojärjestelmien päivitysten korkeat kustannukset. Kirjoitushetkellä tuoreimman ehdotuksen mukaan henkilötunnukset olisivat säilymässä tulevaisuudessakin muodoltaan nykyisiä vastaavina sillä erotuksella, että jatkossa vapaana olevat parilliset ja parittomat yksilönumerot jaettaisiin tasaisesti molemmille sukupuolille.[^4] [^5]
+Henkilötunnusten uudistamisesta on käyty viime vuosina runsaasti julkista keskustelua. Nykymuotoisen henkilötunnuksen ongelmana on pidetty esimerkiksi henkilötunnusten rajallista määrää sekä sitä, että henkilötunnuksesta ilmenee henkilötietoja kuten sukupuoli ja ikä. Toisaalta uudistusta vastaan puhuu julkisen ja yksityisen sektorin toimijoiden tietojärjestelmien päivitysten korkeat kustannukset. Kirjoitushetkellä tuoreimman ehdotuksen mukaan henkilötunnukset olisivat säilymässä tulevaisuudessakin muodoltaan nykyisiä vastaavina sillä erotuksella, että jatkossa vapaana olevat parilliset ja parittomat yksilönumerot jaettaisiin tasaisesti molemmille sukupuolille.[^5] [^6]
 
-Tietosuojaperiaatteen mukaan henkilötietoja tulisi kerätä ja käsitellä ainoastaan siinä laajuudessa, mikä on tarkoituksenmukaista tai välttämätöntä palvelun käyttötarkoituksen kannalta.[^6] Tätä taustaa vasten voidaan pitää ongelmallisena, että henkilötunnusten laajamittainen käyttö aiheuttaa vähintäänkin epäsuorasti tilanteen, jossa palvelun tarjoajalla on usein tarpeettomasti hallussaan tietoa käyttäjien iästä ja sukupuolesta.
+Tietosuojaperiaatteen mukaan henkilötietoja tulisi kerätä ja käsitellä ainoastaan siinä laajuudessa, mikä on tarkoituksenmukaista tai välttämätöntä palvelun käyttötarkoituksen kannalta.[^7] Tätä taustaa vasten voidaan pitää ongelmallisena, että henkilötunnusten laajamittainen käyttö aiheuttaa vähintäänkin epäsuorasti tilanteen, jossa palvelun tarjoajalla on usein tarpeettomasti hallussaan tietoa käyttäjien iästä ja sukupuolesta.
 
-Käytännössä suuremmat ongelmat koituvat ihmisille kuitenkin tavasta, jolla henkilötunnuksia käytetään suomalaisessa yhteiskunnassa. Vaikka henkilötunnus ei teoriassa ole salassapidettävää tietoa, rikollisella tai muutoin vilpillisellä tavalla toimiva henkilö voi aiheuttaa monenlaista haittaa, mikäli hän saa haltuunsa toisen ihmisen henkilötunnuksen. Henkilötunnusta saatetaan kysyä puhelimitse asioivalta henkilöltä varmistukseksi henkilöllisyydestä, ennen kuin hänelle kerrotaan esimerkiksi sensitiivisiä potilastietoja. Joskus henkilötunnus saatetaan asettaa verkkopalvelussa uuden käyttäjän ensimmäiseksi salasanaksi, joka jokaisen pitäisi muistaa vaihtaa ensimmäisen kirjautumiskerran jälkeen. Henkilötunnuksen ja ihmisen nimen tietäminen voivat joissakin tapauksissa riittää siihen, että rikollisesti toimiva voi tilata osamaksulla tuotteita, joita hänellä ei ole aikomustakaan maksaa.[^4]
+Käytännössä suuremmat ongelmat koituvat ihmisille kuitenkin tavasta, jolla henkilötunnuksia käytetään suomalaisessa yhteiskunnassa. Vaikka henkilötunnus ei teoriassa ole salassapidettävää tietoa, rikollisella tai muutoin vilpillisellä tavalla toimiva henkilö voi aiheuttaa monenlaista haittaa, mikäli hän saa haltuunsa toisen ihmisen henkilötunnuksen. Henkilötunnusta saatetaan kysyä puhelimitse asioivalta henkilöltä varmistukseksi henkilöllisyydestä, ennen kuin hänelle kerrotaan esimerkiksi sensitiivisiä potilastietoja. Joskus henkilötunnus saatetaan asettaa verkkopalvelussa uuden käyttäjän ensimmäiseksi salasanaksi, joka jokaisen pitäisi muistaa vaihtaa ensimmäisen kirjautumiskerran jälkeen. Henkilötunnuksen ja ihmisen nimen tietäminen voivat joissakin tapauksissa riittää siihen, että rikollisesti toimiva voi tilata osamaksulla tuotteita, joita hänellä ei ole aikomustakaan maksaa.
 
 ## Lähdeviitteet
 
-[^1]: Digi- ja väestötietovirasto. Henkilötunnus. URL: https://dvv.fi/henkilotunnus
+[^1]: Lisätietoja sweidnumbr-paketista esim. tästä blogikirjoituksesta: Magnusson, Måns & Bülow, Erik. 2015. R made personal (at least for swedes)!. URL: http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/
 
-[^2]: Ks. esim. Finlex. HE 59/2013. URL: https://www.finlex.fi/fi/esitykset/he/2013/20130059
+[^2]: Digi- ja väestötietovirasto. Henkilötunnus. URL: https://dvv.fi/henkilotunnus
 
-[^3]: Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: https://www.ytj.fi/index/y-tunnus.html
+[^3]: Ks. esim. Finlex. HE 59/2013. URL: https://www.finlex.fi/fi/esitykset/he/2013/20130059
 
-[^4]: Tuomas Salsteen nettisivuilta löytyy hyvä selvitys henkilötunnuksen historiasta, ongelmakohdista että uudistustyöryhmän kehitysehdotuksista. URL: https://www.tuomas.salste.net/doc/hetu/tunnus.html. 
+[^4]: Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: https://www.ytj.fi/index/y-tunnus.html
 
-[^5]: Yle Uutiset. 2020. Uusi henkilötunnus kaikille Suomen kansalaisille ja Suomessa asuville, ehdottaa työryhmä – jatkossa tunnuksesta ei selviäisi ikä, syntymäaika tai sukupuoli. Julkaistu 8.4.2020, viitattu 23.10.2020. URL: https://yle.fi/uutiset/3-11299218
+[^5]: Tuomas Salsteen nettisivuilta löytyy hyvä selvitys henkilötunnuksen historiasta, ongelmakohdista että uudistustyöryhmän kehitysehdotuksista. URL: https://www.tuomas.salste.net/doc/hetu/tunnus.html. 
 
-[^6]: Tietosuojavaltuutetun toimisto. Käyttötarkoitussidonnaisuus. Viitattu 26.10.2020. https://tietosuoja.fi/kayttotarkoitussidonnaisuus
+[^6]: Yle Uutiset. 2020. Uusi henkilötunnus kaikille Suomen kansalaisille ja Suomessa asuville, ehdottaa työryhmä – jatkossa tunnuksesta ei selviäisi ikä, syntymäaika tai sukupuoli. Julkaistu 8.4.2020, viitattu 23.10.2020. URL: https://yle.fi/uutiset/3-11299218
+
+[^7]: Tietosuojavaltuutetun toimisto. Käyttötarkoitussidonnaisuus. Viitattu 26.10.2020. https://tietosuoja.fi/kayttotarkoitussidonnaisuus
