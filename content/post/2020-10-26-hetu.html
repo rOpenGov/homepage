@@ -1,9 +1,9 @@
 ---
 title: "Hetu-paketti suomalaisten henkilötunnusten käsittelyyn"
 author: "Pyry Kantanen"
-date: "2020-10-26"
-categories: ["R"]
-tags: ["Finland"]
+date: '2020-10-26'
+categories: R
+tags: Finland
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -36,10 +36,13 @@ tags: ["Finland"]
 <p>Suomalaisen henkilötunnuksen tarkistusmerkki on erilaisten lyöntivirheiden kannalta vikaherkkä. Esimerkiksi päivien, kuukausien ja vuosien järjestyksen vaihtuminen tai päivämäärän väärin merkitsemisen tarkistusmerkin pysyessä samana saa sen, että henkilötunnus ei enää mene läpi tarkistuksessa. Esimerkiksi ruotsalaisen henkilötunnuksen tapauksessa päivien ja kuukausien järjestyksen vaihtuminen ei vaikuta tarkistusmerkin laskentaan.</p>
 <div id="käytännön-esimerkkejä" class="section level3">
 <h3>Käytännön esimerkkejä</h3>
-<p>Paketin asentaminen R-ympäristöön ja perustietojen tulostaminen onnistuu seuraavanlaisesti:</p>
+<p>Paketin asentaminen R-ympäristöön:</p>
+<pre class="r"><code>install.packages(&quot;hetu&quot;)</code></pre>
+<p>Paketin lataaminen kirjastoon ja 2 yksikön pituisen esimerkkivektorin asettaminen onnistuu seuraavanlaisesti:</p>
 <pre class="r"><code>library(hetu)
-example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)
-knitr::kable(hetu(example_pins))</code></pre>
+example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)</code></pre>
+<p>Perustietojen tarkastelu hetuja sisältävästä vektorista onnistuu yksinkertaisesti hetu-komennolla, joka tulostaa perusmuodossa data frame -tyyppisen taulukon. Taulukko on tässä esimerkissä muotoiltu hieman kauniimmaksi kable-funktiolla:</p>
+<pre class="r"><code>knitr::kable(hetu(example_pins))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -82,16 +85,50 @@ knitr::kable(hetu(example_pins))</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Perustietojen tarkistaminen onnistuu joko hetu-funktion extract-parametrin avulla tai siihen erikoistuneiden funktioiden avulla:</p>
+<p>Taulukon sisältämien tietojen, erityisesti sukupuolen ja päivämäärän, tarkastelu onnistuu joko hetu-funktion extract-parametrin avulla tai siihen erikoistuneiden funktioiden avulla:</p>
 <pre class="r"><code>example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)
+# Hetujen omistajien sukupuolen poiminta
 hetu(example_pins, extract = &quot;sex&quot;)</code></pre>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
 <pre class="r"><code>hetu_sex(example_pins)</code></pre>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
-<pre class="r"><code>hetu(example_pins, extract = &quot;date&quot;)</code></pre>
+<pre class="r"><code># Hetujen sisältämän päivämäärän poimiminen
+hetu(example_pins, extract = &quot;date&quot;)</code></pre>
 <pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
 <pre class="r"><code>hetu_date(example_pins)</code></pre>
 <pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
+<pre class="r"><code># Hetujen oikeellisuuden tarkistus
+hetu(example_pins, extract = &quot;valid.pin&quot;)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<pre class="r"><code>hetu_ctrl(example_pins)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<pre class="r"><code># Esimerkki tiedosta, jolle ei löydy erikoistunutta funktiota
+hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
+<pre><code>## [1] &quot;010&quot; &quot;111&quot;</code></pre>
+<p>Muista tiedoista poiketen ikää ei saa suoraan poimittua hetu-funktion extract-parametria käyttämällä. Ikä halutussa aikamääreessä ja haluttuna ajankohtana saadaan hetu_age-funktion avulla. Perusasetus on ikä vuosina kysymisajankohtana, mutta myös ikä kuukausina tai päivinä on mahdollinen.</p>
+<pre class="r"><code>example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)
+# Ikä vuosina
+hetu_age(example_pins)</code></pre>
+<pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
+<pre><code>## [1] 119 108</code></pre>
+<pre class="r"><code># Ikä kuukasina
+hetu_age(example_pins, timespan = &quot;months&quot;)</code></pre>
+<pre><code>## The age in months has been calculated at 2020-10-29.</code></pre>
+<pre><code>## [1] 1437 1307</code></pre>
+<pre class="r"><code># Minkä ikäisiä hetujen omistajat olivat 1950-luvun puolivälissä?
+hetu_age(example_pins, date = &quot;1955-01-01&quot;)</code></pre>
+<pre><code>## The age in years has been calculated at 1955-01-01.</code></pre>
+<pre><code>## [1] 54 43</code></pre>
+<p>Joissakin tapauksissa voi olla hyödyllistä tarkastella epävalidien hetujen diagnostiikkatietoa. Tiedot saadaan hetu_diagnostic -funktion avulla, jota demonstroimme monella tavalla virheellisen henkilötunnuksen avulla:</p>
+<pre class="r"><code>hetu_diagnostic(&quot;321399-000G&quot;)</code></pre>
+<pre><code>##           hetu is.temp valid.p.num valid.checksum correct.checksum valid.date
+## 21 321399-000G   FALSE       FALSE          FALSE            FALSE      FALSE
+##    valid.day valid.month valid.year valid.length valid.century
+## 21     FALSE       FALSE       TRUE         TRUE          TRUE</code></pre>
+<pre class="r"><code># Tulosta ainoastaan halutut sarakkeet
+hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &quot;valid.length&quot;))</code></pre>
+<pre><code>##           hetu valid.p.num valid.length
+## 21 321399-000G       FALSE         TRUE</code></pre>
 </div>
 </div>
 <div id="yritys--ja-yhteisötunnusten-y-tunnus-käsittely" class="section level2">
@@ -101,6 +138,11 @@ hetu(example_pins, extract = &quot;sex&quot;)</code></pre>
 <li>bid_ctrl(bid): tarkastaa y-tunnuksen oikeellisuuden, TRUE tai FALSE</li>
 <li>rbid(n): generoi n kappaletta y-tunnuksia</li>
 </ul>
+<pre class="r"><code>example_bids &lt;- rbid(2)
+example_bids</code></pre>
+<pre><code>## [1] &quot;8260503-7&quot; &quot;1047706-4&quot;</code></pre>
+<pre class="r"><code>bid_ctrl(example_bids)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
 <p>Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitään muuta lisäinformaatiota, esimerkiksi yrityksen perustamisajankohtaan tai toimialaan liittyen.</p>
 </div>
 <div id="henkilötunnusten-tulevaisuus-ja-tietoturvallisuus" class="section level2">

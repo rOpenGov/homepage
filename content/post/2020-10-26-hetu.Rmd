@@ -1,9 +1,9 @@
 ---
 title: "Hetu-paketti suomalaisten henkilötunnusten käsittelyyn"
 author: "Pyry Kantanen"
-date: "2020-10-26"
-categories: ["R"]
-tags: ["Finland"]
+date: '2020-10-26'
+categories: R
+tags: Finland
 ---
 
 ## Yleistä
@@ -41,15 +41,25 @@ Suomalaisen henkilötunnuksen tarkistusmerkki on erilaisten lyöntivirheiden kan
 
 ### Käytännön esimerkkejä
 
-Paketin asentaminen R-ympäristöön ja perustietojen tulostaminen onnistuu seuraavanlaisesti:
+Paketin asentaminen R-ympäristöön:
+```{r, eval = FALSE}
+install.packages("hetu")
+```
 
-```{r, results='asis'}
+Paketin lataaminen kirjastoon ja 2 yksikön pituisen esimerkkivektorin asettaminen onnistuu seuraavanlaisesti:
+
+```{r setup, include=TRUE}
 library(hetu)
 example_pins <- c("010101-0101", "111111-111C")
+```
+
+Perustietojen tarkastelu hetuja sisältävästä vektorista onnistuu yksinkertaisesti hetu-komennolla, joka tulostaa perusmuodossa data frame -tyyppisen taulukon. Taulukko on tässä esimerkissä muotoiltu hieman kauniimmaksi kable-funktiolla:
+
+```{r, eval = TRUE}
 knitr::kable(hetu(example_pins))
 ```
 
-Perustietojen tarkistaminen onnistuu joko hetu-funktion extract-parametrin avulla tai siihen erikoistuneiden funktioiden avulla:
+Taulukon sisältämien tietojen, erityisesti sukupuolen ja päivämäärän, tarkastelu onnistuu joko hetu-funktion extract-parametrin avulla tai siihen erikoistuneiden funktioiden avulla:
 
 ```{r, eval = TRUE}
 example_pins <- c("010101-0101", "111111-111C")
@@ -62,9 +72,11 @@ hetu_date(example_pins)
 # Hetujen oikeellisuuden tarkistus
 hetu(example_pins, extract = "valid.pin")
 hetu_ctrl(example_pins)
+# Esimerkki tiedosta, jolle ei löydy erikoistunutta funktiota
+hetu(example_pins, extract = "p.num")
 ```
 
-Muista toiminnoista poiketen ikää ei saa suoraan määritettyä hetu-funktiota käyttämällä vaan se täytyy erikseen laskea haluamassaan aikamääreessä ja haluamanaan ajankohtana. Perusasetus on ikä vuosina kysymisajankohtana, mutta myös ikä kuukausina tai päivinä on mahdollinen. 
+Muista tiedoista poiketen ikää ei saa suoraan poimittua hetu-funktion extract-parametria käyttämällä. Ikä halutussa aikamääreessä ja haluttuna ajankohtana saadaan hetu_age-funktion avulla. Perusasetus on ikä vuosina kysymisajankohtana, mutta myös ikä kuukausina tai päivinä on mahdollinen. 
 
 ```{r, eval = TRUE}
 example_pins <- c("010101-0101", "111111-111C")
@@ -76,12 +88,26 @@ hetu_age(example_pins, timespan = "months")
 hetu_age(example_pins, date = "1955-01-01")
 ```
 
+Joissakin tapauksissa voi olla hyödyllistä tarkastella epävalidien hetujen diagnostiikkatietoa. Tiedot saadaan hetu_diagnostic -funktion avulla, jota demonstroimme monella tavalla virheellisen henkilötunnuksen avulla:  
+
+```{r, eval = TRUE}
+hetu_diagnostic("321399-000G")
+# Tulosta ainoastaan halutut sarakkeet
+hetu_diagnostic("321399-000G", extract = c("valid.p.num", "valid.length"))
+```
+
 ## Yritys- ja yhteisötunnusten (Y-tunnus) käsittely
 
 Hetu-paketissa on myös sweidnumbr-pakettia vastaavalla tavalla mahdollisuus generoida ja validoida suomalaisia yritys- ja yhteisötunnuksia. Suomalainen Y-tunnus koostuu seitsemästä numerosta, väliviivasta ja tarkistusmerkistä ja on muotoa 1234567-8.[^3] Y-tunnus on englanniksi Business Identity Code, mistä johtuen tässä paketissa y-tunnusten käsittelyyn tarkoitettujen funktioiden etuliitteenä käytetään lyhennettä bid:
 
 * bid_ctrl(bid): tarkastaa y-tunnuksen oikeellisuuden, TRUE tai FALSE
 * rbid(n): generoi n kappaletta y-tunnuksia
+
+```{r, eval = TRUE}
+example_bids <- rbid(2)
+example_bids
+bid_ctrl(example_bids)
+```
 
 Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitään muuta lisäinformaatiota, esimerkiksi yrityksen perustamisajankohtaan tai toimialaan liittyen.
 
