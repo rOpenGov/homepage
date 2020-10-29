@@ -1,7 +1,8 @@
 ---
 title: Hetu-paketti suomalaisten henkilötunnusten käsittelyyn
 author: Pyry Kantanen
-date: '2020-10-29'
+date: 2020-10-29
+slug: "hetu"
 categories:
   - R
 tags:

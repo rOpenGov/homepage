@@ -1,5 +1,5 @@
 ---
-title: projects
+title: Projects
 author: ~
 date: "`r Sys.Date()`"
 slug: projects
