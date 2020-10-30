@@ -107,20 +107,20 @@ hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
 <pre class="r"><code>example_pins2 &lt;- rhetu(5, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;)
 # Age in years
 hetu_age(example_pins2)</code></pre>
-<pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
-<pre><code>## [1] 33 56 52 41 70</code></pre>
+<pre><code>## The age in years has been calculated at 2020-10-30.</code></pre>
+<pre><code>## [1] 59 31 50 58 44</code></pre>
 <pre class="r"><code># Age in months
 hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
-<pre><code>## The age in months has been calculated at 2020-10-29.</code></pre>
-<pre><code>## [1] 402 672 627 492 847</code></pre>
+<pre><code>## The age in months has been calculated at 2020-10-30.</code></pre>
+<pre><code>## [1] 719 383 600 706 532</code></pre>
 <pre class="r"><code># Age in 2011
 hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 23 46 42 31 60</code></pre>
+<pre><code>## [1] 50 22 40 49 34</code></pre>
 <pre class="r"><code># Visualization: boxplot grouped by sex
 example_pins3 &lt;- rhetu(20, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;, p.male = 0.5)
 boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = &quot;&quot;, ylab = &quot;Age in years&quot;, col=c(&quot;cyan&quot;, &quot;magenta&quot;))</code></pre>
-<pre><code>## The age in years has been calculated at 2020-10-29.</code></pre>
+<pre><code>## The age in years has been calculated at 2020-10-30.</code></pre>
 <p><img src="/post/2020-10-29-hetu.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In some cases diagnostics information for invalid PINs might be useful:</p>
 <pre class="r"><code>hetu_diagnostic(&quot;321399-000G&quot;)</code></pre>
@@ -143,18 +143,18 @@ hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &q
 </ul>
 <pre class="r"><code>example_bids &lt;- rbid(2)
 example_bids</code></pre>
-<pre><code>## [1] &quot;6151590-5&quot; &quot;1312093-3&quot;</code></pre>
+<pre><code>## [1] &quot;3775677-6&quot; &quot;0733256-9&quot;</code></pre>
 <pre class="r"><code>bid_ctrl(example_bids)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>
 </div>
-<div id="lähdeviitteet" class="section level2">
-<h2>Lähdeviitteet</h2>
+<div id="references" class="section level2">
+<h2>References</h2>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>More information about sweidnumbr can be read e.g. from this blogpost: Magnusson, Mans &amp; Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: <a href="http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/" class="uri">http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>More information about sweidnumbr can be found e.g. from this blogpost: Magnusson, Mans &amp; Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: <a href="http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/" class="uri">http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Digital and Population Data Services Agency (Digi- ja väestötietovirasto). The personal identity code. URL: <a href="https://dvv.fi/en/personal-identity-code" class="uri">https://dvv.fi/en/personal-identity-code</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Finnish Patent and Registration Office. The Business Information System (BIS). URL: <a href="https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html" class="uri">https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
