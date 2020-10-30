@@ -38,11 +38,11 @@ Malli voi myös ottaa huomioon alueellisen jatkuvuuden, ts. lähekkäisten posti
 
 Alla vasemmalla on kartta postinumeroiden keskihinnoista tarkastelujaksolla 2005--2014, logaritmisena huippuhintojen hajonnan vuoksi, oikeassa kuvassa samat logaritmiset hinnat mallista. Vasemman kartan valkoisille alueille ei keskihintaa saatu, koska kauppoja ei ollut lainkaan. 
 
-![Raakadataa ja mallin hintoja Espoosta](/static/post/2015-06-11-apartment-prices.fi_files/raw-vs-model.png)
+![Raakadataa ja mallin hintoja Espoosta](/post/2015-06-11-apartment-prices.fi_files/raw-vs-model.png)
 
 Vielä alla näemme kuvan eräistä Espoon postinumeroalueista. Pisteet kuvaavat Tilastokeskuksen ilmoittamia vuosihintoja, pisteiden koko kauppojen määrää. Viivat ovat mallin arvioita hintatasosta, harmaat alueet arvion epävarmuuksia, mallin itsensä mielestä.
 
-![Raakadataa ja mallin hintoja Espoosta](/static/post/2015-06-11-apartment-prices.fi_files/espoota.png)
+![Raakadataa ja mallin hintoja Espoosta](/post/2015-06-11-apartment-prices.fi_files/espoota.png)
 
 Hinta-arvioita on saatu vähistäkin kaupoista, ja etenkin vuosimuutokset ovat luotettavamman näköisiä kuin mitä melko paljon heittelevistä keskihinnoista suoraan laskien saisi. Hintojen mallintaminen siis kannattaa.
 
