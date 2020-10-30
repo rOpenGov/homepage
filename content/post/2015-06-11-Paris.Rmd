@@ -1,13 +1,12 @@
 ---
-title: "Digital humanities with R"
-author: "Leo Lahti and Mikko Tolonen"
+title: Digital humanities with R
+author: Leo Lahti, Mikko Tolonen
 date: "2015-06-12"
-categories: ["R"]
-tags: ["computational humanities"]
+categories:
+  - R
+tags:
+  - Computational humanities
 ---
-
-Digital humanities with R
-===================
 
 ```{r, echo=FALSE}
 library(knitr)
