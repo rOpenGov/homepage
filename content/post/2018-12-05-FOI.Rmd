@@ -2,9 +2,11 @@
 ---
 title: "Cost of academic publishing in Finland"
 author: Leo Lahti
-date: 2018-12-05
-categories: ["R"]
-tags: ["foi"]
+date: "2018-12-05"
+categories: 
+  - R
+tags: 
+  - foi
 ---
 
 
