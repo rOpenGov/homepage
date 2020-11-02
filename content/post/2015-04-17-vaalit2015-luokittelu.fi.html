@@ -1,0 +1,108 @@
+---
+title: Kenen joukoissa seisot - ennustaako kone ehdokkaan puoluekannan?
+author: Johan Himberg
+date: "2015-04-17"
+categories: 
+  - news
+tags:
+  - news
+  - R
+  - datavaalit
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Avoimesta Ylen ja HS:n vaalikonedatasta löytyy hyviä analyysejä ja visualisointeja, esimerkiksi Juha Törmäsen <a href="http://kirkas.info/artikkeli/tilastollinen-poliitikkokartta-2015">analyysi ja visualisointi</a>, Markku Niemivirran <a href="http://blogs.helsinki.fi/niemivir/?p=257">analyysit HS:n</a> ja <a href="http://blogs.helsinki.fi/niemivir/?p=293">Ylen datasta</a> ja näiden <a href="http://users.aalto.fi/~leinona1/vaalit2015/">visualisointi</a> (Taipale, Leinonen, Niemivirta). Latenttien komponettien mallinnuksesta kiinnostuneet voivat vilkaista myös Janne Sinkkosen <a href="https://github.com/euxoa/vaalit">latentin multinomiaalimallin koodia</a>. Mallin tuottama <a href="https://dl.dropboxusercontent.com/u/8403120/Hki-Uusimaa-partyplots.pdf">grafiikka tuloksista Uudellemaalle</a> kiinnostanee kaikkia.</p>
+<p>Edellisissä on faktoroitu alkuperäisiä vastauksia ja ryhmitelty ehdokkaita; tehty siis varsinaista analyysiä vastausten taustalla olevista tekijöistä. Analyysit ovat oikein hyviä, joten kokeilen jotain muuta: <em>luokittelijaa</em> Ylen vaalikonedatalle. Luokittelija mittaa suoraan kuinka hyvin kysymykset erottelevat puolueita toisistaan ja kuinka todennäköinen ehdokas on kullekin puolueelle. Osaako kone erottaa puolueet toisistaan? Kuka on Ylen kysymysten perusteella kaikkein piraatein, kokoomuslaisin tai vasemmistolaisin? Voiko pelkkien taustatietojen perusteella arvata ehdokkaan puoluekannan? Mitkä kysymykset oppiva kone valitsee erotteleviksi?</p>
+<div id="kaksi-luokittelijaa-ylen-vaalikonevastauksista" class="section level2">
+<h2>Kaksi luokittelijaa Ylen vaalikonevastauksista</h2>
+<p>Luokittelijat on tehty <a href="http://vaalikone.yle.fi/eduskuntavaalit2015/">Ylen vaalikoneen</a> <a href="http://yle.fi/uutiset/yle_julkaisee_vaalikoneen_vastaukset_avoimena_datana/7869597">avoimen datan</a> kaikille ehdokkaille yhteisten monivalintavastausten perusteella. Toinen perustuu saman datan taustatietoihin: ikä, sukupuoli, kieli, uskontokuntaan kuuluminen, tulot, työnantajan laatu, koulutus.</p>
+<p>Ensimmäistä voi kutsua vaikkapa käyttäytymis- tai arvoperustaiseksi ja jälkimmäistä demografiaperusteiseksi. Käyn läpi lähinnä ensimmäistä, mielipiteisiin perustuvaa ja vähän demografiaperustaita.</p>
+<p>Tekstin lopussa on lisätietoa siitä, mitä “luokittelu” tässä yhteydessä tarkoittaa - ja ihan lopussa on lyhyt tekninen kuvaus (tiivistelmä: <code>glmnet</code>:in multinomiaalimalli, regularisoinnissa käytetään L1-normia)</p>
+<div id="puolueet-ja-määrät" class="section level3">
+<h3>Puolueet ja määrät</h3>
+<p>Ylen vaalikonedatasta löytyy kokeiluun 1849 ehdokasta. Jätin suosiolla pois ne puolueet, joilla vastaajia on alle viisi. Luokittelija nimittäin yrittää minimoida kokonaisluokitteluvirhettä ja jos luokkien esiintymisellä on suuri ero, pienet luokat saattavat hävitä kokonaisvirheen pienentämiseksi, eikä ristiinvalidointiinkaan riitä dataa.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-1-1.png" width="1152" /></p>
+<p>Nykyisten eduskuntapuolueiden lyhenteet lienevät selviä, muut lyhenteet ovat:
+Itsenäisyyspuolue (IP), Kommunistinen Työväenpuolue (KTP), Muutos 2011 (M11), Piraattipuolue (PIR)
+Pirkanmaan Sitoutumattomat yhteislista (PSYL), Suomen Kommunistinen Puolue (SKP) ja Suomen Työväenpuolue (STP).</p>
+</div>
+</div>
+<div id="luokittelutulokset-vastausten-perusteella" class="section level2">
+<h2>Luokittelutulokset vastausten perusteella</h2>
+<div id="kolme-neljästä-luokittuu-oikein" class="section level3">
+<h3>Kolme neljästä luokittuu oikein</h3>
+<p>Malli antaa ristiinvalidoidun tarkkuusennusteen 76%. Noin 24% ehdokkaista luokittuu siis väärään puolueeseen, kun perusteena käytetään Ylen tekemiä kysymyksiä suoraan. Tätä voi suhteuttaa: jos ainoa informaatio (priori) olisi se, kuinka paljon puolueilla on ehdokkaita, olisi kannattavinta arvata aina SDP:ta, jolla on aineistossa eniten ehdokkaita, noin 11%.</p>
+<p>Tulos on paljon arvausta parempi, kun priori on noin 11%. Ylen vaalikoneen datan perusteella yksinkertainen oppiva kone siis pystyy useimmiten tunnistamaan ehdokkaan puoluekannan. Kaipa puolueet sitten eroavat toisistaan.</p>
+<p>Luokittelijan tai kysymysten käsittelyn muokkaamisella tulosta voisi ehkä parantaa, mutta se ei ole tekemäni lyhyen harjoituksen kannalta oleellista.</p>
+</div>
+<div id="sekaannusmatriisi" class="section level3">
+<h3>Sekaannusmatriisi</h3>
+<p>Virhe on eri suuruinen eri puolueilla ja puolueet sekaantuvat eri tavoin. Luokittelukokeessa ehkä mielenkiintoisinta onkin se, miten eri puolueet sekaantuvat toisiinsa vaalikonevastausten perusteella. Seuraavassa ehdokkaat on luokiteltu ja lasketaan, kuinka monta prosenttia kunkin puolueen ehdokkaista saa minkäkin ennustetun puolueen.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<p>RIVIT kertovat oikean puolueen ja sarakkeet ennustetun. Luvut ovat prosentteja ja rivit summatutuvat noin sataan (prosenttiluvut pyöristettyjä).</p>
+<p>Esimerkiksi Kokoomus ja Kristillisdemokraatit erottuvat hyvin, toisaalta näkyy kuinka pienten puolueiden/listojen ehdokaat luokitellaan isompiin: Kommunistinen Työväenpuolue, Pirkanmaan sitoutumattomat ja Suomen Työväenpuolue sirottuvat muihin puolueisiin. Puolueiden eri- ja samankaltaisuutta (Ylen kysymysten perusteella!) voi katsella matriisista: Esimerkiksi isoista puolueista Keskusta luokittuu heikoiten ja osaa luokittelija luulee vihreiksi, kristillisdemokraateiksi, perussuomalaisiksi tai kokoomuslaisiksi. SKP sekaantuu osittain Vasemmistoliittoon ja Muutos 2011 Perussuomalaisiin. Toisaalta esimerkiksi harva, jos kukaan vihreä luokittu kristillisdemokraatiksi tai kokoomuslainen vasemmistoliittolaiseksi.</p>
+</div>
+<div id="mennään-henkilötasolle" class="section level3">
+<h3>Mennään henkilötasolle</h3>
+<p>Käytetty luokittelija toimii niin, että luokiteltava saa ennusteen todennäköisyydestä olla kunkin puolueen ehdokas.
+Tässä vaiheessa on hyvä vielä muistuttaa, että kaikkiaan tämä harjoitus mittaa Ylen kysymysten ja käytetyn menetelmän kykyä tehdä luokittelua, ei todellista aatten puhtautta ja paloa. Pienimmät puolueet luokittuvat sen verran huonosti, että olen reilu ja otan esimerkiksi kymmenen puoluetta, joilla on tässä aineistossa eniten ehdokkaita.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-3-1.png" width="1152" /></p>
+<p>Sarakkeet ovat todennäköisyys (pyöristettynä kokonaisiin prosentteihin) kullekin luokalle (puolueelle). Pienimmät puolueet on jätetty pois joten rivit eivät summaudu aina sataan.</p>
+<p>Helpotuksen huokaus: kaikki näiden puolueiden puheenjohtajat ennustuvat oikein ja vieläpä isolla marginaalilla seuraavaksi todennäköisimpään. On hauska pohtia, mitä tästä voisi nähdä. No, ainakin porvaripuolueiden puheenjohtajilla on hyvin pieni todennäköisyys luokittua Vasemmistoliittoon ja vastaavasti vasemmistopuolueiden puheenjohtajilla Kokoomukseen.</p>
+</div>
+<div id="kertoimet-mitä-kone-on-oppinut" class="section level3">
+<h3>Kertoimet: mitä kone on oppinut?</h3>
+<p>Kertoimen etumerkistä voi päätellä, mihin suuntaan erottelevat kysymykset vaikuttavat. Yksinkertaistaen: kukin ehdokas saa saa kuulumisestaan luokkaan (puolueeseen) pisteluvun, johon vaikuttavat nollasta poikkeavat kertoimet. Jos kerroin on nolla, on samantekevää kyseisen puolueen suhteen, miten on vastannut. Pisteluku lasketaan joka puolueelle erikseen. Esimerkiksi myöteinen suhtautuminen perustuloon tuo pisteitä Vihreiden tai Keskustan ehdokkaana ololle, mutta kertoo päinvastaista sosiaalidemokraattien listoille kuulumisesta. KD:n ehdokkaillakin on asiaan kanta (keskimäärin keskimääräistä kielteisempi): nolla kertoo vain, että luokittelijan mielestä tätä kysymystä ei kannata huomioida kristillisdemokraattien kohdalla.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-4-1.png" width="1440" /></p>
+<p>Entä tuo <code>euc</code>? Lisäsin yhden johdetun muuttujan, joka kertoo kuinka kauas nollatasosta (nollataso = ohita tai tyhjä) ehdokas on vastannut. Näyttää siltä, että luokittelija hyödyntää sitä. Esimerkiksi keskimääräistä “miedommin” vastaaminen puoltaa kuulumista Keskustan ehdokkaisiin. Samalla voi demonstroida sitä että kertoimet <em>eivät</em> kuvaa suoraan puolueiden suhteita keskimääräiseen, vaan sitä miten tietoa käytetään luokittelussa. Alla <a href="http://en.wikipedia.org/wiki/Box_plot">Tukeyn laatikkokaavio</a> muuttujan <code>euc</code> arvoista eri puolueiile. Paksu viiva on mediaani.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p>Esimerkiksi Vasemmistoliiton kerroin on nolla, vaikka ehdokkaissa on monia muita puolueita enemmän “jyrkkiä” vastaajia.</p>
+</div>
+<div id="istuvat-vs.-uudet-ehdokkaat" class="section level3">
+<h3>Istuvat vs. uudet ehdokkaat</h3>
+<p>Verrataan istuvien ja uusien ehdokkaiden luokittelun onnistumisprosentteja</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-6-1.png" width="192" /></p>
+<p>Istuvat luokittuvat selvästi paremmin. Määrät ovat pieniä, joten kokeilin sattuman välttämiseksi tehdä mallin pelkästään aineiston 159 istuvalla kansanedustajalla (pl. Muutos 2011, jolla on vain yksi edustaja), luokittelutarkkuus on ristiinvalidoituna 88 % tienoilla. Ryhmäkuri on sisäistynyt.</p>
+</div>
+<div id="demografinen-luokittelija" class="section level3">
+<h3>Demografinen luokittelija</h3>
+<p>Ylen datassa on taustatietoina mm. tulot, sukupuoli, äidinkieli, lapset, koulutus, työnantajan laatu (yksityinen/julkinen), uskontokunta ja sijoitukset. Kokeilin miten käy, jos käyttää vain näitä tietoja. Kokonaistarkkuus on 27%. Tulos on tietysti huonompi kuin mielipiteisiin perustuvalla luokittelijalla ja hyvä niin - mutta sentään arvausta selvästi parempi. Kun tarkastelee sekaannusmatriisia, huomaa että kyllä demografia ja tulot (tai se että ei halua näitä kertoa) tietyissä tapauksissa ehdokkaiden puoluekannoista kertoo. Itse asiassa RKP luokittuu <em>paremmin</em> kuin asiakysymysten avulla, avaintekijä on tässä äidinkieli. Keskusta on varmaankin “keskiluokkainen” taustaltaan ja vetää siksi monta ehdokasta. KD:n erottuvuutta muista porvaripuolueista selittää suuri sen suuri määrä muihin kristillisiin kirkkokuntiin kuuluvia, joita muissa puolueissa on vähän.</p>
+<p><img src="/post/2015-04-17-vaalit2015-luokittelu.fi_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
+</div>
+</div>
+<div id="mikä-on-luokittelija" class="section level2">
+<h2>Mikä on luokittelija?</h2>
+<p><em>Luokittelu</em> on koneoppimisen yksi perustehtävä. Luokiteltaville alkioille, tässä ehdokkaille, on olemassa oikea <em>luokka</em>, puolue. Lisäksi on selittävää dataa, tässä vastauksia kysymyksiin. Luokittelija muodostetaan käyttämällä aineistoa, jossa tunnetaan sekä selittävä data että oikea luokkatieto. Luokittelijalla voidaan sitten ennustaa oikean luokka muun datan perusteella, kun luokkatieto puuttuu.</p>
+<p>Luokittelu on siis <em>prediktiivinen</em>, ennustava tehtävä. Tässä tapauksessa kaikille ehdokkaille tiedetään oikea puolue, Ennustuskykyä simuloidaan <em>ristiinvalidoinnilla</em>, jossa osaa ehdokkaista käytetään mallin muodostamiseen ja osalla validoidaan kuinka hyvin malli osaa ennustaa. Luokittelija ei voi tehdä ihmeitä: jos kysymykset eivät tuo informaatiota riittävästi, ei luokittelija sitä voi mistään taikoa. Yksi tapa lisätä luokittelukykyä on lisätä dataa, siis kysymyksiä, tai tehdä luokittelijan rakenteesta monimutkaisempi. Tässä piilee väärin tehtynä ansa: luokittelija <em>ylioppii</em> detaljeja ja alkaakin ennustaa uutta aineistoa yhä huonommin. Tätä vastaan taistellaan regularisoinnilla.</p>
+<p>Käytän lineaarista <em>logistista multinomiaalimallia</em>, joka antaa myös ehdokkaille todennäköisyyden kuulua kaikkiin puolueisiin. Lisäksi luokittelijan kertoimet antavat kuvan siitä, millä perusteilla luokkapäätös on tehty. Käytän L1-sakkoa (“lasso”), joka jättää kokonaan huomiotta kysymyksiä, jotka sotkisivat luokittelua. Luokittimen kerroinmatriisiin jäävät vain (luokittimen mielestä) puolueelle riittävät ja yleistyskyvyn säilyttävät erottelevat muuttujat.</p>
+<div id="lyhyt-tekninen-kuvaus" class="section level3">
+<h3>Lyhyt tekninen kuvaus</h3>
+<p>Vastausvaihtoehdot on muunnettu seuraavasti</p>
+<ul>
+<li>täysin eri mieltä / Ei = -1</li>
+<li>jokseenkin eri mieltä: -1/2</li>
+<li>ohita kysymys / Tyhjä: 0</li>
+<li>jokseenkin samaa mieltä: 1/2</li>
+<li>täysin samaa mieltä / Kyllä: 1</li>
+</ul>
+<p>Lisäksi on laskettu muuttuja <code>euc</code> joka on vastausvektorin euklidinen etäisyys nollavektoriin, mikä siis kuvaa vastaustavan “äärimmäisyyttä” tai “laimeutta”.</p>
+<p>(Demografiapohajaiseen luokittimeen vastaukset on 1-of-C -koodattu, puuttuva tieto eksplisiittisenä luokkana, ikä on likukuluku.)</p>
+<p>Luokittelija on <a href="http://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html#log">R:n <code>glmnet</code> -paketin</a> multinomiaalimalli. Kokeessa on käytetty suoraan <code>cv.glmnet</code> -funktiota joka hakee regularisaatioparametrin 10-taitteisella ristiinvalidoinnilla.</p>
+<pre><code>classifier&lt;-cv.glmnet(x,y,family=&quot;multinomial&quot;,type.measure=&quot;class&quot;,standardize=TRUE,intercept=TRUE,alpha=1)</code></pre>
+<p><code>glmnet</code> standardoi muuttujat itse ja asettaa intercept-termin. Vipu <code>alpha=1</code> asettaa mallin käyttämään L1-sakkoa regularisoinnissa (“lasso”). (<code>alpha=0</code> olisi L2-sakko ja tältä väliltä saataisiin “elastic net” -regularisointi.)
+Kokeilin myös L2:ta, mutta tulos ei ollut ainakaan parempi.</p>
+<p>Luokittelun kokonaisvirhe on parhaan mallin ristiinvalidaatiosta. Sekaannusmatriisin prosenttiluvut on puolestaan mallia sovellettu koko aineistoon, jolloin virhe on pari prosenttiyksikköä optimistisempi. Kokonaisvirhe olisi 21%, kun se ristiivalidoituna on siis 23,5%.</p>
+<p>Koska muuttujia on suhteellisen vähän suhteessa dataan ja malli on lineaarinen ja <code>glmnet</code>:in regularisoinnin pitäisi olla laadukas, en ryhtynyt tekemään tästä sen ankarampaa validointia.</p>
+</div>
+<div id="lähdekoodi" class="section level3">
+<h3>Lähdekoodi</h3>
+<p>Datan esikäsittelyyn ja luokitteluun käytetty skripti sekä esikäsitellyt datat löytyvät <a href="https://github.com/louhos/takomo/tree/master/vaalit2015/luokittelu">GitHubista</a>.</p>
+<p>Kaikkien ehdokkaiden lasketut todennäköisyydet kuulua kuhunkin puolueeseen löytyvät <a href="https://github.com/louhos/takomo/blob/master/vaalit2015/luokittelu/ehdokkaat.yle.csv">täältä</a>.</p>
+<p>Kirjoittaja Johan Himberg on data scientist Reaktorilla ja kävi jo äänestämässä eduskuntavaaleissa.</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons -käyttölupa" style="border-width:0"
+src="http://i.creativecommons.org/l/by/4.0/88x31.png" /> </a></p>
+</div>
+</div>
