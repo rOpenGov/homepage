@@ -5,7 +5,9 @@ date: "2016-09-29"
 categories:
   - news
 tags:
-  - news
+  - big data
+  - open data
+  - open science
 ---
 
 Uusien vaaliaineistojen ja sosiaalisen median hyödyntäminen yhteiskuntatieteiden laskennallisiin menetelmiin perustuvassa tutkimuksessa on vasta aluillaan.
