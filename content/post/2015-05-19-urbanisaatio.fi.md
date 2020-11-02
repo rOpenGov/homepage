@@ -1,6 +1,6 @@
 ---
 title: Urbaanien asuinympäristöjen suosio kasvaa
-author: Jaakko Sarela
+author: Jaakko Särelä
 date: "2015-05-19"
 categories:
   - news

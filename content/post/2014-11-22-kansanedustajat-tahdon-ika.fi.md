@@ -1,6 +1,6 @@
 ---
 title: Kansanedustajien Tahdon-kantojen ja iän korrelaatio
-author: Jaakko Sarela
+author: Jaakko Särelä
 date: "2014-11-22"
 categories:
   - news
