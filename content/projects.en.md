@@ -1,10 +1,12 @@
 ---
 title: Projects
 author: ~
-date: "`r Sys.Date()`"
-slug: projects
-categories: []
-tags: []
+date: "2020-10-29"
+slug: projects-en
+categories:
+  -
+tags:
+  -  
 ---
 
 The rOpenGov R package development versions are maintained in [Github](https://github.com/ropengov/).

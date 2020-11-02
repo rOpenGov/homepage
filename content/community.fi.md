@@ -1,9 +1,12 @@
 ---
 title: Yhteisö
 author: ~
-date: 2020-10-29
-categories: []
-tags: []
+date: "2020-10-29"
+slug: community-fi
+categories:
+  -
+tags:
+  -  
 ---
 
 # Ydintiimi
@@ -25,7 +28,6 @@ Yhteydenotot yleisesti rOpenGoviin liittyvissä asioissa:
 Täydellinen listaus pakettikohtaisista kontribuuttoreista löytyy
 [GitHub](http://github.com/ropengov)-sivulta. Olemme kiitollisia kaikille kontribuuttoreille.
 
-
 # Kuinka voin kontribuoida?
 
 [rOpenGov](http://ropengov.github.io) on itsenäisistä R-kehittäjistä koostuva yhteisö. Jos työskentelet vastaavanlaisten projektin parissa, älä epäröi ottaa yhteyttä!
@@ -33,11 +35,3 @@ Täydellinen listaus pakettikohtaisista kontribuuttoreista löytyy
 Voit olla meihin yhteydessä, jos kehittämäsi R-paketti sopisi mielestäsi muiden pakettiemme yhteyteen tai jos haluat kirjoittaa blogikirjoituksen. Palaute, bugi-ilmoitukset ja muu apu ovat erittäin tervetulleita..
 
 Voit ottaa meihin yhteyttä [Gitterissä](https://gitter.im/rOpenGov/home) tai sähköpostitse: ropengov - at - googlegroups.com
-
-
-
-
-
-
-
-
