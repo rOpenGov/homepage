@@ -2,7 +2,7 @@
 title: Community
 author: ~
 date: "2020-10-29"
-slug: community-en
+slug: community
 categories:
   -
 tags:

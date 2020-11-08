@@ -2,7 +2,7 @@
 title: Tietoa rOpenGovista
 author: ~
 date: "2020-10-29"
-slug: about-fi
+slug: about
 categories:
   -
 tags:

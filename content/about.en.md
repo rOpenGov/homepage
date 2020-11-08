@@ -2,7 +2,7 @@
 title: About rOpenGov
 author: ~
 date: "2020-10-29"
-slug: about-en
+slug: about
 categories:
   -
 tags:

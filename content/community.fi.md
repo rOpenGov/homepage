@@ -2,7 +2,7 @@
 title: Yhteisö
 author: ~
 date: "2020-10-29"
-slug: community-fi
+slug: community
 categories:
   -
 tags:
