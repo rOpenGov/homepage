@@ -2,7 +2,7 @@
 title: Projects
 author: ~
 date: "2020-10-29"
-slug: projects-en
+slug: projects
 categories:
   -
 tags:

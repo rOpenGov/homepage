@@ -2,7 +2,7 @@
 title: Projektit
 author: ~
 date: "2020-10-29"
-slug: projects-fi
+slug: projects
 categories:
   -
 tags:
@@ -33,6 +33,7 @@ repodata %>%
 ```
 
 <div class="row">
+
 ```{r create_tbls, results = "asis", echo = FALSE}
 tbl1 <- tbl %>% arrange(desc(updated_at))
 
@@ -71,4 +72,5 @@ glue('
 }
 htmltools::HTML(do.call("c", tbl_list))
 ```
+
 </div>
