@@ -15,7 +15,6 @@ The rOpenGov R package development versions are maintained in [Github](https://g
 library(jsonlite)
 library(dplyr)
 library(glue)
-library(kableExtra)
 ```
 
 ```{r pull_data, echo = FALSE, cache = FALSE, eval = TRUE}

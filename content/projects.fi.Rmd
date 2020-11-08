@@ -15,7 +15,6 @@ rOpenGov-yhteisön kehittämien R-pakettien kehitys tapahtuu [Githubissa](https:
 library(jsonlite)
 library(dplyr)
 library(glue)
-library(kableExtra)
 ```
 
 ```{r pull_data, echo = FALSE, cache = FALSE, eval = TRUE}
