@@ -9,7 +9,7 @@ tags:
   -  
 ---
 
-rOpenGov-yhteisön kehittämien R-pakettien kehitys tapahtuu [Githubissa](https://github.com/ropengov/).
+rOpenGov-yhteisön R-pakettien kehitys tapahtuu [Githubissa](https://github.com/ropengov/).
 
 ```{r pkgs, include = FALSE}
 library(jsonlite)
