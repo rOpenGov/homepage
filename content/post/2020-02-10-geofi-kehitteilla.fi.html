@@ -1,6 +1,7 @@
 ---
 title:  "R-paketti `geofi` Tilastokeskuksen avointen paikkatietoaineistojen käyttöön"
 date: 2020-02-10 10:53:45
+slug: "geofi1"
 categories:
   - R
 tags:
@@ -17,43 +18,79 @@ tags:
 <p>Olemme hiljalleen kirjoittaneet <a href="https://ropengov.github.io/">ropengov</a>-porukalla seuraajaa <a href="https://ropengov.github.io/gisfin/">gisfin</a>-paketille nimeltä <a href="https://ropengov.github.io/geofi/index.html"><code>geofi</code></a>. Paketti mahdollistaa <em>avointen Suomea koskevien paikkatietoaineistojen</em> käytön R:ssä. Painopiste on ollut hallinnollisissa aluerajoissa ja tällä hetkellä ensisijaisena aineistolähteenä on Tilastokeskuksen <code>wfs</code>-rajapinta, josta <code>geofi</code>-paketin funktioilla voi ladata <em>kuntarajat</em>, <em>postinumeroalueet</em> sekä <em>väestöruudukot</em>.</p>
 <p><code>geofi</code>-pakettia ei ole vielä julkaistu CRAN:ssa, etkä voi asentaa sitä <code>intall.packages()</code>-funktiolla. Sen sijaan voit asentaa sen suoraan Github:sta komennolla: <code>remotes::install_github("ropengov/geofi")</code> ja kokeilla seuraavien esimerkkien tai tämän <a href="https://muuankarski.shinyapps.io/geofi_selain/"><code>geofi_selain</code></a>-sovelluksen avulla.</p>
 <p><strong>Kuntarajat</strong></p>
-<pre class="r"><code>library(geofi)
-library(ggplot2)
+<pre class="r"><code>library(geofi)</code></pre>
+<pre><code>## 
+## geofi R package: tools for open GIS data for Finland.
+## Part of rOpenGov &lt;ropengov.github.io&gt;.</code></pre>
+<pre class="r"><code>library(ggplot2)
 
-municipalities &lt;- get_municipalities(year = 2020, scale = 4500)
-ggplot(municipalities) + 
+municipalities &lt;- get_municipalities(year = 2020, scale = 4500)</code></pre>
+<pre><code>## Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2020</code></pre>
+<pre><code>## Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</code></pre>
+<pre><code>## Data is licensed under: Attribution 4.0 International (CC BY 4.0)</code></pre>
+<pre class="r"><code>ggplot(municipalities) + 
   geom_sf(aes(fill = as.integer(kunta))) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipality_map-1.png" width="900" /></p>
+<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipality_map-1.png" width="672" /></p>
 <p><strong>Postinumeroalueet</strong></p>
-<pre class="r"><code>zipcodes &lt;- get_zipcodes(year = 2020) 
-ggplot(zipcodes) + 
+<pre class="r"><code>zipcodes &lt;- get_zipcodes(year = 2020) </code></pre>
+<pre><code>## Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=postialue%3Apno_2020</code></pre>
+<pre><code>## Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</code></pre>
+<pre><code>## Data is licensed under: Attribution 4.0 International (CC BY 4.0)</code></pre>
+<pre class="r"><code>ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/zipcode_map-1.png" width="900" /></p>
+<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/zipcode_map-1.png" width="672" /></p>
 <p><strong>Väestöruudukko</strong></p>
-<pre class="r"><code>pop_grid &lt;- get_population_grid(year = 2018, resolution = 5)
-ggplot(pop_grid) + 
+<pre class="r"><code>pop_grid &lt;- get_population_grid(year = 2018, resolution = 5)</code></pre>
+<pre><code>## Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=vaestoruutu%3Avaki2018_5km</code></pre>
+<pre><code>## Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</code></pre>
+<pre><code>## Data is licensed under: Attribution 4.0 International (CC BY 4.0)</code></pre>
+<pre class="r"><code>ggplot(pop_grid) + 
   geom_sf(aes(fill = objectid), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/population_grid_data-1.png" width="900" /></p>
+<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/population_grid_data-1.png" width="672" /></p>
 <p>Maakuntajako, sairaanhoitopiirit ja useat muut aluejaot perustuvat kuntajakoon. <code>get_municipalities()</code>-funtion palauttamassa datassa löytyvät <a href="https://ropengov.github.io/geofi/reference/municipality_key_2020.html">nämä attribuuttimuuttujat</a> (vuosi 2020), joiden avulla voit aggregoida kuntatason dataa ylemmille tasoille.</p>
-<pre class="r"><code>library(dplyr)
-municipalities &lt;- get_municipalities(year = 2019, scale = 4500)
-regions &lt;- municipalities %&gt;% 
-  group_by(maakunta_name_fi) %&gt;% summarise()
-ggplot(regions) + 
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following object is masked from &#39;.env&#39;:
+## 
+##     n</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>municipalities &lt;- get_municipalities(year = 2019, scale = 4500)</code></pre>
+<pre><code>## Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2019</code></pre>
+<pre><code>## Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</code></pre>
+<pre><code>## Data is licensed under: Attribution 4.0 International (CC BY 4.0)</code></pre>
+<pre class="r"><code>regions &lt;- municipalities %&gt;% 
+  group_by(maakunta_name_fi) %&gt;% summarise()</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>ggplot(regions) + 
   geom_sf(aes(fill = maakunta_name_fi)) +
   scale_fill_viridis_d()</code></pre>
-<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/aggregate-1.png" width="900" /></p>
+<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/aggregate-1.png" width="672" /></p>
 <p>Luonnollisesti voit yhdistää <code>geofi</code>:n datoihin muita attribuuttidatoja. Alla olevassa esimerkissä haetaa Tilastokeskuksen kuntien avainluvut ja luodaan kartta kuntien väkiluvuista.</p>
 <pre class="r"><code>library(tidyr)
-library(pxweb)
-library(janitor)
-
-municipalities17 &lt;- get_municipalities(year = 2017)
-
-# pull municipality data from Statistics Finland
+library(pxweb)</code></pre>
+<pre><code>## pxweb: R tools for PX-WEB API.
+## Copyright (C) 2014-2018 Mans Magnusson, Leo Lahti et al.
+## https://github.com/ropengov/pxweb</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>municipalities17 &lt;- get_municipalities(year = 2017)</code></pre>
+<pre><code>## Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2017</code></pre>
+<pre><code>## Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</code></pre>
+<pre><code>## Data is licensed under: Attribution 4.0 International (CC BY 4.0)</code></pre>
+<pre class="r"><code># pull municipality data from Statistics Finland
 pxweb_query_list &lt;-
   list(&quot;Alue 2019&quot;=c(&quot;*&quot;),
        &quot;Tiedot&quot;=c(&quot;*&quot;),
@@ -74,10 +111,10 @@ tk_data2 &lt;- tk_data %&gt;%
 tk_data3 &lt;- janitor::clean_names(tk_data2)
 
 # Join with Statistics Finland attribute data
-dat &lt;- left_join(municipalities17, tk_data3)
-
-ggplot(dat) + 
+dat &lt;- left_join(municipalities17, tk_data3)</code></pre>
+<pre><code>## Joining, by = &quot;name&quot;</code></pre>
+<pre class="r"><code>ggplot(dat) + 
   geom_sf(aes(fill = vakiluku_2017), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c(trans = &quot;sqrt&quot;)</code></pre>
-<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipalities_with_data-1.png" width="900" /></p>
+<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipalities_with_data-1.png" width="672" /></p>
 <p>Katso lisää paketin kehityssivuilta Github:sta ja tule apuun kehittämisessä!</p>

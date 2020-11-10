@@ -6,6 +6,9 @@ categories: ["R"]
 tags: ["Sweden"]
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="r-made-personal-at-least-for-swedes" class="section level1">
@@ -98,7 +101,7 @@ tags: ["Sweden"]
 <p>We can now also investigate some demographic characteristics almost on the fly (note that pins contained geographical information only up to 1989):</p>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(pin_age(pin), 20, col = &quot;lightgreen&quot;, main = &quot;Age distribution&quot;)</code></pre>
-<pre><code>## The age has been calculated at 2020-10-22.</code></pre>
+<pre><code>## The age has been calculated at 2020-11-10.</code></pre>
 <pre class="r"><code>pie(table(pin_sex(pin)), main = &quot;Sex distribution&quot;)</code></pre>
 <p><img src="/post/2015-08-20-sweidnumber_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>pin_birthplace(pin[1:8])</code></pre>
