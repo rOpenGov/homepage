@@ -27,3 +27,15 @@
 
 - id: thanks
   translation: "Hugo templaatti jonka ❤ tehnyt {{.Xzya}}, inspiroituneena {{.HugoThemeBootstrap4Blog}}"
+
+- id: welcome
+  translation: "Tervetuloa rOpengov-projektiin!"
+
+- id: welcome_lead
+  translation: "Olemme odottaneet sinua!"
+
+- id: welcome_button
+  translation: "Lue lisää!"
+
+- id: blog_title
+  translation: "Blogi"  
