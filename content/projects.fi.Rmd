@@ -51,12 +51,12 @@ homepagelink <- ""
   
   
   # new row every time
-  if (i %% 3 == 0){
+  if (i %% 4 == 0){
     rowbreak <- '</div><div class="row">'
   } else rowbreak <- ""
   
 glue('
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{tbl1$name[i]}</h5>
