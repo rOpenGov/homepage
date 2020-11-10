@@ -116,15 +116,15 @@ hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
 # Ikä vuosina
 hetu_age(example_pins2)</code></pre>
 <pre><code>## The age in years has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 40 70 53 37 38</code></pre>
+<pre><code>## [1] 70 70 66 65 51</code></pre>
 <pre class="r"><code># Ikä kuukasina
 hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
 <pre><code>## The age in months has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 489 843 640 444 461</code></pre>
+<pre><code>## [1] 844 848 797 780 619</code></pre>
 <pre class="r"><code># Minkä ikäisiä hetujen omistajat olivat 2011 puolivälissä?
 hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 30 60 43 27 28</code></pre>
+<pre><code>## [1] 60 60 56 55 41</code></pre>
 <pre class="r"><code># Visualisointi: laatikkojanakuvaaja sukupuolen mukaan ryhmiteltynä
 example_pins3 &lt;- rhetu(20, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;, p.male = 0.5)
 boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = &quot;&quot;, ylab = &quot;Ikä vuosina&quot;, col=c(&quot;gold&quot;, &quot;darkgreen&quot;))</code></pre>
@@ -151,7 +151,7 @@ hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &q
 </ul>
 <pre class="r"><code>example_bids &lt;- rbid(2)
 example_bids</code></pre>
-<pre><code>## [1] &quot;7649792-2&quot; &quot;5265389-8&quot;</code></pre>
+<pre><code>## [1] &quot;0132185-0&quot; &quot;0628392-9&quot;</code></pre>
 <pre class="r"><code>bid_ctrl(example_bids)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitään muuta lisäinformaatiota, esimerkiksi yrityksen perustamisajankohtaan tai toimialaan liittyen.</p>

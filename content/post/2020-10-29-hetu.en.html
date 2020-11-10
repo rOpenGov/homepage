@@ -110,15 +110,15 @@ hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
 # Age in years
 hetu_age(example_pins2)</code></pre>
 <pre><code>## The age in years has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 27 29 66 39 69</code></pre>
+<pre><code>## [1] 67 67 62 42 51</code></pre>
 <pre class="r"><code># Age in months
 hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
 <pre><code>## The age in months has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 335 348 795 477 835</code></pre>
+<pre><code>## [1] 808 812 750 514 612</code></pre>
 <pre class="r"><code># Age in 2011
 hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 18 19 56 29 59</code></pre>
+<pre><code>## [1] 57 57 52 32 41</code></pre>
 <pre class="r"><code># Visualization: boxplot grouped by sex
 example_pins3 &lt;- rhetu(20, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;, p.male = 0.5)
 boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = &quot;&quot;, ylab = &quot;Age in years&quot;, col=c(&quot;cyan&quot;, &quot;magenta&quot;))</code></pre>
@@ -145,7 +145,7 @@ hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &q
 </ul>
 <pre class="r"><code>example_bids &lt;- rbid(2)
 example_bids</code></pre>
-<pre><code>## [1] &quot;2294257-6&quot; &quot;6826099-2&quot;</code></pre>
+<pre><code>## [1] &quot;5600558-0&quot; &quot;0223308-6&quot;</code></pre>
 <pre class="r"><code>bid_ctrl(example_bids)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>
