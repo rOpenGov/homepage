@@ -7,6 +7,9 @@ categories:
   - R
 tags:
   - Finland
+output:
+  blogdown::html_page:
+    highlight: tango
 ---
 
 ## General information
