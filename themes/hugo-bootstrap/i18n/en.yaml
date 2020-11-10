@@ -27,3 +27,15 @@
 
 - id: thanks
   translation: "Hugo template made with ❤ by {{.Xzya}}, inspired by {{.HugoThemeBootstrap4Blog}}"
+
+- id: welcome
+  translation: "Welcome to rOpengov-project!"
+
+- id: welcome_lead
+  translation: "We have been waiting for you!"
+
+- id: welcome_button
+  translation: "Read more!"
+
+- id: blog_title
+  translation: "Blog" 

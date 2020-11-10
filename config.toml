@@ -32,47 +32,58 @@ theme = "hugo-bootstrap"
 [languages]
   [languages.en]
     languageName = "English"
-  
+
     # Replace the default footer message with a localized message
     # copyright = "Hugo template made with ❤ by Xzya"
-  
+
     [[languages.en.menu.main]]
       url = "/"
       name = "Home"
       weight = 1
+#    [[languages.en.menu.main]]
+#      url = "/about/"
+#      name = "About"
+#      weight = 2
+
     [[languages.en.menu.main]]
-      url = "/about/"
-      name = "About"
+      url = "/post/"
+      name = "Blog"
       weight = 2
-  
+
+
     [[languages.en.menu.main]]
       url = "/projects/"
       name = "Projects"
       weight = 3
-  
+
     [[languages.en.menu.main]]
       url = "/community/"
       name = "Community"
       weight = 4
-  
-  
+
+
   [languages.fi]
     languageName = "Suomi"
-  
+
     [[languages.fi.menu.main]]
       url = "/"
       name = "Etusivu"
       weight = 1
+#    [[languages.fi.menu.main]]
+#      url = "/about/"
+#      name = "Lisätietoja"
+#      weight = 2
+
     [[languages.fi.menu.main]]
-      url = "/about/"
-      name = "Lisätietoja"
+      url = "/fi/post/"
+      name = "Blogi"
       weight = 2
-  
+
     [[languages.fi.menu.main]]
       url = "/projects/"
       name = "Projektit"
       weight = 3
-  
+
     [[languages.fi.menu.main]]
       url = "/community/"
       name = "Yhteisö"
@@ -123,7 +134,7 @@ theme = "hugo-bootstrap"
     num_recent_posts = 5
 
    [params.logo]
-    url = "images/ropengov2.png"
+    url = "images/logo2020_black_orange.svg"
     width = 50
     #height = 50
     alt = "rOpenGov"
