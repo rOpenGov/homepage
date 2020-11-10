@@ -1,6 +1,5 @@
 ---
 title:  "R-paketti `geofi` Tilastokeskuksen avointen paikkatietoaineistojen käyttöön"
-author: "Markus Kainu"
 date: 2020-02-10 10:53:45
 categories:
   - R
@@ -25,19 +24,19 @@ municipalities &lt;- get_municipalities(year = 2020, scale = 4500)
 ggplot(municipalities) + 
   geom_sf(aes(fill = as.integer(kunta))) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipality_map-1.png" width="900" /></p>
+<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipality_map-1.png" width="900" /></p>
 <p><strong>Postinumeroalueet</strong></p>
 <pre class="r"><code>zipcodes &lt;- get_zipcodes(year = 2020) 
 ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/zipcode_map-1.png" width="900" /></p>
+<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/zipcode_map-1.png" width="900" /></p>
 <p><strong>Väestöruudukko</strong></p>
 <pre class="r"><code>pop_grid &lt;- get_population_grid(year = 2018, resolution = 5)
 ggplot(pop_grid) + 
   geom_sf(aes(fill = objectid), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c()</code></pre>
-<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/population_grid_data-1.png" width="900" /></p>
+<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/population_grid_data-1.png" width="900" /></p>
 <p>Maakuntajako, sairaanhoitopiirit ja useat muut aluejaot perustuvat kuntajakoon. <code>get_municipalities()</code>-funtion palauttamassa datassa löytyvät <a href="https://ropengov.github.io/geofi/reference/municipality_key_2020.html">nämä attribuuttimuuttujat</a> (vuosi 2020), joiden avulla voit aggregoida kuntatason dataa ylemmille tasoille.</p>
 <pre class="r"><code>library(dplyr)
 municipalities &lt;- get_municipalities(year = 2019, scale = 4500)
@@ -46,7 +45,7 @@ regions &lt;- municipalities %&gt;%
 ggplot(regions) + 
   geom_sf(aes(fill = maakunta_name_fi)) +
   scale_fill_viridis_d()</code></pre>
-<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/aggregate-1.png" width="900" /></p>
+<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/aggregate-1.png" width="900" /></p>
 <p>Luonnollisesti voit yhdistää <code>geofi</code>:n datoihin muita attribuuttidatoja. Alla olevassa esimerkissä haetaa Tilastokeskuksen kuntien avainluvut ja luodaan kartta kuntien väkiluvuista.</p>
 <pre class="r"><code>library(tidyr)
 library(pxweb)
@@ -80,5 +79,5 @@ dat &lt;- left_join(municipalities17, tk_data3)
 ggplot(dat) + 
   geom_sf(aes(fill = vakiluku_2017), color = alpha(&quot;white&quot;, 1/3)) +
   scale_fill_viridis_c(trans = &quot;sqrt&quot;)</code></pre>
-<p><img src="/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipalities_with_data-1.png" width="900" /></p>
+<p><img src="./content/post/2020-02-10-geofi-kehitteilla.fi_files/figure-html/municipalities_with_data-1.png" width="900" /></p>
 <p>Katso lisää paketin kehityssivuilta Github:sta ja tule apuun kehittämisessä!</p>
