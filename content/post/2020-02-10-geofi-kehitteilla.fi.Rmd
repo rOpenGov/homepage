@@ -1,6 +1,7 @@
 ---
 title:  "R-paketti `geofi` Tilastokeskuksen avointen paikkatietoaineistojen käyttöön"
 date: 2020-02-10 10:53:45
+slug: "geofi1"
 categories:
   - R
 tags:
@@ -9,29 +10,7 @@ tags:
   - paikkatieto
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      message = FALSE, 
-                      warning = FALSE, 
-                      cache = FALSE,
-                      fig.width=12,
-                      fig.height=10,
-                      dpi = 60, 
-                      out.width=900)
 
-# Oletusteema
-library(ggplot2)
-theme_set(
-  theme_minimal(base_family = "PT Sans", base_size = 12) +
-  theme(panel.grid = element_blank(),
-        strip.background = element_rect(fill = "#fffff0", color = alpha("black", 1/8)),
-        plot.title = element_text(family = "Pt Sans Caption"), 
-        panel.background = element_rect(fill = "#fffff0", color = "#fffff0"),
-        plot.background = element_rect(fill = "#fffff0", color = "#fffff0"),
-        panel.border = element_rect(color = alpha("black", 1/12), fill = NA))
-)
-options(scipen = 999)
-```
 
 Olemme hiljalleen kirjoittaneet [ropengov](https://ropengov.github.io/)-porukalla seuraajaa [gisfin](https://ropengov.github.io/gisfin/)-paketille nimeltä [`geofi`](https://ropengov.github.io/geofi/index.html). Paketti mahdollistaa *avointen Suomea koskevien paikkatietoaineistojen* käytön R:ssä. Painopiste on ollut hallinnollisissa aluerajoissa ja tällä hetkellä ensisijaisena aineistolähteenä on Tilastokeskuksen `wfs`-rajapinta, josta `geofi`-paketin funktioilla voi ladata *kuntarajat*, *postinumeroalueet* sekä *väestöruudukot*. 
 
