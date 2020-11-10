@@ -5,13 +5,8 @@ draft: false
 ---
 
 
-[rOpenGov](http://ropengov.org) is a community of [R](http://cran.r-project.org/) package developers on open government data analytics and related topics.
+**rOpenGov** is a community of [R](http://cran.r-project.org/) package developers on open government data analytics and related topics.
 
-A number of independent authors have [contributed through github](https://github.com/ropengov/). We maintain the rOpenGov blog, which is also listed in [R-bloggers](http://www.r-bloggers.com/).
+The open collaboration network was initiated in 2010 and has since then led to many R packages and other fruitful outcomes. A number of independent authors have [contributed through github](https://github.com/ropengov/) and written to the [rOpenGov blog](/post/).
 
-This open collaboration network was initiated around 2010, leading to many R packages and unexpected outcomes. You are welcome to check out our [projects](/projects/) and join us. The main focus is on data analytics and peer support. See [community page](/community/) for info on the people behind rOpenGov.
-
-
-
-
-
+You are welcome to check out our [projects](/projects/) and join us. Proposals for new collaborations are also always welcome! See the [community page](/community/) for info on the people behind rOpenGov and get in touch.
