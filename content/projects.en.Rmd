@@ -11,64 +11,20 @@ tags:
 
 The rOpenGov R package development versions are maintained in [Github](https://github.com/ropengov/).
 
-```{r pkgs, include = FALSE}
-library(jsonlite)
-library(dplyr)
-library(glue)
-```
+<table class="table-striped table">
+<thead>
+<tr>
+<th>Package</th>
+<th>Description</th>
+<th>Homepage</th>
+<th>Forks</th>
+<th>Issues</th>
+<th><i class="fa fa-eye" aria-hidden="true"></i></th>
+<th><i class="fa fa-star" aria-hidden="true"></i></th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody id="repo_tbl"></tbody>
+</table>
 
-```{r pull_data, echo = FALSE, cache = FALSE, eval = TRUE}
-pages <- 1:3
-repolist <- list()
-for (i in seq_along(pages)) repolist[[i]] <- fromJSON(glue("https://api.github.com/orgs/ropengov/repos?page={pages[i]}"))
-repodata <- do.call("bind_rows", repolist)
-repodata %>% 
-  select(id,node_id,
-         name,full_name,description,homepage,
-         created_at,updated_at,
-         stargazers_count,watchers_count,
-         language) %>% 
-  as_tibble() -> tbl 
-```
-
-
-<div class="row">
-```{r create_tbls, results = "asis", echo = FALSE}
-tbl1 <- tbl %>% arrange(desc(updated_at))
-
-tbl_list <- list()
-for (i in 1:nrow(tbl1)){
-homepagelink <- ""
-  if (grepl("http", tbl1$homepage[i])){
-  homepagelink <- glue('<p class="card-text"><a href = "{tbl1$homepage[i]}">{sub("htt.+://", "",
- tbl1$homepage[i])}</a></p>')
-  } else homepagelink <- ""
-  description <- ""
-  if (!is.na(tbl1$description[i])){
-  description <- glue('<p class="card-text">{tbl1$description[i]}</p>')
-  } else description <- ""  
-  
-  
-  # new row every time
-  if (i %% 4 == 0){
-    rowbreak <- '</div><div class="row">'
-  } else rowbreak <- ""
-  
-glue('
-  <div class="col-sm-3">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{tbl1$name[i]}</h5>
-  {description}
-        <p class="card-text"><i class="fas fa-star"></i>{tbl1$stargazers_count[i]}<br/><i class="fas fa-eye"></i>{tbl1$watchers_count[i]}</p>
-  <p class="card-text">Updated: <br/><code>{tbl1$updated_at[i]}</code></p>      
-  {homepagelink}
-        <a href="https://github.com/ropengov/{tbl1$name[i]}" class="btn btn-primary">See at Github</a>
-      </div>
-    </div>
-  </div>
-     ') -> tbl_list[[i]]
-}
-htmltools::HTML(do.call("c", tbl_list))
-```
-</div>
+<script src = "/scripts/project_tbl.js"></script>
