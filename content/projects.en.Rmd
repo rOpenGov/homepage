@@ -19,7 +19,6 @@ The rOpenGov R package development versions are maintained in [Github](https://g
 <th>Homepage</th>
 <th>Forks</th>
 <th>Issues</th>
-<th><i class="fa fa-eye" aria-hidden="true"></i></th>
 <th><i class="fa fa-star" aria-hidden="true"></i></th>
 <th>Updated</th>
 </tr>
