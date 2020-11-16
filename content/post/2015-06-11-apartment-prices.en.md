@@ -9,34 +9,31 @@ Probabilistic programming approach for regional trends in apartment prices
 
 
 <!-- for latex/mathjax equations -->
-<script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      displayMath: [['$$','$$']],
-      processEscapes: true,
-      processEnvironments: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-      TeX: { equationNumbers: { autoNumber: "AMS" },
-           extensions: ["AMSmath.js", "AMSsymbols.js"] }
-    }
-    });
-    MathJax.Hub.Queue(function() {
-      // Fix <code> tags after MathJax finishes running. This is a
-      // hack to overcome a shortcoming of Markdown. Discussion at
-      // https://github.com/mojombo/jekyll/issues/199
-      var all = MathJax.Hub.getAllJax(), i;
-      for(i = 0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
 
-    MathJax.Hub.Config({
-    // Autonumbering by mathjax
-    TeX: { equationNumbers: { autoNumber: "AMS" } }
-    });
-  </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
 
 Basing on open data from [Statistics Finland](http://www.stat.fi/index_en.html), we at [Reaktor](http://reaktor.com/datascience) modelled Finnish apartment prices and their trends on zip-code level, in the years 2005–2014. Estimates from the model are available as an [interactive visualization](http://kannattaakokauppa.fi/#/en/).
 
@@ -91,7 +88,7 @@ Note that the model produces price and trend estimates even for areas with no ap
 
 ## Model
 
-Of the past sales, the model has yearly (geometric) average per location, and the associated number of sales, if these are not censored ($$n<6$$). The latter scales the variance of the mean as an estimator of the population mean. Population mean is here the hypothetical mean of all potential *apartment sales* on the areas. Of course all apartments are not sold at the same rate, so mean is biased towards prices of the apartments that are sold more often. 
+Of the past sales, the model has yearly (geometric) average per location, and the associated number of sales, if these are not censored ($n<6$). The latter scales the variance of the mean as an estimator of the population mean. Population mean is here the hypothetical mean of all potential *apartment sales* on the areas. Of course all apartments are not sold at the same rate, so mean is biased towards prices of the apartments that are sold more often. 
 
 Sparseness of the data is a problem especially for estimates of temporal price changes, and also for comparison of areas. Predictive covariates for the zip code areas are therefore valuable. A quite extensive set of demographic variables is available in the [Paavo data](http://www.stat.fi/tup/rajapintapalvelut/paavo.html), but of these the model so far has only the population density included. It is probably the most predictive of the covariates, although not necessarily causal from the economics point of view.
 
@@ -106,16 +103,15 @@ In summary, the lowest level of the model for the log prices is
 $$
 \log h_{it} = 
        \beta_{i1} + \beta_{i2} t + \beta_{i3} t^2 + \beta_{i’4}d_i + \beta_{i’5}d_i\,t + \beta_{i’6}d_i\,t^2, 
-$$  
+$$
 
 $$
 \log y_{it} \sim 
 \textrm{t}\,\left(\log h_{it}, \, \sqrt{\sigma^2_y + \frac{\sigma^2_w}{n_{it}}}, \, \nu\right)\,,
-$$  
+$$
 
-where $$i$$ refers to the zip code area, $$t$$ is time, $$\beta$$ are coefficients specific to the zip code $$i$$, $$i’$$ is the first prefix hierarchy level of the zip code (population density parameters are constant within each $$i’$$-area), $$t()$$ is the t-distribution, $$\sigma_y$$ is standard deviation of the underlying (log) price levels over years, $$\sigma_w$$ standar deviation of the prices within the measurement unit (year $$\times$$ zip), and $$\nu$$ the degrees of freedom of the residual t-distribution. Note that the linear model is for log-scale prices. The complete model is best described  by the [source code](https://github.com/reaktor/Neliohinnat/blob/master/source/m4.stan). 
-
-Estimate for $$\nu$$ is around 6.5, that is, residuals are with a bit heavier tails than normal. From the covariance parameters (*Omega* in the source) one sees that price level and trend correlate at the lowest level ($$r$$=0,28), as do trend change and price level ($$r$$=0,43). So price differences between areas have been growing during the last ten years, probably due to urbanisation, a global trend. 
+where $i$ refers to the zip code area, $t$ is time, $\beta$ are coefficients specific to the zip code $i$, $i’$ is the first prefix hierarchy level of the zip code (population density parameters are constant within each $i’$-area), $t()$ is the t-distribution, $\sigma_y$ is standard deviation of the underlying (log) price levels over years, $\sigma_w$ standar deviation of the prices within the measurement unit (year $\times$ zip), and $\nu$ the degrees of freedom of the residual t-distribution. Note that the linear model is for log-scale prices. The complete model is best described by the [source code](https://github.com/reaktor/Neliohinnat/blob/master/source/m4.stan). 
+Estimate for $\nu$ is around 6.5, that is, residuals are with a bit heavier tails than normal. From the covariance parameters (*Omega* in the source) one sees that price level and trend correlate at the lowest level ($r$=0,28), as do trend change and price level ($r$=0,43). So price differences between areas have been growing during the last ten years, probably due to urbanisation, a global trend. 
 
 Plotting area-wise prices and its changes against population density, one sees the expected correlation: remote areas are loosing in the sense of price, trend *and* trend change. 
 

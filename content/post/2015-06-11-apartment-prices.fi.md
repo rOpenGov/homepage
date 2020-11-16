@@ -9,10 +9,34 @@ tags:
   - news
   - R
   - stan
-output:
-  html_document:
-    mathjax: "default"
 ---
+
+<!-- for latex/mathjax equations -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
 
 ## Mitä teimme?
 
@@ -30,9 +54,7 @@ Alla on vasemmalla satunnaisten postinumeroiden vuosittaisia kauppamääriä. Se
 
 Puuttuva tieto on puuttuvaa, mutta edes 6--30 kaupan keskiarvo _ei kuvaa luotettavasti alueen kaikkien osakkeiden hintatasoa_. Myydyt asunnot ovat satunnaisesti keskihintaa kalliimpia ja halvempia. Vielä huonompaa jälkeä syntyy, kun näin vähistä kaupoista yritetään suoraan arvioida hintojen muutoksia. __Mediassa julkaistut listat parhaiten ja huonoiten menestyvistä alueista ovatkin lähes satunnaisia__, tiheimpiä taajamia lukuunottamatta. 
 
-
 Hinnoista saa paremman kuvan, kun aineistoon sovittaa tilastollisen mallin. Tai jos ei saa, malli paljastaa lähtötietojen heikkouden --- hyvin tehdystä mallista saa epävarmuusarviot kiinnostaville asioille, kuten hintatasoille.
-
 
 Malli voi myös ottaa huomioon alueellisen jatkuvuuden, ts. lähekkäisten postinumeroalueiden samankaltaisuuden. Se osaa painottaa trendi- ja keskihinta-arvioissa kauppojen määrän oikein, ja vielä paikata jäljelle jäävää epävarmuutta postinumeroalueen muilla ominaisuuksilla, kuten väestötiheydellä. 
 
@@ -82,7 +104,7 @@ Vuoden vaikutus mallissa on siis kvadraattinen, ts. joka postinumerolla on malli
 
 Postinumerokohtaisia hintaparametreja kertyy yhteensä kuusi: hintataso, trendi, trendin muutos, ja väestötiheyden vaikutus näihin kaikkiin. Parametreilla on arvot ja varianssit myös postinumeroa isommille hierarkian alueille (Uusimaa, Espoo, jne.), josta ne pääsevät vaikuttamaan postinumerokohtaisiin arvioihin etenkin kun kauppoja on vähän. Parametreilla on myös eri hierarkiatasoilla kovarianssit, jolloin ne voivat auttaa toistensa estimointia tapauksissa joissa hintadata ei suoraan riitä. 
 
-Yhteenvetona kaavaksi, mallin alataso havaitulle keskihinnalle $$y$$ on 
+Yhteenvetona kaavaksi, mallin alataso havaitulle keskihinnalle $y$ on 
 
 $$
 \log h_{it} = 
@@ -94,16 +116,13 @@ $$
 \textrm{t}\,\left(\log h_{it}, \, \sqrt{\sigma^2_y + \frac{\sigma^2_w}{n_{it}}}, \, \nu\right)\,,
 $$
 
+jossa $i$ on postinumeroalue, $t$ vuosi, $\beta$ ovat postinumerokohtaisia hintakertoimia, $i’$ on postinumeron alin hierarkiataso (väestötiheysparametrit ovat yhteisiä kullekin $i’$-alueelle), $t()$ on t-jakauma, $\sigma_y$ vuosikohtainen hajonta, $\sigma_w$ kauppahintojen hajonta mittausyksikön (vuosi$\times$postinumero) sisällä, ja $\nu$ t-jakautuneen residuaalin vapausaste. Hinnat käsitellään mallissa logaritmisena, jolloin absoluuttisella hintaskaalalla malli on multiplikatiivinen. Hajonnat ja $\nu$ estimoidaan kaiken muun ohella. Kertoimille $\beta$ on multinormaali priori kovarianssimatriiseineen, ja lisäksi ylemmille hierarkiatasoille eli postinumeroa suuremmille alueille omat vastaavat rakenteensa ($\beta$ ja sen priorit). Yksityiskohdat tätä tarkemmin selviävät parhaiten [mallikoodista](https://github.com/reaktor/Neliohinnat/blob/master/source/m4.stan). 
 
-
-jossa $$i$$ on postinumeroalue, $$t$$ vuosi, $$\beta$$ ovat postinumerokohtaisia hintakertoimia, $$i’$$ on postinumeron alin hierarkiataso (väestötiheysparametrit ovat yhteisiä kullekin $$i’$$-alueelle), $$t()$$ on t-jakauma, $$\sigma_y$$ vuosikohtainen hajonta, $$\sigma_w$$ kauppahintojen hajonta mittausyksikön (vuosi$$\times$$postinumero) sisällä, ja $$\nu$$ t-jakautuneen residuaalin vapausaste. Hinnat käsitellään mallissa logaritmisena, jolloin absoluuttisella hintaskaalalla malli on multiplikatiivinen. Hajonnat ja $$\nu$$ estimoidaan kaiken muun ohella. Kertoimille $$\beta$$ on multinormaali priori kovarianssimatriiseineen, ja lisäksi ylemmille hierarkiatasoille eli postinumeroa suuremmille alueille omat vastaavat rakenteensa ($$\beta$$ ja sen priorit). Yksityiskohdat tätä tarkemmin selviävät parhaiten [mallikoodista](https://github.com/reaktor/Neliohinnat/blob/master/source/m4.stan). 
-
-Vapausasteen $$\nu$$ estimaatti on luokkaa 6,5, eli hintojen residuaali on normaalijakaumaa selvästi pitkähäntäisempi. Suoraan mallin parametreista (koodissa matriisi "Omega") nähdään, että hintataso ja trendi korreloivat yli postinumeroalueiden ($$r$$=0,28), samoin trendin muutos ja hintataso ($$r$$=0,43). Halvat alueet ovat siis viimeisen n. kymmenen vuoden aikana halventuneet edelleen, ja kalliit kallistuneet. Tämä liittynee asutuksen keskittymiseen. 
+Vapausasteen $\nu$ estimaatti on luokkaa 6,5, eli hintojen residuaali on normaalijakaumaa selvästi pitkähäntäisempi. Suoraan mallin parametreista (koodissa matriisi "Omega") nähdään, että hintataso ja trendi korreloivat yli postinumeroalueiden ($r$=0,28), samoin trendin muutos ja hintataso ($r$=0,43). Halvat alueet ovat siis viimeisen n. kymmenen vuoden aikana halventuneet edelleen, ja kalliit kallistuneet. Tämä liittynee asutuksen keskittymiseen. 
 
 Postinumerokohtaisista estimaateista nähdään, että asukastiheys korreloi niin hintatasoon kuin sen muutoksiinkin:
 
 ![Asukastiheyden ja hinnan korrelaatiot](/post/2015-06-11-apartment-prices.fi_files/tiheys-korrelaatiot.png)
-
 
 Malli on estimoitu Stan-kirjastolla ([http://mc-stan.org/](http://mc-stan.org/)). Stan on [todennäköisyysohjelmointikieli](https://louhos.wordpress.com/2014/01/29/stan-kj/), joka tuottaa generatiivisesta mallin kuvauksesta estimointialgoritmin. Vaihtoehdoista estimoinnin itse koodaaminen olisi huomattavan työlästä, kun taas valmiiden mallipakettien (lme4, mgcv, …) käyttäminen pakottaisi tyytymään rajoittuneempaan malliin, joka kuvaisi asuntojen hintoja ja niiden vaihtelua huonommin. 
 
