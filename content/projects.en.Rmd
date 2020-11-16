@@ -9,7 +9,7 @@ tags:
   -  
 ---
 
-The rOpenGov R package development versions are maintained in [Github](https://github.com/ropengov/).
+The rOpenGov R package development versions are maintained in [GitHub](https://github.com/ropengov/). For contributions, check out our [Community-page](/community/) to get in touch or simply just make a pull request in GitHub.
 
 <table class="table-striped table">
 <thead>
