@@ -32,7 +32,7 @@ We are grateful to all contributors. The full list of contributors varies over t
 
 # How to contribute?
 
-[rOpenGov](http://ropengov.github.io) </a> is a community of independent R package developers. If you are working on related projects, don't hesitate to get in touch!
+[rOpenGov](http://ropengov.github.io) </a> is a community of independent R package developers. If you are working on related projects, don't hesitate to get in touch! You can reach us in [Gitter](https://gitter.im/rOpenGov/home) or via email: ropengov - at - googlegroups.com
 
 ### Possible ways of contributing
 
@@ -45,4 +45,4 @@ We are grateful to all contributors. The full list of contributors varies over t
 7. **Give feedback** on packages, blog posts, website or anything else.
 8. **Help spread the word** for example in Twitter or in workplace breakroom.
 
-You can reach us in [Gitter](https://gitter.im/rOpenGov/home) or via email: ropengov - at - googlegroups.com
+

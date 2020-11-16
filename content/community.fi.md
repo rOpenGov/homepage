@@ -30,7 +30,8 @@ Täydellinen listaus pakettikohtaisista kontribuuttoreista löytyy
 
 # Kuinka voin kontribuoida?
 
-[rOpenGov](http://ropengov.github.io) on itsenäisistä R-kehittäjistä koostuva yhteisö. Jos työskentelet vastaavanlaisten projektin parissa, älä epäröi ottaa yhteyttä!
+[rOpenGov](http://ropengov.github.io) on itsenäisistä R-kehittäjistä koostuva yhteisö. Jos työskentelet vastaavanlaisten projektin parissa, älä epäröi ottaa yhteyttä! Voit ottaa meihin yhteyttä [Gitterissä](https://gitter.im/rOpenGov/home) tai sähköpostitse: ropengov - at - googlegroups.com
+
 
 ### Osallistumismahdollisuuksia
 
@@ -43,4 +44,3 @@ Täydellinen listaus pakettikohtaisista kontribuuttoreista löytyy
 7. **Anna palautetta** paketeista, blogikirjoituksista, nettisivuista tai mistä vain.
 8. **Kerro projekteistamme ystäville** esimerkiksi Twitterissä tai työpaikan kahvihuoneessa.
 
-Voit ottaa meihin yhteyttä [Gitterissä](https://gitter.im/rOpenGov/home) tai sähköpostitse: ropengov - at - googlegroups.com
