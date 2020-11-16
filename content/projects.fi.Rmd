@@ -9,7 +9,7 @@ tags:
   -  
 ---
 
-rOpenGov-yhteisön R-pakettien kehitys tapahtuu [Githubissa](https://github.com/ropengov/).
+rOpenGov-yhteisön R-pakettien kehitys tapahtuu [GithHbissa](https://github.com/ropengov/). Mikäli haluat kontribuoida, katso [Yhteisö-sivu](/fi/community/) ottaaksesi yhteyttä tai yksinkertaisesti tee pull request GitHubissa.
 
 
 <table class="table-striped table">
