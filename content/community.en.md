@@ -34,6 +34,15 @@ We are grateful to all contributors. The full list of contributors varies over t
 
 [rOpenGov](http://ropengov.github.io) </a> is a community of independent R package developers. If you are working on related projects, don't hesitate to get in touch!
 
-You are welcome to contact us if you like to contribute an [R package](https://github.com/ropengov) or blog post. All feedback, bug reports and support are very welcome. In return you may increase the visibility of your own project and connect with other developers.
+### Possible ways of contributing
+
+1. **Utilize our R-packages in your projects**.
+2. **Participate in development**. We will gladly accept code contributions, bug reports or other suggestions for improvements. If you have an R package that would fit in with our current packages, don't hesitate to contact.
+3. **Write tutorials and guidelines**. 
+4. **Write a blog post** in your own blog or send your writing to be published in rOpenGov blog.
+5. **Write a thesis** related to open data and algorithms and help promote access to open data in research and other fields. We will gladly offer help narrow down the subject.
+6. **Publish**. Utilize rOpenGov-packages in your scientific publications or other reports.
+7. **Give feedback** on packages, blog posts, website or anything else.
+8. **Help spread the word** for example in Twitter or in workplace breakroom.
 
 You can reach us in [Gitter](https://gitter.im/rOpenGov/home) or via email: ropengov - at - googlegroups.com
