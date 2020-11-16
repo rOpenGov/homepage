@@ -102,12 +102,12 @@ In summary, the lowest level of the model for the log prices is
 
 $$
 \log h_{it} = 
-       \beta_{i1} + \beta_{i2} t + \beta_{i3} t^2 + \beta_{i’4}d_i + \beta_{i’5}d_i\,t + \beta_{i’6}d_i\,t^2, 
+       \beta_{i1} + \beta_{i2} t + \beta_{i3} t^2 + \beta_{i’4} d_i + \beta_{i’5} d_i t + \beta_{i’6} d_i t^2 \, 
 $$
 
 $$
 \log y_{it} \sim 
-\textrm{t}\,\left(\log h_{it}, \, \sqrt{\sigma^2_y + \frac{\sigma^2_w}{n_{it}}}, \, \nu\right)\,,
+\textrm{t}\ \left(\log h_{it}, \sqrt{\sigma^2_y + \frac{\sigma^2_w}{n_{it}}}, \nu\right) \,
 $$
 
 where $i$ refers to the zip code area, $t$ is time, $\beta$ are coefficients specific to the zip code $i$, $i’$ is the first prefix hierarchy level of the zip code (population density parameters are constant within each $i’$-area), $t()$ is the t-distribution, $\sigma_y$ is standard deviation of the underlying (log) price levels over years, $\sigma_w$ standar deviation of the prices within the measurement unit (year $\times$ zip), and $\nu$ the degrees of freedom of the residual t-distribution. Note that the linear model is for log-scale prices. The complete model is best described by the [source code](https://github.com/reaktor/Neliohinnat/blob/master/source/m4.stan). 
