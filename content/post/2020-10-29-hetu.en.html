@@ -4,9 +4,12 @@ author: Pyry Kantanen
 date: 2020-10-29
 slug: "hetu"
 categories:
+  - R package
   - R
 tags:
   - Finland
+  - national identification number
+  - personal identity code
 output:
   blogdown::html_page:
     highlight: tango
@@ -93,22 +96,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="algorithmic-handling-of-hetu-pins" class="section level2">
 <h2>Algorithmic handling of hetu-pins</h2>
-<p>Analyzing and extracting Finnish personal identity numbers is rather straightforward even with a naked eye. However, hetu-package is best suited for handling large number of PINs, which would be cumbersome by hand.</p>
-<p>Hetu-package can extract the following information from hundreds of thousands of PINs:</p>
+<p>Analyzing and extracting information from Finnish personal identity numbers is rather straightforward even with a naked eye. Hetu-package naturally excels in handling large number of PINs, which would be cumbersome otherwise.</p>
+<p>Hetu-package has functions to extract the following information:</p>
 <ul>
 <li>hetu_date / pin_date: date of birth</li>
 <li>hetu_sex / pin_sex: sex, Male or Female</li>
 <li>hetu_age / pin_age: age in years, months or days (at the time of the query or at a desired date)</li>
 <li>hetu_ctrl / pin_ctrl: validity check for the PIN, TRUE or FALSE</li>
 </ul>
-<div id="practical-examples" class="section level3">
-<h3>Practical examples</h3>
-<p>Installing the package in R:</p>
+<div id="use-of-hetu-package" class="section level3">
+<h3>Use of hetu-package</h3>
+<p>Installing the package in R from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;hetu&quot;</span>)</span></code></pre></div>
-<p>Loading the package and setting a few imaginary example PINs:</p>
+<p>Loading the package and setting a few imaginary PINs for testing:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hetu)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>example_pins <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;010101-0101&quot;</span>, <span class="st">&quot;111111-111C&quot;</span>)</span></code></pre></div>
-<p>Hetu-function is the backbone of the package and lots of information can be extracted in data frame format:</p>
+<p>Hetu-function is the backbone of the package and majority of the information that can be extracted is available as a simple data frame:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">hetu</span>(example_pins))</span></code></pre></div>
 <table>
 <thead>
@@ -152,7 +155,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>The information in the data frame can be extracted with extract-parameter or, for the convenience of the end user, by using specialized functions:</p>
+<p>There are several alternatives in extracting specific information about a group of PINs, for example date of birth. If the output of the hetu-function is saved as an object, all columns can be normally subsetted. For the convenience of the end user, the information in the data frame can also be extracted by using extract-parameter in the hetu-function or by using one of the specialized functions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting sex</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;sex&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
@@ -171,24 +174,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Information that can be extracted only with extract-parameter</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;p.num&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;010&quot; &quot;111&quot;</code></pre>
-<p>Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:</p>
+<p>In contrast to other information, extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>example_pins2 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">5</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in years</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2)</span></code></pre></div>
-<pre><code>## The age in years has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 46 53 41 33 69</code></pre>
+<pre><code>## The age in years has been calculated at 2020-11-24.</code></pre>
+<pre><code>## [1] 59 62 30 48 26</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in months</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">timespan =</span> <span class="st">&quot;months&quot;</span>)</span></code></pre></div>
-<pre><code>## The age in months has been calculated at 2020-11-10.</code></pre>
-<pre><code>## [1] 558 639 499 406 833</code></pre>
+<pre><code>## The age in months has been calculated at 2020-11-24.</code></pre>
+<pre><code>## [1] 712 754 363 583 322</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in 2011</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">date =</span> <span class="st">&quot;2011-01-01&quot;</span>)</span></code></pre></div>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 36 43 31 23 59</code></pre>
+<pre><code>## [1] 49 52 20 38 16</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: boxplot grouped by sex</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>example_pins3 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">20</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>, <span class="at">p.male =</span> <span class="fl">0.5</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">hetu_age</span>(example_pins3)<span class="sc">~</span><span class="fu">hetu_sex</span>(example_pins3), <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Age in years&quot;</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;magenta&quot;</span>))</span></code></pre></div>
-<pre><code>## The age in years has been calculated at 2020-11-10.</code></pre>
+<pre><code>## The age in years has been calculated at 2020-11-24.</code></pre>
 <p><img src="/post/2020-10-29-hetu.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In some cases diagnostics information for invalid PINs might be useful:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_diagnostic</span>(<span class="st">&quot;321399-000G&quot;</span>)</span></code></pre></div>
@@ -211,7 +214,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>example_bids <span class="ot">&lt;-</span> <span class="fu">rbid</span>(<span class="dv">2</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>example_bids</span></code></pre></div>
-<pre><code>## [1] &quot;3112390-0&quot; &quot;0952731-9&quot;</code></pre>
+<pre><code>## [1] &quot;7282312-9&quot; &quot;9772390-9&quot;</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bid_ctrl</span>(example_bids)</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>
@@ -222,7 +225,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>More information about sweidnumbr can be found e.g. from this blogpost: Magnusson, Mans &amp; Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: <a href="http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/" class="uri">http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>More information about sweidnumbr can be found e.g. from this blogpost: Magnusson, Mans &amp; Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: <a href="https://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/" class="uri">https://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Digital and Population Data Services Agency (Digi- ja väestötietovirasto). The personal identity code. URL: <a href="https://dvv.fi/en/personal-identity-code" class="uri">https://dvv.fi/en/personal-identity-code</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Finnish Patent and Registration Office. The Business Information System (BIS). URL: <a href="https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html" class="uri">https://www.prh.fi/en/kaupparekisteri/rekisterointipalvelut/ytj.html</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>

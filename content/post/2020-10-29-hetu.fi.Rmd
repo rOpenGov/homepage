@@ -4,9 +4,12 @@ author: Pyry Kantanen
 date: 2020-10-29
 slug: "hetu"
 categories:
+  - R package
   - R
 tags:
   - Finland
+  - national identification number
+  - personal identity code
 output:
   blogdown::html_page:
     highlight: tango
@@ -17,6 +20,8 @@ output:
 Hetu-paketti on tarkoitettu suomalaisten henkilötunnusten algoritmiseen käsittelyyn. Paketista on erityisesti hyötyä, mikäli halutaan poimia informaatiota suuresta määrästä henkilötunnuksia, kuten tunnuksen haltijoiden iät tai sukupuolet. Henkilötunnusten käsittelyyn tarkoitettujen työkalujen kehitystyö alkoi osana sorvi-pakettia, mutta ne eriytettiin omaksi paketikseen vuonna 2013. Syksyllä 2020 hetu-paketti saatettiin julkaisukelpoiseen kuntoon ja se on saatavissa [CRANista](https://CRAN.R-project.org/package=hetu). 
 
 Hetu-paketin esikuvana on toiminut [sweidnumbr-paketti]( https://CRAN.R-project.org/package=sweidnumbr) ja pakettien käyttämät funktiot on mahdollisuuksien mukaan nimetty samalla tavalla.[^1]
+
+Tämä blogikirjoitus sisältää aluksi yleistietoa suomalaisista henkilötunnuksia. Pelkästään paketin toiminnoista kiinnostuneet voivat siirtyä suoraan [käytännön esimerkkejä sisältävään osaan](#hetu-paketin-käyttö) tai tutustua hetu-paketin sisältämään vignette-ohjeeseen (komennolla 'vignette("hetu")').
 
 ## Suomalainen henkilötunnus
 
@@ -43,16 +48,16 @@ Hetu-paketti mahdollistaa satunnaisesti muodostettujen, tietylle aikavälille os
 
 Henkilötunnuksesta poimittua tietoa voidaan käyttää myös validoimaan ihmisten itse ilmoittamaa tietoa. Rhetu-funktio tuottaa pelkästään valideja henkilötunnuksia, mutta todellisessa aineistossa henkilötunnuksen kirjaamisessa tai tallentamisessa on saattanut tapahtua näppäily- tai lukuvirheitä. Hetu-pakettia voidaankin käyttää validoimaan ihmisistä tallennettujen tietojen laatua tai tehdä vertailua käyttäjien ilmoittamien syntymäaikojen ja henkilötunnuksen syntymäajan välillä. 
 
-Suomalaisen henkilötunnuksen tarkistusmerkki on erilaisten lyöntivirheiden kannalta vikaherkkä. Esimerkiksi päivien, kuukausien ja vuosien järjestyksen vaihtuminen tai päivämäärän väärin merkitsemisen tarkistusmerkin pysyessä samana saa sen, että henkilötunnus ei enää mene läpi tarkistuksessa. Esimerkiksi ruotsalaisen henkilötunnuksen tapauksessa päivien ja kuukausien järjestyksen vaihtuminen ei vaikuta tarkistusmerkin laskentaan.
+Suomalaisen henkilötunnuksen tarkistusmerkki on erilaisten lyöntivirheiden kannalta vikaherkkä. Esimerkiksi päivien, kuukausien ja vuosien järjestyksen vaihtuminen tai päivämäärän väärin merkitsemisen tarkistusmerkin pysyessä samana saa sen, että henkilötunnus ei enää mene läpi tarkistuksessa. Esimerkiksi ruotsalaisen henkilötunnuksen tapauksessa päivien ja kuukausien järjestyksen vaihtuminen ei vaikuta tarkistusmerkin laskentaan.[^4]
 
-### Käytännön esimerkkejä
+### Hetu-paketin käyttö
 
-Paketin asentaminen R-ympäristöön:
+Paketin asentaminen R-ympäristöön CRANista:
 ```{r, eval = FALSE}
 install.packages("hetu")
 ```
 
-Paketin lataaminen kirjastoon ja 2 yksikön pituisen esimerkkivektorin asettaminen onnistuu seuraavanlaisesti:
+Paketin lataaminen kirjastoon ja 2 henkilötunnusta sisältävän esimerkkivektorin asettaminen:
 
 ```{r setup, include=TRUE}
 library(hetu)
@@ -109,7 +114,7 @@ hetu_diagnostic("321399-000G", extract = c("valid.p.num", "valid.length"))
 
 ## Yritys- ja yhteisötunnusten (Y-tunnus) käsittely
 
-Hetu-paketissa on myös sweidnumbr-pakettia vastaavalla tavalla mahdollisuus generoida ja validoida suomalaisia yritys- ja yhteisötunnuksia. Suomalainen Y-tunnus koostuu seitsemästä numerosta, väliviivasta ja tarkistusmerkistä ja on muotoa 1234567-8.[^4] Y-tunnus on englanniksi Business Identity Code, mistä johtuen tässä paketissa y-tunnusten käsittelyyn tarkoitettujen funktioiden etuliitteenä käytetään lyhennettä bid:
+Hetu-paketissa on myös sweidnumbr-pakettia vastaavalla tavalla mahdollisuus generoida ja validoida suomalaisia yritys- ja yhteisötunnuksia. Suomalainen Y-tunnus koostuu seitsemästä numerosta, väliviivasta ja tarkistusmerkistä ja on muotoa 1234567-8.[^5] Y-tunnus on englanniksi Business Identity Code, mistä johtuen tässä paketissa y-tunnusten käsittelyyn tarkoitettujen funktioiden etuliitteenä käytetään lyhennettä bid:
 
 * bid_ctrl(bid): tarkastaa y-tunnuksen oikeellisuuden, TRUE tai FALSE
 * rbid(n): generoi n kappaletta y-tunnuksia
@@ -124,9 +129,9 @@ Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitää
 
 ## Henkilötunnusten tulevaisuus ja tietoturvallisuus
 
-Henkilötunnusten uudistamisesta on käyty viime vuosina runsaasti julkista keskustelua. Nykymuotoisen henkilötunnuksen ongelmana on pidetty esimerkiksi henkilötunnusten rajallista määrää sekä sitä, että henkilötunnuksesta ilmenee henkilötietoja kuten sukupuoli ja ikä. Toisaalta uudistusta vastaan puhuu julkisen ja yksityisen sektorin toimijoiden tietojärjestelmien päivitysten korkeat kustannukset. Kirjoitushetkellä tuoreimman ehdotuksen mukaan henkilötunnukset olisivat säilymässä tulevaisuudessakin muodoltaan nykyisiä vastaavina sillä erotuksella, että jatkossa vapaana olevat parilliset ja parittomat yksilönumerot jaettaisiin tasaisesti molemmille sukupuolille.[^5] [^6]
+Henkilötunnusten uudistamisesta on käyty viime vuosina runsaasti julkista keskustelua. Nykymuotoisen henkilötunnuksen ongelmana on pidetty esimerkiksi henkilötunnusten rajallista määrää sekä sitä, että henkilötunnuksesta ilmenee henkilötietoja kuten sukupuoli ja ikä. Toisaalta uudistusta vastaan puhuu julkisen ja yksityisen sektorin toimijoiden tietojärjestelmien päivitysten korkeat kustannukset. Kirjoitushetkellä tuoreimman ehdotuksen mukaan henkilötunnukset olisivat säilymässä tulevaisuudessakin muodoltaan nykyisiä vastaavina sillä erotuksella, että jatkossa vapaana olevat parilliset ja parittomat yksilönumerot jaettaisiin tasaisesti molemmille sukupuolille.[^6] [^7]
 
-Tietosuojaperiaatteen mukaan henkilötietoja tulisi kerätä ja käsitellä ainoastaan siinä laajuudessa, mikä on tarkoituksenmukaista tai välttämätöntä palvelun käyttötarkoituksen kannalta.[^7] Tätä taustaa vasten voidaan pitää ongelmallisena, että henkilötunnusten laajamittainen käyttö aiheuttaa vähintäänkin epäsuorasti tilanteen, jossa palvelun tarjoajalla on usein tarpeettomasti hallussaan tietoa käyttäjien iästä ja sukupuolesta.
+Tietosuojaperiaatteen mukaan henkilötietoja tulisi kerätä ja käsitellä ainoastaan siinä laajuudessa, mikä on tarkoituksenmukaista tai välttämätöntä palvelun käyttötarkoituksen kannalta.[^8] Tätä taustaa vasten voidaan pitää ongelmallisena, että henkilötunnusten laajamittainen käyttö aiheuttaa vähintäänkin epäsuorasti tilanteen, jossa palvelun tarjoajalla on usein tarpeettomasti hallussaan tietoa käyttäjien iästä ja sukupuolesta.
 
 Käytännössä suuremmat ongelmat koituvat ihmisille kuitenkin tavasta, jolla henkilötunnuksia käytetään suomalaisessa yhteiskunnassa. Vaikka henkilötunnus ei teoriassa ole salassapidettävää tietoa, rikollisella tai muutoin vilpillisellä tavalla toimiva henkilö voi aiheuttaa monenlaista haittaa, mikäli hän saa haltuunsa toisen ihmisen henkilötunnuksen. Henkilötunnusta on saatettu kysyä puhelimitse asioivalta henkilöltä henkilöllisyyden varmistukseksi, ennen kuin hänelle on kerrottu sensitiivisiä potilastietoja. Joskus henkilötunnus saatetaan asettaa verkkopalvelussa uuden käyttäjän ensimmäiseksi salasanaksi, joka jokaisen pitäisi muistaa vaihtaa ensimmäisen kirjautumiskerran jälkeen. On itsestään selvää, että tällaiset käytännöt eivät ole yksilöiden tietosuojan kannalta hyödyllisiä.
 
@@ -134,16 +139,18 @@ Henkilötunnusten epätarkoituksenmukainen käyttö julkisella ja yksityisellä 
 
 ## Lähdeviitteet
 
-[^1]: Lisätietoja sweidnumbr-paketista esim. tästä blogikirjoituksesta: Magnusson, Måns & Bülow, Erik. 2015. R made personal (at least for swedes)!. URL: http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/
+[^1]: Lisätietoja sweidnumbr-paketista esim. tästä blogikirjoituksesta: Magnusson, Måns & Bülow, Erik. 2015. R made personal (at least for swedes)!. URL: https://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/
 
 [^2]: Digi- ja väestötietovirasto. Henkilötunnus. URL: https://dvv.fi/henkilotunnus
 
 [^3]: Ks. esim. Finlex. HE 59/2013. URL: https://www.finlex.fi/fi/esitykset/he/2013/20130059
 
-[^4]: Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: https://www.ytj.fi/index/y-tunnus.html
+[^4]: Teppo Vuoren nettisivuilta löytyy kattavasti erilaisten tarkistusmerkkien laskentamenetelmien kuvaukset: https://tarkistusmerkit.teppovuori.fi/tarkmerk.htm
 
-[^5]: Tuomas Salsteen nettisivuilta löytyy hyvä selvitys henkilötunnuksen historiasta, ongelmakohdista että uudistustyöryhmän kehitysehdotuksista. URL: https://www.tuomas.salste.net/doc/hetu/tunnus.html. 
+[^5]: Yritys- ja yhteisötietojärjestelmä. Y-tunnus. URL: https://www.ytj.fi/index/y-tunnus.html
 
-[^6]: Yle Uutiset. 2020. Uusi henkilötunnus kaikille Suomen kansalaisille ja Suomessa asuville, ehdottaa työryhmä – jatkossa tunnuksesta ei selviäisi ikä, syntymäaika tai sukupuoli. Julkaistu 8.4.2020, viitattu 23.10.2020. URL: https://yle.fi/uutiset/3-11299218
+[^6]: Tuomas Salsteen nettisivuilta löytyy hyvä selvitys henkilötunnuksen historiasta, ongelmakohdista että uudistustyöryhmän kehitysehdotuksista. URL: https://www.tuomas.salste.net/doc/hetu/tunnus.html. 
 
-[^7]: Tietosuojavaltuutetun toimisto. Käyttötarkoitussidonnaisuus. Viitattu 26.10.2020. https://tietosuoja.fi/kayttotarkoitussidonnaisuus
+[^7]: Yle Uutiset. 2020. Uusi henkilötunnus kaikille Suomen kansalaisille ja Suomessa asuville, ehdottaa työryhmä – jatkossa tunnuksesta ei selviäisi ikä, syntymäaika tai sukupuoli. Julkaistu 8.4.2020, viitattu 23.10.2020. URL: https://yle.fi/uutiset/3-11299218
+
+[^8]: Tietosuojavaltuutetun toimisto. Käyttötarkoitussidonnaisuus. Viitattu 26.10.2020. https://tietosuoja.fi/kayttotarkoitussidonnaisuus
