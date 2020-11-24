@@ -4,9 +4,12 @@ author: Pyry Kantanen
 date: 2020-10-29
 slug: "hetu"
 categories:
+  - R package
   - R
 tags:
   - Finland
+  - national identification number
+  - personal identity code
 output:
   blogdown::html_page:
     highlight: tango
@@ -28,36 +31,36 @@ Personal identity codes are widely used in public and private sectors alike. The
 
 ## Algorithmic handling of hetu-pins
 
-Analyzing and extracting Finnish personal identity numbers is rather straightforward even with a naked eye. However, hetu-package is best suited for handling large number of PINs, which would be cumbersome by hand.
+Analyzing and extracting information from Finnish personal identity numbers is rather straightforward even with a naked eye. Hetu-package naturally excels in handling large number of PINs, which would be cumbersome otherwise.
 
-Hetu-package can extract the following information from hundreds of thousands of PINs:
+Hetu-package has functions to extract the following information:
 
 * hetu_date / pin_date: date of birth
 * hetu_sex / pin_sex: sex, Male or Female
 * hetu_age / pin_age: age in years, months or days (at the time of the query or at a desired date)
 * hetu_ctrl / pin_ctrl: validity check for the PIN, TRUE or FALSE
 
-### Practical examples
+### Use of hetu-package
 
-Installing the package in R:
+Installing the package in R from CRAN:
 ```{r, eval = FALSE}
 install.packages("hetu")
 ```
 
-Loading the package and setting a few imaginary example PINs:
+Loading the package and setting a few imaginary PINs for testing:
 
 ```{r setup, include=TRUE}
 library(hetu)
 example_pins <- c("010101-0101", "111111-111C")
 ```
 
-Hetu-function is the backbone of the package and lots of information can be extracted in data frame format:
+Hetu-function is the backbone of the package and majority of the information that can be extracted is available as a simple data frame:
 
 ```{r, eval = TRUE}
 knitr::kable(hetu(example_pins))
 ```
 
-The information in the data frame can be extracted with extract-parameter or, for the convenience of the end user, by using specialized functions:
+There are several alternatives in extracting specific information about a group of PINs, for example date of birth. If the output of the hetu-function is saved as an object, all columns can be normally subsetted. For the convenience of the end user, the information in the data frame can also be extracted by using extract-parameter in the hetu-function or by using one of the specialized functions:
 
 ```{r, eval = TRUE}
 # Extracting sex
@@ -73,7 +76,7 @@ hetu_ctrl(example_pins)
 hetu(example_pins, extract = "p.num")
 ```
 
-Extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:
+In contrast to other information, extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:
 
 ```{r, eval = TRUE}
 example_pins2 <- rhetu(5, start = "1950-01-01", end = "1995-05-07")
@@ -113,7 +116,7 @@ No additional information can be extracted from BIDs.
 
 ## References
 
-[^1]: More information about sweidnumbr can be found e.g. from this blogpost: Magnusson, Mans & Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: http://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/
+[^1]: More information about sweidnumbr can be found e.g. from this blogpost: Magnusson, Mans & Bulow, Erik. 2015. R made personal (at least for swedes)!. URL: https://ropengov.org/2015/08/r-made-personal-at-least-for-swedes/
 
 [^2]: Digital and Population Data Services Agency (Digi- ja väestötietovirasto). The personal identity code. URL: https://dvv.fi/en/personal-identity-code
 
