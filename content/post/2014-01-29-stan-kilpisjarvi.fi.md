@@ -4,12 +4,12 @@ date: 2014-01-29
 author: Janne Sinkkonen
 slug: "stan"
 categories:
-  - stan
   - R
-tags:
   - visualisointi
   - koneoppiminen
   - tiedonlouhinta
+tags:
+  - stan
 output:
   blogdown::html_page:
     highlight: tango
@@ -89,8 +89,9 @@ fit <- sampling(m.slm, data=sdat, iter=20000)
 trends <- extract(fit, "trend")[[1]]
 2*sum(trends<0)/length(trends)
 quantile(trends, c(0.025, 1-0.025))
-Vähempikin määrä iteraatioita riittäisi, esim. 1000 näytettä per ketju antaa yhteensä 500–800 efektiivistä näytettä posteriorista ja vie aikaa n. 0.7 sekuntia. Mutta nyt haluamme tarkan p-arvon vertailua varten. p-arvo on 0.0125, eli melko lailla sama kuin R:n lm()-funktiolla saatu.
 ```
+
+Vähempikin määrä iteraatioita riittäisi, esim. 1000 näytettä per ketju antaa yhteensä 500–800 efektiivistä näytettä posteriorista ja vie aikaa n. 0.7 sekuntia. Mutta nyt haluamme tarkan p-arvon vertailua varten. p-arvo on 0.0125, eli melko lailla sama kuin R:n lm()-funktiolla saatu.
 
 ### Robusti regressio
 

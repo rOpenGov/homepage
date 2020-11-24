@@ -5,10 +5,10 @@ author: Leo Lahti
 categories:
   - uutinen
   - R
-tags:
-  - visualisointi
-  - sorvi
   - tiedonlouhinta
+  - visualisointi
+tags:
+  - sorvi
   - Apps4Finland
   - Demos Helsinki
 output:
