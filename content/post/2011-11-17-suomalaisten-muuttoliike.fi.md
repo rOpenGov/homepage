@@ -16,8 +16,12 @@ Mistä maasta ihmiset muuttavat Suomeen ja mihin Suomesta muutetaan? Vastausta v
 
 Idea on simppeli: ladataan Maailmanpankin data ja haetaan Suomen tiedot eli kuinka monta ihmistä on muuttanut Suomesta kuhunkin maahan ja päin vastoin vuonna 2010. Muuttoliike yhteen suuntaan on helppo värikoodata kartalle, mutta halusin tehdä nimenomaan yhden kartan josta näkyisi sekä muuttoliikkeen suunta että muuttajien määrä. Testailin eri vaihtoehtoja ja päädyin lopulta näyttämään Suomeen kohdistuvan muuttoliikkeen punaisella värillä ja Suomesta poispäin kulkevan liikkeen sinisellä värillä, jolloin jos jostakin maasta on muuttoliikettä molempiin suuntiin, näkyisi se violettina. Lisäksi värin voimakkuus (alpha-kanava) näyttää muuttajien määrän. Lopputuloksesta pystyy vertailemaan liikenteen suuntaa ja voimakkuutta eri maiden välillä, mutta varsinaisia arvoja siitä ei pysty tulkitsemaan.
 
-![Muuttoliike Suomesta ja Suomeen. Sinisen väri kertoo Suomesta muihin maihin kohdistuvan muuttoliikkeen suhteellisen osuuden koko muuttoliikkeestä, ja punainen vastaavasti Suomeen suhtautuvan liikkeen osuuden. Värien voimakkuus kertoo muuttajien määrästä.](/post/2011-11-17-suomalaisten-muuttoliike.fi/finland_migration_20111116.png)
-*Muuttoliike Suomesta ja Suomeen. Sinisen väri kertoo Suomesta muihin maihin kohdistuvan muuttoliikkeen suhteellisen osuuden koko muuttoliikkeestä, ja punainen vastaavasti Suomeen suhtautuvan liikkeen osuuden. Värien voimakkuus kertoo muuttajien määrästä.*
+{{< img src="/post/2011-11-17-suomalaisten-muuttoliike.fi/finland_migration_20111116.png" 
+caption="Muuttoliike Suomesta ja Suomeen. Sinisen väri kertoo Suomesta muihin maihin kohdistuvan muuttoliikkeen suhteellisen osuuden koko muuttoliikkeestä, ja punainen vastaavasti Suomeen suhtautuvan liikkeen osuuden. Värien voimakkuus kertoo muuttajien määrästä." 
+width="800" 
+alt="Teemakartta koko maapallosta, jossa värein kuvattu Suomesta muihin maihin kohdistuvan muuttoliikkeen voimakkuutta" 
+link="/post/2011-11-17-suomalaisten-muuttoliike.fi/finland_migration_20111116.png" 
+align="center" >}}
 
 Visualisoinnista näkyy todella selkeästi muuttoliikkeen suunta: Suomeen muutetaan pääasiassa alemman kehitystason maista Aasiasta, Afrikasta, Etelä-Amerikasta ja Itä-Euroopasta, kun taas Suomesta muutetaan lähinnä muihin kehittyneisiin maihin Eurooppaan, Pohjois-Amerikkaan, Australiaan ja Länsi-Eurooppaan. Tätä olisi mielenkiintoista verrata tarkemmin elintasosta kertoviin datoihin, mutta jätetään se myöhemmäksi.
 

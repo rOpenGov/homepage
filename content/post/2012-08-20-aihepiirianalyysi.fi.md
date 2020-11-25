@@ -19,8 +19,12 @@ Aihepiirianalyysissä kukin aihepiiri koostuu joukosta sanoja, jotka esiintyvät
 
 Aihepiirianalyysin tulokset voisi esittää listaamalla annettujen esimerkkien tyyliin kullekin aihepiirille todennäköisimmät sanat ja vastaavasti kullekin kansanedustajalle todennäköisimmät aihepiirit. Erityinen [*eye diagram* -visualisointi](http://research.ics.aalto.fi/mi/software/ismb09/) tiivistää mallin löytämät yhteydet yhteen kuvaan:
 
-![Eye diagram -visualisointi kansanedustajien puheiden aihepiirianalyysista](/post/2012-08-20-aihepiirianalyysi.fi/eyediagram_speech_20120820.png)
-*Eye diagram -visualisointi kansanedustajien puheiden aihepiirianalyysista*
+{{< img src="/post/2012-08-20-aihepiirianalyysi.fi/eyediagram_speech_20120820.png" 
+caption="Eye diagram -visualisointi kansanedustajien puheiden aihepiirianalyysista" 
+width="800" 
+alt="Ns. eye diagram -visualisointi, jossa vasemmalla puolella kansanedustajat ja oikealla puolella heidän käyttämissään puheenvuoroissa esiintyvät sanat" 
+link="/post/2012-08-20-aihepiirianalyysi.fi/eyediagram_speech_20120820.png" 
+align="center" >}}
 
 [Esimerkkiaineistomme eye diagram-visualisoinnissa (PDF-versio)](http://ouzor.github.com/files/figures/EyeDiagram_Speech_20120813.pdf) kansanedustajat ovat vasemmalla, aihepiirit keskellä ja sanat oikealla. Viivojen leveydet kuvaavat mallin määrittämiä todennäköisyyksiä kansanedustajien ja aihepiirien ja vastaavasti aihepiirien ja sanojen välillä. Kunkin aihepiirin yhteydet on esitetty omalla värillään ja lisäksi kuhunkin aihepiiriin liittyvät kansanedustajat ja sanat on tulkinnan helpottamiseksi pyritty listaamaan peräkkäin. Pienen tutustumisen jälkeen visualisoinnista löytyy selkeitä aihepiirejä. [Tässä esimerkiksi-visualisointi](http://ouzor.github.com/files/figures/EyeDiagram_Speech_Topic18_20120813.pdf), jossa on korostettu selvästi eurokriisiin liittyvän aihepiirin yhteydet.
 
