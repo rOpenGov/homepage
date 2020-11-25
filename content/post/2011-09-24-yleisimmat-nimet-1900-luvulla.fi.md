@@ -14,20 +14,25 @@ Idea tähän artikkeliin tuli hauskasta [Name Voyager](http://www.bewitched.com/
 
 Nimipalvelun data on tarjolla vain html-taulukkona, mutta pieni googlaus [näytti miten XML-pakettia käytetään html-taulukon lataamiseen R:ään](http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package). Pienellä esikäsittelyllä ja ggplot2:n area-plotilla datasta saadaan alkuperäistä ideaa mukaileva visualisointi.
 
-![Yleisimmät poikien nimet 1900-luvulla (geom_area)](/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_area_20110919.png)
-*Yleisimmät poikien nimet 1900-luvulla (geom_area)*
+{{< img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_area_20110919.png" caption="Yleisimmät poikien nimet 1900-luvulla (geom_area)" width="700" alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä" link="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_area_20110919.png" align="center" >}}
 
 Matti ei näytäkään olevan yhtä suosittu nimi kuin olin ymmärtänyt. Kuvaajasta näkyy suurten ikäluokkien vaikutus selvästi.
 
 Jos edellisen kuvaajan kulmikkuus häiritsee, pehmeämpää jälkeä saadaan geom_density:llä, joka sovittaa dataan jatkuvan tiheysjakauman. Tällöin tosin y-akselin tulkinta hankaloituu.
 
-![Yleisimmät poikien nimet 1900-luvulla (geom_density)](/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_density_20110919.png)
-*Yleisimmät poikien nimet 1900-luvulla (geom_density)*
+{{< img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_density_20110919.png" 
+caption="Yleisimmät poikien nimet 1900-luvulla (geom_density)" 
+width="700" 
+alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä" 
+link="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_density_20110919.png" align="center" >}}
 
 Tässä vielä area-plotti tyttöjen nimistä. Maria näyttää tulleen uudestaan muotiin sotavuosien jälkeen, kun taas Marjatta on ollut erityisesti sota-ajan suosikkinimi.
 
-![Yleisimmät tyttöjen nimet 1900-luvulla](/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/tytc3b6t_top10_area_20110919.png)
-*Yleisimmät tyttöjen nimet 1900-luvulla*
+{{< img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/tytc3b6t_top10_area_20110919.png" 
+caption="Yleisimmät tyttöjen nimet 1900-luvulla" 
+width="700" 
+alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä" 
+link="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/tytc3b6t_top10_area_20110919.png" align="center" >}}
 
 PÄIVITYS 6.1.2013: Blogin R-skriptejä ylläpidetään jatkossa Githubissa. Tämän artikkelin koodit löytyvät [täältä](https://github.com/louhos/takomo/blob/master/examples/20110924-nimet.R).
 

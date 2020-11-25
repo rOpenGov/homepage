@@ -27,8 +27,7 @@ Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä viel�
 
 Tässä esimerkkinä ruutukaappaus interaktiivisesta visualisoinnista.
 
-![visualisointi](/post/2012-02-07-vaalitulosten-vertailua.fi_files/motionchart_screenshot.png)
-*Esimerkkivertailu. Väyrysen ensimmäisen kierroksen kannatuksen ja toisen kierroksen äänestysprosentin välillä näyttää olevan yhteys.*
+{{< img src="/post/2012-02-07-vaalitulosten-vertailua.fi_files/motionchart_screenshot.png" caption="Esimerkkivertailu. Väyrysen ensimmäisen kierroksen kannatuksen ja toisen kierroksen äänestysprosentin välillä näyttää olevan yhteys." width="500" alt="Kuva interaktiivisesta visualisoinnista" link="/post/2012-02-07-vaalitulosten-vertailua.fi_files/motionchart_screenshot.png" align="center" >}}
 
 Aiemmat Louhoksessa julkaisut visualisaatiot ovat kaikki olleet staattisia, sillä R:ssä on toistaiseksi melko huonosti tarjolla työkaluja interaktiivisten visualisointien tekoon. Tähän tuli kuitenkin hiljattain muutos [googleVis](http://cran.r-project.org/web/packages/googleVis/index.html) R-paketin myötä. Paketti tarjoaa helppokäyttöisen rajapinnan [Google Chart Tools](http://code.google.com/apis/chart/):iin, joilla kuka tahansa voi tuottaa esimerkiksi [Hans Rosling](http://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen.html) -tyyppisen [Motion Chartin](http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html) hetkessä.
 
