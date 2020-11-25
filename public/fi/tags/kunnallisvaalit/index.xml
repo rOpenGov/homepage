@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kunnallisvaalit on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/kunnallisvaalit/</link>
+    <description>Recent content in kunnallisvaalit on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Oct 2012 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/kunnallisvaalit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua</title>
+      <link>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</link>
+      <pubDate>Fri, 26 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</guid>
+      <description>Datavaalit-hanke on kerännyt runsaasti aineistoa kunnallisvaaliehdokkaista ja puolueista. Sivustolla ylläpidetään esimerkiksi sosiaalisen median aggregaattia, johon kerätään tietoja ehdokkaiden aktiivisuudesta mm. Facebookissa ja Twitterissä.
+Teimme muutamia esimerkkejä ehdokasaineistojen käsittelystä R-kielellä. Esimerkit hakevat dataa Oikeusministeriön, Tilastokeskuksen, Maanmittauslaitoksen ja Datavaalit-sivuston palvelimilta ja vertailevat ehdokkaiden aktiivisuutta sosiaalisessa mediassa puolueiden välillä, ja ne voidaan toistaa alusta loppuun automatisoidusti mukana tulevalla lähdekoodilla.
+Visualisoinnit lähdekoodeineen löydät Louhoksen Datawikistä ja Githubin takomo-reposta. Materiaaliin on tulossa myöhemmin täydennystä.
+PÄIVITYS 24.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaalien vertailukelpoiset ehdokasdatat CSV-taulukkoina: 2004 / 2008 / 2012</title>
+      <link>/fi/2012/10/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-/-2008-/-2012/</link>
+      <pubDate>Fri, 05 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-/-2008-/-2012/</guid>
+      <description>Vuoden 2012 kunnallisvaaliehdokkaiden vertailu aiempien kunnallisvaalien ehdokastietoihin on nyt ajankohtainen aihe. Ensimmäisiä vertailuja on julkaistu muun muassa Jyväskylän ylioppilaslehdessä ja Helsingin vaalipiirille on laadittu alustava puolueloikkaritaulukko.
+Käyttövalmiissa muodossa olevien aineistojen puute kunnallisvaaleista 2004-2008 on kuitenkin jälleen osoittautunut merkittäväksi pullonkaulaksi koko maan kattaville vertailuille sen jälkeen, kun julkaisimme edellisessä blogipostauksessa OM:n koneluettavista raakadatoista koostetun käyttövalmiin CSV-tiedoston 2012 kunnallisvaalien ehdokasdatasta.
+Datavaalit työstää keskitettyä tietokantaa vaalidatan tarjoilulle helppokäyttöisessä muodossa, mutta työn edetessä julkaisemme alustavaa dataa käyttövalmiina CSV-taulukkoina Linus Torvaldsin tunnetuksi tekemää ”release early – release often”-taktiikkaa noudattaen.</description>
+    </item>
+    
+  </channel>
+</rss>

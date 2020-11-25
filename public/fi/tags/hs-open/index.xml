@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HS open on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/hs-open/</link>
+    <description>Recent content in HS open on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Oct 2011 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/hs-open/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HS Open 3 lämmittely: Asuntojen myyntihinnat Helsingin kartalla</title>
+      <link>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</link>
+      <pubDate>Wed, 05 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</guid>
+      <description>Päivitys: Uudempi postaus tästä aiheesta!
+Kolmannessa HS Openissa yhtenä avattuna datana on Asuntojen vuokrat ja hintapyynnöt Oikotiellä. Talosen Jaakko ehtikin jo tehdän vuokrahinnoista mainion visualisoinnin. Itse olen jo pidempään fiilistellyt mahdollisuutta käyttää GoogleMapsin karttoja R-visualisoinnin pohjana, ja tässähän tarjoutui loistava tilaisuus kokeilla tuota käytännössä.
+Ideana on siis näyttää Oikotiedatan perusteella asuntojen hintapyynnöt kartalla, käytännössä keskimääräiset neliöhinnat postinumeroa kohden. Helpommin sanottu kuin tehty. Tämä vaatii nimittäin maantieteelliseti koordinaatit kullekin postinumerolle. Geonames tarjoaa tällaista tietoa, mutta itse en ainakaan onnistunut saamaan sieltä Helsingin kaupunginosien postinumerotietoja ulos.</description>
+    </item>
+    
+    <item>
+      <title>HS Open 2: Apurahadataa kaivelemassa</title>
+      <link>/fi/2011/09/hs-open-2-apurahadataa-kaivelemassa/</link>
+      <pubDate>Tue, 13 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/09/hs-open-2-apurahadataa-kaivelemassa/</guid>
+      <description>Ensimmäisen artikkelini aiheena on HS Open 2 -tapahtumassa analysoitu apurahadata. Data sisältää tietoa vuosina 2005-2009 jaetuista taiteilija-apurahoista. Latasin datan R:ään ja tein muutamia kuvaajia käyttäen ggplot2-pakettia. Tässä muutamia kuvaajia:
+ 20 eniten apurahaa saanutta taiteilijaa (HS 19.5.2011)    Apurahat hakemusluokittain ja vuosittain eroteltuna    Apurahat ikäryhmittäin ja sukupuolen mukaan    Apurahat ikäryhmän ja hakemusluokan mukaan   ggplot2:n perusplottien lisäksi data voidaan visualisoida kartalle käyttäen apuna esimerkiksi sp-pakettia.</description>
+    </item>
+    
+  </channel>
+</rss>

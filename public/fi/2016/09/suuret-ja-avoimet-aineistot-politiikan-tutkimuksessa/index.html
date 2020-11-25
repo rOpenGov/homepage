@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Suuret ja avoimet aineistot politiikan tutkimuksessa" />
+<meta property="og:description" content="Uusien vaaliaineistojen ja sosiaalisen median hyödyntäminen yhteiskuntatieteiden laskennallisiin menetelmiin perustuvassa tutkimuksessa on vasta aluillaan.
+Verkosta on alkanut muodostua lupaava aarreaitta myös politiikan tutkijoille. (CC0)
+Perinteisesti politiikan tutkimus on nojautunut pääasiassa laadullisiin menetelmiin, ja ehkä lähinnä vain vaalitutkimus on poikennut valtavirrasta tukeutumalla ensisijaisesti määrälliseen tutkimusotteeseen. Asetelman syy saattaa juontua aineistojen saatavuudesta. Sellainen inhimillinen toiminta jota politiikan monimutkaiset vuorovaikutusverkostot ja ilmiöt edustavat, taipuu vaivoin määrällisesti mitattaviksi suureiksi ja muuttujiksi. Vaalit muodostavat kuitenkin erityisen poikkeuksen tähän säännönmukaisuuteen." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/fi/2016/09/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa/" />
+<meta property="article:published_time" content="2016-09-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-09-29T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Suuret ja avoimet aineistot politiikan tutkimuksessa"/>
+<meta name="twitter:description" content="Uusien vaaliaineistojen ja sosiaalisen median hyödyntäminen yhteiskuntatieteiden laskennallisiin menetelmiin perustuvassa tutkimuksessa on vasta aluillaan.
+Verkosta on alkanut muodostua lupaava aarreaitta myös politiikan tutkijoille. (CC0)
+Perinteisesti politiikan tutkimus on nojautunut pääasiassa laadullisiin menetelmiin, ja ehkä lähinnä vain vaalitutkimus on poikennut valtavirrasta tukeutumalla ensisijaisesti määrälliseen tutkimusotteeseen. Asetelman syy saattaa juontua aineistojen saatavuudesta. Sellainen inhimillinen toiminta jota politiikan monimutkaiset vuorovaikutusverkostot ja ilmiöt edustavat, taipuu vaivoin määrällisesti mitattaviksi suureiksi ja muuttujiksi. Vaalit muodostavat kuitenkin erityisen poikkeuksen tähän säännönmukaisuuteen."/>
+
+
+
+    <link rel="canonical" href="/fi/2016/09/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa/">
+
+    <title>
+      
+        Suuret ja avoimet aineistot politiikan tutkimuksessa | rOpenGov - R packages for open government data analytics
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>
+<script src="https://www.kela.fi/kelafi-theme/js/tablesorter/jquery.tablesorter-2.0.5.min.js"></script>
+
+
+
+
+  </head>
+  <body>
+    
+      
+
+<header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/fi">
+            <img src="/images/logo2020_white_orange.svg" height="30" class="d-inline-block align-top"
+    alt="rOpenGov - R packages for open government data analytics">
+
+
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi">Etusivu</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/post/">Blogi</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/projects/">Projektit</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/community/">Yhteisö</a>
+                    
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav">
+                
+                        
+                            <a class="nav-link" href="/">English</a>
+                        
+                            <a class="nav-link" href="/fi/">Suomi</a>
+                        
+                    
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-12 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+    <a class="text-dark" href="/fi/2016/09/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa/">Suuret ja avoimet aineistot politiikan tutkimuksessa</a>
+</h2>
+
+ 
+    <hr>
+</header>
+
+<article class="blog-post">
+    <p>Uusien vaaliaineistojen ja sosiaalisen median hyödyntäminen yhteiskuntatieteiden laskennallisiin menetelmiin perustuvassa tutkimuksessa on vasta aluillaan.</p>
+<p><img src="/post/2016-09-29-politiikan-tutkimuksen-aineistot.fi_files/kuva0_verkko.jpg" alt="kuva0"></p>
+<p><em>Verkosta on alkanut muodostua lupaava aarreaitta myös politiikan tutkijoille. (CC0)</em></p>
+<p>Perinteisesti politiikan tutkimus on nojautunut pääasiassa laadullisiin menetelmiin, ja ehkä lähinnä vain vaalitutkimus on poikennut valtavirrasta tukeutumalla ensisijaisesti määrälliseen tutkimusotteeseen. Asetelman syy saattaa juontua aineistojen saatavuudesta. Sellainen inhimillinen toiminta jota politiikan monimutkaiset vuorovaikutusverkostot ja ilmiöt edustavat, taipuu vaivoin määrällisesti mitattaviksi suureiksi ja muuttujiksi. Vaalit muodostavat kuitenkin erityisen poikkeuksen tähän säännönmukaisuuteen. Äänestyspäätös ilmaistaan numeerisena arvona, ja se kytkeytyy ehdokkaan ja mahdollisesti edustajan arvoihin ja edelleen äänestyspäätöksiin, syntyviin lakeihin ja vallan rakenteisiin niin kansallisesti, paikallisesti kuin ylikansallisestikin. Toiseen suuntaan äänestyspäätös kytkeytyy kyselytutkimusten kautta myös äänestäjiin ja heidän demografisiin piirteisiinsä sekä arvoihin. Näin vaaleihin kytkeytyvä tutkimuskenttä voi tarkastella monin tavoin yhteiskunnan ja äänestäjien kollektiivisen tason ilmiöitä, kuten vallanjaon muutoksien syitä, äänestämisen ja osallistumisen kiinnostavuutta tai puoluekannatuksen taustatekijöitä.</p>
+<p>Teknologian moninaisen hyödyntämisen yleistyminen ihmisten ja organisaatioiden päivittäisessä käytössä viime vuosikymmeninä on käynnistänyt politiikan tutkimuksen kannalta mielenkiintoisten aineistojen saatavuuteen liittyvän muutoksen. Yleisemmin ilmiötä on kutsuttu hieman eri rajauksin ja näkökulmin ajoin tietoyhteiskuntakehitykseksi, informaation vallankumoukseksi tai aikakaudeksi ja nyt viimeisimpänä digitalisaatioksi. Tälle ajalle on ominaista, että ihmisten välinen vuorovaikutus ja viestintä on teknologian välittämää. Niinpä jo suuri ja yhä kasvava osa inhimillisestä toiminnasta on jo syntyjään digitaalista tietoa, dataa, joka on myös mahdollisesti rakenteellista ja määrällisesti tarkasteltavissa.</p>
+<p>Tässä artikkelissa tarkastellaan ensin big datan ja avoimen datan käsitteitä ja niiden kautta sitä minkälaisia aineistoja laskennallisia menetelmiä hyödyntävässä politiikan tutkimuksessa Suomessa on viime aikoina käytetty. Samalla nostetaan esille joitakin aineistoja hyödyntäneitä tutkimuksia ja menetelmiä.</p>
+<p><strong>Muotisanoja vai määriteltyjä käsitteitä?</strong></p>
+<p>Ensin on syytä määritellä mitä datalla tarkoitetaan ja minkälaisissa muodoissa se ilmenee. Data on digitaalisessa muodossa esiintyvää informaatiota. Sitä esiintyy tallennettuna erilaisille massamedioille, kuten kovalevyille, usb-muistitikuille tai cd-levyille. Inhimillisen tulkinnan kautta tämä digitaalinen informaatio voi jalostua tiedoksi, ja vielä syvällisemmin tietämykseksi.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Datan määrää mitataan tavuina (engl. byte), ja yksi tavu koostuu kahdeksasta bitistä, jotka ovat arvoltaan aina ykkönen tai nolla. Bittien binäärinen, numeerisesti ilmaistava joko-tai -luonne linkittyy terminlogisesti digitalisaation käsitteeseen, joka viittaa laskemiseen. Suurten datamäärien ilmaisemiseen käytetään tavujen monikertoja, jotka tulevat kahden potensseista taulukon 1 mukaisesti.</p>
+<pre><code class="language-{%" data-lang="{%">Tavu = 8 bittiä
+Kilotavu 2^10 = 1024 tavua
+Megatavu 2^10 = 1024 kilotavua
+Gigatavu 2^10 = 1024 megatavua
+Teratavu 2^10 = 1024 gigatavua
+</code></pre><p><em>Taulukko 1. Datan määrän ilmaiseminen.</em></p>
+<p>Konkreettiset esimerkit auttavat määrien havainnollistamista, ja niitä löytyy runsaasti verkosta. Keskimääräinen englannin kielen sana vaati viisi tavua tallennustilaa, matalaresoluutioinen valokuva vie 100 kilotavua, raamatullinen tekstiä 4 megatavua ja ihmisen genomi 750 megatavua, joka mahtuu yhdelle cd-levylle. Yksi elokuva vie noin 5-7 gigatavua tallennustilaa, joka löytyy sopivasti DVD-levyltä. Huomionarvoista on, että ääni ja kuva, erityisesti liikkuva kuva, vievät moninkertaisesti tallennustilaa tekstiin verrattuna.
+Kokonaisen akateemisen kirjaston sisältö ottaisi 2 teratavua. Vuonna 2014 Facebook kertoi keräävänsä 600 teratavua käyttäjädataa päivässä.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>Datan määrän räjähdysmäinen kasvu on vaikuttanut “big datan” käsitteen yleistymiseen. Sitä ei yleensä käytetä viittaamaan mihinkään tarkkaan datamäärään, vaan käsite on monin tavoin suhteellinen. Yksi lähestymiskulma on, että kun perinteiset laitteistot, tietojärjestelmät, tietokannat ja ohjelmistot eivät kykene käsittelemään aineistoja, ainakaan inhimillisesti siedettävillä käsittelyajoilla, aletaan puhua big datasta. Tämä lähestymiskulma on luonnollisesti sidoksissa teknologiseen kehitykseen, tarkemmin laskentatehoon ja ohjelmistojen käsittelykykyyn, jotka käytännössä paranevat ajan myötä. Suuntaa-antavasti voidaan kuitenkin ilmaista, että esimerkiksi vuonna 2016 harvoin alle teratavun ainestoista puhutaan big datana.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>Toinen lähestymiskulma tarkastelee datan ominaisuuksia, niin kutsuttua kolmea v:tä: tilaa (volume), nopeutta (velocity) ja moninaisuutta (variety). Perinteisen tilan lisäksi päivitystahti, esimerkiksi videon suoralähetyksessä, striimauksessa kasvattaa nopeasti resurssien tarvetta. Moninaisuus taas esiinty esimerkiksi sosiaalisen median päivityksissä, jossa saattavat yhdistyä teksti, kuva, ääni ja videot, jolloin yksi perinteinen tietokanta ei taivu eri sisältömuotojen käsitelyyn -varsinkaan, kun viestejä lähetetään miljoonia tunnissa. Jotkut määrittelevätkin big datan sellaiseksi dataksi, jonka käsittely vaatii hajautettuja järjestelmiä. Hieman kriittisemmästä näkökulmasta big dataa pidetään yli-yksinkertaistavana markkinointiterminä, joka ei tarkoita välttämättä mitään eksaktia informaatioteknologian kanssa varsinaisesti työskenteleville.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>Tutkimuksen kannalta määrän ohella toinen olennainen datan ominaisuus on sen saatavuus, johon liittyy avoimen datan käsite. Avoimen datan käsitteen määritelmät vaihtelevat hieman eri lähteissä, mutta yhteistä on yleensä, että data on teknisesti ja luvallisesti kenen tahansa vapaasti käytettävissä, joka sisältää oikeuden edelleen jakaa ja julkaista muunneltuja jatkotuotoksia. Vapaa käyttö tarkoittaa pääsääntöisesti maksuttomuutta. Joissakin tapauksissa määreet “kenen tahansa” tai “mihin tahansa käyttötarkoitukseen” vaihtelevat ja jotkut saattavat viitatata avoimina myös sellaiseen dataan, jonka käyttöehdot kieltävät kaupallisen käytön tai rajaavat käyttötarkoituksia tai käyttäjäkuntaa muutoin tai vaativat esimerkiksi rekisteröitymistä tai muuta sopimuksenvaraisuutta. Tosin esimerkiksi Rufus Pollock kutsuu tällaista avoimuuspesuksi. Useimmat avoimen data käsitteenmääritelmät sisältävätkin vaatimuksen, jonka mukaan julkaisija ei julkaisun jälkeen aseta mitään rajoituksia jatkokäytölle -muuta kuin korkeintaan vaatimuksen julkaista jatkotyöt samalla avoimuuden säilyttävällä lisenssiehdolla.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p><strong>Uudet aineistot</strong></p>
+<p>Politiikan tutkimuksen kannalta relevanttien uusien aineistojen erittely tuo niin ikään uuden ongelman ratkaistavaksi aineistojen ryhmittely- tai luokitteluperusteen suhteen. Aineistoja voisi luokitella esimerkiksi ainakin sisällöntuottajien, aineiston omistajan tai sisältötyypin mukaan, eivätkä nämäkään tavat asettuisi välttämättä tai jopa todennäköisesti siisteihin luokkiin. Eri ominaisuuksien perusteella toisistaan erottuvia aineistotyyppejä ovat ainakin:</p>
+<ul>
+<li>sosiaalinen media</li>
+<li>yhteisöllinen tiedontuotanto</li>
+<li>vaali-aineistot</li>
+<li>järjestelmäpolitiikan päätöksenteko-aineistot</li>
+<li>talousdata</li>
+</ul>
+<p>Todennäköisesti suurin ja käytetyin politiikan tutkimuksen uusi aineistolähde tulee sosiaalisen median keskusteluista. Kansainvälisesti suosituin lähde lienee Twitter. Suomessa Aller oy herätti huomiota julkaisemalla Suomi24-sivuston keskustelut epäkaupalliseen tutkimus- ja opetuskäyttöön.<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> Maailman ylivoimaisesti käytön määrällä mitattu yksittäinen sosiaalisen median palvelu Facebook sen sijaan ei ole kokonsa veroinen aineistolähde. Vaikka osa käyttäjien päivityksistä on julkisia, ne eivät esimerkiksi nyt ole ohjelmallisesti saatavilla palvelun rajapinnasta<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>. Twitterin viestit sen sijaan ovat, ja ovat pääsääntöisesti aina olleet. Edellä mainittujen aineistojen lisäksi sosiaalista mediaa edustavat ainakin esimerkiksi YouTube ja blogit yleensä, mutta tämän artikkelin taustaselvityksessä ei tullut vastaan tutkimuksia, joissa niitä olisi käytetty tutkimusaineistona. Seuraavaksi tarkastellaan hieman lähemmin Twitteriä, Suomi24:ää ja vaaliaineistoja.</p>
+<p><strong>Twitter</strong></p>
+<p>Tämän artikkelin lähteenä olevissa tutkimuksissa ja kirjoituksissa ei esitelty miltä Twitteristä saatava data näyttää, joten sen havainnollistamiseksi turvaudutaan Wei Xu:n Twitter-tutoriaaliin<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup> Ensin esitellään kuvakaappaus yksittäisestä twiitistä twitterin selainkäyttöliittymässä:</p>
+<p><img src="/post/2016-09-29-politiikan-tutkimuksen-aineistot.fi_files/kuva1_tweet.png" alt="kuva1"></p>
+<p><em>Kuva 1. Yksittäinen twiitti selainkäyttöliittymässä.</em></p>
+<p>Twiitin voi ladata ohjelmallisesti yhdestä Twitterin rajapinnoista (API) JSON-datana. Tuolloin se näyttää tekstieditorissa taulukon 2 mukaiselta.</p>
+<pre><code>{
+&quot;favorited&quot;: false,
+&quot;contributors&quot;: null,
+&quot;truncated&quot;: false,
+&quot;text&quot;: &quot;#CFP Workshop on Noisy User-generated Text at ACL - Beijing 31 July 2015. Papers due: 11 May 2015. http://t.co/rcygyEowqH #NLProc #WNUT15&quot;,
+&quot;possibly_sensitive&quot;: false,
+&quot;in_reply_to_status_id&quot;: null,
+&quot;user&quot;: {
+&quot;follow_request_sent&quot;: null,
+&quot;profile_use_background_image&quot;: true,
+&quot;default_profile_image&quot;: false,
+&quot;id&quot;: 237918251,
+&quot;verified&quot;: false,
+&quot;profile_image_url_https&quot;: &quot;https://pbs.twimg.com/profile_images/527088456967544832/DnclpoZO_normal.jpeg&quot;,
+&quot;profile_sidebar_fill_color&quot;: &quot;DDEEF6&quot;,
+&quot;profile_text_color&quot;: &quot;333333&quot;,
+&quot;followers_count&quot;: 226,
+&quot;profile_sidebar_border_color&quot;: &quot;C0DEED&quot;,
+&quot;id_str&quot;: &quot;237918251&quot;,
+&quot;profile_background_color&quot;: &quot;C0DEED&quot;,
+&quot;listed_count&quot;: 13,
+&quot;profile_background_image_url_https&quot;: &quot;https://abs.twimg.com/images/themes/theme1/bg.png&quot;,
+&quot;utc_offset&quot;: null,
+&quot;statuses_count&quot;: 120,
+&quot;description&quot;: &quot;I am a postdoctoral researcher @PennCIS, studying Natural Language Processing and Social Media.&quot;,
+&quot;friends_count&quot;: 166,
+&quot;location&quot;: &quot;Philadelphia PA&quot;,
+&quot;profile_link_color&quot;: &quot;0084B4&quot;,
+&quot;profile_image_url&quot;: &quot;http://pbs.twimg.com/profile_images/527088456967544832/DnclpoZO_normal.jpeg&quot;,
+&quot;following&quot;: null,
+&quot;geo_enabled&quot;: true,
+&quot;profile_background_image_url&quot;: &quot;http://abs.twimg.com/images/themes/theme1/bg.png&quot;,
+&quot;name&quot;: &quot;Wei Xu&quot;,
+&quot;lang&quot;: &quot;en&quot;,
+&quot;profile_background_tile&quot;: false,
+&quot;favourites_count&quot;: 88,
+&quot;screen_name&quot;: &quot;cocoweixu&quot;,
+&quot;notifications&quot;: null,
+&quot;url&quot;: &quot;http://www.cis.upenn.edu/~xwe/&quot;,
+&quot;created_at&quot;: &quot;Thu Jan 13 23:15:12 +0000 2011&quot;,
+&quot;contributors_enabled&quot;: false,
+&quot;time_zone&quot;: null,
+&quot;protected&quot;: false,
+&quot;default_profile&quot;: true,
+&quot;is_translator&quot;: false
+},
+&quot;filter_level&quot;: &quot;low&quot;,
+&quot;geo&quot;: null,
+&quot;id&quot;: 616333141884674048,
+&quot;favorite_count&quot;: 0,
+&quot;lang&quot;: &quot;en&quot;,
+&quot;entities&quot;: {
+&quot;user_mentions&quot;: [],
+&quot;symbols&quot;: [],
+&quot;trends&quot;: [],
+&quot;hashtags&quot;: [{
+&quot;indices&quot;: [0, 4],
+&quot;text&quot;: &quot;CFP&quot;
+}, {
+&quot;indices&quot;: [124, 131],
+&quot;text&quot;: &quot;NLProc&quot;
+}, {
+&quot;indices&quot;: [132, 139],
+&quot;text&quot;: &quot;WNUT15&quot;
+}],
+&quot;urls&quot;: [{
+&quot;url&quot;: &quot;http://t.co/rcygyEowqH&quot;,
+&quot;indices&quot;: [99, 121],
+&quot;expanded_url&quot;: &quot;http://noisy-text.github.io&quot;,
+&quot;display_url&quot;: &quot;noisy-text.github.io&quot;
+}]
+},
+&quot;in_reply_to_user_id_str&quot;: null,
+&quot;retweeted&quot;: false,
+&quot;coordinates&quot;: null,
+&quot;timestamp_ms&quot;: &quot;1435780246598&quot;,
+&quot;source&quot;: &quot;&lt;a href=\&quot;http://twitter.com\&quot; rel=\&quot;nofollow\&quot;&gt;Twitter Web Client&lt;/a&gt;&quot;,
+&quot;in_reply_to_status_id_str&quot;: null,
+&quot;in_reply_to_screen_name&quot;: null,
+&quot;id_str&quot;: &quot;616333141884674048&quot;,
+&quot;place&quot;: null,
+&quot;retweet_count&quot;: 0,
+&quot;created_at&quot;: &quot;Wed Jul 01 19:50:46 +0000 2015&quot;,
+&quot;in_reply_to_user_id&quot;: null
+}
+</code></pre><p><em>Taulukko 2. Twiitti JSON-muodossa.</em></p>
+<p>140 merkin twiitti muuttuukin tässä esimerkissä 2731 merkiksi, kun kaikki tietueet ja kentät lasketaan yhteen. Eri kentät kuvaavat twiitin eri ominaisuuksia ja metatietoja. JSON-muotoisen datan- rakenne muodostuu yksinkertaisesti kahdesta osasta, joka on mallia <code>“nimi” : “arvo”</code>. Useampia yhteenkuuluvia nimiä ja arvoja voidaan niputtaa kaari- ja hakasulkeiden sisään. Esimerkiksi kenttä <code>“text”</code> sisältää twiitin varsinaisen tekstin. Juuri datan rakenteellinen muoto luo edellytykset tehokkaalle ja ohjelmoijille helpolle käsittelylle. Sen lisäksi verkosta löytyy runsaasti maksuttomia ja kaupallisia oppaita.<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup></p>
+<p>Twitterin käyttöä vaalikampanjoinnissa on tutkittu laskennallisin menetelmin vuonna 2012 Datavaalit-hankkeessa<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>. Sen taustalla on eräänlaista hakkerietiikkaa edustava avoin tutkija- ja koodaajayhteisö, jossa myös Louhos-blogin kirjoittajat ovat olleet mukana. Leo Lahden ym. mukaan kunnallisvaaleissa 2012 vihreät ja kokoomus olivat Twitterin aktiivisimmat puolueet. Miehet twiittasivat yli kaksi kertaa niin usein kuin naiset. Aktiivisimmat ehdokkaat twiittasivat jopa 2000-5000 kertaa.<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup></p>
+<p>Samankaltaisesti nimetyssä, mutta eri tutkijoiden Digivaalit 2015 -hankkeessa Twitteriä hyödynnettiin keskeisenä aineistolähteenä eduskuntavaalien tarkastelussa. Hankkeen tutkijat Matti Nelimarkan johdolla latasivat Twitterin rajapinnasta ainakin yli 200 000 viestiä<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>. Aineisto on kerätty pääosin eduskuntavaaleja edeltävältä ajalta, mutta osa tutkimuksista kohdistuu myös vaalien jälkeiseen aikaan. Twiitit ovat tallennettu tekstitietokannaksi.<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> Salla-Maria Laaksosen mukaan vaaleja ei voi sanoa vielä twitter-vaaleiksi, sillä vain 938 kaikkiaan 2146 ehdokkaasta oli ylipäätään mukana twitterissä. Sen sijaan nimitys hashtag-vaalit saattaisi kuvata vaalien luonnetta paremmin<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup>.</p>
+<p>Hankkeessa on tehty useita eri tutkimuksia ja julkaisuja, joilla on vielä tarkemmat omat aineistorajauksensa, eikä kaikissa tapauksissa ole käytetty koko aineistoa. Mari Marttila on tutkinut osuvasti ja leikkisästi nimetyssä pro gradussaan otsikolla #vainkansanedustajajutut kansanedustajien twitter-tilien, twiittien ja keskustelun määrää<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup>. Arto Kekkonen tarkasteli #koulutuslupaus-kampanjan tavoitteita ja twitter-keskustelua 14 235 aiheen mukaisesti tägätyn twiitin avulla<sup id="fnref:16"><a href="#fn:16" class="footnote-ref" role="doc-noteref">16</a></sup>. Mari Tuokko tutki 433 keskusteluketjun (erittelemättä sekä Twitter- että Facebook -ketjuja) avulla ehdokkaiden ja kansalaisten välistä vuorovaikutusta sosiaalisessa mediassa. Tutkimuksen analyysi kohdistui yksittäisten viestien tasolle sekä laadullisella että määrällisellä otteella. Tarkastelulla pyrittiin selvittämään sekä vuorovaikutuksen funktioita että topiikkeja.<sup id="fnref:17"><a href="#fn:17" class="footnote-ref" role="doc-noteref">17</a></sup> Toisessa tutkimuksessa Tuokko ja tutkimusryhmä tarkastelivat #olohuonetentti -kampanjaa, joka osoitti, että joissakin tapauksissa twitter-keskustelu rikkoo perinteiset puoluerajat.<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup></p>
+<p>Yksi Digivaalit-hankkeen merkittävimmistä tutkimuskohteista lienee verkon vaikuttajaindeksin laskemismenetelmän kehittäminen. Sen selvittämiseksi 167 395 Twitter- ja Facebook-viestiä vertailtiin 5427 politiikkaa koskevaan uutiseen 19 eri median sivuilta ja 80 456 kansalaisten #vaalit2015, #vaalit ja #politiikka -tunnisteilla julkaisemaan sosiaalisen median viestiin. Tutkimuksen tuloksena aineistosta erottautui joukko niin kutsuttuja supervaikuttajia, jotka saavat äänensä kuuluviin sosiaalisen median ansiosta myös perinteisen median puolelle.<sup id="fnref:19"><a href="#fn:19" class="footnote-ref" role="doc-noteref">19</a></sup></p>
+<p>Tweetit ovat hyvä esimerkki avoimesta datasta politiikan tutkimuksessa. Pääosa tweeteistä ovat sekä julkisia ja helposti ihmisluettavassa muodossa että avoimien rajapintojen kautta myös koneluettavassa muodossa ja siten hyvää raaka-ainetta laskennallisille tutkimusmenetelmille. Muutamat kymmenet tuhannet akiiviset suomalaiset twiittajaat muodostavat verrattain pienen käyttäjäjoukon, varsinkin twitter-keskusteluaineistojen big dataksi luokittelemisen kannalta. Sen sijaan kansainväliset, yleensä englanninkieliset otokset voivat helposti kasvaa suuriksi ja jatkuvan päivittymisen ansiosta muodostaa loputtoman aineistolähteen. Se herättääkin pohtimaan kysymystä siitä, täytyisikö tutkijoiden jättää tutkimusohjelmakoodinsa pyörimään palvelimelle itsekseen, jotta tutkimustulokset voivat päivittyä automaattisesti aineiston lisääntyessä?</p>
+<p><strong>Suomi24</strong></p>
+<p>Krista Lagus, Mika Pantzar, Minna Ruckenstein ja Marjoriikka Ylisiurua ovat kuvailleet Suomi24-keskusteluaineistoa julkaisemassaan “Suomi24 - Muodonantoa aineistolle” -raportissa. Erillinen tutkimusjulkaisu pelkästä aineistosta itsestään kuvaa hyvin big data -aineistojen laajuutta ja sisällöllistä moninaisuutta, jonka hahmottaminen vaatii alkuun oman aikansa ennen varsinaiseen tutkimukseen ryhtymistä. Aineisto koostuu Suomi24-verkkokeskustelufoorumille käyttäjien kirjoittamista viesteistä. Keskustelu on organisoitu useisiin erilaisiin alueisiin, kuten Suhteet, Ajoneuvot ja liikenne tai Yhteiskunta, joka on suurin yksittäinen keskustelualue. Alueet jakaantuvat vielä alatasoille jopa kuudennelle tasolle, ja aina alimmalla tasolla sijaitsevat keskusteluketjut. Yksittäinen viesti voi aloittaa uuden ketjun tai kommentoida vanhaa olemassaolevaa ketjua.<sup id="fnref:20"><a href="#fn:20" class="footnote-ref" role="doc-noteref">20</a></sup></p>
+<p>Lagus ym. kirjoittavat, että “Suomi24-aineisto on avattu tutkimuskäyttöön avoimen datan hengessä”<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref">21</a></sup>. Ilmaisu pitää sinällään paikkansa, että aineisto ei ole kovin monen määritelmän mukaan kaikille avointa dataa, vaan se on sopimuksenvaraisesti määrättyihin käyttötarkoituksiin julkaistua dataa. Tutkijoiden näkökulmasta aineiston käytössä ei ole kuitenkaan saatavuuteen liittyviä ongelmia, joten se näyttäytyy tieteen kannalta avoimena aineistona.</p>
+<p>Data on saatavilla tutkimuskäyttöön joko Allerilta suoraan päivittyvästä rajapinnasta sopimuksella tai Kielipankista korkeakoulujen tutkijoiden käyttäjätunnuksilla kerralla yhtenä pakettina. Se on tarjolla sekä JSON-muodossa että kielitieteellisesti rikastetussa VRT-muodossa. Ensin mainitussa kommentit näyttävät taulukon 3 mukaiselta:</p>
+<pre><code>{
+”body”: ”&lt;p&gt;Mukavasti on pukannut uusia S6 ja A8 Audeja liikenteeseen t\u00e4\u00e4ll\u00e4 Turun seudulla!!!&lt;/p&gt;”,
+“closed_reason”: “inactivity_time_reached”,
+“views”: 308,
+“deleted”: false,
+“topics”: [{“title”: “Ajoneuvot ja liikenne”, “topic_id”: 2},
+{“title”: “Autot”, “topic_id”: 6254},
+{“title”: “Automerkit”, “topic_id”: 1109},
+{“title”: “Audi”, “topic_id”: 3256}],
+“title”: “Audia pukkaa....”,
+“comments”: [{“body”: “&lt;p&gt;pukkas 70:t\u00e4 luvulla Ladaa liikkuu jyv\u00e4skyl\u00e4ss\u00e4!&lt;/p&gt;”,
+“quote_id”: 0, “deleted”: false, “created_at”: 1207988326000, “comment_id”: 29898190,
+“anonnick”: “krigg”, “thread_id”: 5604224, “parent_comment_id”: 0}],
+“anonnick”: “SS66AA88”,
+“thread_id”: 5604224,
+“closed”: true,
+”created_at”: 1207910044000
+}
+</code></pre><p><em>Taulukko 3. Suomi24-keskusteluketju JSON-muodossa.</em></p>
+<p>Esimerkissä on ensin nimimerkin “krigg” kirjoittama ketjun aloitusviesti otsikolla <em>“Mukavasti on pukannut uusia S6 ja A8 Audeja liikenteeseen täällä Turun seudulla!!!”</em> ja siihen nimimerkin “SS66AA88” vastaus <em>“pukkas 70:ta luvulla Ladaa liikkuu jyväskylässä!”</em>.</p>
+<p>Suomi24 -aineisto on kertynyt vuodesta 2001 alkaen ja sitä kerääntyy toistaiseksi koko ajan. Palveluun on kirjoitettu sen olemassaolon aikana viestien juoksevan id-tunnistenumeron perusteella yli 80 miljoonaa viestiä. Tosin näistä suuri osa on poistettu tai virheellisiä kirjauksia, sillä ladattu aineisto käsittää noin 60 miljoonaa viestiä. Yksittäiset viestit voivat olla lyhyitä tai hyvinkin pitkiä, satoja sanoja, mutta keskimäärin viestit ovat lauseen, eli 5 - 10 sanan pituisia. Ketjujen elinikä vaihtelee myös suuresti, ja osa aloitetuista ketjuista ei saa lainkaan vastauksia, kun taas toisiin palataan vielä vuosien päästä.</p>
+<p>Aineistoa on jo hyödynnetty joissakin tutkimuksissa. Veikko Eranti ja Tuukka Ylä-Anttila etsivät esipoliittisia keskusteluaiheita ihmisten arkipäiväisistä verkkokeskusteluista laskennalllisen aiheenmallinnus (topic modelling) -menetelmän avulla. He tunnistivat 21 aihetta, joiden muodostama aineisto voi toimia raaka-aineena esimerkiksi tarkemmalle laadulliselle analyysille.<sup id="fnref:22"><a href="#fn:22" class="footnote-ref" role="doc-noteref">22</a></sup> Kesällä 2015 Helsingissä järjestettiin Suomi24-aineistoon keskittyvä hackathon, jossa eri ryhmät sovelsivat erilaisia laskennallisia menetelmiä kokeellisesti ja pienimuotoisesti aineiston tutkimiseksi. Osallistujat tutkivat esimerkiksi keskustelujen ennustuskykyä talouden suhdanteisiin, kateutta ilmaisevien keskustelujen ajallisia vaihteluita ja keskusteluaiheita, jotka johtavat lyhyisiin tai pitkiin keskusteluketjuihin.<sup id="fnref:23"><a href="#fn:23" class="footnote-ref" role="doc-noteref">23</a></sup></p>
+<p><strong>Vaali-aineistot</strong></p>
+<p>Vaalit ovat kvantitatiivisen politiikan tutkimuksen perinteisesti suurin ja vaikuttavin aineistolähde. Vaalituloksen ja kyselytutkimusaineistojen rinnalle viime vuosina on noussut kuitenkin uusia mielenkiintoisia aineistolähteitä. Valtiontalouden tarkastusviraston vuodesta 2009 alkaen keräämät vaali- ja puoluerahoitusilmoitukset ovat muodostuneet varteenotettavaksi tutkimusaineistoksi vaalirahakohun seurauksena. Ilmoitukset ovat luettavissa verkkopalvelussa ja lisäksi virasto raportoi tarkastuksensa vaaleittain.<sup id="fnref:24"><a href="#fn:24" class="footnote-ref" role="doc-noteref">24</a></sup></p>
+<p>Virallisten julkaisujen lisäksi Datavaalit-yhteisö on uudelleenjulkaissut siistittynä ja alkuperäislähteitä helpommin jatkokäytettävässä muodossa muiden muassa oikeusministeriön vaalituloksia, ehdokkaiden Facebook- ja Twitter-päivityksiä sekä vaalirahoitusilmoituksia.<sup id="fnref:25"><a href="#fn:25" class="footnote-ref" role="doc-noteref">25</a></sup></p>
+<p>Yksi merkittävimmistä uusista aineistolähdetyypeistä ovat vaalikone-aineistot. Erityisesti Helsingin Sanomat ja Yle ovat julkaisseet sekä ehdokkaiden että joissakin tapauksissa myös vaalikoneiden käyttäjien vastauksia avoimena datana.<sup id="fnref:26"><a href="#fn:26" class="footnote-ref" role="doc-noteref">26</a></sup> Vanhin julkaistu aineisto on Helsingin sanomien eduskuntavaalien 2011 alla julkaisema eduskuntavaalien 2007 aineisto.<sup id="fnref:27"><a href="#fn:27" class="footnote-ref" role="doc-noteref">27</a></sup> Tämän jälkeen sekä Yle että HS ovat julkaisseet kaikkien eduskuntavaalien ja presidentinvaalien ehdokkaiden aineistot. Myös MTV on avannut presidentinvaalien 2006 aineistot.<sup id="fnref:28"><a href="#fn:28" class="footnote-ref" role="doc-noteref">28</a></sup> Yksittäistapauksissa mediatalot ovat julkaisseet myös euro- ja kunnallisvaalien aineistoja.</p>
+<p>Helsingin Sanomien ja Ylen vaalikoneaineistot ovat pääsääntöisesti tarjolla verkkosivuilla julkaistun linkin kautta suoraan palvelimelta ladattavina tiedostoina. Aineistojen lisenssit ovat tyypillisesti vapaasti tai ei-kaupallisesti käytettäviä, kunhan lähdeviite mainitaan muutettuja töitä julkaistaessa. Joissakin tapauksissa aineistot ovat tarjolla päivittyvässä muodossa rajapinnan kautta, jonka käyttäminen edellyttää rajapinta-avaimen pyytämistä toimitukselta. Suorien pakettien tapauksessa aineistot ovat todella avoin dataa. Myös Yhteiskuntatieteellinen tietoarkisto on kerännyt samoja aineistoja ja jakaa niitä omassa Aila-palvelussaan, mutta erikoisesti huomattavasti rajoitetuilla käyttöehdoilla, joissa jopa tarkkaan määritellään minkä tasoiseen tutkimukseen aineistoja saa käyttää.<sup id="fnref:29"><a href="#fn:29" class="footnote-ref" role="doc-noteref">29</a></sup></p>
+<p><strong>Ehdokkaiden ja käyttäjien vastauksia</strong></p>
+<p>Vuoden 2015 eduskuntavaalien Ylen aineisto sisältää 2147 ja HS:n 1764 riviä, joissa kummassakin yhden ehdokkaan vastaukset ovat yhdellä rivillä. Ylen data on csv-muodossa yksinkertaisesti tekstinä pilkulla erotettuina arvoina ja HS:n data excel-taulukkona. Käytännössä muodot ovat yhtä lailla käytettävissä ja helposti konvertoitavissa suuntaan tai toiseen missä tahansa taulukkolaskentaohjelmassa tai ohjelmointiin tarkoitetussa tekstieditorissa. Vastaukset löytyvät sarakkeilta ja Ylellä kysymyksiä on yli sata sekä jokaisella kysymyksellä on omana tietueenaan avovastauksen mahdollisuus. Helsingin Sanomilla kysymyksiä on vain 30. Lisäksi kummallakin on kustakin ehdokkaasta yleistietoja liittyen sukupuoleen, ikään, ammattiin, alueeseen sekä verkkonäkyvyyteen eli kotisivuihin ja sosiaaliseen mediaan. Datan tallennustavassa on sellainen ero, että Ylen datassa vastaukset ovat tekstinä sarakkeissa kun taas HS:n datassa ne ovat numeerisina arvoina. Ylen tapa lienee helppolukuisempi ihmissilmälle, mutta HS:n tapa suoraviivaisempi ohjelmalliseen käsittelyyn ja vie myös huomattavasti vähemmän tilaa.<sup id="fnref:30"><a href="#fn:30" class="footnote-ref" role="doc-noteref">30</a></sup></p>
+<p>Ehdokkaiden vastausten lisäksi joissain vaaleissa vaalikoneiden tarjoajat ovat julkaisseet myös palveluiden käyttäjien vastauksia. Tällöin datan määrä ja samalla potentiaalinen tutkimuksellinen hyöty kasvaa huomattavasti. Helsingin Sanomien varhaisia vaalikoneaineistojulkaisuja olivat vuosien 2007 eduskuntavaalien ja 2009 europarlamenttivaalien vaalikoneiden käyttäjien vastausten aineistot.<sup id="fnref:31"><a href="#fn:31" class="footnote-ref" role="doc-noteref">31</a></sup> Seuraavassa on (luettavuuden helpottamiseksi rivitettynä) otsikkorivit ja yksi rivi dataa vuoden 2007 aineiston alusta:</p>
+<pre><code>&quot;Inner_id&quot;;
+&quot;User_id&quot;;
+&quot;Age_group&quot;;
+&quot;Sex&quot;;
+&quot;Area_id&quot;;
+&quot;Election_year&quot;;
+&quot;winnerCandidate&quot;;
+&quot;winnerParty&quot;;
+&quot;Answers&quot;;
+&quot;CandidatesList&quot;;
+&quot;PartiesList&quot;;
+&quot;Created&quot;;
+&quot;Modified&quot;
+
+&quot;4569&quot;;
+&quot;11718105386517402&quot;;
+&quot;0&quot;;
+&quot;n&quot;;
+&quot;1020&quot;;
+&quot;2007&quot;;
+&quot;3240&quot;;
+&quot;Kokoomus&quot;;
+&quot;20:1:134:1:2:;21:2:0:0:2:;22:3:0:0:2:;23:4:0:0:2:;24:5:0:0:2:;25:6:0:0:2:;26:7:0:0:2:;27:8:0:0:2:;28:9:0:0:2:;29:10:0:0:2:;30:11:0:0:2:;31:12:0:0:2:;32:13:0:0:2:;33:14:0:0:2:;34:15:0:0:2:;35:16:0:0:2:;36:17:0:0:2:;37:18:0:0:2:;38:19:0:0:2:;39:20:0:0:2:;40:21:0:0:2:;41:22:0:0:2:;42:23:0:0:2:;43:24:0:0:2:;44:25:0:0:2:;45:26:0:0:2:;46:27:229:3:2:;&quot;;
+&quot;3240:663:Pynnönen:Jarmo:Kok:83;4316:623:Luoma-Nirva:Jarno:Lib:57;2513:540:Hyttinen:Ilkka:Ipu:120;3233:398:Hyytiäinen:Sari:Kok:76;3232:392:Heinonen:Timo:Kok:75;2898:382:Sutinen:Reijo:Skp:53;3462:380:Nissilä:Minna:Kesk:67;3242:377:Vahter:Merja:Kok:85;3243:373:Viljanen:Ilkka:Kok:86;3463:367:Penttilä:Mika:Kesk:68;999999999:0:0:0:0:0;4162:-600:Savolainen:Leena:Vas:13;2628:-601:Raappana:Paavo:Vihr:116;4164:-629:Toivonen:Sari:Vas:15;&quot;;
+&quot;Ipu:129:19:3;Kai Aaltonen:-287:32:1;Kd:-37:14:8;Kesk:-65:10:13;Kok:269:12:14;Lib:623:20:1;Ps:-38:17:10;Sdp:-381:11:13;Skp:-352:26:7;Sks:-397:25:1;Stp:-571:18:1;Vas:-450:16:14;Vihr:-316:15:12;&quot;;
+&quot;2007-02-18 16:55:38&quot;;
+&quot;2007-02-18 16:55:38&quot;
+</code></pre><p><em>Taulukko 4. Helsingin Sanomien vuoden 2007 eduskuntavaalien vaalikoneen yhden käyttäjän vastaukset csv-muodossa.</em></p>
+<p>Data kertoo siis esimerkiksi vastaajan ikäryhmän, sukupuolen, vaalipiirin, vastaajalle sopivimmat ehdokkaat ja puolueet sekä vastaukset vaalikoneeseen. Vuoden 2007 aineisto sisältää 384694 riviä ja vuoden 2009 aineisto 228 476 riviä. Aineistojen tietorakenteet ovat samanlaiset.</p>
+<p>Ylen vuoden 2012 presidentinvaalien vaalikoneaineiston julkaisu sisältää käyttäjien vastaukset, joita on 244 976 riviä. Kysymykset löytyvät sarakkeilta, joita on 20. Vastaukset ovat numeerisina arvoina ja niiden selitteet löytyvät datan julkaisun verkkosivuilta. Ehdokasaineistoista poiketen käyttäjistä ei ole mitään kuvailevaa tai identifoivaa dataa.<sup id="fnref:32"><a href="#fn:32" class="footnote-ref" role="doc-noteref">32</a></sup></p>
+<p>Helsingin Sanomat julkaisi vuoden 2012 presidentinvaalien aineistosta sekä ehdokkaiden että käyttäjien vastaukset, mutta hieman tavallista rajoitetummalla, uudelleenjulkaisun kieltävällä lisenssillä ja vain rajapinnan kautta.<sup id="fnref:33"><a href="#fn:33" class="footnote-ref" role="doc-noteref">33</a></sup> Aineistoa ei ladattu ja tutkittu suoraan tätä artikkelia varten, mutta Louhos-tutkijaryhmä on julkaissut kuvaajia aineistosta, jotka erittelevät kuinka vastaajat jakautuvat eri demografisten piirteiden mukaan. Aineisto sisältää yli 200 000 käyttäjän vastaukset.<sup id="fnref:34"><a href="#fn:34" class="footnote-ref" role="doc-noteref">34</a></sup> Aineiston luotettavuuteen liittyy joitakin reunaehtoja, mutta se tarjoaa kokonsa vuoksi huomattavasti ilmaisuvoimaa tilastolliseen tarkasteluun.<sup id="fnref:35"><a href="#fn:35" class="footnote-ref" role="doc-noteref">35</a></sup></p>
+<p>Vuoden 2012 Kuntakoneesta HS julkaisi myös n. 11 000 käyttäjän vastaukset. Aineisto sisältää yksinkertaisuudessaa vastaajan kotikunnan ja toisessa sarakkeessa ne kunnat, joiden haluaisi muodostavan kuntaliitoksen.<sup id="fnref:36"><a href="#fn:36" class="footnote-ref" role="doc-noteref">36</a></sup> Erityisesti juuri vaalikoneiden käyttäjien vastaukset sisältävät aineistot ovat mahdollistaneet vaaleissa valittujen ehdokkaiden, kaikkien ehdokkaiden ja kansalaisten arvojen vertailut.</p>
+<p>Vain ehdokkaiden vastaukset sisältävät vaalikoneaineistot ovat tyypillisesti muutamien tai joidenkin kymmenien megatavujen kokoisia, jolloin niistä puhuminen big datana ei välttämättä ole oikein oikeutettua. Sen sijaan käyttäjien vastaukset sisältävät aineistot ovat useita satoja megatavuja, ja hieman ohjelmasta ja koneesta riippuen aineistojen käsittely saattaa olla enemmän tai vähemmän sujuvaa. Esimerkiksi Helsingin Sanomien vuoden 2007 pakkaamaton 500-megatavuinen aineisto osoittautui ylivoimaiseksi Open Officelle ja suhteellisen tehokkaalle tietokoneelleni, jossa on i5-prosessori ja 8 Gt työmuistia. Näin ollen ainakin yhden näkökulman mukaan big datan mainitseminen tällaisten aineistojen yhteydessä voi olla perusteltua.</p>
+<p><strong>Tutkimuksellista “pikaruokaa” vaalikonedatasta</strong></p>
+<p>Vaalikoneainestoja on hyödynnetty hyvin monipuolisesti. Tavat vaihtelevat yksinkertaisista kehittyneisiin tilastollisiin menetelmiin, visualisointeihin kuten ehdokkaiden ja puolueiden arvokarttoihin ja sisällöllisiin tutkimuksiin, jossa hallitusohjelmaa vertaillaan vastauksiin tai se uudelleenkirjoitetaan niiden perusteella. Seuraavat esimerkit eivät edusta perinteistä tieteenteon “hidasta” tapaa vaan päinvastoin, informaatioajalle ominaista ketterää lähestymistapaa.</p>
+<p>Yksinkertaisia vastausten jakaumia edustavia tutkimuksia edustavat esimerkiksi Jouni Tuomiston ym. Kansanedustajien arvot -artikkeli, joka selvitti eniten samanmielisyyttä ja toisaalta erimielisyyttä herättäneitä kysymyksiä.<sup id="fnref:37"><a href="#fn:37" class="footnote-ref" role="doc-noteref">37</a></sup> Ehkä kaikkein suosituin tapa vaalikonevastausten hyödyntämiseen ovat olleet erilaiset visualisoinnit, jotka sijoittavat kansanedustajat arvokartalle eri ristiriitaulottuuvuksien suhteen, kuten kuvassa 2. Ne ovat havainnollistavia, toimivat yksilö- ja puoluetasolla sekä parhaimmillaan visuaalisesti näyttäviä että käytettävyydeltään hyviä, joskus jopa addiktiivisia.<sup id="fnref:38"><a href="#fn:38" class="footnote-ref" role="doc-noteref">38</a></sup></p>
+<p><img src="/post/2016-09-29-politiikan-tutkimuksen-aineistot.fi_files/kuva2_arvokartta.png" alt="kuva2">
+<em>Kuva 2. Martti Leppäsen visualisoima kansanedustajien ja puolueiden arvokartta. Ulla-Maj Wideroosin arvot sijoittuvat aivan keskelle sekä vasemmisto-oikeisto että konservatiivi-arvoliberaali -ulottuvuuksa. Kuvakaappaus Helsingin Sanomien sivuilta.</em></p>
+<p>Niiden taustalla olevat valinnat eri ristiriitaulottuvuuksien valinnasta, tilastollisista menetelmistä ja tulkinnoista ovat herättäneet paljon keskustelua, kritiikkiä ja vaihtoehtoisia tulkintoja.<sup id="fnref:39"><a href="#fn:39" class="footnote-ref" role="doc-noteref">39</a></sup> Tarkastelemalla ilmiötä hieman etäämmältä voidaan huomata, että vaalikoneaineistot ovat innoittaneet vilkasta avointa tutkimusta, kun aineistot ovat lähtökohtaisesti avoimia ja osallistujat julkaisevat tutkimuksensa, kritiikkinsä ja menetelmänsä avoimesti.</p>
+<p>Politiikan sisältöjä tarkastelevia tutkimuksia edustavat esimerkiksi Jouni Tuomiston edellä mainitun artikkelin jatkoksi tehdyt analyysit poikkipuolue- ja jokapuoluehallituksista. Ensin mainittu hallituskokoonpano muodostuu puolueiden poikki niistä kansanedustajista, jotka kuuluvat vastausvaihtoehtojen enemistön kannalle. Kukin edustaja saa samanmielisyyspisteet enemmistömielisyydestään. Hallitusohjelma muodostuu niistä vaalikonekysymyksistä, jotka ehdottavat jotakin muutosta nykyiseen ja ehdotusta on kannattanut selkeä enemmistö.<sup id="fnref:40"><a href="#fn:40" class="footnote-ref" role="doc-noteref">40</a></sup></p>
+<p>Jokapuoluehallitus perustuu muuten samaan ajatukseen kuin poikkipuoluehallitus, mutta sen muodostamisessa huomioidaan puoluekurin vaikutus. Puolueen enemmistön kanta saa tällöin puolueen kaikkien edustajien äänen taakseen. Tällöin jotkin puolueita sisäisesti tasaisesti jakavista kysymyksistä voivat ratketa eduskunnan tasolla huomattavasti selkeämmin luvuin, ja niin hallitusohjelmastakin tulee erilainen.</p>
+<p><strong>Data ja demokratia</strong></p>
+<p>Tämän artikkelin taustoittamiseksi tutustuin hyvään pintaraapaisuun monipuolisia tutkimuksia ja aineistoja, jotka paljastavat ainakin sen, että politiikan tutkijoilta ei puutu aineistoja, eikä luovuutta ja uutta ajattelua menetelmävalintojen suhteen. Sen sijaan kehittymisen varaa lienee varmasti enemmän menetelmien tieteellisessä pätevyydessä ja teknisessä sovellettavuudessa. Ohjelmointitaitoiset voivat hyödyntää nopeasti valmiita koodikirjastoja enemmän tai vähemmän soveltuviin aineistoihin tai kehittää omia ratkaisujaan, mutta tulkintojen validiteetin arvioiminen jää joko dokumentaation, ei-ohjelmointitaitoisille suunnattujen vastaavien työkalujen saatavuuden tai toisten ohjelmointitaitoisten samojen aiheiden tutkijoiden aktiivisuuden varaan. Kun vielä ajan henki suosii nopeaa ja näyttävää tutkimustulosten viestintää, tieteellinen laatu voi joutua sivulliseksi uhriksi. Hyvä esimerkki ei-ohjelmistotaitoisille suunnatusta data-aineistojen tutkimustyökalusta on kuitenkin Kielipankin Korp-käyttöliittymä, jolla voi analysoida suuria tekstiaineistoja.<sup id="fnref:41"><a href="#fn:41" class="footnote-ref" role="doc-noteref">41</a></sup> Tämänkaltaisia työkaluja toivoisi näkevän tulevaisuudessa myös politiikan tutkimuksen alueella. Se ei poista tutkijoiden tarvetta menetelmien ymmärtämiseen, mutta voi luoda siltaa ohjelmointiin ja eri substanssikysymyksiin erikoistuneiden tieteenharjoittajien välille.</p>
+<p>Toinen erityisen mielenkiintoinen kysymys on vaalikone- ja sosiaalisen median aineistojen todistusvoima kansalaisten arvojen ja julkisen mielipiteen suhteen. On parhaillaan eri tutkijoiden ja tutkimushankkeiden työn alla ratkoa menetelmiin liittyviä teknisiä ongelmia siitä kuinka vaalikonedatasta ja sosiaalisen median keskusteluista jalostetaan niin sanottua kansan tahtoa, joka voitaisiin ilmaista esimerkiksi hallitusohjelman tai yksittäisten lakien muodossa. Aineistolähtöisyyden vastavoimaksi asettuu kuitenkin luotettavuuteen ja edustavuuteen liittyvät kysymykset. Syrjiikö digikuilu vielä 2010-luvun lopulla joitakin ryhmiä tai ovat vaalikoneet tai sosiaalinen media itsessään tai niitä ylläpitävät mediatalot epädemokraattista vääristymää aiheuttava tekijä? Olisi itse asiassa mielenkiintoista paneutua siihen, kumpaa ihmiset vierastavat enemmän -äänestämistä vai verkkoa poliittisen mielipiteenilmaisun välineenä. Jos verkkoa ei nähdä ongelmana ja siirrytään pohtimaan aineistojen täyttä potentiaalia demokratian kannalta, voidaan asetelma pelkistää vaikka seuraavanlaiseen kysymykseen: kumpi on demokraattisempaa, johtaa hallitusohjelma suoraan vaalikoneen (tai kahden, Helsingin Sanomat ja Yle, synteesistä) yli 200 000 vastaajan otoksesta vai että vajaan kolmen miljoonan äänestäjän tahto pelkistetään 200 edustajaan, joista vain pieni osa osallistuu eturyhmien edustajien ja korkeiden virkamiesten kanssa neuvottelemaan ja kirjoittamaan vaalikauden tavoitteita? Nyt kun aineistoja alkaa olla tarjolla ja menetelmät kehittyvät, olisi älyllistä epärehellisyyttä hyödyntää niitä vain puolueiden tai edustuksellisuuden ongelmien ratkaisemiseen ja jättää taustalla piilevä laajempi demokratian toimintaedellytysten ongelma huomiotta.</p>
+<p><em>Tämä artikkeli on kirjoitettu alkujaan keväällä 2016 opintosuoritukseksi valtio-opin syventävien menetelmien kurssille. Sitä on päivitetty julkaisun yhteydessä vähäisissä määrin. Artikkelista on julkaistu myös <a href="http://alusta.uta.fi/artikkelit/2016/09/06/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa.html" title="tiivistelmä Alustassa">tiivistelmä Alusta!-verkkolehdessä</a>.</em></p>
+<h2 id="lähdeluettelo">Lähdeluettelo</h2>
+<p>Datavaalit (2016), &lt;<a href="http://www.datavaalit.fi/">http://www.datavaalit.fi/</a>&gt;</p>
+<p>Datavaalit (2016b), &lt;<a href="https://github.com/avoindata">https://github.com/avoindata</a>&gt;</p>
+<p>Digivaalit (2015), &lt;<a href="https://www.hiit.fi/digivaalit-2015">https://www.hiit.fi/digivaalit-2015</a>&gt;</p>
+<p>Digivaalit (2016) &lt;<a href="https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-verkosto-lores.pdf">https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-verkosto-lores.pdf</a>&gt;</p>
+<p>Eranti, Veikko &amp; Ylä-Anttila Tuukka (2016) &lt;<a href="http://www.slideshare.net/tuylaant/using-topic-modeling-to-study-everyday-civic-talk-and-protopolitical-engagements">http://www.slideshare.net/tuylaant/using-topic-modeling-to-study-everyday-civic-talk-and-protopolitical-engagements</a>&gt;</p>
+<p>Haakana, Kari (2011) &lt;<a href="http://yle.fi/aihe/artikkeli/2011/05/16/vuoden-2011-vaalikonetiedot-nyt-avoimena-datana">http://yle.fi/aihe/artikkeli/2011/05/16/vuoden-2011-vaalikonetiedot-nyt-avoimena-datana</a>&gt;</p>
+<p>Haakana, Kari (2012) &lt;<a href="http://yle.fi/aihe/artikkeli/2012/01/13/presidentinvaalien-vaalikoneen-kayttajien-vastaukset-avoimena-datana">http://yle.fi/aihe/artikkeli/2012/01/13/presidentinvaalien-vaalikoneen-kayttajien-vastaukset-avoimena-datana</a>&gt;</p>
+<p>Helsingin Sanomat (2012) &lt;<a href="http://www.hs.fi/politiikka/a1305606343277">http://www.hs.fi/politiikka/a1305606343277</a>&gt;</p>
+<p>Ted Holmes (2005)
+&lt;<a href="http://simplyted.blogspot.fi/2005/12/how-to-visualize-data.html">http://simplyted.blogspot.fi/2005/12/how-to-visualize-data.html</a>&gt;</p>
+<p>Kekkonen, Arto (2016) &lt;<a href="https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-kekkonen-lores.pdf">https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-kekkonen-lores.pdf</a>&gt;</p>
+<p>Laaksonen, Salla-Maaria (2015) &lt;<a href="https://rajapinta.co/2015/04/19/alustavia-analyyseja-eduskuntavaalipohinasta-sosiaalisessa-mediassa/">https://rajapinta.co/2015/04/19/alustavia-analyyseja-eduskuntavaalipohinasta-sosiaalisessa-mediassa/</a>&gt;</p>
+<p>Laaksonen, Salla-Maaria (2015b) &lt;<a href="https://rajapinta.co/2015/09/17/verkon-agendaa-asettamassa-vaikuttajaindeksilaskelmia-digivaalit-2015-projektista/">https://rajapinta.co/2015/09/17/verkon-agendaa-asettamassa-vaikuttajaindeksilaskelmia-digivaalit-2015-projektista/</a>&gt;</p>
+<p>Laaksonen, Salla-Maaria (2015c) &lt;<a href="https://rajapinta.co/2015/06/04/suomi24-data-science-hackathon-results-and-afterthoughts/">https://rajapinta.co/2015/06/04/suomi24-data-science-hackathon-results-and-afterthoughts/</a>&gt;</p>
+<p>Laaksonen, Salla-Maaria (2016a) &lt;<a href="https://rajapinta.files.wordpress.com/2016/04/digivaalit_finalseminar-pptx.pdf">https://rajapinta.files.wordpress.com/2016/04/digivaalit_finalseminar-pptx.pdf</a>&gt;</p>
+<p>Laaksonen, Salla-Maaria (2016b), &lt;<a href="https://rajapinta.co/2016/05/02/sosiaalinen-media-tutkimusaineiston-hankala-aarrearkku/">https://rajapinta.co/2016/05/02/sosiaalinen-media-tutkimusaineiston-hankala-aarrearkku/</a>&gt;</p>
+<p>Lagus, Krista, Mika Pantzar, Minna Ruckenstein ja Marjoriikka Ylisiurua (2016), Suomi24 -Muodonantoa aineistolle. &lt;<a href="http://blogs.helsinki.fi/citizenmindscapes/">http://blogs.helsinki.fi/citizenmindscapes/</a>&gt;</p>
+<p>Lahti, Leo (2012a), Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua. &lt;<a href="https://louhos.wordpress.com/2012/10/26/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/">https://louhos.wordpress.com/2012/10/26/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</a>&gt;</p>
+<p>Lahti, Leo (2012b), Kunnallisvaalien vertailukelpoiset ehdokasdatat CSV-taulukkoina: 2004 / 2008 / 2012 &lt;<a href="https://louhos.wordpress.com/2012/10/05/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-2008-2012/">https://louhos.wordpress.com/2012/10/05/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-2008-2012/</a>&gt;</p>
+<p>Lahti, Leo (2012c), Datavaalit: Oikeusministeriön vaalidatat sorvattu auki. &lt;<a href="https://louhos.wordpress.com/2012/09/28/datavaalit-oikeusministerion-vaalitulosdata-sorvattu-auki/">https://louhos.wordpress.com/2012/09/28/datavaalit-oikeusministerion-vaalitulosdata-sorvattu-auki/</a>&gt;</p>
+<p>Lahti, Leo (2012d), Helsingin Sanomien avoin vaalikonedata: osa2. &lt;<a href="https://louhos.wordpress.com/2012/02/05/helsingin-sanomien-avoin-vaalikonedata-osa2/">https://louhos.wordpress.com/2012/02/05/helsingin-sanomien-avoin-vaalikonedata-osa2/</a>&gt;</p>
+<p>Lahti, Leo (2013), Kunnallisvaalit sosiaalisessa mediassa. &lt;<a href="https://louhos.wordpress.com/2013/01/26/kunnallisvaalit-sosiaalisessa-mediassa/">https://louhos.wordpress.com/2013/01/26/kunnallisvaalit-sosiaalisessa-mediassa/</a>&gt;</p>
+<p>Leppänen, Martti (2011a)<a href="http://www2.hs.fi/extrat/kotimaa/puoluekentta/"> <a href="http://www2.hs.fi/extrat/kotimaa/puoluekentta/">http://www2.hs.fi/extrat/kotimaa/puoluekentta/</a></a></p>
+<p>Leppänen, Martti (2011b), Puoluekenttä. &lt;<a href="http://puoluekentta.tstm.info/">http://puoluekentta.tstm.info/</a>&gt;</p>
+<p>MTV (2006), Presidentinvaalit 2006: ehdokkaiden vastaukset MTV3:n vaalikoneeseen. Yhteiskuntatieteellinen tietoarkisto [jakaja]. &lt;<a href="http://urn.fi/urn:nbn:fi:fsd:T-FSD2127">http://urn.fi/urn:nbn:fi:fsd:T-FSD2127</a>&gt;</p>
+<p>Marttila Mari (2016) &lt;<a href="https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-marttila-lores.pdf">https://rajapinta.files.wordpress.com/2016/04/dv2015-posteri-marttila-lores.pdf</a>] &gt;</p>
+<p>Mäkinen, Esa (2011a) &lt;<a href="http://blogit.hs.fi/hsnext/hs-julkaisee-vaalikoneensa-avoimena-tietona-ennen-vaaleja">http://blogit.hs.fi/hsnext/hs-julkaisee-vaalikoneensa-avoimena-tietona-ennen-vaaleja</a> &gt;</p>
+<p>Mäkinen, Esa (2011b) &lt;<a href="http://blogit.hs.fi/hsnext/hsn-vaalikone-on-nyt-avointa-tietoa">http://blogit.hs.fi/hsnext/hsn-vaalikone-on-nyt-avointa-tietoa</a>&gt;</p>
+<p>Mäkinen, Esa (2011c) &lt;<a href="http://blogit.hs.fi/hsnext/vaalikonedata-avoimeksi-kristilliset-eniten-avioliitossa">http://blogit.hs.fi/hsnext/vaalikonedata-avoimeksi-kristilliset-eniten-avioliitossa</a>&gt;</p>
+<p>Mäkinen, Esa (2011d) &lt;<a href="http://blogit.hs.fi/hsnext/15-uusiokayttoa-hsn-vaalikonedatalle-viikossa">http://blogit.hs.fi/hsnext/15-uusiokayttoa-hsn-vaalikonedatalle-viikossa</a>&gt;</p>
+<p>Mäkinen, Esa (2012a) &lt;<a href="http://blogit.hs.fi/hsnext/helsingin-sanomat-julkaisee-vaalikoneen-tiedot-avoimena-rajapintana">http://blogit.hs.fi/hsnext/helsingin-sanomat-julkaisee-vaalikoneen-tiedot-avoimena-rajapintana</a>&gt;</p>
+<p>Mäkinen, Esa (2012b) &lt;<a href="http://blogit.hs.fi/hsnext/nain-kuntalaiset-yhdistaisivat-kotikuntansa-kuntakoneen-vastaukset-avodatana">http://blogit.hs.fi/hsnext/nain-kuntalaiset-yhdistaisivat-kotikuntansa-kuntakoneen-vastaukset-avodatana</a>&gt;</p>
+<p>Mäkinen, Esa (2012c) &lt;<a href="http://blogit.hs.fi/hsnext/hs-open-tapahtumissa-luodaan-tietojournalismia">http://blogit.hs.fi/hsnext/hs-open-tapahtumissa-luodaan-tietojournalismia</a>&gt;</p>
+<p>Mäkinen, Esa (2015) &lt;<a href="http://www.hs.fi/politiikka/a1305929269692">http://www.hs.fi/politiikka/a1305929269692</a>&gt;</p>
+<p>Parkkinen, Juuso (2012) &lt;<a href="https://louhos.wordpress.com/2012/01/06/kenesta-seuraava-presidentti-ennusta-itse-hsn-vaalikonedatan-avulla/">https://louhos.wordpress.com/2012/01/06/kenesta-seuraava-presidentti-ennusta-itse-hsn-vaalikonedatan-avulla/</a>&gt;</p>
+<p>Poikola, Antti, Kola, Petri &amp; Hintikka, Kari A. (2010), Julkinen data. johdatus tietovarantojen
+avaamiseen. Helsinki: Liikenne- ja viestintäministeriö.</p>
+<p>Pollock, Rufus (2014) &lt;<a href="http://blog.okfn.org/2014/09/30/why-the-open-definition-matters-for-open-data-quality-compatibility-and-simplicity/">http://blog.okfn.org/2014/09/30/why-the-open-definition-matters-for-open-data-quality-compatibility-and-simplicity/</a>&gt;</p>
+<p>Quora (2016), &lt;<a href="https://www.quora.com/How-much-data-is-Big-Data">https://www.quora.com/How-much-data-is-Big-Data</a>&gt;</p>
+<p>Rouse, Margaret (2008) &lt;<a href="http://searchstorage.techtarget.com/definition/How-many-bytes-for">http://searchstorage.techtarget.com/definition/How-many-bytes-for</a>&gt;</p>
+<p>Sairanen, Heikki (2016)[ <a href="http://sairanen.org/wordpress/blog/2016/04/24/poliittiset-akselit/%5D(http://sairanen.org/wordpress/blog/2016/04/24/poliittiset-akselit/)">http://sairanen.org/wordpress/blog/2016/04/24/poliittiset-akselit/](http://sairanen.org/wordpress/blog/2016/04/24/poliittiset-akselit/)</a></p>
+<p>Stack Overflow (2016), &lt;<a href="http://stackoverflow.com/questions/14045056/how-big-data-is-bigdata">http://stackoverflow.com/questions/14045056/how-big-data-is-bigdata</a>&gt;</p>
+<p>Tuokko, Mari (2015) &lt;<a href="https://rajapinta.co/2015/05/25/vaalit2015-muutama-sana-olohuonetentista-ja-twitterista/">https://rajapinta.co/2015/05/25/vaalit2015-muutama-sana-olohuonetentista-ja-twitterista/</a>&gt;</p>
+<p>Tuokko, Mari (2016) &lt;<a href="https://rajapinta.co/2016/03/10/digivaalit-2015-ehdokkaiden-ja-kansalaisten-vuorovaikutus-sosiaalisessa-mediassa-vaalikampanjoinnin-aikana-tyhjyyteen-huutelua-vai-merkityksellista-dialogia/">https://rajapinta.co/2016/03/10/digivaalit-2015-ehdokkaiden-ja-kansalaisten-vuorovaikutus-sosiaalisessa-mediassa-vaalikampanjoinnin-aikana-tyhjyyteen-huutelua-vai-merkityksellista-dialogia/</a>&gt;</p>
+<p>Tuomisto, Jouni ym. (2011a) &lt;<a href="http://fi.opasnet.org/fi/Kansanedustajien_arvot">http://fi.opasnet.org/fi/Kansanedustajien_arvot</a>&gt;</p>
+<p>Tuomisto, Jouni ym. (2011b) &lt;<a href="http://fi.opasnet.org/fi/Poikkipuoluehallitus">http://fi.opasnet.org/fi/Poikkipuoluehallitus</a>&gt;</p>
+<p>Tuomisto, Jouni ym. (2011c) &lt;<a href="http://fi.opasnet.org/fi/Jokapuoluehallitus">http://fi.opasnet.org/fi/Jokapuoluehallitus</a>&gt;</p>
+<p>Törmänen, Juha (2011)[ <a href="http://peili.kirkas.info/archive/hsvaalikone11/kartta/%5D(http://peili.kirkas.info/archive/hsvaalikone11/kartta/)">http://peili.kirkas.info/archive/hsvaalikone11/kartta/](http://peili.kirkas.info/archive/hsvaalikone11/kartta/)</a></p>
+<p>Törmänen, Juha (2012)[ <a href="http://peili.kirkas.info/archive/hsvaalikone12/%5D(http://peili.kirkas.info/archive/hsvaalikone12/)">http://peili.kirkas.info/archive/hsvaalikone12/](http://peili.kirkas.info/archive/hsvaalikone12/)</a></p>
+<p>Valtiontalouden tarkastusvirasto (2016), &lt;<a href="http://www.vaalirahoitus.fi/">http://www.vaalirahoitus.fi/</a>&gt;</p>
+<p>Wikipedia: Big data (2016), &lt;<a href="https://en.wikipedia.org/w/index.php?title=Big_data&amp;oldid=722833400">https://en.wikipedia.org/w/index.php?title=Big_data&amp;oldid=722833400</a>&gt;</p>
+<p>Yhteiskuntatieteellinen tietoarkisto (2016), &lt;<a href="http://www.fsd.uta.fi/fi/aineistot/taustatietoa/vaalidataa.html">http://www.fsd.uta.fi/fi/aineistot/taustatietoa/vaalidataa.html</a>&gt;</p>
+<p>Yle (2012) &lt;<a href="http://yle.fi/uutiset/nyt_sita_saa_vaalikonedataa/6331306">http://yle.fi/uutiset/nyt_sita_saa_vaalikonedataa/6331306</a>&gt;</p>
+<p>Yle (2015) &lt;<a href="http://yle.fi/uutiset/yle_julkaisee_vaalikoneen_vastaukset_avoimena_datana/7869597">http://yle.fi/uutiset/yle_julkaisee_vaalikoneen_vastaukset_avoimena_datana/7869597</a>&gt;</p>
+<p>Yle (2016) &lt;<a href="http://yle.fi/aihe/artikkeli/2016/05/18/ylen-sisaltoja-tarjolla-avoimena-datana">http://yle.fi/aihe/artikkeli/2016/05/18/ylen-sisaltoja-tarjolla-avoimena-datana</a>&gt;</p>
+<p>Pamela Vagata, Kevin Wilfong 2014
+&lt;<a href="https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/">https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/</a>&gt;</p>
+<p>Xu, Wei, (2016) Twitter API Tutorial &lt;<a href="http://socialmedia-class.org/twittertutorial.html">http://socialmedia-class.org/twittertutorial.html</a>&gt;</p>
+<h2 id="tekstin-sisäiset-viitteet">Tekstin sisäiset viitteet</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Poikola, Kola ja Hintikka 2010, 13-14. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Holmes 2005; Rouse 2008; Vagata ja Wilfong 2014. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Quora 2016; Stack Overflow 2016; Wikipedia: Big data 2016. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Emt. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>Poikola ym. 2010; Pollock 2014. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>Lagus, Pantzar, Ruckenstein &amp; Ylisiurua 2016. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>Laaksonen 2016b. <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>Xu 2016. <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>Wu 2015. <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p>Datavaalit 2016. <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p>Lahti 2012a; Lahti 2013. <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p>Twiittien tarkka määrä jää epäselväksi, sillä Rajapinta-blogissa puhutaan koko aineiston osalta Facebookin kanssa yhdessä yli 1,5 miljoonasta viestistä, mutta pelkkien Twiittien osalta johdonmukaisin tulkinta on erikseen mainittu noin yli 200 000 twiitin aineisto. Kts. Digivaalit 2016. <a href="https://rajapinta.co/2016/04/07/digivaalit-2015-paatosseminaarin-materiaali/">https://rajapinta.co/2016/04/07/digivaalit-2015-paatosseminaarin-materiaali/</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p>Digivaalit 2015; Laaksonen 2016a; Laaksonen 2016b. <a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p>Digivaalit 2016. <a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15" role="doc-endnote">
+<p>Marttila 2016. <a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:16" role="doc-endnote">
+<p>Kekkonen 2016. <a href="#fnref:16" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:17" role="doc-endnote">
+<p>Tuokko 2016. <a href="#fnref:17" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:18" role="doc-endnote">
+<p>Tuokko 2015. <a href="#fnref:18" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:19" role="doc-endnote">
+<p>Laaksonen 2015b. <a href="#fnref:19" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:20" role="doc-endnote">
+<p>Lagus ym. 2016. <a href="#fnref:20" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:21" role="doc-endnote">
+<p>Emt., 43. <a href="#fnref:21" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:22" role="doc-endnote">
+<p>Eranti ja Ylä-Anttila 2016. <a href="#fnref:22" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:23" role="doc-endnote">
+<p>Laaksonen 2015c. <a href="#fnref:23" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:24" role="doc-endnote">
+<p>Valtiontalouden tarkastusvirasto 2016. <a href="#fnref:24" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:25" role="doc-endnote">
+<p>Datavaalit 2016b; Lahti 2012b; Lahti 2012c. <a href="#fnref:25" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:26" role="doc-endnote">
+<p>Haakana 2011; Haakana 2012; Mäkinen 2011a; Mäkinen 2011b; Mäkinen 2015; Yle 2012; Yle 2016. <a href="#fnref:26" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:27" role="doc-endnote">
+<p>Mäkinen 2011c. <a href="#fnref:27" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:28" role="doc-endnote">
+<p>MTV 2006. <a href="#fnref:28" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:29" role="doc-endnote">
+<p>Yhteiskuntatieteellinen tietoarkisto 2016. <a href="#fnref:29" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:30" role="doc-endnote">
+<p>Mäkinen 2015; Yle 2015. <a href="#fnref:30" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:31" role="doc-endnote">
+<p>Mäkinen 2011c. <a href="#fnref:31" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:32" role="doc-endnote">
+<p>Haakana 2012. <a href="#fnref:32" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:33" role="doc-endnote">
+<p>Mäkinen 2012a. <a href="#fnref:33" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:34" role="doc-endnote">
+<p>Parkkinen 2012. <a href="#fnref:34" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:35" role="doc-endnote">
+<p>Lahti 2012d. <a href="#fnref:35" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:36" role="doc-endnote">
+<p>Mäkinen 2012b. <a href="#fnref:36" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:37" role="doc-endnote">
+<p>Tuomisto ym. 2011a. <a href="#fnref:37" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:38" role="doc-endnote">
+<p>Kts. esim. Helsingin Sanomat 2012; Leppänen 2011a; Leppänen 2011b; Mäkinen 2012c; Sairanen 2016; Törmänen 2011; Törmänen 2012. <a href="#fnref:38" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:39" role="doc-endnote">
+<p>Mäkinen 2011d. <a href="#fnref:39" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:40" role="doc-endnote">
+<p>Tuomisto ym. 2011b; Tuomisto ym. 2011c. <a href="#fnref:40" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:41" role="doc-endnote">
+<p>Lagus ym. 2016. <a href="#fnref:41" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+    
+
+    
+
+    <h4>Katso myös</h4>
+    <ul>
+        
+            <li><a href="/fi/2015/08/tieteellisen-kirjoittamisen-uudet-v%C3%A4lineet-opaskokoelma-tekeill%C3%A4/">Tieteellisen kirjoittamisen uudet välineet: opaskokoelma tekeillä</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        
+
+      </div>
+    </div>
+    
+
+    
+      <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

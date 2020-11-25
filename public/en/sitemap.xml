@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-11-09T19:55:24+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/community/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/community/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/community/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/finland/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/finland/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/finland/"
+                />
+  </url>
+  
+  <url>
+    <loc>/2020/10/hetu-package-for-handling-of-finnish-personal-identity-codes/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/2020/10/hetu-paketti-suomalaisten-henkil%C3%B6tunnusten-k%C3%A4sittelyyn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/2020/10/hetu-package-for-handling-of-finnish-personal-identity-codes/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/national-identification-number/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/national-identification-number/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/national-identification-number/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/personal-identity-code/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/personal-identity-code/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/personal-identity-code/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/projects/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/projects/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/projects/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/r-package/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/categories/r-package/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r-package/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/example/</loc>
+    <lastmod>2020-10-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/10/hello-ropengov/</loc>
+    <lastmod>2020-10-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/plot/</loc>
+    <lastmod>2020-10-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-markdown/</loc>
+    <lastmod>2020-10-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/12/cost-of-academic-publishing-in-finland/</loc>
+    <lastmod>2018-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/foi/</loc>
+    <lastmod>2018-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/news/</loc>
+    <lastmod>2017-07-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/categories/news/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/news/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/presentation/</loc>
+    <lastmod>2017-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/07/presenting-at-user2017-in-brussels/</loc>
+    <lastmod>2017-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2017-07-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/user/</loc>
+    <lastmod>2017-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eurostat/</loc>
+    <lastmod>2017-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/04/eurostat-package-published-in-r-journal/</loc>
+    <lastmod>2017-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/06/scientific-journal-subscription-costs-in-finland-2010-2015/</loc>
+    <lastmod>2016-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/08/r-made-personal-at-least-for-swedes/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sweden/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/computational-humanities/</loc>
+    <lastmod>2015-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/digital-humanities-with-r/</loc>
+    <lastmod>2015-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/a-hierarchical-model-of-finnish-apartment-prices/</loc>
+    <lastmod>2015-06-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/2015/06/a-hierarchical-model-of-finnish-apartment-prices/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/latex/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/poster/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/poster/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/reproducible-posters-with-r-latex-tikz-and-sweave/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/sweave/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tikz/</loc>
+    <lastmod>2015-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/09/finnish-meteorological-institute-open-data-added-to-ropengov/</loc>
+    <lastmod>2014-09-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/07/berlin-open-knowledge-festival/</loc>
+    <lastmod>2014-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/12/nips/mloss-workshop-on-machine-learning-open-source-software/</loc>
+    <lastmod>2013-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/news/</loc>
+    <lastmod>2013-12-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/tags/news/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/news/"
+                />
+  </url>
+  
+  <url>
+    <loc>/2013/12/r-ecosystem-for-open-government-data-and-computational-social-science/</loc>
+    <lastmod>2013-12-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fi"
+                href="/fi/2013/12/ropengov-kansainv%C3%A4linen-r-ekosysteemi-avoimelle-datalle/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/2013/12/r-ecosystem-for-open-government-data-and-computational-social-science/"
+                />
+  </url>
+  
+</urlset>

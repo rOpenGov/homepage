@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>presentation on rOpenGov - R packages for open government data analytics</title>
+    <link>/tags/presentation/</link>
+    <description>Recent content in presentation on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="/tags/presentation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Presenting at useR2017 in Brussels</title>
+      <link>/2017/07/presenting-at-user2017-in-brussels/</link>
+      <pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/07/presenting-at-user2017-in-brussels/</guid>
+      <description>Annual useR-conference is organised this year in Brussels, Belgium. rOpenGov will be presenting in two occasion on Thursday 6th. Leo Lahti will give an general overview of rOpenGov in his lightning talk rOpenGov - Community project for open government data at 17.50 in room 3.02. At 13.30 in Plenary room Markus Kainu will speak about Community-based learning and knowledge sharing - Teaching R withing organisation using edu -package.</description>
+    </item>
+    
+  </channel>
+</rss>

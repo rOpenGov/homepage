@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stan on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/stan/</link>
+    <description>Recent content in stan on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/stan/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Asuntohintojen alueellinen kehitys selviää todennäköisyysohjelmoinnilla</title>
+      <link>/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/</link>
+      <pubDate>Thu, 07 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/</guid>
+      <description>Mitä teimme? Mallinsimme osakeasuntojen hintoja ja niiden muutoksia, postinumerotasolla, koko Suomessa, vuosina 2005–2014, perustuen Tilastokeskuksen jakamiin kauppa- ja asukasmäärätietoihin. Mallin arvioita hinnoista voi tarkastella vuorovaikutteisesta karttavisualisoinnista. Tuloksista voi lukea lisää Reaktorin blogista. Työn takana on Reaktorin Data Science -tiimi. Mallinnuksen lähdekoodi löytyy GitHubista.
+Mallinsimme? Tilastokeskuksen avaamat asuntojen hintatiedot ovat keskiarvoja per postinumero ja vuosi. Jos kauppoja on alle kuusi, keskiarvokin on sensuroitu. Hinnan ohella ilmoitetaan kauppojen määrä.
+Raakadatasta on useimmille postinumeroille vaikea suoraan arvioida hintoja ja etenkin niiden muutoksia.</description>
+    </item>
+    
+    <item>
+      <title>STAN ja Kilpisjärven kesät</title>
+      <link>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</guid>
+      <description>Johtopäätöksiä tai edes käyttökelpoista visualisaatiota ei useinkaan pysty tekemään datasta suoraan, vaan tarvitaan mallintamista. Mallintaminen erottaa kiinnostavan ja ei-kiinnostavan variaation, ja auttaa johtopäätösten luotettavuuden arvioinnissa.
+Pienehköissä projekteissa mallintaminen perustuu valmiisiin mallikohtaisiin ohjelmistopaketteihin. Esim. jos työskennellään R:ssä, regressiomalli syntyy lm()-funktiolla. Jos ennustettavassa on patologisen oloisia poikkeamia, voidaan lm():n sijaan käyttää robustia regressiota. Epälineaaristen vaikutusten huomiointi onnistuu parhaiten mgcv-paketin gam()-funktiolla. Jos selittäjissä on kovin moniarvoisia nominaalimuuttujia ja data on harva ja iso, turvaudutaan lme4-pakettiin, jne.</description>
+    </item>
+    
+  </channel>
+</rss>

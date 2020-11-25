@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uutinen on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/categories/uutinen/</link>
+    <description>Recent content in uutinen on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Dec 2013 00:00:00 +0000</lastBuildDate><atom:link href="/fi/categories/uutinen/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alueellinen hyvinvointi – vuorovaikutteinen visualisointi Sotkanetin datasta</title>
+      <link>/fi/2013/12/alueellinen-hyvinvointi-vuorovaikutteinen-visualisointi-sotkanetin-datasta/</link>
+      <pubDate>Fri, 06 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2013/12/alueellinen-hyvinvointi-vuorovaikutteinen-visualisointi-sotkanetin-datasta/</guid>
+      <description>Louhoksen ja Demos Helsingin yhteistyönä tehty vuorovaikutteinen visualisointi alueellisesta hyvinvoinnista sijoittui Apps4Finland 2013 -kilpailun Hahmota-sarjassa hienosti kolmanneksi. Visualisointi mahdollistaa Sotkanetin hyvinvointi-indikaattoreiden havainnollisen tarkastelun ja mielenkiintoisten ilmiöiden löytämisen. Demos blogasi aiheesta aiemmin tällä viikolla, ja avaan tässä sitä lisää Louhoksen näkökulmasta.
+Louhoksen toiminta on toistaiseksi keskittynyt lähinnä avointen datasettien esikäsittelyyn ja hakurutiinien kehittämiseen sorvi-paketissa. Lisäksi olemme tehneet avatuista datoista yksinkertaisia visualisointeja ja bloganneet niistä. Tavoitteena on tehdä myös syvällisempiä analyysejä, mutta toistaiseksi niihin ei ole aika riittänyt päivätöiden ohella.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua</title>
+      <link>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</link>
+      <pubDate>Fri, 26 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</guid>
+      <description>Datavaalit-hanke on kerännyt runsaasti aineistoa kunnallisvaaliehdokkaista ja puolueista. Sivustolla ylläpidetään esimerkiksi sosiaalisen median aggregaattia, johon kerätään tietoja ehdokkaiden aktiivisuudesta mm. Facebookissa ja Twitterissä.
+Teimme muutamia esimerkkejä ehdokasaineistojen käsittelystä R-kielellä. Esimerkit hakevat dataa Oikeusministeriön, Tilastokeskuksen, Maanmittauslaitoksen ja Datavaalit-sivuston palvelimilta ja vertailevat ehdokkaiden aktiivisuutta sosiaalisessa mediassa puolueiden välillä, ja ne voidaan toistaa alusta loppuun automatisoidusti mukana tulevalla lähdekoodilla.
+Visualisoinnit lähdekoodeineen löydät Louhoksen Datawikistä ja Githubin takomo-reposta. Materiaaliin on tulossa myöhemmin täydennystä.
+PÄIVITYS 24.</description>
+    </item>
+    
+    <item>
+      <title>Datavaalit: Oikeusministeriön vaalidatat sorvattu auki</title>
+      <link>/fi/2012/09/datavaalit-oikeusministeri%C3%B6n-vaalidatat-sorvattu-auki/</link>
+      <pubDate>Fri, 28 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/09/datavaalit-oikeusministeri%C3%B6n-vaalidatat-sorvattu-auki/</guid>
+      <description>Oikeusministeriö julkaisi eilen illalla (to 27.1.2012) koko maan kattavat tiedot kunnallisvaalien ehdokkaista ja puolueista. Mukana vuoden 2012 kunnallisvaaleissa on kaikkiaan 36305 ehdokasta. Yhdistelemällä aineistoa esimerkiksi viime kunnallis- ja eduskuntavaalien tuloksiin sekä kuntatason indikaattoreihin voidaan tuoda esiin uusia näkökulmia suomalaiseen kunnallispolitiikkaan.
+Datavaalit edistää helppokäyttöisen vaalidatan saatavuutta Louhos ja sorvi ovat aktiivisesti mukana viikko sitten Open Knowledge-festivaaleilla lanseeratussa Datavaalit-hankkeessa, jonka tavoitteena on tukea vaalidatan avaamista ja laajaa hyödyntämistä. Helppokäyttöisessä muodossa olevan päätöksentekodatan heikko saatavuus on keskeinen pullonkaula yhteiskunnallisesti vaikuttavassa datajournalismissa sekä läpinäkyvyyttä edistävien verkkopalveluiden yleistymisessä.</description>
+    </item>
+    
+    <item>
+      <title>Datavaalit osa 1 – vaali- ja kuntadatan kokoaminen ja paketointi</title>
+      <link>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</link>
+      <pubDate>Mon, 21 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</guid>
+      <description>Datavaalit Syksyn kunnallisvaalien yhteydessä on mahdollisuus kokeilla vaaleihin ja päätöksentekoon liittyvän tiedonlouhinnan mahdollisuuksia ja tuoda esiin kehityskohteita päätöksentekoon kytkeytyvien tietoaineistojen saatavuuden ja yhteiskunnan läpinäkyvyyden lisäämiseksi. Aiheen tiimoilta on käynnistynyt ruohonjuuritason Datavaalit-tempaus, jossa eri toimijat keräävät, pöyhivät, ja julkaisevat vaaleihin liittyvää dataa ja sen pohjalta tehtäviä havaintoja. Datavaalit-tempauksella ei ole muodollista organisaatiota, vaan aiheesta kiinnostuneet ovat tervetulleita liittymään mukaan itselleen sopivalla tavalla. Ideoita ja tietolähteitä on koottuna täällä. Jos aihepiiri kiinnostaa, nyt on hyvä aika hypätä kelkkaan.</description>
+    </item>
+    
+    <item>
+      <title>R-paketti avoimen Suomi-datan louhintaan</title>
+      <link>/fi/2011/10/r-paketti-avoimen-suomi-datan-louhintaan/</link>
+      <pubDate>Sun, 09 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/10/r-paketti-avoimen-suomi-datan-louhintaan/</guid>
+      <description>On tullut aika yhdistää voimavarat ja koota kattava kokoelma eri tahoilla kehitettyjä ratkaisuja avoimen datan käsittelyyn yhteen pakettiin. Kehitteillä oleva avoimen lähdekoodin sorvi-paketti on suunnattu palvelemaan erityisesti suomalaista avoimen datan yhteisöä ja kokoamaan yleiskäyttöisiä välineitä tietoaineistojen hakuun, putsaamiseen, yhdistelyyn, louhintaan ja visualisointiin. Esimerkkejä paketin käytöstä Suomi-datan penkomiseen tullaan julkaisemaan lisää tässä blogissa.
+Paketti on kehitysvaiheessa, ja uudet tekijät ja lisäykset ovat tervetulleita. Ensimmäisenä esimerkkinä sorvin käytöstä hain kuntien asukasluvut Väestörekisterikeskuksen sivulta ja visualisoin kuntien sukupuolijakauman Suomen kartalla.</description>
+    </item>
+    
+  </channel>
+</rss>

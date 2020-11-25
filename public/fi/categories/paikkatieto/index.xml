@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paikkatieto on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/categories/paikkatieto/</link>
+    <description>Recent content in paikkatieto on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 May 2012 00:00:00 +0000</lastBuildDate><atom:link href="/fi/categories/paikkatieto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Datavaalit osa 1 – vaali- ja kuntadatan kokoaminen ja paketointi</title>
+      <link>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</link>
+      <pubDate>Mon, 21 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</guid>
+      <description>Datavaalit Syksyn kunnallisvaalien yhteydessä on mahdollisuus kokeilla vaaleihin ja päätöksentekoon liittyvän tiedonlouhinnan mahdollisuuksia ja tuoda esiin kehityskohteita päätöksentekoon kytkeytyvien tietoaineistojen saatavuuden ja yhteiskunnan läpinäkyvyyden lisäämiseksi. Aiheen tiimoilta on käynnistynyt ruohonjuuritason Datavaalit-tempaus, jossa eri toimijat keräävät, pöyhivät, ja julkaisevat vaaleihin liittyvää dataa ja sen pohjalta tehtäviä havaintoja. Datavaalit-tempauksella ei ole muodollista organisaatiota, vaan aiheesta kiinnostuneet ovat tervetulleita liittymään mukaan itselleen sopivalla tavalla. Ideoita ja tietolähteitä on koottuna täällä. Jos aihepiiri kiinnostaa, nyt on hyvä aika hypätä kelkkaan.</description>
+    </item>
+    
+    <item>
+      <title>Vaalitulosten vertailua vuorovaikutteisena visualisaationa</title>
+      <link>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</link>
+      <pubDate>Tue, 07 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</guid>
+      <description>Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.
+VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN. Tässä voi esimerkiksi tarkastella kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.
+VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista.</description>
+    </item>
+    
+    <item>
+      <title>Suomalaisten muuttoliike Maailmanpankin datoista maailmankartalla visualisoituna</title>
+      <link>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</link>
+      <pubDate>Thu, 17 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</guid>
+      <description>Mistä maasta ihmiset muuttavat Suomeen ja mihin Suomesta muutetaan? Vastausta voi etsiä Maailmanpankin Migration-datasta. Kiinnostuin aiheesta tämän mielenkiintoisen mutta loppupeleissä mielestäni erittäin vaikeaselkoisen visualisoinnin takia. Yritettyäni aikani tutkia Suomen muuttovirtoja turhauduin ja päätin visualisoida datan itse kartalle (vaihteeksi). Maailmankarttavisualisointeja ei tästä blogista vielä löydykään, joten tulee sekin samalla tutuksi. Lisäksi R-ohjelmointi -blogissa oli jokin aika sitten koodinpätkä jolla R tuottaa interaktiivisen karttapallon, jota oli tietysti pakko kokeilla itse uuden datan kanssa!</description>
+    </item>
+    
+    <item>
+      <title>HS Open 3 lämmittely: Asuntojen myyntihinnat Helsingin kartalla</title>
+      <link>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</link>
+      <pubDate>Wed, 05 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</guid>
+      <description>Päivitys: Uudempi postaus tästä aiheesta!
+Kolmannessa HS Openissa yhtenä avattuna datana on Asuntojen vuokrat ja hintapyynnöt Oikotiellä. Talosen Jaakko ehtikin jo tehdän vuokrahinnoista mainion visualisoinnin. Itse olen jo pidempään fiilistellyt mahdollisuutta käyttää GoogleMapsin karttoja R-visualisoinnin pohjana, ja tässähän tarjoutui loistava tilaisuus kokeilla tuota käytännössä.
+Ideana on siis näyttää Oikotiedatan perusteella asuntojen hintapyynnöt kartalla, käytännössä keskimääräiset neliöhinnat postinumeroa kohden. Helpommin sanottu kuin tehty. Tämä vaatii nimittäin maantieteelliseti koordinaatit kullekin postinumerolle. Geonames tarjoaa tällaista tietoa, mutta itse en ainakaan onnistunut saamaan sieltä Helsingin kaupunginosien postinumerotietoja ulos.</description>
+    </item>
+    
+  </channel>
+</rss>

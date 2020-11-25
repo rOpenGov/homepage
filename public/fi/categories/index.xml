@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/categories/</link>
+    <description>Recent content in Categories on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/fi/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>R</title>
+      <link>/fi/categories/r/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R package</title>
+      <link>/fi/categories/r-package/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/r-package/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>news</title>
+      <link>/fi/categories/news/</link>
+      <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/news/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archive</title>
+      <link>/fi/categories/archive/</link>
+      <pubDate>Sat, 06 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/archive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>koneoppiminen</title>
+      <link>/fi/categories/koneoppiminen/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/koneoppiminen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tiedonlouhinta</title>
+      <link>/fi/categories/tiedonlouhinta/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/tiedonlouhinta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>visualisointi</title>
+      <link>/fi/categories/visualisointi/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/visualisointi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uutinen</title>
+      <link>/fi/categories/uutinen/</link>
+      <pubDate>Fri, 06 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/uutinen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sorvi</title>
+      <link>/fi/categories/sorvi/</link>
+      <pubDate>Wed, 07 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/sorvi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>paikkatieto</title>
+      <link>/fi/categories/paikkatieto/</link>
+      <pubDate>Mon, 21 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/categories/paikkatieto/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

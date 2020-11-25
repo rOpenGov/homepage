@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Twitter on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/twitter/</link>
+    <description>Recent content in Twitter on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Jan 2013 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/twitter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kunnallisvaalit sosiaalisessa mediassa</title>
+      <link>/fi/2013/01/kunnallisvaalit-sosiaalisessa-mediassa/</link>
+      <pubDate>Sat, 26 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2013/01/kunnallisvaalit-sosiaalisessa-mediassa/</guid>
+      <description>Datavaalit-sivustolla ylläpidettävään sosiaalisen median aggregaattiin on tätä kirjoitettaessa kasautunut dataa 987 ehdokkaan Twitter-syötteestä ja 2553 ehdokkaan Facebook-sivulta yhteensä 419975 päivitystä. Profiilien osoitteet on poimittu Ylen vaalikoneesta sekä ehdokkaiden omien ilmoitusten perusteella. Esimerkeissä käytetty data on saatavilla CSV-dumppina GitHubin avoindata-repositoryn kautta. Yksityiskohtaisempaa dataa on saatavilla Datavaalit-sivuston rajapinnan kautta.
+Poimimme muutamia esimerkkejä aineiston sisällöstä syksyn 2012 kunnallisvaaleihin liittyen. Esimerkit lähdekoodeineen löytyvät kokonaisuudessaan Louhoksen Datawikistä.
+Sosiaalisen median päivitystiheydet aikasarjana Syksyn 2012 kunnallisvaalien aikana puolueitten ehdokkaat päivittivät statuksiaan tavanomaista ahkerammin.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua</title>
+      <link>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</link>
+      <pubDate>Fri, 26 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</guid>
+      <description>Datavaalit-hanke on kerännyt runsaasti aineistoa kunnallisvaaliehdokkaista ja puolueista. Sivustolla ylläpidetään esimerkiksi sosiaalisen median aggregaattia, johon kerätään tietoja ehdokkaiden aktiivisuudesta mm. Facebookissa ja Twitterissä.
+Teimme muutamia esimerkkejä ehdokasaineistojen käsittelystä R-kielellä. Esimerkit hakevat dataa Oikeusministeriön, Tilastokeskuksen, Maanmittauslaitoksen ja Datavaalit-sivuston palvelimilta ja vertailevat ehdokkaiden aktiivisuutta sosiaalisessa mediassa puolueiden välillä, ja ne voidaan toistaa alusta loppuun automatisoidusti mukana tulevalla lähdekoodilla.
+Visualisoinnit lähdekoodeineen löydät Louhoksen Datawikistä ja Githubin takomo-reposta. Materiaaliin on tulossa myöhemmin täydennystä.
+PÄIVITYS 24.</description>
+    </item>
+    
+  </channel>
+</rss>

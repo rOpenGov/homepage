@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computational humanities on rOpenGov - R packages for open government data analytics</title>
+    <link>/tags/computational-humanities/</link>
+    <description>Recent content in Computational humanities on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2015 00:00:00 +0000</lastBuildDate><atom:link href="/tags/computational-humanities/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital humanities with R</title>
+      <link>/2015/06/digital-humanities-with-r/</link>
+      <pubDate>Fri, 12 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/06/digital-humanities-with-r/</guid>
+      <description>Digital humanities is one of the fields where reproducible research is now becoming increasingly popular. We got an opportunity to highlight the latest advancement in this field in Paris Digital Humanities event, June 12 at Deutsches Historische Institut Paris.
+The ‘digital humanities lab’ is an interactive experiment where the audience actively participates in designing the analysis of massive library catalogues. In particular, we focused on publishing activity in the early modern period by mining the British Library ESTC catalogue 1470-1800.</description>
+    </item>
+    
+  </channel>
+</rss>

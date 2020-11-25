@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/post/</link>
+    <description>Recent content in Posts on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/fi/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hetu-paketti suomalaisten henkilötunnusten käsittelyyn</title>
+      <link>/fi/2020/10/hetu-paketti-suomalaisten-henkil%C3%B6tunnusten-k%C3%A4sittelyyn/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2020/10/hetu-paketti-suomalaisten-henkil%C3%B6tunnusten-k%C3%A4sittelyyn/</guid>
+      <description>pre  code.sourceCode { white-space: pre; position: relative; } pre  code.sourceCode  span { display: inline-block; line-height: 1.25; } pre  code.sourceCode  span:empty { height: 1.2em; } code.sourceCode  span { color: inherit; text-decoration: inherit; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { pre  code.sourceCode { white-space: pre-wrap; } pre  code.</description>
+    </item>
+    
+    <item>
+      <title>R-paketti geofi Tilastokeskuksen avointen paikkatietoaineistojen käyttöön</title>
+      <link>/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/</link>
+      <pubDate>Mon, 10 Feb 2020 10:53:45 +0000</pubDate>
+      
+      <guid>/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/</guid>
+      <description>pre  code.sourceCode { white-space: pre; position: relative; } pre  code.sourceCode  span { display: inline-block; line-height: 1.25; } pre  code.sourceCode  span:empty { height: 1.2em; } code.sourceCode  span { color: inherit; text-decoration: inherit; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { pre  code.sourceCode { white-space: pre-wrap; } pre  code.</description>
+    </item>
+    
+    <item>
+      <title>Suuret ja avoimet aineistot politiikan tutkimuksessa</title>
+      <link>/fi/2016/09/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa/</link>
+      <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2016/09/suuret-ja-avoimet-aineistot-politiikan-tutkimuksessa/</guid>
+      <description>Uusien vaaliaineistojen ja sosiaalisen median hyödyntäminen yhteiskuntatieteiden laskennallisiin menetelmiin perustuvassa tutkimuksessa on vasta aluillaan.
+Verkosta on alkanut muodostua lupaava aarreaitta myös politiikan tutkijoille. (CC0)
+Perinteisesti politiikan tutkimus on nojautunut pääasiassa laadullisiin menetelmiin, ja ehkä lähinnä vain vaalitutkimus on poikennut valtavirrasta tukeutumalla ensisijaisesti määrälliseen tutkimusotteeseen. Asetelman syy saattaa juontua aineistojen saatavuudesta. Sellainen inhimillinen toiminta jota politiikan monimutkaiset vuorovaikutusverkostot ja ilmiöt edustavat, taipuu vaivoin määrällisesti mitattaviksi suureiksi ja muuttujiksi. Vaalit muodostavat kuitenkin erityisen poikkeuksen tähän säännönmukaisuuteen.</description>
+    </item>
+    
+    <item>
+      <title>Tieteellisen kirjoittamisen uudet välineet: opaskokoelma tekeillä</title>
+      <link>/fi/2015/08/tieteellisen-kirjoittamisen-uudet-v%C3%A4lineet-opaskokoelma-tekeill%C3%A4/</link>
+      <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/08/tieteellisen-kirjoittamisen-uudet-v%C3%A4lineet-opaskokoelma-tekeill%C3%A4/</guid>
+      <description>Tieteellisen kirjoittamisen vaihtoehdoista heräsi keskustelua Open Science Finland-ryhmässä. Saatavilla on runsaasti uusia toistettavaa tai hajautettua raportointia tukevia välineitä kuten markdown, pandoc, authorea ja monia muita. Tämänkin blogin postaukset on kirjoitettu Rmarkdownilla. Vaihtoehtojen moninaisuus ja teknisyys voivat hämmentää aiheeseen perehtymätöntä.
+Keskustelujen pohjalta on nyt alettu koostaa talkootyönä verkko-opasta näiden välineiden hyödyntämiseen tieteellisen kirjoittamisen näkökulmasta. Lisäykset oppaaseen ja keskusteluun ovat tervetulleita !</description>
+    </item>
+    
+    <item>
+      <title>Kuntatiedon visualisointi R:n gisfin-kirjastolla</title>
+      <link>/fi/2015/06/kuntatiedon-visualisointi-rn-gisfin-kirjastolla/</link>
+      <pubDate>Sat, 06 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/06/kuntatiedon-visualisointi-rn-gisfin-kirjastolla/</guid>
+      <description>PÄIVITYS 2020-11-02: gisfin-paketin kehitystyö on lopetettu ja kehitystyö on siirtynyt geofi-paketin pariin. Tämä alun perin Louhos-blogissa julkaistu kirjoitus on arkistoitu rOpenGov-blogiin esimerkkinä aiempien vuosien kehitystyöstä. Alla esitetyt esimerkit eivät todennäköisesti enää toimi geofi-paketin uusilla versioilla.
+Kuntatiedon visualisointi Suomen kartalla R-kielellä nousi kuluneella viikolla keskusteluun Finnish Open Data Ecosystem-foorumin Facebook-ketjussa.
+Tähän on monta tapaa, ja valmiiden välineiden käyttö helpottaa tehtävää. Suomalaisen paikkatiedon visualisointiin suunnatussa gisfin-paketissa on valmiit wrapperit kuntatiedon visualisointiin. Päivitä paketin kehitysversio Githubista saadaksesi kaikki toiminnot käyttöön.</description>
+    </item>
+    
+    <item>
+      <title>Urbaanien asuinympäristöjen suosio kasvaa</title>
+      <link>/fi/2015/05/urbaanien-asuinymp%C3%A4rist%C3%B6jen-suosio-kasvaa/</link>
+      <pubDate>Tue, 19 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/05/urbaanien-asuinymp%C3%A4rist%C3%B6jen-suosio-kasvaa/</guid>
+      <description>Asuntojen hintojen nousu on viime vuosina keskittynyt taajamiin. Ilmiö on havaittavissa koko Suomessa, erityisesti pääkaupunkiseudulla, ja näkyy asukastiheyden ja hintojen nousunopeuden korrelaationa (alla olevissa kuvissa). Todennäköinen syy hintojen epätasaiselle kehitykselle on urbaanien asuinympäristöjen arvostuksen kasvu.
+Maailmalla on vallannut alaa uusi urbanismin aalto, jossa ihmiset haluavat muuttaa tiiviisiin kaupunkikeskustoihin omakotitalolähiöiden sijaan (ks esim. NYT). Korkeasta väestötiheydestä sanotaan olevan monia etuja: Se tarjoaa monipuoliset palvelut, työpaikkojen ja palveluiden hyvän saavutettavuuden, mahdollisuuden rakentaa viihtyisää kävely-ympäristöä ja tehokkaasti toimivan joukkoliikenteen.</description>
+    </item>
+    
+    <item>
+      <title>Asuntohintojen alueellinen kehitys selviää todennäköisyysohjelmoinnilla</title>
+      <link>/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/</link>
+      <pubDate>Thu, 07 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/</guid>
+      <description>Mitä teimme? Mallinsimme osakeasuntojen hintoja ja niiden muutoksia, postinumerotasolla, koko Suomessa, vuosina 2005–2014, perustuen Tilastokeskuksen jakamiin kauppa- ja asukasmäärätietoihin. Mallin arvioita hinnoista voi tarkastella vuorovaikutteisesta karttavisualisoinnista. Tuloksista voi lukea lisää Reaktorin blogista. Työn takana on Reaktorin Data Science -tiimi. Mallinnuksen lähdekoodi löytyy GitHubista.
+Mallinsimme? Tilastokeskuksen avaamat asuntojen hintatiedot ovat keskiarvoja per postinumero ja vuosi. Jos kauppoja on alle kuusi, keskiarvokin on sensuroitu. Hinnan ohella ilmoitetaan kauppojen määrä.
+Raakadatasta on useimmille postinumeroille vaikea suoraan arvioida hintoja ja etenkin niiden muutoksia.</description>
+    </item>
+    
+    <item>
+      <title>Kenen joukoissa seisot - ennustaako kone ehdokkaan puoluekannan?</title>
+      <link>/fi/2015/04/kenen-joukoissa-seisot-ennustaako-kone-ehdokkaan-puoluekannan/</link>
+      <pubDate>Fri, 17 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/04/kenen-joukoissa-seisot-ennustaako-kone-ehdokkaan-puoluekannan/</guid>
+      <description>Avoimesta Ylen ja HS:n vaalikonedatasta löytyy hyviä analyysejä ja visualisointeja, esimerkiksi Juha Törmäsen analyysi ja visualisointi, Markku Niemivirran analyysit HS:n ja Ylen datasta ja näiden visualisointi (Taipale, Leinonen, Niemivirta). Latenttien komponettien mallinnuksesta kiinnostuneet voivat vilkaista myös Janne Sinkkosen latentin multinomiaalimallin koodia. Mallin tuottama grafiikka tuloksista Uudellemaalle kiinnostanee kaikkia.
+Edellisissä on faktoroitu alkuperäisiä vastauksia ja ryhmitelty ehdokkaita; tehty siis varsinaista analyysiä vastausten taustalla olevista tekijöistä. Analyysit ovat oikein hyviä, joten kokeilen jotain muuta: luokittelijaa Ylen vaalikonedatalle.</description>
+    </item>
+    
+    <item>
+      <title>Avoimella paikkatiedolla kohti älykkäämpää kaupunkia</title>
+      <link>/fi/2015/03/avoimella-paikkatiedolla-kohti-%C3%A4lykk%C3%A4%C3%A4mp%C3%A4%C3%A4-kaupunkia/</link>
+      <pubDate>Fri, 13 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2015/03/avoimella-paikkatiedolla-kohti-%C3%A4lykk%C3%A4%C3%A4mp%C3%A4%C3%A4-kaupunkia/</guid>
+      <description>Helsingin Seudun Ympäristöpalvelut (HSY) järjesti keskiviikkona vuotuisen paikkatietoseminaarin Heurekassa. Tämän vuoden seminaarissa teemana oli älykäs kaupunki, ja vieläpä kehitys älykkäästä viisaaseen kaupunkiin. Tapahtuman ohjelma ja esitysten kalvot löytyvät täältä.
+Sain kutsun puhumaan seminaarin yli 200 päiselle yleisölle avoimen paikkatiedon visualisoinnista ja mallinnuksesta. Päädyin kertomaan viime syksynä Antin ja Jannen kanssa tekemästämme fillarilaskentadatan analyysistä. Esityksessäni herätti mielenkiintoa erityisesti avoimen tekemisen korostaminen ja myös R:llä tehdyt visualisoinnit ja mallinnus kiinnostivat. Alla esimerkkinä lämpötilan vaikutuksesta pyöräilymääriin kertova kuva.</description>
+    </item>
+    
+    <item>
+      <title>Kansanedustajien Tahdon-kantojen ja iän korrelaatio</title>
+      <link>/fi/2014/11/kansanedustajien-tahdon-kantojen-ja-i%C3%A4n-korrelaatio/</link>
+      <pubDate>Sat, 22 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2014/11/kansanedustajien-tahdon-kantojen-ja-i%C3%A4n-korrelaatio/</guid>
+      <description>Tasa-arvoinen avioliittolaki käsitellään eduskunnassa 28.11.2014. Sivistysvaliokunta asettui niukasti vastustamaan uudistusta. Mielenkiintoiseksi asian tekee sen, että vastustajien ja kannattajien välillä menee selkeä ikäraja, kuten ao. HS:n uutisgrafiikasta nähdään (HS 21.11.2014).
+Helsingin sanomat tutki myös kansanedustajien kantoja perustuen “useista eri lähteistä ja haastatteluista saatuihin tietoihin kansanedustajien kannoista, ja muutamassa tapauksessa kansanedustajien omiin ilmoituksiin” (HS 21.11.2014).
+Onko näiden kansanedustajien kantojen ja heidän ikänsä välillä yhtä vahva korrelaatio kuin sivistysvaliokunnassa?
+Tarvittavat tiedot saa HS:n artikkelista ja eduskunnan sivuilta ja niistä saa kätevästi plotattua jakaumia ja histogrammeja R:n ggplot2-kirjastolla.</description>
+    </item>
+    
+    <item>
+      <title>gisfin - Avoimen suomalaisen paikkatiedon työkalupakki R-kielelle</title>
+      <link>/fi/2014/08/gisfin-avoimen-suomalaisen-paikkatiedon-ty%C3%B6kalupakki-r-kielelle/</link>
+      <pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2014/08/gisfin-avoimen-suomalaisen-paikkatiedon-ty%C3%B6kalupakki-r-kielelle/</guid>
+      <description>PÄIVITYS 2020-11-02: gisfin-paketin kehitystyö on lopetettu ja kehitystyö on siirtynyt geofi-paketin pariin. Tämä alun perin Louhos-blogissa julkaistu kirjoitus on arkistoitu rOpenGov-blogiin esimerkkinä aiempien vuosien kehitystyöstä. Alla esitetyt esimerkit eivät todennäköisesti enää toimi geofi-paketin uusilla versioilla.
+Paikkatiedon käsittely on keskeinen osa avoimen datan analysointia ja visualisointia. Nykyisellään paikkatietoaineistot ovat hajallaan eri lähteissä, tiedostomuodoissa ja koordinaattijärjestelmissä, joten niiden hyödyntäminen vaatii huomattavaa erityisosaamista. Iso osa paikkatietoaineistojen käsittelyyn liittyvistä toimenpiteistä on kuitenkin automatisoitavissa. Tästä syystä olemme kehittäneet suomalaisen paikkatiedon käsittelyyn tarkoitetun R-paketin: gisfin.</description>
+    </item>
+    
+    <item>
+      <title>STAN ja Kilpisjärven kesät</title>
+      <link>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</guid>
+      <description>Johtopäätöksiä tai edes käyttökelpoista visualisaatiota ei useinkaan pysty tekemään datasta suoraan, vaan tarvitaan mallintamista. Mallintaminen erottaa kiinnostavan ja ei-kiinnostavan variaation, ja auttaa johtopäätösten luotettavuuden arvioinnissa.
+Pienehköissä projekteissa mallintaminen perustuu valmiisiin mallikohtaisiin ohjelmistopaketteihin. Esim. jos työskennellään R:ssä, regressiomalli syntyy lm()-funktiolla. Jos ennustettavassa on patologisen oloisia poikkeamia, voidaan lm():n sijaan käyttää robustia regressiota. Epälineaaristen vaikutusten huomiointi onnistuu parhaiten mgcv-paketin gam()-funktiolla. Jos selittäjissä on kovin moniarvoisia nominaalimuuttujia ja data on harva ja iso, turvaudutaan lme4-pakettiin, jne.</description>
+    </item>
+    
+    <item>
+      <title>rOpenGov: kansainvälinen R-ekosysteemi avoimelle datalle</title>
+      <link>/fi/2013/12/ropengov-kansainv%C3%A4linen-r-ekosysteemi-avoimelle-datalle/</link>
+      <pubDate>Mon, 09 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2013/12/ropengov-kansainv%C3%A4linen-r-ekosysteemi-avoimelle-datalle/</guid>
+      <description>Suomalainen avoimen datan työkalupakki sorvi tarjoaa automatisoituja haku- ja analyysirutiineja suomalaisille avoimen datan lähteille, kuten Tilastokeskuksen, Maanmittauslaitoksen, Helsingin seudun ympäristöpalveluiden, Terveyden ja hyvinvoinnin laitoksen ja muiden tahojen ylläpitämille tietovarannoille. Välineet tarjoavat uusia työvälineitä muun muassa yhteiskuntatieteilijöille, opiskelijoille, datajournalisteille, blogaajille ja järjestöille, jotka tahtovat hyödyntää yhteiskunnan uusia tietovarantoja työssään tehokkaasti ja läpinäkyvästi.
+Suomalaiselle sorville on viime aikoina ilmestynyt vastineita monissa maissa. Yhteistyön edistämiseksi olemme käynnistäneet kansainvälisen rOpenGov-yhteisöprojektin, joka kokoaa yhteen R-ekosysteemiä laskennallisten yhteiskuntatieteiden työvälineeksi.</description>
+    </item>
+    
+    <item>
+      <title>Alueellinen hyvinvointi – vuorovaikutteinen visualisointi Sotkanetin datasta</title>
+      <link>/fi/2013/12/alueellinen-hyvinvointi-vuorovaikutteinen-visualisointi-sotkanetin-datasta/</link>
+      <pubDate>Fri, 06 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2013/12/alueellinen-hyvinvointi-vuorovaikutteinen-visualisointi-sotkanetin-datasta/</guid>
+      <description>Louhoksen ja Demos Helsingin yhteistyönä tehty vuorovaikutteinen visualisointi alueellisesta hyvinvoinnista sijoittui Apps4Finland 2013 -kilpailun Hahmota-sarjassa hienosti kolmanneksi. Visualisointi mahdollistaa Sotkanetin hyvinvointi-indikaattoreiden havainnollisen tarkastelun ja mielenkiintoisten ilmiöiden löytämisen. Demos blogasi aiheesta aiemmin tällä viikolla, ja avaan tässä sitä lisää Louhoksen näkökulmasta.
+Louhoksen toiminta on toistaiseksi keskittynyt lähinnä avointen datasettien esikäsittelyyn ja hakurutiinien kehittämiseen sorvi-paketissa. Lisäksi olemme tehneet avatuista datoista yksinkertaisia visualisointeja ja bloganneet niistä. Tavoitteena on tehdä myös syvällisempiä analyysejä, mutta toistaiseksi niihin ei ole aika riittänyt päivätöiden ohella.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaalit sosiaalisessa mediassa</title>
+      <link>/fi/2013/01/kunnallisvaalit-sosiaalisessa-mediassa/</link>
+      <pubDate>Sat, 26 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2013/01/kunnallisvaalit-sosiaalisessa-mediassa/</guid>
+      <description>Datavaalit-sivustolla ylläpidettävään sosiaalisen median aggregaattiin on tätä kirjoitettaessa kasautunut dataa 987 ehdokkaan Twitter-syötteestä ja 2553 ehdokkaan Facebook-sivulta yhteensä 419975 päivitystä. Profiilien osoitteet on poimittu Ylen vaalikoneesta sekä ehdokkaiden omien ilmoitusten perusteella. Esimerkeissä käytetty data on saatavilla CSV-dumppina GitHubin avoindata-repositoryn kautta. Yksityiskohtaisempaa dataa on saatavilla Datavaalit-sivuston rajapinnan kautta.
+Poimimme muutamia esimerkkejä aineiston sisällöstä syksyn 2012 kunnallisvaaleihin liittyen. Esimerkit lähdekoodeineen löytyvät kokonaisuudessaan Louhoksen Datawikistä.
+Sosiaalisen median päivitystiheydet aikasarjana Syksyn 2012 kunnallisvaalien aikana puolueitten ehdokkaat päivittivät statuksiaan tavanomaista ahkerammin.</description>
+    </item>
+    
+    <item>
+      <title>Eduskunnan äänestysten hakurutiinit R-kielelle</title>
+      <link>/fi/2012/11/eduskunnan-%C3%A4%C3%A4nestysten-hakurutiinit-r-kielelle/</link>
+      <pubDate>Wed, 07 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/11/eduskunnan-%C3%A4%C3%A4nestysten-hakurutiinit-r-kielelle/</guid>
+      <description>Eduskunnan äänestysdatan sujuva saatavuus mahdollistaa eduskunnassa tehtävien päätösten automaattisen seurannan ja edistää läpinäkyvyyttä. Mikko Heikkisen aiemmin julkaisema biomi.orgin eduskunta-APIn kautta on saatavilla osa eduskunnan äänestysdatoista.
+Lisäsimme nyt R-kieliset hakurutiinit eduskunnan äänestysdatalle sorviin osana Datavaalit-hanketta. Näiden avulla löytyvät kaikki biomi.org-rajapinnan kautta saatavilla olevat eduskunnan äänestystiedot sekä äänestys- että edustajakohtaisesti. Yksityiskohtaisia hakuesimerkkejä löydät Louhoksen Datawikistä.
+Ääkkösten ja muiden erikoismerkkien käsittely on vielä osin ratkaisematta; pull requestejä otetaan vastaan. Toinen, vakavampi ongelma liittyy eduskunnan äänestysdatan tämä hetkiseen saatavuuteen: eduskunnan äänestysdata on saatavilla koneluettavassa muodossa vain biomi.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua</title>
+      <link>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</link>
+      <pubDate>Fri, 26 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa-puolueiden-vertailua/</guid>
+      <description>Datavaalit-hanke on kerännyt runsaasti aineistoa kunnallisvaaliehdokkaista ja puolueista. Sivustolla ylläpidetään esimerkiksi sosiaalisen median aggregaattia, johon kerätään tietoja ehdokkaiden aktiivisuudesta mm. Facebookissa ja Twitterissä.
+Teimme muutamia esimerkkejä ehdokasaineistojen käsittelystä R-kielellä. Esimerkit hakevat dataa Oikeusministeriön, Tilastokeskuksen, Maanmittauslaitoksen ja Datavaalit-sivuston palvelimilta ja vertailevat ehdokkaiden aktiivisuutta sosiaalisessa mediassa puolueiden välillä, ja ne voidaan toistaa alusta loppuun automatisoidusti mukana tulevalla lähdekoodilla.
+Visualisoinnit lähdekoodeineen löydät Louhoksen Datawikistä ja Githubin takomo-reposta. Materiaaliin on tulossa myöhemmin täydennystä.
+PÄIVITYS 24.</description>
+    </item>
+    
+    <item>
+      <title>Kunnallisvaalien vertailukelpoiset ehdokasdatat CSV-taulukkoina: 2004 / 2008 / 2012</title>
+      <link>/fi/2012/10/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-/-2008-/-2012/</link>
+      <pubDate>Fri, 05 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/10/kunnallisvaalien-vertailukelpoiset-ehdokasdatat-csv-taulukkoina-2004-/-2008-/-2012/</guid>
+      <description>Vuoden 2012 kunnallisvaaliehdokkaiden vertailu aiempien kunnallisvaalien ehdokastietoihin on nyt ajankohtainen aihe. Ensimmäisiä vertailuja on julkaistu muun muassa Jyväskylän ylioppilaslehdessä ja Helsingin vaalipiirille on laadittu alustava puolueloikkaritaulukko.
+Käyttövalmiissa muodossa olevien aineistojen puute kunnallisvaaleista 2004-2008 on kuitenkin jälleen osoittautunut merkittäväksi pullonkaulaksi koko maan kattaville vertailuille sen jälkeen, kun julkaisimme edellisessä blogipostauksessa OM:n koneluettavista raakadatoista koostetun käyttövalmiin CSV-tiedoston 2012 kunnallisvaalien ehdokasdatasta.
+Datavaalit työstää keskitettyä tietokantaa vaalidatan tarjoilulle helppokäyttöisessä muodossa, mutta työn edetessä julkaisemme alustavaa dataa käyttövalmiina CSV-taulukkoina Linus Torvaldsin tunnetuksi tekemää ”release early – release often”-taktiikkaa noudattaen.</description>
+    </item>
+    
+    <item>
+      <title>Datavaalit: Oikeusministeriön vaalidatat sorvattu auki</title>
+      <link>/fi/2012/09/datavaalit-oikeusministeri%C3%B6n-vaalidatat-sorvattu-auki/</link>
+      <pubDate>Fri, 28 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/09/datavaalit-oikeusministeri%C3%B6n-vaalidatat-sorvattu-auki/</guid>
+      <description>Oikeusministeriö julkaisi eilen illalla (to 27.1.2012) koko maan kattavat tiedot kunnallisvaalien ehdokkaista ja puolueista. Mukana vuoden 2012 kunnallisvaaleissa on kaikkiaan 36305 ehdokasta. Yhdistelemällä aineistoa esimerkiksi viime kunnallis- ja eduskuntavaalien tuloksiin sekä kuntatason indikaattoreihin voidaan tuoda esiin uusia näkökulmia suomalaiseen kunnallispolitiikkaan.
+Datavaalit edistää helppokäyttöisen vaalidatan saatavuutta Louhos ja sorvi ovat aktiivisesti mukana viikko sitten Open Knowledge-festivaaleilla lanseeratussa Datavaalit-hankkeessa, jonka tavoitteena on tukea vaalidatan avaamista ja laajaa hyödyntämistä. Helppokäyttöisessä muodossa olevan päätöksentekodatan heikko saatavuus on keskeinen pullonkaula yhteiskunnallisesti vaikuttavassa datajournalismissa sekä läpinäkyvyyttä edistävien verkkopalveluiden yleistymisessä.</description>
+    </item>
+    
+    <item>
+      <title>Aihepiirianalyysi kansanedustajien puheista</title>
+      <link>/fi/2012/08/aihepiirianalyysi-kansanedustajien-puheista/</link>
+      <pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/08/aihepiirianalyysi-kansanedustajien-puheista/</guid>
+      <description>Hesari ja Kansan muisti julkaisivat keväällä mielenkiintoisen kansanedustajien puheista koostetun datasetin. Datan perusteella syntyikin useita mielenkiintoisia visualisointeja osana HS Open 4 -tapahtumaa. Näin laaja aineisto tarjoaa myös mainion mahdollisuuden kokeilla aihepiirianalyysiä (engl. topic model). Se on tilastollinen koneoppimismenetelmä, jolla laajoista tekstidokumenttikokoelmista voidaan etsiä toistuvia aihepiirejä (topic). Esimerkiksi kansanedustajien puheista voidaan automaattisesti tunnistaa eduskunnassa käsiteltyjä aiheita, ja mitata edustajien verbaalista aktiivisuutta kunkin aiheen tiimoilta.
+Aihepiirianalyysissä kukin aihepiiri koostuu joukosta sanoja, jotka esiintyvät usein aihepiirin keskusteluissa.</description>
+    </item>
+    
+    <item>
+      <title>Datavaalit osa 1 – vaali- ja kuntadatan kokoaminen ja paketointi</title>
+      <link>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</link>
+      <pubDate>Mon, 21 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</guid>
+      <description>Datavaalit Syksyn kunnallisvaalien yhteydessä on mahdollisuus kokeilla vaaleihin ja päätöksentekoon liittyvän tiedonlouhinnan mahdollisuuksia ja tuoda esiin kehityskohteita päätöksentekoon kytkeytyvien tietoaineistojen saatavuuden ja yhteiskunnan läpinäkyvyyden lisäämiseksi. Aiheen tiimoilta on käynnistynyt ruohonjuuritason Datavaalit-tempaus, jossa eri toimijat keräävät, pöyhivät, ja julkaisevat vaaleihin liittyvää dataa ja sen pohjalta tehtäviä havaintoja. Datavaalit-tempauksella ei ole muodollista organisaatiota, vaan aiheesta kiinnostuneet ovat tervetulleita liittymään mukaan itselleen sopivalla tavalla. Ideoita ja tietolähteitä on koottuna täällä. Jos aihepiiri kiinnostaa, nyt on hyvä aika hypätä kelkkaan.</description>
+    </item>
+    
+    <item>
+      <title>Vaalitulosten vertailua vuorovaikutteisena visualisaationa</title>
+      <link>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</link>
+      <pubDate>Tue, 07 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</guid>
+      <description>Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.
+VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN. Tässä voi esimerkiksi tarkastella kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.
+VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista.</description>
+    </item>
+    
+    <item>
+      <title>Suomalaisten muuttoliike Maailmanpankin datoista maailmankartalla visualisoituna</title>
+      <link>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</link>
+      <pubDate>Thu, 17 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</guid>
+      <description>Mistä maasta ihmiset muuttavat Suomeen ja mihin Suomesta muutetaan? Vastausta voi etsiä Maailmanpankin Migration-datasta. Kiinnostuin aiheesta tämän mielenkiintoisen mutta loppupeleissä mielestäni erittäin vaikeaselkoisen visualisoinnin takia. Yritettyäni aikani tutkia Suomen muuttovirtoja turhauduin ja päätin visualisoida datan itse kartalle (vaihteeksi). Maailmankarttavisualisointeja ei tästä blogista vielä löydykään, joten tulee sekin samalla tutuksi. Lisäksi R-ohjelmointi -blogissa oli jokin aika sitten koodinpätkä jolla R tuottaa interaktiivisen karttapallon, jota oli tietysti pakko kokeilla itse uuden datan kanssa!</description>
+    </item>
+    
+    <item>
+      <title>R-paketti avoimen Suomi-datan louhintaan</title>
+      <link>/fi/2011/10/r-paketti-avoimen-suomi-datan-louhintaan/</link>
+      <pubDate>Sun, 09 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/10/r-paketti-avoimen-suomi-datan-louhintaan/</guid>
+      <description>On tullut aika yhdistää voimavarat ja koota kattava kokoelma eri tahoilla kehitettyjä ratkaisuja avoimen datan käsittelyyn yhteen pakettiin. Kehitteillä oleva avoimen lähdekoodin sorvi-paketti on suunnattu palvelemaan erityisesti suomalaista avoimen datan yhteisöä ja kokoamaan yleiskäyttöisiä välineitä tietoaineistojen hakuun, putsaamiseen, yhdistelyyn, louhintaan ja visualisointiin. Esimerkkejä paketin käytöstä Suomi-datan penkomiseen tullaan julkaisemaan lisää tässä blogissa.
+Paketti on kehitysvaiheessa, ja uudet tekijät ja lisäykset ovat tervetulleita. Ensimmäisenä esimerkkinä sorvin käytöstä hain kuntien asukasluvut Väestörekisterikeskuksen sivulta ja visualisoin kuntien sukupuolijakauman Suomen kartalla.</description>
+    </item>
+    
+    <item>
+      <title>HS Open 3 lämmittely: Asuntojen myyntihinnat Helsingin kartalla</title>
+      <link>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</link>
+      <pubDate>Wed, 05 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/10/hs-open-3-l%C3%A4mmittely-asuntojen-myyntihinnat-helsingin-kartalla/</guid>
+      <description>Päivitys: Uudempi postaus tästä aiheesta!
+Kolmannessa HS Openissa yhtenä avattuna datana on Asuntojen vuokrat ja hintapyynnöt Oikotiellä. Talosen Jaakko ehtikin jo tehdän vuokrahinnoista mainion visualisoinnin. Itse olen jo pidempään fiilistellyt mahdollisuutta käyttää GoogleMapsin karttoja R-visualisoinnin pohjana, ja tässähän tarjoutui loistava tilaisuus kokeilla tuota käytännössä.
+Ideana on siis näyttää Oikotiedatan perusteella asuntojen hintapyynnöt kartalla, käytännössä keskimääräiset neliöhinnat postinumeroa kohden. Helpommin sanottu kuin tehty. Tämä vaatii nimittäin maantieteelliseti koordinaatit kullekin postinumerolle. Geonames tarjoaa tällaista tietoa, mutta itse en ainakaan onnistunut saamaan sieltä Helsingin kaupunginosien postinumerotietoja ulos.</description>
+    </item>
+    
+    <item>
+      <title>Yleisimmät nimet 1900-luvulla</title>
+      <link>/fi/2011/09/yleisimm%C3%A4t-nimet-1900-luvulla/</link>
+      <pubDate>Sat, 24 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/09/yleisimm%C3%A4t-nimet-1900-luvulla/</guid>
+      <description>Idea tähän artikkeliin tuli hauskasta Name Voyager-visualisointipalvelusta, joka näyttää suosituimpien lasten nimet vuosiluvun mukaan (olettetavasti Jenkeissä). Vastaavaa dataa suomalaisten nimien määristä löytyy Väestörekisterikeskuksen tilastoista ja Nimipalvelusta. Ensimmäisessä on kattavat tilastot 2000-luvulta, kun taas jälkimmäisessä on luvut pienelle osalle yleisimpiä nimiä koko 1900-luvulta. Käytän tässä jälkimmäistä dataa yksinkertaisiin visualisointeihin. Tulevaisuudessa olisi mielenkiintoista kokeilla jotain alkuperäisen Name Voyagerin tapaista interaktiivista visualisointia tarkemmista 2000-luvun tilastoista.
+Nimipalvelun data on tarjolla vain html-taulukkona, mutta pieni googlaus näytti miten XML-pakettia käytetään html-taulukon lataamiseen R:ään.</description>
+    </item>
+    
+    <item>
+      <title>HS Open 2: Apurahadataa kaivelemassa</title>
+      <link>/fi/2011/09/hs-open-2-apurahadataa-kaivelemassa/</link>
+      <pubDate>Tue, 13 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/09/hs-open-2-apurahadataa-kaivelemassa/</guid>
+      <description>Ensimmäisen artikkelini aiheena on HS Open 2 -tapahtumassa analysoitu apurahadata. Data sisältää tietoa vuosina 2005-2009 jaetuista taiteilija-apurahoista. Latasin datan R:ään ja tein muutamia kuvaajia käyttäen ggplot2-pakettia. Tässä muutamia kuvaajia:
+ 20 eniten apurahaa saanutta taiteilijaa (HS 19.5.2011)    Apurahat hakemusluokittain ja vuosittain eroteltuna    Apurahat ikäryhmittäin ja sukupuolen mukaan    Apurahat ikäryhmän ja hakemusluokan mukaan   ggplot2:n perusplottien lisäksi data voidaan visualisoida kartalle käyttäen apuna esimerkiksi sp-pakettia.</description>
+    </item>
+    
+  </channel>
+</rss>

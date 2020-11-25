@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kunnat on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/kunnat/</link>
+    <description>Recent content in kunnat on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 May 2012 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/kunnat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Datavaalit osa 1 – vaali- ja kuntadatan kokoaminen ja paketointi</title>
+      <link>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</link>
+      <pubDate>Mon, 21 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/05/datavaalit-osa-1-vaali-ja-kuntadatan-kokoaminen-ja-paketointi/</guid>
+      <description>Datavaalit Syksyn kunnallisvaalien yhteydessä on mahdollisuus kokeilla vaaleihin ja päätöksentekoon liittyvän tiedonlouhinnan mahdollisuuksia ja tuoda esiin kehityskohteita päätöksentekoon kytkeytyvien tietoaineistojen saatavuuden ja yhteiskunnan läpinäkyvyyden lisäämiseksi. Aiheen tiimoilta on käynnistynyt ruohonjuuritason Datavaalit-tempaus, jossa eri toimijat keräävät, pöyhivät, ja julkaisevat vaaleihin liittyvää dataa ja sen pohjalta tehtäviä havaintoja. Datavaalit-tempauksella ei ole muodollista organisaatiota, vaan aiheesta kiinnostuneet ovat tervetulleita liittymään mukaan itselleen sopivalla tavalla. Ideoita ja tietolähteitä on koottuna täällä. Jos aihepiiri kiinnostaa, nyt on hyvä aika hypätä kelkkaan.</description>
+    </item>
+    
+    <item>
+      <title>Vaalitulosten vertailua vuorovaikutteisena visualisaationa</title>
+      <link>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</link>
+      <pubDate>Tue, 07 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</guid>
+      <description>Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.
+VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN. Tässä voi esimerkiksi tarkastella kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.
+VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista.</description>
+    </item>
+    
+  </channel>
+</rss>

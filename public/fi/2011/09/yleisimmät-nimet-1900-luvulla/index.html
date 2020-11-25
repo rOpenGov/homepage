@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Yleisimmät nimet 1900-luvulla" />
+<meta property="og:description" content="Idea tähän artikkeliin tuli hauskasta Name Voyager-visualisointipalvelusta, joka näyttää suosituimpien lasten nimet vuosiluvun mukaan (olettetavasti Jenkeissä). Vastaavaa dataa suomalaisten nimien määristä löytyy Väestörekisterikeskuksen tilastoista ja Nimipalvelusta. Ensimmäisessä on kattavat tilastot 2000-luvulta, kun taas jälkimmäisessä on luvut pienelle osalle yleisimpiä nimiä koko 1900-luvulta. Käytän tässä jälkimmäistä dataa yksinkertaisiin visualisointeihin. Tulevaisuudessa olisi mielenkiintoista kokeilla jotain alkuperäisen Name Voyagerin tapaista interaktiivista visualisointia tarkemmista 2000-luvun tilastoista.
+Nimipalvelun data on tarjolla vain html-taulukkona, mutta pieni googlaus näytti miten XML-pakettia käytetään html-taulukon lataamiseen R:ään." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/fi/2011/09/yleisimm%C3%A4t-nimet-1900-luvulla/" />
+<meta property="article:published_time" content="2011-09-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2011-09-24T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Yleisimmät nimet 1900-luvulla"/>
+<meta name="twitter:description" content="Idea tähän artikkeliin tuli hauskasta Name Voyager-visualisointipalvelusta, joka näyttää suosituimpien lasten nimet vuosiluvun mukaan (olettetavasti Jenkeissä). Vastaavaa dataa suomalaisten nimien määristä löytyy Väestörekisterikeskuksen tilastoista ja Nimipalvelusta. Ensimmäisessä on kattavat tilastot 2000-luvulta, kun taas jälkimmäisessä on luvut pienelle osalle yleisimpiä nimiä koko 1900-luvulta. Käytän tässä jälkimmäistä dataa yksinkertaisiin visualisointeihin. Tulevaisuudessa olisi mielenkiintoista kokeilla jotain alkuperäisen Name Voyagerin tapaista interaktiivista visualisointia tarkemmista 2000-luvun tilastoista.
+Nimipalvelun data on tarjolla vain html-taulukkona, mutta pieni googlaus näytti miten XML-pakettia käytetään html-taulukon lataamiseen R:ään."/>
+
+
+
+    <link rel="canonical" href="/fi/2011/09/yleisimm%C3%A4t-nimet-1900-luvulla/">
+
+    <title>
+      
+        Yleisimmät nimet 1900-luvulla | rOpenGov - R packages for open government data analytics
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>
+<script src="https://www.kela.fi/kelafi-theme/js/tablesorter/jquery.tablesorter-2.0.5.min.js"></script>
+
+
+
+
+  </head>
+  <body>
+    
+      
+
+<header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/fi">
+            <img src="/images/logo2020_white_orange.svg" height="30" class="d-inline-block align-top"
+    alt="rOpenGov - R packages for open government data analytics">
+
+
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi">Etusivu</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/post/">Blogi</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/projects/">Projektit</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/community/">Yhteisö</a>
+                    
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav">
+                
+                        
+                            <a class="nav-link" href="/">English</a>
+                        
+                            <a class="nav-link" href="/fi/">Suomi</a>
+                        
+                    
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-12 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+    <a class="text-dark" href="/fi/2011/09/yleisimm%C3%A4t-nimet-1900-luvulla/">Yleisimmät nimet 1900-luvulla</a>
+</h2>
+
+ 
+    <hr>
+</header>
+
+<article class="blog-post">
+    <p>Idea tähän artikkeliin tuli hauskasta <a href="http://www.bewitched.com/namevoyager.html">Name Voyager</a>-visualisointipalvelusta, joka näyttää suosituimpien lasten nimet vuosiluvun mukaan (olettetavasti Jenkeissä). Vastaavaa dataa suomalaisten nimien määristä löytyy Väestörekisterikeskuksen <a href="http://www.vrk.fi/default.aspx?id=279">tilastoista</a> ja <a href="http://verkkopalvelu.vrk.fi/Nimipalvelu/default.asp?L=1">Nimipalvelusta</a>. Ensimmäisessä on kattavat tilastot 2000-luvulta, kun taas jälkimmäisessä on luvut pienelle osalle yleisimpiä nimiä koko 1900-luvulta. Käytän tässä jälkimmäistä dataa yksinkertaisiin visualisointeihin. Tulevaisuudessa olisi mielenkiintoista kokeilla jotain alkuperäisen Name Voyagerin tapaista interaktiivista visualisointia tarkemmista 2000-luvun tilastoista.</p>
+<p>Nimipalvelun data on tarjolla vain html-taulukkona, mutta pieni googlaus <a href="http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package">näytti miten XML-pakettia käytetään html-taulukon lataamiseen R:ään</a>. Pienellä esikäsittelyllä ja ggplot2:n area-plotilla datasta saadaan alkuperäistä ideaa mukaileva visualisointi.</p>
+<div style="text-align: center;">
+<figure >
+    <a href="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_area_20110919.png">
+        <img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_area_20110919.png" width="700"
+alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä"  />
+    </a>
+    <figcaption><small><i>Yleisimmät poikien nimet 1900-luvulla (geom_area)</i></small></figcaption>
+</figure>
+</div>
+<p>Matti ei näytäkään olevan yhtä suosittu nimi kuin olin ymmärtänyt. Kuvaajasta näkyy suurten ikäluokkien vaikutus selvästi.</p>
+<p>Jos edellisen kuvaajan kulmikkuus häiritsee, pehmeämpää jälkeä saadaan geom_density:llä, joka sovittaa dataan jatkuvan tiheysjakauman. Tällöin tosin y-akselin tulkinta hankaloituu.</p>
+<div style="text-align: center;">
+<figure >
+    <a href="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_density_20110919.png">
+        <img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/pojat_top10_density_20110919.png" width="700"
+alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä"  />
+    </a>
+    <figcaption><small><i>Yleisimmät poikien nimet 1900-luvulla (geom_density)</i></small></figcaption>
+</figure>
+</div>
+<p>Tässä vielä area-plotti tyttöjen nimistä. Maria näyttää tulleen uudestaan muotiin sotavuosien jälkeen, kun taas Marjatta on ollut erityisesti sota-ajan suosikkinimi.</p>
+<div style="text-align: center;">
+<figure >
+    <a href="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/tytc3b6t_top10_area_20110919.png">
+        <img src="/post/2011-09-24-yleisimmat-nimet-1900-luvulla.fi/tytc3b6t_top10_area_20110919.png" width="700"
+alt="Pinottu aluekaavio, jossa x-akselilla vuosi 1900-2000 ja y-akselilla nimien määrä. Alueet kuvaavat 10 yleisintä nimeä"  />
+    </a>
+    <figcaption><small><i>Yleisimmät tyttöjen nimet 1900-luvulla</i></small></figcaption>
+</figure>
+</div>
+<p>PÄIVITYS 6.1.2013: Blogin R-skriptejä ylläpidetään jatkossa Githubissa. Tämän artikkelin koodit löytyvät <a href="https://github.com/louhos/takomo/blob/master/examples/20110924-nimet.R">täältä</a>.</p>
+<p>Alkuperäinen kirjoitus Louhos-blogissa: <a href="https://louhos.wordpress.com/2011/09/24/yleisimmat-nimet-1900-luvulla/">https://louhos.wordpress.com/2011/09/24/yleisimmat-nimet-1900-luvulla/</a></p>
+
+
+    
+
+    
+
+    <h4>Katso myös</h4>
+    <ul>
+        
+            <li><a href="/fi/2011/09/hs-open-2-apurahadataa-kaivelemassa/">HS Open 2: Apurahadataa kaivelemassa</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        
+
+      </div>
+    </div>
+    
+
+    
+      <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

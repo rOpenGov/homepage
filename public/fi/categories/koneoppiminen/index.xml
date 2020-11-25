@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>koneoppiminen on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/categories/koneoppiminen/</link>
+    <description>Recent content in koneoppiminen on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="/fi/categories/koneoppiminen/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>STAN ja Kilpisjärven kesät</title>
+      <link>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2014/01/stan-ja-kilpisj%C3%A4rven-kes%C3%A4t/</guid>
+      <description>Johtopäätöksiä tai edes käyttökelpoista visualisaatiota ei useinkaan pysty tekemään datasta suoraan, vaan tarvitaan mallintamista. Mallintaminen erottaa kiinnostavan ja ei-kiinnostavan variaation, ja auttaa johtopäätösten luotettavuuden arvioinnissa.
+Pienehköissä projekteissa mallintaminen perustuu valmiisiin mallikohtaisiin ohjelmistopaketteihin. Esim. jos työskennellään R:ssä, regressiomalli syntyy lm()-funktiolla. Jos ennustettavassa on patologisen oloisia poikkeamia, voidaan lm():n sijaan käyttää robustia regressiota. Epälineaaristen vaikutusten huomiointi onnistuu parhaiten mgcv-paketin gam()-funktiolla. Jos selittäjissä on kovin moniarvoisia nominaalimuuttujia ja data on harva ja iso, turvaudutaan lme4-pakettiin, jne.</description>
+    </item>
+    
+    <item>
+      <title>Aihepiirianalyysi kansanedustajien puheista</title>
+      <link>/fi/2012/08/aihepiirianalyysi-kansanedustajien-puheista/</link>
+      <pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2012/08/aihepiirianalyysi-kansanedustajien-puheista/</guid>
+      <description>Hesari ja Kansan muisti julkaisivat keväällä mielenkiintoisen kansanedustajien puheista koostetun datasetin. Datan perusteella syntyikin useita mielenkiintoisia visualisointeja osana HS Open 4 -tapahtumaa. Näin laaja aineisto tarjoaa myös mainion mahdollisuuden kokeilla aihepiirianalyysiä (engl. topic model). Se on tilastollinen koneoppimismenetelmä, jolla laajoista tekstidokumenttikokoelmista voidaan etsiä toistuvia aihepiirejä (topic). Esimerkiksi kansanedustajien puheista voidaan automaattisesti tunnistaa eduskunnassa käsiteltyjä aiheita, ja mitata edustajien verbaalista aktiivisuutta kunkin aiheen tiimoilta.
+Aihepiirianalyysissä kukin aihepiiri koostuu joukosta sanoja, jotka esiintyvät usein aihepiirin keskusteluissa.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Kuntatiedon visualisointi R:n gisfin-kirjastolla" />
+<meta property="og:description" content="PÄIVITYS 2020-11-02: gisfin-paketin kehitystyö on lopetettu ja kehitystyö on siirtynyt geofi-paketin pariin. Tämä alun perin Louhos-blogissa julkaistu kirjoitus on arkistoitu rOpenGov-blogiin esimerkkinä aiempien vuosien kehitystyöstä. Alla esitetyt esimerkit eivät todennäköisesti enää toimi geofi-paketin uusilla versioilla.
+Kuntatiedon visualisointi Suomen kartalla R-kielellä nousi kuluneella viikolla keskusteluun Finnish Open Data Ecosystem-foorumin Facebook-ketjussa.
+Tähän on monta tapaa, ja valmiiden välineiden käyttö helpottaa tehtävää. Suomalaisen paikkatiedon visualisointiin suunnatussa gisfin-paketissa on valmiit wrapperit kuntatiedon visualisointiin. Päivitä paketin kehitysversio Githubista saadaksesi kaikki toiminnot käyttöön." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/fi/2015/06/kuntatiedon-visualisointi-rn-gisfin-kirjastolla/" />
+<meta property="article:published_time" content="2015-06-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-06-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kuntatiedon visualisointi R:n gisfin-kirjastolla"/>
+<meta name="twitter:description" content="PÄIVITYS 2020-11-02: gisfin-paketin kehitystyö on lopetettu ja kehitystyö on siirtynyt geofi-paketin pariin. Tämä alun perin Louhos-blogissa julkaistu kirjoitus on arkistoitu rOpenGov-blogiin esimerkkinä aiempien vuosien kehitystyöstä. Alla esitetyt esimerkit eivät todennäköisesti enää toimi geofi-paketin uusilla versioilla.
+Kuntatiedon visualisointi Suomen kartalla R-kielellä nousi kuluneella viikolla keskusteluun Finnish Open Data Ecosystem-foorumin Facebook-ketjussa.
+Tähän on monta tapaa, ja valmiiden välineiden käyttö helpottaa tehtävää. Suomalaisen paikkatiedon visualisointiin suunnatussa gisfin-paketissa on valmiit wrapperit kuntatiedon visualisointiin. Päivitä paketin kehitysversio Githubista saadaksesi kaikki toiminnot käyttöön."/>
+
+
+
+    <link rel="canonical" href="/fi/2015/06/kuntatiedon-visualisointi-rn-gisfin-kirjastolla/">
+
+    <title>
+      
+        Kuntatiedon visualisointi R:n gisfin-kirjastolla | rOpenGov - R packages for open government data analytics
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>
+<script src="https://www.kela.fi/kelafi-theme/js/tablesorter/jquery.tablesorter-2.0.5.min.js"></script>
+
+
+
+
+  </head>
+  <body>
+    
+      
+
+<header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/fi">
+            <img src="/images/logo2020_white_orange.svg" height="30" class="d-inline-block align-top"
+    alt="rOpenGov - R packages for open government data analytics">
+
+
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi">Etusivu</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/post/">Blogi</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/projects/">Projektit</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/community/">Yhteisö</a>
+                    
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav">
+                
+                        
+                            <a class="nav-link" href="/">English</a>
+                        
+                            <a class="nav-link" href="/fi/">Suomi</a>
+                        
+                    
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-12 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+    <a class="text-dark" href="/fi/2015/06/kuntatiedon-visualisointi-rn-gisfin-kirjastolla/">Kuntatiedon visualisointi R:n gisfin-kirjastolla</a>
+</h2>
+
+ 
+    <hr>
+</header>
+
+<article class="blog-post">
+    <p><em><strong>PÄIVITYS 2020-11-02: gisfin-paketin kehitystyö on lopetettu ja kehitystyö on siirtynyt <a href="https://github.com/rOpenGov/geofi">geofi-paketin</a> pariin. Tämä alun perin Louhos-blogissa julkaistu kirjoitus on arkistoitu rOpenGov-blogiin esimerkkinä aiempien vuosien kehitystyöstä. Alla esitetyt esimerkit eivät todennäköisesti enää toimi geofi-paketin uusilla versioilla.</strong></em></p>
+<p>Kuntatiedon visualisointi Suomen kartalla R-kielellä nousi kuluneella viikolla keskusteluun Finnish Open Data Ecosystem-foorumin <a href="https://www.facebook.com/groups/fi.okfn/permalink/10153486329250628/">Facebook-ketjussa</a>.</p>
+<p>Tähän on monta tapaa, ja valmiiden välineiden käyttö helpottaa tehtävää. Suomalaisen paikkatiedon visualisointiin suunnatussa <a href="https://github.com/rOpenGov/gisfin">gisfin</a>-paketissa on valmiit wrapperit kuntatiedon visualisointiin. <a href="https://github.com/rOpenGov/gisfin/blob/master/vignettes/gisfin_tutorial.md">Päivitä paketin kehitysversio Githubista</a> saadaksesi kaikki toiminnot käyttöön.</p>
+<p>Kokosimme tähän blogipostaukseen tiiviit esimerkit. Lisää suomalaisen paikkatiedon R-työkaluista löytyy gisfin-paketin <a href="https://github.com/rOpenGov/gisfin/blob/master/vignettes/gisfin_tutorial.md">tutoriaalisivulta</a>, jossa kuntien lisäksi saatavilla on mm. maakuntarajat, postinumeroalueet, äänestysalueet, aluejakokartat, Helsingin aluekarttoja, väestöruututietoja, spatiaalisia tilastoja ym.</p>
+<h3 id="esimerkkidata-thln-sairastavuusindeksi">Esimerkkidata: THL:n sairastavuusindeksi</h3>
+<p>Käytämme esimerkkinä kuntatason aineistojen visualisoinnissa
+sairastavuusindeksiä, jonka voi ladata <a href="http://www.sotkanet.fi/sotkanet/fi/index">THL:n
+sotkanet-palvelusta</a> R:ään
+<a href="https://github.com/rOpenGov/sotkanet">sotkanet</a>-paketilla. Jostain syystä sotkanet-portaalin indeksiä ei saa vuotta 2010 pitemmälle joten otetaan se:</p>
+<pre><code class="language-{%" data-lang="{%"># List all available indicators from THL Sotkanet
+library(sotkanet) 
+sotkanet.indicators &lt;- SotkanetIndicators(type = &quot;table&quot;)
+
+# Check specific indicators for 'sairastavuusindeksi'
+# sotkanet.indicators[grep(&quot;sairastavuusindeksi&quot;, sotkanet.indicators$indicator.title.fi),]
+
+# This shows that the index 244 is THL sairastavuusindeksi.
+# Retrieve THL sairastavuusindeksi 2010 for municipalities
+# (newer information is not available???)
+healthindex &lt;- GetDataSotkanet(indicators = 244, year = 2010, region.category = &quot;KUNTA&quot;)
+
+# Let us rename the value field for clarity
+healthindex$Sairastavuusindeksi &lt;- healthindex$primary.value
+</code></pre><p>Voit tallentaa datat tiedostoon ja lukea ne sieltä takaisin (tai vaihtaa tilalle oman aineistosi):</p>
+<pre><code class="language-{%" data-lang="{%"># Write the data to file
+write.csv(healthindex, file = &quot;mydata.csv&quot;, row.names = FALSE)
+
+# Read the same data from file
+# (instead you can just use the original mydata that was written in this file)
+# or alternatively you can replace your own data in the file mydata.csv:
+healthindex &lt;- read.csv(file = &quot;mydata.csv&quot;)
+</code></pre><h3 id="kuntarajojen-lataus-maanmittauslaitokselta">Kuntarajojen lataus Maanmittauslaitokselta</h3>
+<p>Lataa kuntarajat R:ään seuraavalla komennolla. Tässä esimerkissä käytämme <a href="https://github.com/avoindata/mml">valmiiksi esikäsiteltyjä Maanmittauslaitoksen kuntarajoja 2013</a> (Yleiskartta-1000 Hallintoalueet). Muiden MML-aineistojen lataamiseen perehdy funktioon get_mml.</p>
+<pre><code class="language-{%" data-lang="{%">library(gisfin)
+map &lt;- get_municipality_map(data.source = &quot;MML&quot;)
+</code></pre><p>Toinen vaihtoehto olisi ladata kuntarajat <a href="http://gadm.org/country">GADM-palvelusta</a>. GADMin kuntakartta sisältää tällä hetkellä vanhentunutta tietoa, joten sivuutamme sen tässä esimerkissä. GADMin kartoista voi kuitenkin olla apua muiden alueitten visualisoinnissa.</p>
+<h3 id="tietojen-liittäminen-kuntakarttaan">Tietojen liittäminen kuntakarttaan</h3>
+<p>Liitä THL:n sairastavuusindeksin tiedot MML:n kuntakarttaan
+kuntakoodin nojalla (MML-datassa &ldquo;kuntakoodi&rdquo; ja healthindex-datassa
+&ldquo;region.code&rdquo;):</p>
+<pre><code class="language-{%" data-lang="{%">sp &lt;- sp::merge(map, healthindex, by.x = &quot;kuntakoodi&quot;, by.y=&quot;region.code&quot;)
+</code></pre><h3 id="visualisointi-maanmittauslaitoksen-kuntarajoilla">Visualisointi Maanmittauslaitoksen kuntarajoilla</h3>
+<p>Nyt datan voi visualisoida Suomen kuntakartalla sp-paketilla:</p>
+<pre><code class="language-{%" data-lang="{%"># Define the 20% quantiles for plotting
+quantiles &lt;- quantile(sp$Sairastavuusindeksi, probs = seq(0, 1, .2))
+
+# Discretize the data. This is easier to comprehend than continuous scale.
+# And I could not find how to change color scale in spplot for continuous scale -
+# suggestions are welcome.
+sp$Sairastavuusindeksi2 &lt;- cut(sp$Sairastavuusindeksi, quantiles)
+
+# Define blue-white-red palette 
+library(leaflet)
+palette &lt;- colorNumeric(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;), domain = range(quantiles), na.color = &quot;black&quot;)
+
+# Visualize:
+spplot(sp, zcol = &quot;Sairastavuusindeksi2&quot;, colorkey = TRUE,
+	   main = &quot;THL ikävakioimaton sairastavuusindeksi 2010 (Sotkanet-indeksi 244)&quot;,
+	   col.regions = palette(quantiles))
+</code></pre><p><img src="/post/2015-06-06-kuntakartat.fi_files/20150606-mmlplot-1.png" alt="center"></p>
+<h3 id="nopea-visualisointi">Nopea visualisointi</h3>
+<p>Voit vaihtoehtoisesti käyttää aluedatan nopeaan visualisointiin räätälöityä wrapperiä. Tämä tuottaa ggplot2-objektin, jonka visualisointiparametreja voi halutessasi säätää lisää tarpeen mukaan:</p>
+<pre><code class="language-{%" data-lang="{%">p &lt;- region_plot(sp, color = &quot;Sairastavuusindeksi&quot;, region = &quot;kuntakoodi&quot;)
+print(p)
+</code></pre><p><img src="/post/2015-06-06-kuntakartat.fi_files/20150606-mmlplot2b-1.png" alt="center"></p>
+<h3 id="vuorovaikutteinen-kuntakartta">Vuorovaikutteinen kuntakartta</h3>
+<p>Karttojen vuorovaikutteiseen visualisointiin soveltuvat ainakin <a href="http://rmaps.github.io/">rMaps</a> ja <a href="https://rstudio.github.io/leaflet/">leaflet</a>-paketit. Seuraava esimerkki tulostaa leaflet-paketin avulla selaimeen vuorovaikutteisen kuntakartan <a href="https://github.com/finKeva/DataKuntakartalle/blob/master/dataKuntakartalle.r">Dmitry Poletaevin koodia mukaillen</a>. Lopputulos muistuttaa <a href="http://rpubs.com/welxo88/kela_tth_IvsIIsuhde">Dmitryn RPubs-esimerkkiä</a>:</p>
+<pre><code class="language-{%" data-lang="{%"># Define the region and color variables and title:
+region &lt;- &quot;kuntanimi&quot;
+color &lt;- &quot;Sairastavuusindeksi&quot;
+main &lt;- &quot;THL:n Sairastavuusindeksi&quot;
+
+# Define color palette
+palette &lt;- colorNumeric(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;), NULL)
+
+# Define the text for popup box
+state_popup &lt;- paste0(&quot;&lt;strong&gt;Kunta: &lt;/strong&gt;&quot;, sp[[region]], 
+                        &quot;&lt;br&gt;&lt;strong&gt;&quot;, main, &quot;: &lt;/strong&gt;&quot;, 
+                        round(sp@data[,c(color)], digits=2))
+
+# Generate interactive visualization
+p &lt;- leaflet(data = sp) %&gt;%
+       addTiles() %&gt;% 
+       addPolygons(fillColor = ~palette(get(color)), 
+                fillOpacity = 0.7, 
+                color = &quot;#000000&quot;, 
+                weight = 1,
+                popup = state_popup)
+
+# Open in browser
+print(p)
+</code></pre><p>rOpenGov-pakettien kehitys tapahtuu vapaaehtoispohjalta. Pakettien toiminnallisuuteen, dokumentaatioon, tutoriaaliin tai liittyvät <a href="https://github.com/rOpenGov/gisfin">kontribuutiot ovat tervetulleita</a>. Julkaisemme mieluusti täydennyksiä tähän postaukseen sekä muita R-kielen käyttöä käsitteleviä blogikirjoituksia.</p>
+
+
+    
+
+    
+
+    <h4>Katso myös</h4>
+    <ul>
+        
+            <li><a href="/fi/2014/08/gisfin-avoimen-suomalaisen-paikkatiedon-ty%C3%B6kalupakki-r-kielelle/">gisfin - Avoimen suomalaisen paikkatiedon työkalupakki R-kielelle</a></li>
+        
+            <li><a href="/fi/2015/05/urbaanien-asuinymp%C3%A4rist%C3%B6jen-suosio-kasvaa/">Urbaanien asuinympäristöjen suosio kasvaa</a></li>
+        
+            <li><a href="/fi/2015/05/asuntohintojen-alueellinen-kehitys-selvi%C3%A4%C3%A4-todenn%C3%A4k%C3%B6isyysohjelmoinnilla/">Asuntohintojen alueellinen kehitys selviää todennäköisyysohjelmoinnilla</a></li>
+        
+            <li><a href="/fi/2015/04/kenen-joukoissa-seisot-ennustaako-kone-ehdokkaan-puoluekannan/">Kenen joukoissa seisot - ennustaako kone ehdokkaan puoluekannan?</a></li>
+        
+            <li><a href="/fi/2015/03/avoimella-paikkatiedolla-kohti-%C3%A4lykk%C3%A4%C3%A4mp%C3%A4%C3%A4-kaupunkia/">Avoimella paikkatiedolla kohti älykkäämpää kaupunkia</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        
+
+      </div>
+    </div>
+    
+
+    
+      <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

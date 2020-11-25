@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maailmanpankki on rOpenGov - R packages for open government data analytics</title>
+    <link>/fi/tags/maailmanpankki/</link>
+    <description>Recent content in Maailmanpankki on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Nov 2011 00:00:00 +0000</lastBuildDate><atom:link href="/fi/tags/maailmanpankki/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Suomalaisten muuttoliike Maailmanpankin datoista maailmankartalla visualisoituna</title>
+      <link>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</link>
+      <pubDate>Thu, 17 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/fi/2011/11/suomalaisten-muuttoliike-maailmanpankin-datoista-maailmankartalla-visualisoituna/</guid>
+      <description>Mistä maasta ihmiset muuttavat Suomeen ja mihin Suomesta muutetaan? Vastausta voi etsiä Maailmanpankin Migration-datasta. Kiinnostuin aiheesta tämän mielenkiintoisen mutta loppupeleissä mielestäni erittäin vaikeaselkoisen visualisoinnin takia. Yritettyäni aikani tutkia Suomen muuttovirtoja turhauduin ja päätin visualisoida datan itse kartalle (vaihteeksi). Maailmankarttavisualisointeja ei tästä blogista vielä löydykään, joten tulee sekin samalla tutuksi. Lisäksi R-ohjelmointi -blogissa oli jokin aika sitten koodinpätkä jolla R tuottaa interaktiivisen karttapallon, jota oli tietysti pakko kokeilla itse uuden datan kanssa!</description>
+    </item>
+    
+  </channel>
+</rss>

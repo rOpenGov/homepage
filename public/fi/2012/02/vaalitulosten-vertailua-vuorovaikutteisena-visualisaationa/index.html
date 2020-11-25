@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Vaalitulosten vertailua vuorovaikutteisena visualisaationa" />
+<meta property="og:description" content="Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.
+VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN. Tässä voi esimerkiksi tarkastella kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.
+VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/" />
+<meta property="article:published_time" content="2012-02-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2012-02-07T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vaalitulosten vertailua vuorovaikutteisena visualisaationa"/>
+<meta name="twitter:description" content="Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.
+VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN. Tässä voi esimerkiksi tarkastella kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.
+VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista."/>
+
+
+
+    <link rel="canonical" href="/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/">
+
+    <title>
+      
+        Vaalitulosten vertailua vuorovaikutteisena visualisaationa | rOpenGov - R packages for open government data analytics
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>
+<script src="https://www.kela.fi/kelafi-theme/js/tablesorter/jquery.tablesorter-2.0.5.min.js"></script>
+
+
+
+
+  </head>
+  <body>
+    
+      
+
+<header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/fi">
+            <img src="/images/logo2020_white_orange.svg" height="30" class="d-inline-block align-top"
+    alt="rOpenGov - R packages for open government data analytics">
+
+
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi">Etusivu</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/post/">Blogi</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/projects/">Projektit</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/fi/community/">Yhteisö</a>
+                    
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav">
+                
+                        
+                            <a class="nav-link" href="/">English</a>
+                        
+                            <a class="nav-link" href="/fi/">Suomi</a>
+                        
+                    
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-12 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+    <a class="text-dark" href="/fi/2012/02/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/">Vaalitulosten vertailua vuorovaikutteisena visualisaationa</a>
+</h2>
+
+ 
+    <hr>
+</header>
+
+<article class="blog-post">
+    <p>Vaalihumu alkaa onneksi jo laantua, mutta innokkaimmille tarjotaan tässä vielä osana Datavaalit2012-projektia mahdollisuus vertailla äänestystuloksia ensimmäisen ja toisen kierroksen välillä. Vertailu onnistuu kuntatasolla sekä pääkaupunkiseudun sisällä äänestysalueiden kesken.</p>
+<p><a href="http://dl.dropbox.com/u/792906/figures/Presidentti2012_MotionChart_Kunnat_20120207.html">VISUALISOINTI: VAALITULOSTEN VERTAILU KUNNITTAIN</a>. Tässä voi esimerkiksi tarkastella <a href="http://www.hs.fi/politiikka/V%C3%A4yrysen+kannattajat+j%C3%A4ttiv%C3%A4t+%C3%A4%C3%A4nest%C3%A4m%C3%A4tt%C3%A4+Soinin+eiv%C3%A4t/a1305555204413">kuinka aktiivisesti Soinia ja Väyrystä ensimmäisellä kierroksella äänestäneet äänestivät toisella kierroksella</a>, ja toisaalta äänestivätkö he Niinistöä vai Haavistoa.</p>
+<p><a href="http://dl.dropbox.com/u/792906/figures/Presidentti2012_MotionChart_PKS_20120207.html">VISUALISOINTI: VAALITULOSTEN VERTAILU PÄÄKAUPUNKISEUDULLA</a>. Tässä voi tarkastella äänestyskäyttäytymistä yksityiskohtaisesti pääkaupunkiseudun sisällä äänestysalueittain. PÄIVITYS 8.2. kaupungit korjattu, kiitos Martille kommentista.</p>
+<p>Tässä esimerkkinä ruutukaappaus interaktiivisesta visualisoinnista.</p>
+<div style="text-align: center;">
+<figure >
+    <a href="/post/2012-02-07-vaalitulosten-vertailua.fi_files/motionchart_screenshot.png">
+        <img src="/post/2012-02-07-vaalitulosten-vertailua.fi_files/motionchart_screenshot.png" width="500"
+alt="Kuva interaktiivisesta visualisoinnista"  />
+    </a>
+    <figcaption><small><i>Esimerkkivertailu. Väyrysen ensimmäisen kierroksen kannatuksen ja toisen kierroksen äänestysprosentin välillä näyttää olevan yhteys.</i></small></figcaption>
+</figure>
+</div>
+<p>Aiemmat Louhoksessa julkaisut visualisaatiot ovat kaikki olleet staattisia, sillä R:ssä on toistaiseksi melko huonosti tarjolla työkaluja interaktiivisten visualisointien tekoon. Tähän tuli kuitenkin hiljattain muutos <a href="http://cran.r-project.org/web/packages/googleVis/index.html">googleVis</a> R-paketin myötä. Paketti tarjoaa helppokäyttöisen rajapinnan <a href="http://code.google.com/apis/chart/">Google Chart Tools</a>:iin, joilla kuka tahansa voi tuottaa esimerkiksi <a href="http://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen.html">Hans Rosling</a> -tyyppisen <a href="http://code.google.com/apis/chart/interactive/docs/gallery/motionchart.html">Motion Chartin</a> hetkessä.</p>
+<p>Vaalien ensimmäisen kierroksen tuloksista julkaistiinkin jo <a href="https://sites.google.com/site/tiedonlouhintaa/">hieno Motion Chart -visualisointi</a>, jossa oli lisäksi yhdistetty muuta Tilastokeskukselta löytyvää kuntadataa. Näytämme nyt kuinka sama tehdään R:llä yhdistäen ensimmäisen ja toisen kierroksen vaalidatat, koodi löytyy alta.</p>
+<p>HS Next tarjoaa <a href="http://blogit.hs.fi/hsnext/hs-julkaisee-presidentinvaalien-tuloksen-avoimena-tietona">ensimmäisen</a> ja <a href="http://blogit.hs.fi/hsnext/presidentinvaalien-toisen-kierroksen-tulos-avoimena-datana">toisen kierroksen</a> äänestystulokset, ja lisäksi Tilastokeskukselta löytyi <a href="http://www.stat.fi/meta/luokitukset/vaalipiiri/001-2012/luokitusavain_kunta.html">lista kunnista vaalipiireittäin</a>, mikä helpottaa datan työstämistä yhteensopivaan muotoon. Tulokset löytyvät aluksi linkitettyinä Dropboxin kautta, kunnes keksin kuinka ne saa sisällytettyä WordPressiin. PÄIVITYS: Tämä ei taidakaan onnistua eli noilla Dropbox-linkeillä mennään.</p>
+<p>PÄIVITYS 6.1.2013: Blogin R-skriptejä ylläpidetään jatkossa Githubissa. Tämän artikkelin koodit löytyvät <a href="https://github.com/louhos/takomo/blob/master/examples/20120207-Presidentti2012_MotionCharts.R">täältä</a>.</p>
+<p>PÄIVITYS 24.11.2020: Poistettu suora linkki domain squattereiden kaappaamalle datajournalismi.fi-sivustolle</p>
+<p>Alkuperäinen kirjoitus Louhos-blogissa: <a href="https://louhos.wordpress.com/2012/02/07/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/">https://louhos.wordpress.com/2012/02/07/vaalitulosten-vertailua-vuorovaikutteisena-visualisaationa/</a></p>
+
+
+    
+
+    
+
+
+</article>
+
+
+
+        </div>
+
+        
+
+      </div>
+    </div>
+    
+
+    
+      <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

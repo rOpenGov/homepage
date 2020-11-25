@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>eurostat on rOpenGov - R packages for open government data analytics</title>
+    <link>/tags/eurostat/</link>
+    <description>Recent content in eurostat on rOpenGov - R packages for open government data analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="/tags/eurostat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>eurostat package published in R Journal</title>
+      <link>/2017/04/eurostat-package-published-in-r-journal/</link>
+      <pubDate>Fri, 14 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/04/eurostat-package-published-in-r-journal/</guid>
+      <description>   eurostat package published in R Journal A formal publication on the eurostat CRAN R package has now appeared on-line in R Journal.
+Further details on installation and use are provided at the package homepage, tutorial and cheat sheet. Blog posts provide further and more advanced examples on the package use.
+We are also collecting information about publications using the eurostat R package, suggestions are welcome.
+ </description>
+    </item>
+    
+  </channel>
+</rss>
