@@ -26,7 +26,7 @@
   translation: "Kieli"
 
 - id: thanks
-  translation: "Hugo templaatti jonka ❤ tehnyt {{.Xzya}}, inspiroituneena {{.HugoThemeBootstrap4Blog}}"
+  translation: "Hugo-malli, jonka ❤:lla tehnyt {{.Xzya}}. Inspiraation lähteenä {{.HugoThemeBootstrap4Blog}}"
 
 - id: welcome
   translation: "Tervetuloa rOpengov-projektiin!"
