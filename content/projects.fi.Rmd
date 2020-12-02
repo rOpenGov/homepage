@@ -7,6 +7,7 @@ categories:
   -
 tags:
   -  
+noComment: TRUE
 ---
 
 rOpenGov-yhteisön R-pakettien kehitys tapahtuu [GitHubissa](https://github.com/ropengov/). Mikäli haluat kontribuoida, katso lisätietoja [Yhteisö-sivulta](/fi/community/) tai tee pull request GitHubissa.
