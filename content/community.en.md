@@ -1,7 +1,7 @@
 ---
 title: Community
 author: ~
-date: "2020-10-29"
+date: "2020-12-02"
 slug: community
 categories:
   -
@@ -19,17 +19,13 @@ Contact points in administrative matters.
 - [Joona Lehtomäki](https://github.com/jlehtoma)
 - [Markus Kainu](https://github.com/muuankarski)
 
-This started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
+It all started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
 
 
-# Key contributors
+# Other key contributors
 
-- Przemyslaw Biececk
-- Måns Magnusson
-- Janne Huovari
-- Pyry Kantanen
+We are grateful to all contributors, including [Daniel Antal](https://github.com/antaldaniel), [Przemyslaw Biececk](https://github.com/pbiecek), [Francois Briatte](https://github.com/briatte), [Christopher Gandrud](https://github.com/christophergandrud), [Janne Huovari](https://github.com/jhuovari), [Pyry Kantanen](https://github.com/pitkant), [Thomas J. Leeper](https://github.com/mansmeg), [Måns Magnusson](https://github.com/mansmeg), Kenneth Rose, and many others.. The full list and activities of contributors varies over time, and can be found through the individual projects in [github](http://github.com/ropengov). 
 
-We are grateful to all contributors. The full list of contributors varies over time, and can be found through the individual projects in [github](http://github.com/ropengov).
 
 # How to contribute?
 
