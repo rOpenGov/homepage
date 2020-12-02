@@ -4,7 +4,16 @@ $.ajax({
     url: "https://api.github.com/orgs/ropengov/repos?per_page=100&sort=updated",
     dataType: "json",
     success: function(result) {
-    var whitelist = ['homepage','geofi','hetu','eurostat','rqog','fmi2','pxweb','openthl','sweidnumber','regions','sotkanet','vipunen','digitransit','europarl']
+	var whitelist = ['homepage','geofi','hetu','eurostat','rqog','fmi2','pxweb','openthl','sweidnumber','regions','sotkanet','vipunen','digitransit','europarl', 'iotables', 'psData', 'pollstR', 'rwfs', 'hansard', 'europarl', 'RPublica', 'dkstat', 'usbroadband', 'mpg', 'federalregister', 'ogdindiar']
+
+	// edu,
+	// eurostat_geodata
+	
+	// In devel:
+	// helsinki, sorvi, election
+	
+        // Remove: fmi, edudata, rustfare
+	
         for( i in result ) {
 
         // homepage if exists

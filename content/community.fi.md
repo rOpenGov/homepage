@@ -1,7 +1,7 @@
 ---
 title: Yhteisö
 author: ~
-date: "2020-10-29"
+date: "2020-12-02"
 slug: community
 categories:
   -
@@ -21,13 +21,8 @@ Yhteydenotot yleisesti rOpenGoviin liittyvissä asioissa:
 
 # Keskeiset kontribuuttorit
 
-- Przemyslaw Biececk
-- Måns Magnusson
-- Janne Huovari
-- Pyry Kantanen
+Olemme kiitollisia kaikille kontribuuttoreille! Kattavin listaus pakettikohtaisista kontribuuttoreista löytyy [GitHub](http://github.com/ropengov)-sivulta. Merkittävää panosta hankkeeseen ovat antaneet mm. [Daniel Antal](https://github.com/antaldaniel), [Przemyslaw Biececk](https://github.com/pbiecek), [Francois Briatte](https://github.com/briatte), [Christopher Gandrud](https://github.com/christophergandrud), [Janne Huovari](https://github.com/jhuovari), [Pyry Kantanen](https://github.com/pitkant), [Thomas J. Leeper](https://github.com/mansmeg), [Måns Magnusson](https://github.com/mansmeg), Kenneth Rose, ja muut..
 
-Täydellinen listaus pakettikohtaisista kontribuuttoreista löytyy
-[GitHub](http://github.com/ropengov)-sivulta. Olemme kiitollisia kaikille kontribuuttoreille.
 
 # Kuinka voin kontribuoida?
 
