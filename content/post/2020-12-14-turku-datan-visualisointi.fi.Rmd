@@ -1,9 +1,13 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
+<<<<<<< HEAD
 author: "Pyry Kantanen"
 <<<<<<< HEAD
 date: "2020-12-14 15:38:52 EET"
 =======
+=======
+author: Pyry Kantanen
+>>>>>>> origin
 date: 2020-12-14
 >>>>>>> origin
 categories:
