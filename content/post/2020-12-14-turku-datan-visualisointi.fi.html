@@ -1,0 +1,225 @@
+---
+title: "Turun pienaluetilastojen visualisointi R:ssä"
+author: "Pyry Kantanen"
+date: 2020-12-14
+categories: ["paikkatieto", "visualisointi"]
+tags: ["geojson", "ggplot2", "kaupunkidata", "PC-Axis", "Turku"]
+output:
+  blogdown::html_page:
+    highlight: tango
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<div id="yleistä" class="section level2">
+<h2>Yleistä</h2>
+<p>Turun kaupunki avasi syksyllä <a href="https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja">2020 pienaluetilastoja</a>, jotka antavat jo ennestään saatavilla olleiden <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html">postinumeroaluekohtaisten tilastojen</a> ohella mahdollisuuden tarkastella <a href="https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja">Turun kaupungin alueita</a> hienojakoisemmin kuin aiemmin on ollut mahdollista.</p>
+<p>Ainakin toistaiseksi Turun kaupunki tarjoaa valmiissa muodossa ainoastaan kaupunkitason tilastoja sekä pienaluetilastoja. Pienaluetilastoista voidaan aggregoida suurempia alueita vastaavalla tavalla kuin kunnista voidaan aggregoida maakuntatason tietoja.</p>
+<p>Toistaiseksi pienaluetilastojen yhdistäminen karttatietoaineistoon vaatii enemmän manuaalista työtä kuin esimerkiksi Tilastokeskuksen sivuilta <a href="https://CRAN.R-project.org/package=pxweb">pxweb-paketilla</a> ladatun tiedon visualisointi <a href="https://ropengov.org/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/">geofi-pakettia</a> käyttämällä. Ennen kuin tähän saadaan tulevaisuudessa muutos, tämän blogitekstin on tarkoitus demonstroida kuinka helppoa datan visualisointi on ilman erikoistuneita pakettejakin.</p>
+</div>
+<div id="pienaluetilastojen-lataaminen-ja-visualisointi" class="section level2">
+<h2>Pienaluetilastojen lataaminen ja visualisointi</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># px-muotoisen datan lukemiseen tarvittava paketti</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxR)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Datan käsittelyyn tarvittavat tidyverse-paketit</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Geospatiaalisen datan käsittelyyn tarvittavat paketit</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># URL lähde: https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>url_data <span class="ot">&lt;-</span> <span class="st">&quot;https://dev.turku.fi/datasets/pienaluetilastot/turku-vaesto_ian_ja_sukupuolen_mukaan-varak_12nh.px&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pxR-paketin standardinomainen tapa lukea Tilastokeskuksen px-dataa ei toimi:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read.px(filename = url)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Error in scan(tc, na.strings = na.strings, quote = NULL, quiet = TRUE) : </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  scan() expected &#39;a real&#39;, got &#39;..&#39;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Käytetään argumenttia na.strings = c(&quot;..&quot;), jolloin data voidaan lukea</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> <span class="fu">read.px</span>(url_data, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;..&quot;</span>))</span></code></pre></div>
+<p>Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># px_data-objektin sisällön otsikot</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(px_data)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;AXIS.VERSION&quot;        &quot;CHARSET&quot;             &quot;CODEPAGE&quot;           </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [4] &quot;CODES&quot;               &quot;CODES.sv.&quot;           &quot;CONTACT&quot;            </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] &quot;CONTACT.sv.&quot;         &quot;CONTENTS&quot;            &quot;CONTENTS.sv.&quot;       </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] &quot;CONTVARIABLE&quot;        &quot;CONTVARIABLE.sv.&quot;    &quot;COPYRIGHT&quot;          </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] &quot;CREATION.DATE&quot;       &quot;DATA&quot;                &quot;DECIMALS&quot;           </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] &quot;DESCRIPTION&quot;         &quot;DESCRIPTION.sv.&quot;     &quot;DOMAIN&quot;             </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [19] &quot;DOMAIN.sv.&quot;          &quot;HEADING&quot;             &quot;HEADING.sv.&quot;        </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [22] &quot;LANGUAGE&quot;            &quot;LANGUAGES&quot;           &quot;LAST.UPDATED&quot;       </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [25] &quot;LAST.UPDATED.sv.&quot;    &quot;MADE.WITH&quot;           &quot;MATRIX&quot;             </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [28] &quot;NOTE&quot;                &quot;NOTE.sv.&quot;            &quot;OFFICIAL.STATISTICS&quot;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [31] &quot;SHOWDECIMALS&quot;        &quot;SOURCE&quot;              &quot;SOURCE.sv.&quot;         </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [34] &quot;STUB&quot;                &quot;STUB.sv.&quot;            &quot;SUBJECT.AREA&quot;       </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [37] &quot;SUBJECT.AREA.sv.&quot;    &quot;SUBJECT.CODE&quot;        &quot;TABLEID&quot;            </span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [40] &quot;TIMEVAL&quot;             &quot;TIMEVAL.sv.&quot;         &quot;TITLE&quot;              </span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [43] &quot;TITLE.sv.&quot;           &quot;UNITS&quot;               &quot;UNITS.sv.&quot;          </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [46] &quot;VALUES&quot;              &quot;VALUES.sv.&quot;          &quot;VARIABLE.TYPE&quot;      </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [49] &quot;VARIABLE.TYPE.sv.&quot;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># px_data-objektin luokka</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(px_data)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;px&quot;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># px_data-objektin rakenne: Tulostaa erittäin pitkän listan tietoja, jota en toista tässä esimerkissä</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(px_data)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Muoto, jossa px_data-objektin tiedot on tallennettu</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(px_data)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;list&quot;</span></span></code></pre></div>
+<p>Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa. Tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-elementistä. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muodostetaan uusi muuttuja turku_data px_data-objektin sisältämästä data.framesta</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>turku_data <span class="ot">&lt;-</span> px_data<span class="sc">$</span>DATA<span class="sc">$</span>value</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># px_data -objektin kuvauksen tallentaminen voi olla hyödyllistä myöhemmin</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>turku_data_otsikko <span class="ot">&lt;-</span> px_data<span class="sc">$</span>DESCRIPTION<span class="sc">$</span>value</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(turku_data)</span></code></pre></div>
+<pre><code>## [1] 160344      7</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(turku_data)</span></code></pre></div>
+<pre><code>##            Tiedot        Vuosi                            Kieli      
+##  Väestö 31.12.:160344   2019:160344   Yhteensä               :40086  
+##                                       suomi                  :40086  
+##                                       ruotsi                 :40086  
+##                                       VIERASKIELISET YHTEENSÄ:40086  
+##                                                                      
+##                                                                      
+##                                                                      
+##     Sukupuoli           Ikä                                   Osa.alue     
+##  Yhteensä:53448   Yhteensä:  1572   853 Turku                     :  1224  
+##  Miehet  :53448   0       :  1572   853101001 Rauhankatu VII      :  1224  
+##  Naiset  :53448   1       :  1572   853101002 Ursininkatu pohj.   :  1224  
+##                   2       :  1572   853101003 Ursininkatu et.     :  1224  
+##                   3       :  1572   853101004 Kristiinankatu et.  :  1224  
+##                   4       :  1572   853101005 Kristiinankatu pohj.:  1224  
+##                   (Other) :150912   (Other)                       :153000  
+##      value          
+##  Min.   :     0.00  
+##  1st Qu.:     0.00  
+##  Median :     1.00  
+##  Mean   :    22.68  
+##  3rd Qu.:     7.00  
+##  Max.   :192962.00  
+##  NA&#39;s   :24480</code></pre>
+<p>dim-komento kertoo, että data.framessa on 160344 riviä ja 7 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.</p>
+<p>Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme eri kieliryhmiin kuuluvia eri pienalueilla, joten valitsemme siis Kieli-sarakkeesta suomi, ruotsi ja VIERASKIELISET YHTEENSÄ. Sukupuolen tai iän osalta emme tee erottelua, joten Yhteensä-sarake riittää. Osa.alue-sarakkeesta voimme ottaa kaikki tiedot, sillä yhdistämme vasta myöhemmin tiedot geospatiaaliseen dataan.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sukupuoli <span class="sc">==</span> <span class="st">&quot;Yhteensä&quot;</span>, Kieli <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;VIERASKIELISET YHTEENSÄ&quot;</span>, <span class="st">&quot;ruotsi&quot;</span>, <span class="st">&quot;suomi&quot;</span>), Ikä <span class="sc">==</span> <span class="st">&quot;Yhteensä&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(turku_data2)</span></code></pre></div>
+<pre><code>##            Tiedot     Vuosi                         Kieli        Sukupuoli  
+##  Väestö 31.12.:393   2019:393   Yhteensä               :  0   Yhteensä:393  
+##                                 suomi                  :131   Miehet  :  0  
+##                                 ruotsi                 :131   Naiset  :  0  
+##                                 VIERASKIELISET YHTEENSÄ:131                 
+##                                                                             
+##                                                                             
+##                                                                             
+##        Ikä                                Osa.alue       value       
+##  Yhteensä:393   853 Turku                     :  3   Min.   :     0  
+##  0       :  0   853101001 Rauhankatu VII      :  3   1st Qu.:    48  
+##  1       :  0   853101002 Ursininkatu pohj.   :  3   Median :   134  
+##  2       :  0   853101003 Ursininkatu et.     :  3   Mean   :  1157  
+##  3       :  0   853101004 Kristiinankatu et.  :  3   3rd Qu.:   710  
+##  4       :  0   853101005 Kristiinankatu pohj.:  3   Max.   :159506  
+##  (Other) :  0   (Other)                       :375   NA&#39;s   :60</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan vieraskielisten teksti lyhyemmäksi</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>turku_data2<span class="sc">$</span>Kieli <span class="ot">&lt;-</span> turku_data2<span class="sc">$</span>Kieli <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">recode</span>(<span class="st">&quot;VIERASKIELISET YHTEENSÄ&quot;</span> <span class="ot">=</span> <span class="st">&quot;muut&quot;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">area_code =</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;</span>, <span class="st">&quot;&quot;</span>, turku_data2<span class="sc">$</span>Osa.alue))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan pitkä datamuoto leveäksi</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">&quot;Osa.alue&quot;</span>, <span class="st">&quot;area_code&quot;</span>), <span class="at">names_from =</span> <span class="st">&quot;Kieli&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<p>Seuraavaksi yhdistämme datatiedot geospatiaaliseen dataan käyttämällä sf-pakettia sekä visualisointiin ggplot2-pakettia.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>url_geo <span class="ot">&lt;-</span> <span class="st">&quot;http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson&quot;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>turku_pienalueet <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="at">dsn =</span> url_geo)</span></code></pre></div>
+<pre><code>## Reading layer `aj_osa-alue_20200415_area&#39; from data source `http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson&#39; using driver `GeoJSON&#39;
+## Simple feature collection with 129 features and 1 field
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 22.06614 ymin: 60.33351 xmax: 22.45816 ymax: 60.73729
+## geographic CRS: WGS 84</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>turku_pienalueet <span class="ot">&lt;-</span> turku_pienalueet <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area_code =</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;</span>, <span class="st">&quot;&quot;</span>, turku_pienalueet<span class="sc">$</span>id))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(turku_pienalueet, turku_data2, <span class="at">by =</span> <span class="st">&quot;area_code&quot;</span>)</span></code></pre></div>
+<p>Visualisoidaan ruotsinkielisen väestön osuus suhteessa suomenkielisiin ja muunkielisiin:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ruotsi <span class="sc">/</span> (suomi <span class="sc">+</span> ruotsi <span class="sc">+</span> muut)), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">&quot;Ruotsinkielisten osuus&quot;</span>)</span></code></pre></div>
+<p><img src="/post/2020-12-14-turku-datan-visualisointi.fi_files/figure-html/visualization-1.png" width="672" /></p>
+<p>Kuten huomataan, osalla pienalueista dataa on liian vähän visualisointien tekemiseen. Toisaalta pienalueet ovat visualisoimisen kannalta ongelmallisia siinäkin mielessä, että karttakuva on helposti liian yksityiskohtaista piiperrystä. Eräs ratkaisu tähän olisi tehdä pienaluekuvista kartogrammi, jossa väkirikkaammat pienalueet piirrettäisiin suhteellisesti suurempina kuin harvaan asutummat pienalueet.</p>
+</div>
