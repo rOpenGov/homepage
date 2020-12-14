@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 <<<<<<< HEAD
 author: "Pyry Kantanen"
@@ -10,12 +11,18 @@ author: Pyry Kantanen
 >>>>>>> origin
 date: 2020-12-14
 >>>>>>> origin
+=======
+title: Turun pienaluetilastojen visualisointi R:ssä
+author: Pyry Kantanen
+date: '2020-12-14'
+>>>>>>> origin
 categories:
-- spatial data
-- paikkatieto
-- visualization
-- visualisointi
+  - paikkatieto
+  - spatial data
+  - visualisointi
+  - visualization
 tags:
+<<<<<<< HEAD
 - ggplot2
 - Turku
 - PC Axis
@@ -31,6 +38,13 @@ draft: yes
 =======
 >>>>>>> origin
 =======
+=======
+  - geojson
+  - ggplot2
+  - kaupunkidata
+  - PC Axis
+  - Turku
+>>>>>>> origin
 output:
   blogdown::html_page:
     highlight: tango
