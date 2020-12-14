@@ -4,7 +4,7 @@ author: "Pyry Kantanen"
 date: "2020-12-14"
 categories:
   - paikkatieto
-  - spatial data
+  - spatialdata
   - visualisointi
   - visualization
 tags:
