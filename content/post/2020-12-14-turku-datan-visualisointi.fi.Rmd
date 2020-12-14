@@ -1,0 +1,171 @@
+---
+title: "Turun pienaluetilastojen visualisointi R:ssä"
+author: "Pyry Kantanen"
+date: "2020-12-14 15:38:52 EET"
+categories:
+- spatial data
+- paikkatieto
+- visualization
+tags:
+- ggplot2
+- Turku
+- PC Axis
+- geojson
+- kaupunkidata
+draft: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Yleistä
+
+Turun kaupunki avasi syksyllä [2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista. 
+
+Ainakin toistaiseksi Turun kaupunki tarjoaa valmiissa muodossa ainoastaan kaupunkitason tilastoja sekä pienaluetilastoja. Pienaluetilastoista voidaan aggregoida suurempia alueita vastaavalla tavalla kuin kunnista voidaan aggregoida maakuntatason tietoja.
+
+Toistaiseksi pienaluetilastojen yhdistäminen karttatietoaineistoon vaatii enemmän manuaalista työtä kuin esimerkiksi Tilastokeskuksen sivuilta [pxweb-paketilla](https://CRAN.R-project.org/package=pxweb) ladatun tiedon visualisointi [geofi-pakettia](https://ropengov.org/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/) käyttämällä. Ennen kuin tähän saadaan tulevaisuudessa muutos, tämän blogitekstin on tarkoitus demonstroida kuinka helppoa datan visualisointi on ilman erikoistuneita pakettejakin.
+
+## Pienaluetilastojen lataaminen ja visualisointi
+
+```{r, load-packages-showcase, message='hide', eval=FALSE}
+# px-muotoisen datan lukemiseen tarvittava paketti
+library(pxR)
+# Datan käsittelyyn tarvittavat tidyverse-paketit
+library(dplyr)
+library(tidyr)
+# Geospatiaalisen datan käsittelyyn tarvittavat paketit
+library(sf)
+library(ggplot2)
+```
+
+```{r, load-packages1, include=FALSE}
+# px-muotoisen datan lukemiseen tarvittava paketti
+library(pxR)
+```
+
+Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.
+
+```{r, data_loading}
+
+# URL lähde: https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja
+url_data <- "https://dev.turku.fi/datasets/pienaluetilastot/turku-vaesto_ian_ja_sukupuolen_mukaan-varak_12nh.px"
+
+# pxR-paketin standardinomainen tapa lukea Tilastokeskuksen px-dataa ei toimi:
+# read.px(filename = url)
+#Error in scan(tc, na.strings = na.strings, quote = NULL, quiet = TRUE) : 
+#  scan() expected 'a real', got '..'
+
+# Käytetään argumenttia na.strings = c(".."), jolloin data voidaan lukea
+px_data <- read.px(url_data, na.strings = c(".."))
+```
+
+Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:
+
+```{r, data-exploration, eval=FALSE}
+
+# px_data-objektin sisällön otsikot
+names(px_data)
+##  [1] "AXIS.VERSION"        "CHARSET"             "CODEPAGE"           
+##  [4] "CODES"               "CODES.sv."           "CONTACT"            
+##  [7] "CONTACT.sv."         "CONTENTS"            "CONTENTS.sv."       
+## [10] "CONTVARIABLE"        "CONTVARIABLE.sv."    "COPYRIGHT"          
+## [13] "CREATION.DATE"       "DATA"                "DECIMALS"           
+## [16] "DESCRIPTION"         "DESCRIPTION.sv."     "DOMAIN"             
+## [19] "DOMAIN.sv."          "HEADING"             "HEADING.sv."        
+## [22] "LANGUAGE"            "LANGUAGES"           "LAST.UPDATED"       
+## [25] "LAST.UPDATED.sv."    "MADE.WITH"           "MATRIX"             
+## [28] "NOTE"                "NOTE.sv."            "OFFICIAL.STATISTICS"
+## [31] "SHOWDECIMALS"        "SOURCE"              "SOURCE.sv."         
+## [34] "STUB"                "STUB.sv."            "SUBJECT.AREA"       
+## [37] "SUBJECT.AREA.sv."    "SUBJECT.CODE"        "TABLEID"            
+## [40] "TIMEVAL"             "TIMEVAL.sv."         "TITLE"              
+## [43] "TITLE.sv."           "UNITS"               "UNITS.sv."          
+## [46] "VALUES"              "VALUES.sv."          "VARIABLE.TYPE"      
+## [49] "VARIABLE.TYPE.sv."
+
+# px_data-objektin luokka
+class(px_data)
+# [1] "px"
+
+# px_data-objektin rakenne: Tulostaa erittäin pitkän listan tietoja, jota en toista tässä esimerkissä
+str(px_data)
+
+# Muoto, jossa px_data-objektin tiedot on tallennettu
+typeof(px_data)
+# [1] "list"
+```
+
+Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa. Tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-elementistä. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.
+
+```{r, data-handling}
+# Muodostetaan uusi muuttuja turku_data px_data-objektin sisältämästä data.framesta
+turku_data <- px_data$DATA$value
+
+# px_data -objektin kuvauksen tallentaminen voi olla hyödyllistä myöhemmin
+turku_data_otsikko <- px_data$DESCRIPTION$value
+
+dim(turku_data)
+summary(turku_data)
+```
+
+dim-komento kertoo, että data.framessa on 160344 riviä ja 7 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.
+
+Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme eri kieliryhmiin kuuluvia eri pienalueilla, joten valitsemme siis Kieli-sarakkeesta suomi, ruotsi ja VIERASKIELISET YHTEENSÄ. Sukupuolen tai iän osalta emme tee erottelua, joten Yhteensä-sarake riittää. Osa.alue-sarakkeesta voimme ottaa kaikki tiedot, sillä yhdistämme vasta myöhemmin tiedot geospatiaaliseen dataan.
+
+```{r, load-packages2, include = FALSE}
+library(dplyr)
+library(tidyr)
+```
+
+```{r, data-handling2}
+turku_data2 <- turku_data %>% 
+  filter(Sukupuoli == "Yhteensä", Kieli %in% c("VIERASKIELISET YHTEENSÄ", "ruotsi", "suomi"), Ikä == "Yhteensä")
+
+summary(turku_data2)
+
+# Muutetaan vieraskielisten teksti lyhyemmäksi
+turku_data2$Kieli <- turku_data2$Kieli %>% 
+  recode("VIERASKIELISET YHTEENSÄ" = "muut")
+
+# Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit
+turku_data2 <- turku_data2 %>% 
+  dplyr::mutate(area_code = gsub("[[:alpha:]]*[[:punct:]]*[[:blank:]]*", "", turku_data2$Osa.alue))
+
+# Muutetaan pitkä datamuoto leveäksi
+turku_data2 <- turku_data2 %>% 
+  tidyr::pivot_wider(id_cols = c("Osa.alue", "area_code"), names_from = "Kieli", values_from = "value")
+
+```
+
+Seuraavaksi yhdistämme datatiedot geospatiaaliseen dataan käyttämällä sf-pakettia sekä visualisointiin ggplot2-pakettia.
+
+```{r, load-packages3, include=FALSE}
+# Geospatiaalisen datan käsittelyyn tarvittavat paketit
+library(sf)
+library(ggplot2)
+```
+
+```{r, geospatial-data-handling}
+
+url_geo <- "http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson"
+
+turku_pienalueet <- sf::st_read(dsn = url_geo)
+
+turku_pienalueet <- turku_pienalueet %>% 
+  mutate(area_code = gsub("[[:alpha:]]*[[:punct:]]*[[:blank:]]*", "", turku_pienalueet$id))
+
+dat <- dplyr::left_join(turku_pienalueet, turku_data2, by = "area_code")
+
+```
+
+Visualisoidaan ruotsinkielisen väestön osuus suhteessa suomenkielisiin ja muunkielisiin: 
+
+```{r, visualization}
+ggplot(dat) +
+  geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
+  labs(fill="Ruotsinkielisten osuus")
+```
+
+Kuten huomataan, osalla pienalueista dataa on liian vähän visualisointien tekemiseen. Toisaalta pienalueet ovat visualisoimisen kannalta ongelmallisia siinäkin mielessä, että karttakuva on helposti liian yksityiskohtaista piiperrystä. Eräs ratkaisu tähän olisi tehdä pienaluekuvista kartogrammi, jossa väkirikkaammat pienalueet piirrettäisiin suhteellisesti suurempina kuin harvaan asutummat pienalueet.
