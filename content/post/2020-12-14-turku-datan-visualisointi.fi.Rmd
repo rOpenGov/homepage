@@ -12,7 +12,10 @@ tags:
 - PC Axis
 - geojson
 - kaupunkidata
+<<<<<<< HEAD
 draft: yes
+=======
+>>>>>>> origin
 ---
 
 ```{r setup, include=FALSE}
