@@ -1,6 +1,7 @@
 ---
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 <<<<<<< HEAD
 author: "Pyry Kantanen"
@@ -20,6 +21,10 @@ date: '2020-12-14'
 =======
 title: Turun pienaluetilastojen visualisointi R:ssä
 author: Pyry Kantanen
+=======
+title: "Turun pienaluetilastojen visualisointi R:ssä"
+author: "Pyry Kantanen"
+>>>>>>> origin
 date: '2020-12-14'
 >>>>>>> origin
 categories:
