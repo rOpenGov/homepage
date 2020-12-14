@@ -33,7 +33,7 @@ date: "2020-12-14"
 >>>>>>> origin
 categories:
   - paikkatieto
-  - spatial data
+  - spatialdata
   - visualisointi
   - visualization
 tags:
