@@ -23,10 +23,16 @@ tags:
 - kaupunkidata
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 draft: yes
 =======
 >>>>>>> origin
 =======
+>>>>>>> origin
+=======
+output:
+  blogdown::html_page:
+    highlight: tango
 >>>>>>> origin
 ---
 
