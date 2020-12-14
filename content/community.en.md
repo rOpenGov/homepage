@@ -10,21 +10,19 @@ tags:
 noComment: TRUE
 ---
 
-# Core team
 
-Contact points in administrative matters.
+# Developers
+
+In administrative matters, you can **contact:**
 
 - [Leo Lahti](http://www.iki.fi/Leo.Lahti)
 - [Juuso Parkkinen](http://ouzor.github.io/)
 - [Joona Lehtomäki](https://github.com/jlehtoma)
 - [Markus Kainu](https://github.com/muuankarski)
 
-It all started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
-
-
-# Other key contributors
-
 We are grateful to all contributors, including [Daniel Antal](https://github.com/antaldaniel), [Przemyslaw Biececk](https://github.com/pbiecek), [Francois Briatte](https://github.com/briatte), [Christopher Gandrud](https://github.com/christophergandrud), [Janne Huovari](https://github.com/jhuovari), [Pyry Kantanen](https://github.com/pitkant), [Thomas J. Leeper](https://github.com/mansmeg), [Måns Magnusson](https://github.com/mansmeg), Kenneth Rose, and many others.. The full list and activities of contributors varies over time, and can be found through the individual projects in [github](http://github.com/ropengov). 
+
+It all started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
 
 
 # How to contribute?

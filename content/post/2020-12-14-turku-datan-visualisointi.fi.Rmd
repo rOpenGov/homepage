@@ -1,9 +1,25 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
+<<<<<<< HEAD
 author: "Pyry Kantanen"
 date: 2020-12-14
 categories: ["paikkatieto", "visualisointi", "example"]
 tags: ["geojson", "ggplot2", "kaupunkidata", "PC Axis", "Turku"]
+=======
+author: Pyry Kantanen
+date: "2020-12-14"
+categories:
+  - paikkatieto
+  - spatialdata
+  - visualisointi
+  - visualization
+tags:
+  - geojson
+  - ggplot2
+  - kaupunkidata
+  - PCAxis
+  - Turku
+>>>>>>> 05aa1640307fdc49de0343dfe53e8e6303f451ca
 output:
   blogdown::html_page:
     highlight: tango
