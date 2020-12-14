@@ -18,10 +18,6 @@ output:
     highlight: tango
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Yleistä
 
 Turun kaupunki avasi syksyllä [2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista. 
