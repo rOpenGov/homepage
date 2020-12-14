@@ -11,7 +11,7 @@ tags:
   - geojson
   - ggplot2
   - kaupunkidata
-  - PC Axis
+  - PCAxis
   - Turku
 output:
   blogdown::html_page:
