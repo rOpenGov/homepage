@@ -1,16 +1,12 @@
 ---
-title: "Avoimella paikkatiedolla kohti älykkäämpää kaupunkia"
+title: Avoimella paikkatiedolla kohti älykkäämpää kaupunkia
 author: Juuso Parkkinen
-date: "2015-03-13"
-category : news
-tags : [news, avoin data, paikkatieto]
-language: fi
-comments: true
+date: '2015-03-13'
 categories:
   - news
 tags:
-  - news
   - avoin data
+  - news
   - paikkatieto
 ---
 
