@@ -1,0 +1,167 @@
+---
+title: "Turun pienaluetilastojen visualisointi R:ssä"
+author: "Pyry Kantanen"
+date: "2020-12-14 15:38:52 EET"
+categories:
+- spatial data
+- paikkatieto
+- visualization
+tags:
+- ggplot2
+- Turku
+- PC Axis
+- geojson
+- kaupunkidata
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="yleistä" class="section level2">
+<h2>Yleistä</h2>
+<p>Turun kaupunki avasi syksyllä <a href="https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja">2020 pienaluetilastoja</a>, jotka antavat jo ennestään saatavilla olleiden <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html">postinumeroaluekohtaisten tilastojen</a> ohella mahdollisuuden tarkastella <a href="https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja">Turun kaupungin alueita</a> hienojakoisemmin kuin aiemmin on ollut mahdollista.</p>
+<p>Ainakin toistaiseksi Turun kaupunki tarjoaa valmiissa muodossa ainoastaan kaupunkitason tilastoja sekä pienaluetilastoja. Pienaluetilastoista voidaan aggregoida suurempia alueita vastaavalla tavalla kuin kunnista voidaan aggregoida maakuntatason tietoja.</p>
+<p>Toistaiseksi pienaluetilastojen yhdistäminen karttatietoaineistoon vaatii enemmän manuaalista työtä kuin esimerkiksi Tilastokeskuksen sivuilta <a href="https://CRAN.R-project.org/package=pxweb">pxweb-paketilla</a> ladatun tiedon visualisointi <a href="https://ropengov.org/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/">geofi-pakettia</a> käyttämällä. Ennen kuin tähän saadaan tulevaisuudessa muutos, tämän blogitekstin on tarkoitus demonstroida kuinka helppoa datan visualisointi on ilman erikoistuneita pakettejakin.</p>
+</div>
+<div id="pienaluetilastojen-lataaminen-ja-visualisointi" class="section level2">
+<h2>Pienaluetilastojen lataaminen ja visualisointi</h2>
+<pre class="r"><code># px-muotoisen datan lukemiseen tarvittava paketti
+library(pxR)
+# Datan käsittelyyn tarvittavat tidyverse-paketit
+library(dplyr)
+library(tidyr)
+# Geospatiaalisen datan käsittelyyn tarvittavat paketit
+library(sf)
+library(ggplot2)</code></pre>
+<p>Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.</p>
+<pre class="r"><code># URL lähde: https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja
+url_data &lt;- &quot;https://dev.turku.fi/datasets/pienaluetilastot/turku-vaesto_ian_ja_sukupuolen_mukaan-varak_12nh.px&quot;
+
+# pxR-paketin standardinomainen tapa lukea Tilastokeskuksen px-dataa ei toimi:
+# read.px(filename = url)
+#Error in scan(tc, na.strings = na.strings, quote = NULL, quiet = TRUE) : 
+#  scan() expected &#39;a real&#39;, got &#39;..&#39;
+
+# Käytetään argumenttia na.strings = c(&quot;..&quot;), jolloin data voidaan lukea
+px_data &lt;- read.px(url_data, na.strings = c(&quot;..&quot;))</code></pre>
+<p>Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:</p>
+<pre class="r"><code># px_data-objektin sisällön otsikot
+names(px_data)
+##  [1] &quot;AXIS.VERSION&quot;        &quot;CHARSET&quot;             &quot;CODEPAGE&quot;           
+##  [4] &quot;CODES&quot;               &quot;CODES.sv.&quot;           &quot;CONTACT&quot;            
+##  [7] &quot;CONTACT.sv.&quot;         &quot;CONTENTS&quot;            &quot;CONTENTS.sv.&quot;       
+## [10] &quot;CONTVARIABLE&quot;        &quot;CONTVARIABLE.sv.&quot;    &quot;COPYRIGHT&quot;          
+## [13] &quot;CREATION.DATE&quot;       &quot;DATA&quot;                &quot;DECIMALS&quot;           
+## [16] &quot;DESCRIPTION&quot;         &quot;DESCRIPTION.sv.&quot;     &quot;DOMAIN&quot;             
+## [19] &quot;DOMAIN.sv.&quot;          &quot;HEADING&quot;             &quot;HEADING.sv.&quot;        
+## [22] &quot;LANGUAGE&quot;            &quot;LANGUAGES&quot;           &quot;LAST.UPDATED&quot;       
+## [25] &quot;LAST.UPDATED.sv.&quot;    &quot;MADE.WITH&quot;           &quot;MATRIX&quot;             
+## [28] &quot;NOTE&quot;                &quot;NOTE.sv.&quot;            &quot;OFFICIAL.STATISTICS&quot;
+## [31] &quot;SHOWDECIMALS&quot;        &quot;SOURCE&quot;              &quot;SOURCE.sv.&quot;         
+## [34] &quot;STUB&quot;                &quot;STUB.sv.&quot;            &quot;SUBJECT.AREA&quot;       
+## [37] &quot;SUBJECT.AREA.sv.&quot;    &quot;SUBJECT.CODE&quot;        &quot;TABLEID&quot;            
+## [40] &quot;TIMEVAL&quot;             &quot;TIMEVAL.sv.&quot;         &quot;TITLE&quot;              
+## [43] &quot;TITLE.sv.&quot;           &quot;UNITS&quot;               &quot;UNITS.sv.&quot;          
+## [46] &quot;VALUES&quot;              &quot;VALUES.sv.&quot;          &quot;VARIABLE.TYPE&quot;      
+## [49] &quot;VARIABLE.TYPE.sv.&quot;
+
+# px_data-objektin luokka
+class(px_data)
+# [1] &quot;px&quot;
+
+# px_data-objektin rakenne: Tulostaa erittäin pitkän listan tietoja, jota en toista tässä esimerkissä
+str(px_data)
+
+# Muoto, jossa px_data-objektin tiedot on tallennettu
+typeof(px_data)
+# [1] &quot;list&quot;</code></pre>
+<p>Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa. Tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-elementistä. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.</p>
+<pre class="r"><code># Muodostetaan uusi muuttuja turku_data px_data-objektin sisältämästä data.framesta
+turku_data &lt;- px_data$DATA$value
+
+# px_data -objektin kuvauksen tallentaminen voi olla hyödyllistä myöhemmin
+turku_data_otsikko &lt;- px_data$DESCRIPTION$value
+
+dim(turku_data)</code></pre>
+<pre><code>## [1] 160344      7</code></pre>
+<pre class="r"><code>summary(turku_data)</code></pre>
+<pre><code>##            Tiedot        Vuosi                            Kieli      
+##  Väestö 31.12.:160344   2019:160344   Yhteensä               :40086  
+##                                       suomi                  :40086  
+##                                       ruotsi                 :40086  
+##                                       VIERASKIELISET YHTEENSÄ:40086  
+##                                                                      
+##                                                                      
+##                                                                      
+##     Sukupuoli           Ikä                                   Osa.alue     
+##  Yhteensä:53448   Yhteensä:  1572   853 Turku                     :  1224  
+##  Miehet  :53448   0       :  1572   853101001 Rauhankatu VII      :  1224  
+##  Naiset  :53448   1       :  1572   853101002 Ursininkatu pohj.   :  1224  
+##                   2       :  1572   853101003 Ursininkatu et.     :  1224  
+##                   3       :  1572   853101004 Kristiinankatu et.  :  1224  
+##                   4       :  1572   853101005 Kristiinankatu pohj.:  1224  
+##                   (Other) :150912   (Other)                       :153000  
+##      value          
+##  Min.   :     0.00  
+##  1st Qu.:     0.00  
+##  Median :     1.00  
+##  Mean   :    22.68  
+##  3rd Qu.:     7.00  
+##  Max.   :192962.00  
+##  NA&#39;s   :24480</code></pre>
+<p>dim-komento kertoo, että data.framessa on 160344 riviä ja 7 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.</p>
+<p>Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme eri kieliryhmiin kuuluvia eri pienalueilla, joten valitsemme siis Kieli-sarakkeesta suomi, ruotsi ja VIERASKIELISET YHTEENSÄ. Sukupuolen tai iän osalta emme tee erottelua, joten Yhteensä-sarake riittää. Osa.alue-sarakkeesta voimme ottaa kaikki tiedot, sillä yhdistämme vasta myöhemmin tiedot geospatiaaliseen dataan.</p>
+<pre class="r"><code>turku_data2 &lt;- turku_data %&gt;% 
+  filter(Sukupuoli == &quot;Yhteensä&quot;, Kieli %in% c(&quot;VIERASKIELISET YHTEENSÄ&quot;, &quot;ruotsi&quot;, &quot;suomi&quot;), Ikä == &quot;Yhteensä&quot;)
+
+summary(turku_data2)</code></pre>
+<pre><code>##            Tiedot     Vuosi                         Kieli        Sukupuoli  
+##  Väestö 31.12.:393   2019:393   Yhteensä               :  0   Yhteensä:393  
+##                                 suomi                  :131   Miehet  :  0  
+##                                 ruotsi                 :131   Naiset  :  0  
+##                                 VIERASKIELISET YHTEENSÄ:131                 
+##                                                                             
+##                                                                             
+##                                                                             
+##        Ikä                                Osa.alue       value       
+##  Yhteensä:393   853 Turku                     :  3   Min.   :     0  
+##  0       :  0   853101001 Rauhankatu VII      :  3   1st Qu.:    48  
+##  1       :  0   853101002 Ursininkatu pohj.   :  3   Median :   134  
+##  2       :  0   853101003 Ursininkatu et.     :  3   Mean   :  1157  
+##  3       :  0   853101004 Kristiinankatu et.  :  3   3rd Qu.:   710  
+##  4       :  0   853101005 Kristiinankatu pohj.:  3   Max.   :159506  
+##  (Other) :  0   (Other)                       :375   NA&#39;s   :60</code></pre>
+<pre class="r"><code># Muutetaan vieraskielisten teksti lyhyemmäksi
+turku_data2$Kieli &lt;- turku_data2$Kieli %&gt;% 
+  recode(&quot;VIERASKIELISET YHTEENSÄ&quot; = &quot;muut&quot;)
+
+# Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit
+turku_data2 &lt;- turku_data2 %&gt;% 
+  dplyr::mutate(area_code = gsub(&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;, &quot;&quot;, turku_data2$Osa.alue))
+
+# Muutetaan pitkä datamuoto leveäksi
+turku_data2 &lt;- turku_data2 %&gt;% 
+  tidyr::pivot_wider(id_cols = c(&quot;Osa.alue&quot;, &quot;area_code&quot;), names_from = &quot;Kieli&quot;, values_from = &quot;value&quot;)</code></pre>
+<p>Seuraavaksi yhdistämme datatiedot geospatiaaliseen dataan käyttämällä sf-pakettia sekä visualisointiin ggplot2-pakettia.</p>
+<pre class="r"><code>url_geo &lt;- &quot;http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson&quot;
+
+turku_pienalueet &lt;- sf::st_read(dsn = url_geo)</code></pre>
+<pre><code>## Reading layer `aj_osa-alue_20200415_area&#39; from data source `http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson&#39; using driver `GeoJSON&#39;
+## Simple feature collection with 129 features and 1 field
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 22.06614 ymin: 60.33351 xmax: 22.45816 ymax: 60.73729
+## geographic CRS: WGS 84</code></pre>
+<pre class="r"><code>turku_pienalueet &lt;- turku_pienalueet %&gt;% 
+  mutate(area_code = gsub(&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;, &quot;&quot;, turku_pienalueet$id))
+
+dat &lt;- dplyr::left_join(turku_pienalueet, turku_data2, by = &quot;area_code&quot;)</code></pre>
+<p>Visualisoidaan ruotsinkielisen väestön osuus suhteessa suomenkielisiin ja muunkielisiin:</p>
+<pre class="r"><code>ggplot(dat) +
+  geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha(&quot;white&quot;, 1/3)) +
+  labs(fill=&quot;Ruotsinkielisten osuus&quot;)</code></pre>
+<p><img src="/post/2020-12-14-turku-datan-visualisointi.fi_files/figure-html/visualization-1.png" width="672" /></p>
+<p>Kuten huomataan, osalla pienalueista dataa on liian vähän visualisointien tekemiseen. Toisaalta pienalueet ovat visualisoimisen kannalta ongelmallisia siinäkin mielessä, että karttakuva on helposti liian yksityiskohtaista piiperrystä. Eräs ratkaisu tähän olisi tehdä pienaluekuvista kartogrammi, jossa väkirikkaammat pienalueet piirrettäisiin suhteellisesti suurempina kuin harvaan asutummat pienalueet.</p>
+</div>
