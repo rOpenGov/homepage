@@ -6,6 +6,7 @@ title: "Turun pienaluetilastojen visualisointi R:ssä"
 <<<<<<< HEAD
 author: "Pyry Kantanen"
 <<<<<<< HEAD
+<<<<<<< HEAD
 date: "2020-12-14 15:38:52 EET"
 =======
 =======
@@ -26,6 +27,9 @@ title: "Turun pienaluetilastojen visualisointi R:ssä"
 author: "Pyry Kantanen"
 >>>>>>> origin
 date: '2020-12-14'
+>>>>>>> origin
+=======
+date: "2020-12-14"
 >>>>>>> origin
 categories:
   - paikkatieto
