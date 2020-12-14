@@ -1,6 +1,6 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
-author: "Pyry Kantanen"
+author: Pyry Kantanen
 date: 2020-12-14
 categories:
 - spatial data
