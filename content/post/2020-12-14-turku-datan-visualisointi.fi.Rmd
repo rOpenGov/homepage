@@ -60,7 +60,7 @@ draft: yes
   - geojson
   - ggplot2
   - kaupunkidata
-  - PC Axis
+  - PCAxis
   - Turku
 <<<<<<< HEAD
 >>>>>>> origin
