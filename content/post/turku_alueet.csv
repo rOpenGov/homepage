@@ -1,0 +1,191 @@
+﻿1 Suuralue 1: Keskusta
+101 VI ja VII
+101001 Rauhankatu VII
+101002 Ursininkatu pohj. 
+101003 Ursininkatu et.
+101004 Kristiinankatu et. 
+101005 Kristiinankatu pohj. 
+101006 Puolalanmäki VII
+101007 Tuurepori VI
+101008 Kauppatori VI
+101009 Verkatehdas VI
+102 I
+102010 Yliopisto I
+102011 Sirkkala I
+103 II ja III
+103012 Vartiovuori II
+103013 Samppalinna III
+103014 Urheilupuisto III
+104 IV ja V
+104015 Martti IV
+104016 Itäranta
+105 VIII ja IX
+105017 Länsiranta
+105018 Kakola
+105019 Port Arthur
+106 Iso-Heikkilä
+106020 Iso-Heikkilä it.
+106021 Iso-Heikkilä länt.
+109 Kupittaa
+109029 Kupittaa
+110 Mäntymäki - Kurjenmäki 
+110030 Kurjenmäki it.
+110031 Kurjenmäki länt.
+110032 Mäntymäki
+111 Vähäheikkilä
+111033 Vähäheikkilä it.
+111034 Vähäheikkilä länt.
+112 Korppolainen länsi 
+112035 Korppolaismäki
+112036 Majakkaranta
+113 Satama
+113037 Otkantti
+113038 Rahtisatama
+127 Vatsela
+127022 Vatsela
+142 Ruissalo
+142128 Ruissalo
+2 Suuralue 2: Hirvensalo - Kakskerta
+214 Läntinen Hirvensalo 
+214040 Pikisaari
+214041 Jänessaari
+214042 Maanpää
+215 Väli-Hirvensalo 
+215043 Lauttaranta 
+215044 Särkilahti 
+215045 Illoinen 
+215046 Oriniemi
+216 Keski-Hirvensalo 
+216047 Toijainen 
+216048 Kukola
+216049 Haarla
+216050 Friskala
+217 Itäinen Hirvensalo 
+217051 Moikoinen
+217052 Kaistarniemi 
+217053 Papinsaari
+218 Satava - Kakskerta 
+218054 Satava
+218055 Kakskerta
+3 Suuralue 3: Skanssi - Uittamo
+311 Vähäheikkilä etelä 
+311058 Vähäheikkilä loun. 
+311059 Vähäheikkilä kaak. 
+312 Korppolainen itä 
+312057 Korppolainen
+319 Itäinen Pitkäsalmi 
+319060 Pihlajaniemi 
+319061 Puistomäki 
+319062 Uittamo
+319063 Ispoinen
+319064 Katariina
+320 Luolavuori - Ilpoinen - Peltola
+320065 Ilpoinen
+320066 Luolavuori länt.
+320067 Luolavuori it.
+320068 Peltola
+321 Vasaramäki
+321069 Vasaramäki
+322 Koivula - Harittu
+322070 Koivula
+322071 Harittu
+323 Skanssi
+323072 Skanssi
+4 Suuralue 4: Varissuo - Lauste
+424 Pääskyvuori - Huhkola 
+424074 Huhkola
+424075 Teoll. Lauste
+424076 Pääskyvuori
+425 Varissuo - Lauste 
+425077 Asuin-Lauste 
+425078 Vaala
+425079 Varissuo
+5 Suuralue 5: Nummi - Halinen
+525 Huhtaraivio
+525085 Huhtaraivio
+526 Itäharju - Kurala - Nummenmäki 
+526080 Teoll. Itäharju
+526081 Asuin-Itäharju
+526082 Nummenmäki
+526083 Kurala
+526084 Kohmo
+527 Kuuvuori - Ylioppilaskylä 
+527086 Paaskunta
+527087 Kuuvuori
+527088 Yo-kylä
+528 Koroinen
+528089 Koroinen
+529 Räntämäki
+529090 Asuin-Räntämäki
+529091 Teoll. Räntämäki
+530 Oriketo
+530092 Oriketo
+531 Halinen
+531093 Halinen
+535 Piipanoja
+535104 Piipanoja
+6 Suuralue 6: Runosmäki - Raunistula
+608 Raunistula
+608098 Raunistula et.
+632 Kastu
+632094 Virusmäki - Raunistula
+632095 Kastu et.
+632096 Kastu pohj.
+632097 Kaerla it.
+633 Impivaara
+633099 Impivaara
+634 Runosmäki
+634100 Asuin-Runosmäki 
+634101 Teoll. Runosmäki
+635 Kärsämäki - Piipanoja 
+635102 Kärsämäki et.
+635103 Orjasmäki
+7 Suuralue 7: Länsikeskus
+706 Vr
+706023 Vr - Iso-Heikkilä
+707 Ratapiha - Pohjola
+707024 Teoll. Pitkämäki
+707025 Kähäri et.
+707026 Pohjola
+708 Pohjola itä
+708027 Autistenaukio - Oikotie
+708028 Vätti et.
+736 Rauman valtatie - Satakunnantie
+736106 Kähäri pohj.
+736107 Asuin-Pitkämäki
+736108 Suikkila
+736109 Ruohonpää it.
+736110 Ruohonpää länt.
+736111 Pläkkikaupunki
+737 Länsikeskus - Vätti
+737112 Vätti pohj.
+737113 Hepokulta
+737114 Länsikeskus
+738 Kuninkoja
+738116 Länsinummi
+738117 Nättinummi
+738118 Metsäkylä
+739 Muhkuri
+739119 Muhkuri
+8 Suuralue 8: Pansio - Jyrkkälä
+839 Raisionjoki
+839120 Pahaniemi kaakko
+839121 Härkämäki - Jyrkkälä
+839122 Pahaniemi et.
+839123 Artukainen
+840 Perno
+840124 Asuin-Perno
+840125 Telakka
+841 Pansio
+841126 Pansio länt.
+841127 Pansio it.
+9 Suuralue 9: Maaria - Paattinen
+943 Etelä-Maaria
+943129 Lentokenttä
+943130 Saramäki - Paimala
+943131 Maaria - Jäkärlä
+944 Moisio - Yli-Maaria
+944132 Moisio - Kanervamäki 
+945 Paattinen
+945133 Etelä-Paattinen
+945134 Ikkala - Tortinmäki
