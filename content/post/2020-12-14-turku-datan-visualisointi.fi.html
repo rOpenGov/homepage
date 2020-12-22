@@ -1,7 +1,7 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 author: "Pyry Kantanen"
-date: 2020-12-23
+date: 2020-12-22
 categories: ["paikkatieto", "visualisointi"]
 tags: ["geojson", "ggplot2", "kaupunkidata", "PC-Axis", "Turku"]
 output:
@@ -134,7 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Muoto, jossa px_data-objektin tiedot on tallennettu</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(px_data)</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;list&quot;</span></span></code></pre></div>
-<p>Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa, joka on tietojen raportoinnin kannalta yleensä hyvä ottaa huomioon. Olennaisin tieto löytyy kuitenkin jo otsikosta: Väestön määrä jaoteltuna iän (1 vuoden tarkkuudella), sukupuolen ja kielen mukaan Turun eri osa-alueilla. Numeerisen tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-avainsanan takaa. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.</p>
+<p>Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa, joka on tietojen raportoinnin kannalta yleensä hyvä ottaa huomioon. Olennaisin tieto löytyy kuitenkin jo otsikosta: Asunnot osa-alueittain huoneistotyypin ja hallintaperusteen mukaan vuosina 2015-2019. Numeerisen tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-avainsanan takaa. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muodostetaan uusi muuttuja turku_data px_data-objektin sisältämästä data.framesta</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>turku_data <span class="ot">&lt;-</span> px_data<span class="sc">$</span>DATA<span class="sc">$</span>value</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>

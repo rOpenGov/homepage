@@ -1,7 +1,7 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 author: "Pyry Kantanen"
-date: 2020-12-23
+date: 2020-12-22
 categories: ["paikkatieto", "visualisointi"]
 tags: ["geojson", "ggplot2", "kaupunkidata", "PC-Axis", "Turku"]
 output:
@@ -92,7 +92,7 @@ typeof(px_data)
 # [1] "list"
 ```
 
-Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa, joka on tietojen raportoinnin kannalta yleensä hyvä ottaa huomioon. Olennaisin tieto löytyy kuitenkin jo otsikosta: Väestön määrä jaoteltuna iän (1 vuoden tarkkuudella), sukupuolen ja kielen mukaan Turun eri osa-alueilla. Numeerisen tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-avainsanan takaa. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.
+Huomataan, että suurin osa px_data-objektin sisällöstä on erilaista metatietoa, joka on tietojen raportoinnin kannalta yleensä hyvä ottaa huomioon. Olennaisin tieto löytyy kuitenkin jo otsikosta: Asunnot osa-alueittain huoneistotyypin ja hallintaperusteen mukaan vuosina 2015-2019. Numeerisen tilastotiedon tarkastelun ja visualisoinnin kannalta kiinnostavin sisältö löytyy DATA-avainsanan takaa. DATA-elementti sisältää vastaavasti data.framen nimeltä value, josta olemme kiinnostuneita.
 
 ```{r, data-handling}
 # Muodostetaan uusi muuttuja turku_data px_data-objektin sisältämästä data.framesta
