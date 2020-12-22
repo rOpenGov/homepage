@@ -1,7 +1,7 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 author: "Pyry Kantanen"
-date: 2020-12-14
+date: 2020-12-23
 categories: ["paikkatieto", "visualisointi"]
 tags: ["geojson", "ggplot2", "kaupunkidata", "PC-Axis", "Turku"]
 output:
@@ -11,17 +11,17 @@ output:
 
 ## Yleistä
 
-Turun kaupunki avasi syksyllä [2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista. 
+Turun kaupunki avasi [syksyllä 2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista. 
 
-Tietoa on kirjoitushetkellä saatavilla seuraavista asioista:
-
-- Rakennukset, asunnot ja vapaa-ajanasunnot: Valmistumisvuosi, hallintaperuste, talotyyppi, käyttötarkoitus, kerrosala
-- Muuttoliike ja väestönmuutokset: Kuntaan muuttaneet ja kunnasta muuttaneet, sisäinen muuttoliike, kuolleet ja syntyneet
-- Väestörakenne: Ikä, sukupuoli, kieli, veronalaiset tulot
-
-Tilastokeskuksen sivuilta löytyvän artikkelin [(Tammilehto-Luode, 2009)](https://www.stat.fi/artikkelit/2009/art_2009-06-08_008.html?s=3) mukaan "[k]untien sisäinen aluejako on syntynyt kuntien omien tarpeiden pohjalta". Tästä johtuen pienalueet eivät välttämättä ole alueina kovin pysyviä ja niiden käyttö ajallisen muutoksen tarkastelussa saattaisi olla hankalaa. 
+Tietoa on kirjoitushetkellä saatavissa Turussa sijaitsevista rakennuksista, asunnoista ja vapaa-ajanasunnoista (esim. hallintaperuste, valmistumisvuosi, kerrosala), muuttoliikkeestä ja väestönmuutoksista (esim. syntymät, kuolemat, muutto kuntaan ja kunnasta pois) ja väestörakenteesta (asukkaiden ikä, sukupuoli, kieli, veronalaiset tulot). 
 
 Ainakin toistaiseksi Turun kaupunki tarjoaa valmiissa muodossa ainoastaan pienaluetilastoja sekä koko kaupungin kattavia tilastoja. Kaupunkitasoista dataa on saanut jo pitkään Tilastokeskuksen sivuilta, joten varsinainen uutuusarvo liittyykin nimenomaan pienaluetilastoihin. Pienaluetilastoista voidaan tarvittaessa aggregoida ylemmän tason alueita kuten tilastoalueita ja suuralueita.
+
+Pienaluetilastojen sisältämä data on [Tilastokeskuksen asettamien ehtojen](https://ah.turku.fi/kh/2020/0302005x/4046774.htm) vuoksi rajattu siten, että tietoja ei julkisteta niiltä alueilta, joilla asuu alle 100 henkilöä tai alle 100 asuntokuntaa / perhettä, käy töissä alle 100 henkilöä tai joilla sijaitsee alle 10 asuinrakennusta.
+
+Suurin osa julkaistuista pienaluedatoista on itse asiassa aikasarjadataa, joten mielenkiintoisten ajallisten muutosten tarkastelu on mahdollista. Ilmiselvästi mielenkiinnon kohteena olevien alueiden tulisi kuitenkin pysyä suhteellisen muuttumattomina, jotta vertailu olisi mielekästä. Tilastokeskuksen sivuilta löytyvän artikkelin [(Tammilehto-Luode, 2009)](https://www.stat.fi/artikkelit/2009/art_2009-06-08_008.html?s=3) mukaan "[k]untien sisäinen aluejako on syntynyt kuntien omien tarpeiden pohjalta". 
+
+Turussakin kaupunki on kehittynyt 10 vuoden aikana, uusia asuinalueita on rakennettu ja väkilukukin on kasvanut yli 10 000 asukkaalla. Pienalueiden rajat saattavat muuttua samalla kun kaupunki kasvaa ja kehittyy. Aluejakojen pysyvyys ei tietenkään ole vakio laajemmassakaan mittakaavassa, sillä kuntaliitoksia ja kuntarajojen uudelleenvetoja tapahtuu melkein vuosittain (ks. [Tilastokeskuksen luokitustiedotteet](https://www.stat.fi/fi/luokitukset/luokitustiedotteet/)), postinumeroalueita muutetaan (ks. [Postin sivut](https://www.posti.fi/fi/postinumerohaku/postinumeroalueet)) ja maakuntien rajojakin vedetään toisinaan uudelleen.
 
 Pienaluetilastojen yhdistäminen karttatietoaineistoon vaatii enemmän manuaalista työtä kuin esimerkiksi Tilastokeskuksen sivuilta [pxweb-paketilla](https://CRAN.R-project.org/package=pxweb) ladatun tiedon visualisointi [geofi-pakettia](https://ropengov.org/fi/2020/02/r-paketti-geofi-tilastokeskuksen-avointen-paikkatietoaineistojen-k%C3%A4ytt%C3%B6%C3%B6n/) käyttämällä. Tähän saadaan tulevaisuudessa mahdollisesti muutos, mutta tämän blogitekstin on tarkoitus demonstroida nykyhetkessä, kuinka helppoa datan visualisointi on ilman erikoistuneita pakettejakin.
 
@@ -43,12 +43,14 @@ library(ggplot2)
 library(pxR)
 ```
 
-Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-tiedostomuoto on moniulotteisen tilastotaulukon eli kuution tallennusformaatti, josta voi saada jonkinlaista lisätietoa esimerkiksi vuonna 2008 julkaistusta [käsikirjasta](http://www.tilastokeskus.fi/tup/pcaxis/px-file_format_2008_1_2008-02-04_fi.pdf). Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.
+Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-tiedostomuoto on moniulotteisen tilastotaulukon eli kuution tallennusformaatti, josta voi saada jonkinlaista lisätietoa esimerkiksi vuonna 2008 julkaistusta [käsikirjasta](http://www.tilastokeskus.fi/tup/pcaxis/px-file_format_2008_1_2008-02-04_fi.pdf) tai Ruotsin SCB:n [tiedostomuodon määrittelystä](https://www.scb.se/globalassets/vara-tjanster/px-programmen/px-file_format_specification_2013.pdf). Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.
+
+pxR-paketti ei lue pysty lukemaan kaikkia tarjolla olevia .px-muodossa olevia data-aineistoja, mutta toivottavasti paketin kehitystyö korjaa ongelman tulevaisuudessa tai avointa dataa tarjotaan jatkossa toisenlaisessa muodossa.
 
 ```{r, data_loading}
 
 # URL lähde: https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja
-url_data <- "https://dev.turku.fi/datasets/pienaluetilastot/turku-vaesto_ian_ja_sukupuolen_mukaan-varak_12nh.px"
+url_data <- "https://dev.turku.fi/datasets/pienaluetilastot/turku-asunnot-r03e.px"
 
 # pxR-paketin standardinomainen tapa lukea Tilastokeskuksen px-dataa ei toimi:
 # read.px(filename = url)
@@ -59,7 +61,7 @@ url_data <- "https://dev.turku.fi/datasets/pienaluetilastot/turku-vaesto_ian_ja_
 px_data <- read.px(url_data, na.strings = c(".."))
 ```
 
-Vuoden 2008 PC-Axis-tiedostomuodon käsikirjasta voidaan lukea, että pistekoodi ".." tarkoittaa tietoa, jota ei ole saatu, joka on epävarmaa tai joka on salassapitosäännön alaista. Turun kaupungin julkaisemien tietoaineistojen kuvauksen yhteydessä kerrotaan, että "Turun kaupungin avoimen datan palvelu on sopimus- ja tietosuojasyistä rajannut aineistojen laajuutta. Julkaistuilla alueilla on vähintään 100 asukasta tai 10 rakennusta tilastosta riippuen." Puuttuvan tiedon voikin suurimmalti osalti selittää tällä rajauksella, mistä johtuen kahden pisteen pistekoodi lienee tullut valituksi.
+Vuoden 2008 PC-Axis-tiedostomuodon käsikirjasta voidaan lukea, että pistekoodi ".." tarkoittaa tietoa, jota ei ole saatu, joka on epävarmaa tai joka on salassapitosäännön alaista. Kuten aiemminkin mainittiin, Turun kaupuynki on rajannut julkaisemiensa aineistojen laajuutta. Puuttuvan tiedon voikin suurimmalti osalti selittää salassapitosäännöksen mukaisella rajauksella, mistä johtuen kahden pisteen pistekoodi lienee tullut valituksi.
 
 Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:
 
@@ -67,23 +69,16 @@ Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:
 
 # px_data-objektin sisältämät avainsanat
 names(px_data)
-##  [1] "AXIS.VERSION"        "CHARSET"             "CODEPAGE"           
-##  [4] "CODES"               "CODES.sv."           "CONTACT"            
-##  [7] "CONTACT.sv."         "CONTENTS"            "CONTENTS.sv."       
-## [10] "CONTVARIABLE"        "CONTVARIABLE.sv."    "COPYRIGHT"          
-## [13] "CREATION.DATE"       "DATA"                "DECIMALS"           
-## [16] "DESCRIPTION"         "DESCRIPTION.sv."     "DOMAIN"             
-## [19] "DOMAIN.sv."          "HEADING"             "HEADING.sv."        
-## [22] "LANGUAGE"            "LANGUAGES"           "LAST.UPDATED"       
-## [25] "LAST.UPDATED.sv."    "MADE.WITH"           "MATRIX"             
-## [28] "NOTE"                "NOTE.sv."            "OFFICIAL.STATISTICS"
-## [31] "SHOWDECIMALS"        "SOURCE"              "SOURCE.sv."         
-## [34] "STUB"                "STUB.sv."            "SUBJECT.AREA"       
-## [37] "SUBJECT.AREA.sv."    "SUBJECT.CODE"        "TABLEID"            
-## [40] "TIMEVAL"             "TIMEVAL.sv."         "TITLE"              
-## [43] "TITLE.sv."           "UNITS"               "UNITS.sv."          
-## [46] "VALUES"              "VALUES.sv."          "VARIABLE.TYPE"      
-## [49] "VARIABLE.TYPE.sv."
+## [1] "AXIS.VERSION"       "CHARSET"            "CODEPAGE"           "CODES"              "CODES.sv."         
+## [6] "CONTACT"            "CONTACT.sv."        "CONTENTS"           "CONTENTS.sv."       "CONTVARIABLE"      
+## [11] "CONTVARIABLE.sv."   "COPYRIGHT"          "CREATION.DATE"      "DATA"               "DECIMALS"          
+## [16] "DESCRIPTION"        "DESCRIPTION.sv."    "DESCRIPTIONDEFAULT" "DOMAIN"             "DOMAIN.sv."        
+## [21] "HEADING"            "HEADING.sv."        "LANGUAGE"           "LANGUAGES"          "LAST.UPDATED"      
+## [26] "MATRIX"             "NOTE"               "NOTE.sv."           "SHOWDECIMALS"       "SOURCE"            
+## [31] "SOURCE.sv."         "STUB"               "STUB.sv."           "SUBJECT.AREA"       "SUBJECT.AREA.sv."  
+## [36] "SUBJECT.CODE"       "TIMEVAL"            "TIMEVAL.sv."        "TITLE"              "TITLE.sv."         
+## [41] "UNITS"              "UNITS.sv."          "VALUES"             "VALUES.sv."         "VARIABLE.TYPE"     
+## [46] "VARIABLE.TYPE.sv."
 
 # px_data-objektin luokka
 class(px_data)
@@ -111,9 +106,9 @@ dim(turku_data)
 summary(turku_data)
 ```
 
-dim-komennon tulos kertoo, että data.framessa on 160344 riviä ja 7 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.
+dim-komennon tulos kertoo, että data.framessa on 50435 riviä ja 5 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.
 
-Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme eri kieliryhmiin kuuluvia eri pienalueilla, joten valitsemme siis Kieli-sarakkeesta suomi, ruotsi ja vieraskieliset. Sukupuolen tai iän osalta emme tee erottelua. Osa.alue-sarakkeesta voimme ottaa kaikki tiedot, sillä rajaukset voidaan tehdä samalla kun tilastotietoja yhdistetään paikkatietoon
+Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme omistusasujien määrän suhdetta kaikkiin asumismuotoihin, joten valitsemme siis Hallintaperuste-sarakkeesta "Hallintaperusteet yhteensä", "Omistaa talon" ja "Omistaa asunnon osakkeet". Huoneistotyypin osalta emme tee erottelua. Osa.alue- ja Vuosi-sarakkeista voimme ottaa kaikki tiedot, sillä tarvittavat rajaukset voidaan tehdä samalla kun tilastotietoja yhdistetään paikkatietoon.
 
 ```{r, load-packages2, include = FALSE}
 library(dplyr)
@@ -122,13 +117,13 @@ library(tidyr)
 
 ```{r, data-handling2}
 turku_data2 <- turku_data %>% 
-  filter(Sukupuoli == "Yhteensä", Kieli %in% c("VIERASKIELISET YHTEENSÄ", "ruotsi", "suomi"), Ikä == "Yhteensä")
+  filter(Hallintaperuste %in% c("Hallintaperusteet yhteensä", "Omistaa talon", "Omistaa asunnon osakkeet"), Huoneistotyyppi == "Huoneistotyypit yhteensä")
 
 summary(turku_data2)
 
 # Muutetaan vieraskielisten teksti lyhyemmäksi
-turku_data2$Kieli <- turku_data2$Kieli %>% 
-  recode("VIERASKIELISET YHTEENSÄ" = "muut")
+#turku_data2$Kieli <- turku_data2$Kieli %>% 
+#  recode("VIERASKIELISET YHTEENSÄ" = "muut")
 
 # Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit
 turku_data2 <- turku_data2 %>% 
@@ -136,7 +131,14 @@ turku_data2 <- turku_data2 %>%
 
 # Muutetaan pitkä datamuoto leveäksi
 turku_data2 <- turku_data2 %>% 
-  tidyr::pivot_wider(id_cols = c("Osa.alue", "area_code"), names_from = "Kieli", values_from = "value")
+  tidyr::pivot_wider(id_cols = c("Vuosi", "area_code"), names_from = "Hallintaperuste", values_from = "value")
+
+# Siivotaan sarakkeita käytettävämpään muotoon
+turku_data2 <- turku_data2 %>% 
+  dplyr::mutate(omistusasunto = `Omistaa talon` + `Omistaa asunnon osakkeet`) %>% 
+  dplyr::mutate(muu_asumismuoto = `Hallintaperusteet yhteensä` - omistusasunto) %>% 
+  dplyr::rename(hallintaperusteet_yhteensa = `Hallintaperusteet yhteensä`) %>% 
+  dplyr::select(-c(`Omistaa talon`, `Omistaa asunnon osakkeet`))
 
 ```
 
@@ -161,21 +163,25 @@ dat <- dplyr::left_join(turku_pienalueet, turku_data2, by = "area_code")
 
 ```
 
-Visualisoidaan ruotsinkielisen väestön osuus suhteessa suomenkielisiin ja muunkielisiin: 
+Visualisoidaan omistusasujien osuus suhteessa kaikkiin asumismuotoihin: 
 
 ```{r, visualization}
-ggplot(dat) +
-  geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
-  labs(fill="Ruotsinkielisten osuus")
+
+viz_dat <- dat %>% 
+  filter(Vuosi == 2019)
+
+ggplot(viz_dat) +
+  geom_sf(aes(fill = omistusasunto / hallintaperusteet_yhteensa), color = alpha("white", 1/3)) +
+  labs(fill="Omistusasujien osuus 2019")
 ```
 
-Kuten huomataan, osalla pienalueista dataa on liian vähän visualisointien tekemiseen. Toisaalta pienalueet ovat visualisoimisen kannalta ongelmallisia siinäkin mielessä, että karttakuva on helposti liian yksityiskohtaista piiperrystä. Eräs ratkaisu tähän olisi tehdä pienaluekuvista kartogrammi, jossa väkirikkaammat pienalueet piirrettäisiin suhteellisesti suurempina kuin harvaan asutummat pienalueet. Tällöin kartan maantieteellinen vastaavuus kuitenkin vääristyisi ja "karttakuva" muuttuisi entistä abstraktimman tason visualisoinniksi.
+Kuten huomataan, osasta pienalueista data puuttuu kokonaan. Pienalueita käytettäessä kartasta tulee helposti turhan yksityiskohtaista piiperrystä. Eräs ratkaisu tähän olisi tehdä pienaluekuvista kartogrammi (esim. cartogram-pakettia käyttämällä), jossa väkirikkaammat pienalueet piirrettäisiin suhteellisesti suurempina kuin harvaan asutummat pienalueet. Tällöin kartan maantieteellinen vastaavuus kuitenkin vääristyisi ja "karttakuva" muuttuisi entistä abstraktimman tason visualisoinniksi.
 
 Toinen ratkaisu on muodostaa pienaluetilastoista suurempia alueita ryhmittelemällä ne uudelleen.
 
 ## Pienalueiden uudelleenryhmittely tilastoalueiksi ja suuralueiksi
 
-Turku voidaan jakaa 9 suuralueeseen, 45 tilastoalueesta ja 129 pienalueesta. Jokainen suuralue sisältää useamman tilastoalueen ja useimmat tilastoalueet sisältävät useita pienalueita. Joidenkin ilmeisesti harvaan asuttujen alueiden tapauksessa tilastoalueet sisältävät ainoastaan yhden pienalueen. Turun kaupungin tilastoaluejakoa voi tarkastella tästä kartasta: https://www.turku.fi/sites/default/files/atoms/files/tilastoaluejakokartta_tilusvaihtojen_ja_kuntarajamuutoksen_takia_10032020_0.pdf
+Turku voidaan jakaa 9 suuralueeseen, 45 tilastoalueesta ja 129 pienalueesta. Jokainen suuralue sisältää useamman tilastoalueen ja useimmat tilastoalueet sisältävät useita pienalueita. Joidenkin ilmeisesti harvaan asuttujen alueiden tapauksessa tilastoalueet sisältävät ainoastaan yhden pienalueen.
 
 Useimmat aiemmin muodostetut aluekoodit muodostuvat 9 numerosta, esimerkkinä "853943130 Saramäki - Paimala". 853 on Turun kaupungin kuntakoodi, 9 on Maaria-Paattisen suuralueen numero, 43 on Etelä-Maarian tilastoalueen numero ja 130 on Saramäki-Paimalan pienaluekoodi. Koska numerosarja on kaikkien tapausten osalta saman pituinen ja eri alueita merkitsevät numerot ovat aina samassa kohdassa, koodi pystytään helposti purkamaan osiin:
 
@@ -185,39 +191,41 @@ dat$tilastoalue <- substring(dat$area_code, first = 5, last = 6)
 dat$pienalue <- substring(dat$area_code, first = 7, last = 9)
 ```
 
-
-
-```{r, group-by-ja-summarise}
+```{r, group-by-ja-summarise, message=FALSE}
 dat_suuralue <- dat %>%
+    dplyr::filter(Vuosi == 2019) %>% 
     dplyr::group_by(suuralue) %>% 
-    dplyr::summarise(suomi = sum(suomi, na.rm = TRUE), ruotsi = sum(ruotsi, na.rm = TRUE), muut = sum(muut, na.rm = TRUE)) 
+    dplyr::summarise(hallintaperusteet_yhteensa = sum(hallintaperusteet_yhteensa, na.rm = TRUE), omistusasunto = sum(omistusasunto, na.rm = TRUE), muu_asumismuoto = sum(muu_asumismuoto, na.rm = TRUE)) 
 
 dat_tilastoalue <- dat %>%
+    dplyr::filter(Vuosi == 2019) %>% 
     dplyr::group_by(tilastoalue) %>% 
-    dplyr::summarise(suomi = sum(suomi, na.rm = TRUE), ruotsi = sum(ruotsi, na.rm = TRUE), muut = sum(muut, na.rm = TRUE)) 
+    dplyr::summarise(hallintaperusteet_yhteensa = sum(hallintaperusteet_yhteensa, na.rm = TRUE), omistusasunto = sum(omistusasunto, na.rm = TRUE), muu_asumismuoto = sum(muu_asumismuoto, na.rm = TRUE)) 
 ```
 
 Lopuksi visualisoidaan:
 
 ```{r, visualization2}
 ggplot(dat_suuralue) +
-    geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
-    labs(fill="Ruotsinkielisten osuus")
+    geom_sf(aes(fill = omistusasunto / hallintaperusteet_yhteensa), color = alpha("white", 1/3)) +
+    labs(fill="Omistusasujien osuus 2019")
 
 ggplot(dat_tilastoalue) +
-    geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
-    labs(fill="Ruotsinkielisten osuus")
+    geom_sf(aes(fill = omistusasunto / hallintaperusteet_yhteensa), color = alpha("white", 1/3)) +
+    labs(fill="Omistusasujien osuus 2019")
 ```
 
-Hyvännäköinen karttakuva vaatisi informatiivisuuden vuoksi lisää tietoja, erityisesti alueiden nimet sisältävät labelit. Px-data ei sisältänyt kuin pienalueiden nimet, joten tilastoalueiden ja suuralueiden nimet joutuu kirjoittamaan joko käsin tai lataamaan toisesta lähteestä. Tätä blogikirjoitusta varten tein Turun kaupungin aluejaot sisältävän pdf-kartan pohjalta csv-tiedoston, joka sisältää alueiden numerokoodit ja nimet. Aiemmasta jaottelusta poiketen numerokoodit ovat hieman pidempiä, joten muokkaamme dat-objektin koodit csv-tiedostoa vastaaviksi:
+Hyvännäköinen karttakuva saattaa vaatia informatiivisuuden vuoksi lisää tietoja, esimerkiksi alueiden nimet sisältävät labelit. Px-data ei sisältänyt kuin pienalueiden nimet, joten tilastoalueiden ja suuralueiden nimet joutuisi kirjoittamaan joko käsin tai lataamaan toisesta lähteestä. 
 
-```{r, uudet-numerot}
+Tätä blogikirjoitusta varten tein [Turun kaupungin aluejaot sisältävän pdf-kartan](https://www.turku.fi/sites/default/files/atoms/files/tilastoaluejakokartta_tilusvaihtojen_ja_kuntarajamuutoksen_takia_10032020_0.pdf) pohjalta csv-tiedoston, joka sisältää alueiden numerokoodit ja nimet. Aiemmasta jaottelusta poiketen numerokoodit ovat hieman pidempiä, joten muokkaamme dat-objektin koodit csv-tiedostoa vastaaviksi:
+
+```{r, uudet-numerot, message=FALSE}
 dat$pienalue <- paste(dat$suuralue, dat$tilastoalue, dat$pienalue, sep="")
 dat$tilastoalue <- paste(dat$suuralue, dat$tilastoalue, sep="")
 
 dat_tilastoalue <- dat %>%
     dplyr::group_by(tilastoalue) %>% 
-    dplyr::summarise(suomi = sum(suomi, na.rm = TRUE), ruotsi = sum(ruotsi, na.rm = TRUE), muut = sum(muut, na.rm = TRUE)) 
+    dplyr::summarise(hallintaperusteet_yhteensa = sum(hallintaperusteet_yhteensa, na.rm = TRUE), omistusasunto = sum(omistusasunto, na.rm = TRUE), muu_asumismuoto = sum(muu_asumismuoto, na.rm = TRUE)) 
 ```
 
 ```{r, regexpr-hommia}
@@ -225,7 +233,11 @@ dat_tilastoalue <- dat %>%
 aluekoodit <- read.csv("turku_alueet.csv", header = FALSE)
 
 head(aluekoodit)
+```
 
+Kuten huomataan, alueiden nimet ja numerokoodit pitkässä muodossa ovat yhdessä sarakkeessa. Ainakin dplyr vaatii, että kaksi yhdistettävää taulukkoa sisältävät ainakin yhden sarakkeen, joka sisältää toisiaan täydellisesti vastaavaa tietoa ja jonka avulla taulukoiden rivit voidaan yhdistää toisiinsa. [Fuzzyjoin-pakettia](https://CRAN.R-project.org/package=fuzzyjoin) hyödyntämällä tästä täydellisen vastaavuuden vaatimuksesta voitaisiin kenties luopua ja osittainen vastaavuuskin riittäisi, mutta käytän tässä blogikirjoituksessa dplyriä ja muodostan toisiaan täydellisesti vastaavat sarakkeet.
+
+```{r, data-join}
 # Poistetaan rivien alusta numero + välilyönti ja muodostetaan uusi sarake
 aluekoodit$nimi <- gsub("^[0-9]*[[:blank:]]", "", aluekoodit$V1)
 
@@ -244,16 +256,24 @@ Visualisoinnit labeleiden kanssa:
 
 ```{r, visualization3}
 ggplot(dat_suuralue) +
-    geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
+    geom_sf(aes(fill = omistusasunto / hallintaperusteet_yhteensa), color = alpha("white", 1/3)) +
     geom_sf_text(aes(label = nimi), size = 2, color = "red", fontface = "bold", check_overlap = TRUE) +
-    labs(fill="Ruotsinkielisten osuus")
+    labs(fill="Omistusasujien osuus 2019")
 
 ggplot(dat_tilastoalue) +
-    geom_sf(aes(fill = ruotsi / (suomi + ruotsi + muut)), color = alpha("white", 1/3)) +
+    geom_sf(aes(fill = omistusasunto / hallintaperusteet_yhteensa), color = alpha("white", 1/3)) +
     geom_sf_label(aes(label = nimi), size = 2) +
-    labs(fill="Ruotsinkielisten osuus")
+    labs(fill="Omistusasujien osuus 2019")
 ```
 
 Kuten huomataan, suuri määrä tekstiä tai labeleita saa kartan näyttämään sotkuiselta. Teemakartat ovatkin kaikista hyödyllisimmillään alueellisten trendien, esimerkiksi työttömyysasteen tai asukkaiden keski-iän nopeaan silmäilyyn, jolloin alueen nimikkeellä ei välttämättä ole niin suurta merkitystä. 
 
 Toisaalta nimikkeiden kiinnittäminen paikkatietoon ei myöskään ole turhaa, jos paikkatietoja haluaa visualisoida staattisten karttojen sijaan interaktiivisessa näkymässä. Tällöin informaatiota voidaan esittää pop-up -ikkunassa ja labeleiden tekstiä voidaan samalla muotoilla monipuolisesti html-tageja käyttäen.
+
+## Lopuksi
+
+Tämän kirjoituksen tarkoituksena oli demonstroida, kuinka Turun julkistamaa pienaluedataa voidaan visualisoida yleisesti käytössä olevia R-paketteja hyödyntämällä. Jatkokehityskohteena joitakin blogissa esiteltyjä työvaiheita olisi epäilemättä hyvä kiteyttää helpommin käytettävämpään ja pysyvämpään muotoon, esimerkiksi erillisen R-paketin muodossa. [Koneellisesti luettava valmis lista Turun aluekoodeista](https://github.com/rOpenGov/homepage/blob/master/content/post/turku_aluekoodit.csv) on esimerkki tiedosta, joka olisi hyvä olla valmiina saatavilla. 
+
+Yksinään Turun aluedata jää kuitenkin hieman ontoksi. Suomen kontekstissa esimerkiksi [6Aika-hankkeeseen](https://6aika.fi) osallistuvien suurempien kaupunkien (Helsinki, Espoo, Vantaa, Turku, Tampere, Oulu) tuottama avoin data voisi olla hyödyllistä saattaa yhden käyttöliittymän taakse, samaan tapaan kuin geofi-paketissa on tehty Suomen laajuisesti. Vertailu muihin pohjoismaisiin kaupunkeihin saattaisi myös olla mielenkiintoista.
+
+Aiheeseen varmasti palataan myöhemmissä kirjoituksissa.
