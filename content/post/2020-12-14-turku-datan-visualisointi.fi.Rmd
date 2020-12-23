@@ -1,7 +1,7 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
 author: "Pyry Kantanen"
-date: 2020-12-22
+date: 2020-12-23
 categories: ["paikkatieto", "visualisointi"]
 tags: ["geojson", "ggplot2", "kaupunkidata", "PC-Axis", "Turku"]
 output:
@@ -11,7 +11,7 @@ output:
 
 ## Yleistä
 
-Turun kaupunki avasi [syksyllä 2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista. 
+Turun kaupunki avasi [syksyllä 2020 pienaluetilastoja](https://data.lounaistieto.fi/data/fi/dataset/turun-kaupungin-pienaluetilastoja), jotka antavat jo ennestään saatavilla olleiden [postinumeroaluekohtaisten tilastojen](https://www.stat.fi/org/avoindata/paikkatietoaineistot/paavo.html) ohella mahdollisuuden tarkastella [Turun kaupungin alueita](https://www.avoindata.fi/data/fi/dataset/turun-kaupungin-aluejakoja) hienojakoisemmin kuin aiemmin on ollut mahdollista.
 
 Tietoa on kirjoitushetkellä saatavissa Turussa sijaitsevista rakennuksista, asunnoista ja vapaa-ajanasunnoista (esim. hallintaperuste, valmistumisvuosi, kerrosala), muuttoliikkeestä ja väestönmuutoksista (esim. syntymät, kuolemat, muutto kuntaan ja kunnasta pois) ja väestörakenteesta (asukkaiden ikä, sukupuoli, kieli, veronalaiset tulot). 
 
@@ -45,7 +45,7 @@ library(pxR)
 
 Käytän tässä kirjoituksessa pxR-pakettia, sillä ainakin toistaiseksi Turun kaupunki toimittaa pienaluetilastonsa px-muodossa. Px-tiedostomuoto on moniulotteisen tilastotaulukon eli kuution tallennusformaatti, josta voi saada jonkinlaista lisätietoa esimerkiksi vuonna 2008 julkaistusta [käsikirjasta](http://www.tilastokeskus.fi/tup/pcaxis/px-file_format_2008_1_2008-02-04_fi.pdf) tai Ruotsin SCB:n [tiedostomuodon määrittelystä](https://www.scb.se/globalassets/vara-tjanster/px-programmen/px-file_format_specification_2013.pdf). Px-dataa voidaan Windows-koneilla käsitellä erillisellä PxWin-ohjelmistolla, mutta Macin tai Linuxin käyttäjille tämä ei valitettavasti ole vaihtoehto.
 
-pxR-paketti ei lue pysty lukemaan kaikkia tarjolla olevia .px-muodossa olevia data-aineistoja, mutta toivottavasti paketin kehitystyö korjaa ongelman tulevaisuudessa tai avointa dataa tarjotaan jatkossa toisenlaisessa muodossa.
+pxR-paketti ei lue pysty lukemaan kaikkia tarjolla olevia .px-muodossa olevia tietoaineistoja, mutta toivottavasti paketin kehitystyö korjaa ongelman tulevaisuudessa tai avointa dataa tarjotaan jatkossa toisenlaisessa muodossa.
 
 ```{r, data_loading}
 
@@ -61,7 +61,7 @@ url_data <- "https://dev.turku.fi/datasets/pienaluetilastot/turku-asunnot-r03e.p
 px_data <- read.px(url_data, na.strings = c(".."))
 ```
 
-Vuoden 2008 PC-Axis-tiedostomuodon käsikirjasta voidaan lukea, että pistekoodi ".." tarkoittaa tietoa, jota ei ole saatu, joka on epävarmaa tai joka on salassapitosäännön alaista. Kuten aiemminkin mainittiin, Turun kaupuynki on rajannut julkaisemiensa aineistojen laajuutta. Puuttuvan tiedon voikin suurimmalti osalti selittää salassapitosäännöksen mukaisella rajauksella, mistä johtuen kahden pisteen pistekoodi lienee tullut valituksi.
+Vuoden 2008 PC-Axis-tiedostomuodon käsikirjasta voidaan lukea, että pistekoodi ".." tarkoittaa tietoa, jota ei ole saatu, joka on epävarmaa tai joka on salassapitosäännön alaista. Kuten aiemminkin mainittiin, Turun kaupunki on rajannut julkaisemiensa aineistojen laajuutta. Puuttuvan tiedon voikin suurimmalti osalti selittää salassapitosäännöksen mukaisella rajauksella, mistä johtuen kahden pisteen pistekoodi lienee tullut valituksi.
 
 Tarkastellaan seuraavaksi lataamamme px_data-objektin sisältöä:
 
@@ -109,6 +109,8 @@ summary(turku_data)
 dim-komennon tulos kertoo, että data.framessa on 50435 riviä ja 5 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.
 
 Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme omistusasujien määrän suhdetta kaikkiin asumismuotoihin, joten valitsemme siis Hallintaperuste-sarakkeesta "Hallintaperusteet yhteensä", "Omistaa talon" ja "Omistaa asunnon osakkeet". Huoneistotyypin osalta emme tee erottelua. Osa.alue- ja Vuosi-sarakkeista voimme ottaa kaikki tiedot, sillä tarvittavat rajaukset voidaan tehdä samalla kun tilastotietoja yhdistetään paikkatietoon.
+
+Pelkästään pienalueita tarkasteltaessa uuden area_code -sarakkeen luominen ei ole välttämätöntä, sillä pienaluedatan sisältävät tietoaineistot sekä pienalueiden paikkatietoaineistot käyttävät toisiaan vastaavia nimikkeitä. Muiden aineistojen kanssa toimiessa on kuitenkin hyödyllistä, että numeromuodossa oleva aluekoodi ja alueen nimi erotellaan erillisiksi sarakkeiksi.  
 
 ```{r, load-packages2, include = FALSE}
 library(dplyr)
@@ -270,10 +272,79 @@ Kuten huomataan, suuri määrä tekstiä tai labeleita saa kartan näyttämään
 
 Toisaalta nimikkeiden kiinnittäminen paikkatietoon ei myöskään ole turhaa, jos paikkatietoja haluaa visualisoida staattisten karttojen sijaan interaktiivisessa näkymässä. Tällöin informaatiota voidaan esittää pop-up -ikkunassa ja labeleiden tekstiä voidaan samalla muotoilla monipuolisesti html-tageja käyttäen.
 
+## Esimerkki ajallisen muutoksen visualisoimisesta
+
+Turussa on opiskelijakaupunkina suuri kysyntä opiskelijoille soveltuvista yksiöistä. Seuraavassa esimerkissä katsomme, kuinka yksiöiden määrä on muuttunut vuodesta 2015 vuoteen 2019 eri alueilla.
+
+```{r, aikasarja}
+turku_data_yksiot <- turku_data %>% 
+  filter(Hallintaperuste %in% c("Hallintaperusteet yhteensä"), Huoneistotyyppi %in% c("1h+kk/kt", "1h+k")) %>% 
+  tidyr::pivot_wider(id_cols = c("Osa.alue", "Vuosi"), names_from = "Huoneistotyyppi", values_from = "value") %>%
+  # Yhdistetään 1h + kk ja 1h+k yhdeksi faktoriksi
+  mutate(yksiot = `1h+kk/kt` + `1h+k`) %>% 
+  select(-c(`1h+kk/kt`, `1h+k`)) %>% 
+  # Järjestetään data nimen perusteella (ja samalla vuoden perusteella aikajärjestykseen)
+  group_by(Osa.alue) %>% 
+  arrange(Osa.alue, by_group = TRUE) %>% 
+  # Vertaillaan vuoden 2015 ja 2019 tilannetta, joten lag = 4
+  mutate(muutos_2015_2019 = yksiot / dplyr::lag(yksiot, n = 4)) %>% 
+  # Jätetään taulukkoon vain 2019 havainnot
+  filter(Vuosi %in% c("2019"))
+
+# Aineiston tunnusluvut
+summary(turku_data_yksiot$muutos_2015_2019)
+
+# Tarkastellaan, miltä muutoksen suuruus näyttää yläpäässä
+turku_data_yksiot %>% arrange(desc(muutos_2015_2019))
+
+# Yhdistetään aineisto geospatiaaliseen dataan
+dat2 <- dplyr::inner_join(turku_pienalueet, turku_data_yksiot, by = c("id" = "Osa.alue"))
+
+```
+
+Huomataan, että Skanssin kaupunginosassa yksiöiden rakentamistahti on ollut huomattavasti nopeampaa kuin muualla Turussa (2016 3 yksiötä, 2019 174 yksiötä). Tämä selittyy Skanssin kaupunginosan edelleen jatkuvalla kehityksellä. Toisella alueella, Toijaisessa, muutoksen suuruus on "mittaamattoman suuri" alussa olleen yksiöiden lukumäärän oltua 0. Teemakartan piirtämisen kannalta näin räikeästi muista poikkeavat outlierit tekee pääasiassa muutaman prosentin vuosittaisten muutosten visualisoimisesta mahdotonta, joten poistamme kaksi suurinta havaintoa ja piirrämme lopuksi kartan:
+
+```{r, yksiot-visualisointi}
+dat2 <- dat2 %>% 
+  mutate(muutos_2015_2019 = ifelse(muutos_2015_2019 > 3, NA, muutos_2015_2019))
+
+ggplot(dat2) +
+    geom_sf(aes(fill=muutos_2015_2019), color = alpha("white", 1/3)) +
+    labs(fill="Yksiöiden määrän muutos 2015-2019, 100 %") +
+    scale_fill_gradient2(low = "red", midpoint = 1.0, mid = "white", high = "blue", space="Lab")
+```
+
+Suuri osa kartasta maalautuu valkoiseksi, mikä tarkoittaa että neljän vuoden aikana yksiöiden määrän kasvu ei ole ollut järin suurta. Toisaalta on hyvä muistaa, että tämän kaltainen yksinkertainen tarkastelu ylikorostaa pienillä alueilla tapahtuvia muutoksia ja tekee jo ennestään väkirikkailla alueilla tapahtuvat absoluuttiset muutokset näkymättömiksi.  
+
+Vertailun vuoksi vielä kaikkien asuntojen absoluuttisia määriä kuvaava teemakartta:
+
+```{r, turku-kaikki-asunnot}
+turku_data_asunnot <- turku_data %>% 
+  filter(Hallintaperuste %in% c("Hallintaperusteet yhteensä"), Huoneistotyyppi %in% c("Huoneistotyypit yhteensä")) %>% 
+  tidyr::pivot_wider(id_cols = c("Osa.alue", "Vuosi"), names_from = "Huoneistotyyppi", values_from = "value") %>%
+  rename(kaikki_asunnot = `Huoneistotyypit yhteensä`) %>% 
+  group_by(Osa.alue) %>% 
+  arrange(Osa.alue, by_group = TRUE) %>% 
+  mutate(muutos_2015_2019 = lag(kaikki_asunnot, n = 0) - lag(kaikki_asunnot, n = 4)) %>% 
+  filter(Vuosi %in% c("2019"))
+
+summary(turku_data_asunnot$muutos_2015_2019)
+
+dat3 <- dplyr::inner_join(turku_pienalueet, turku_data_asunnot, by = c("id" = "Osa.alue"))
+
+ggplot(dat3) +
+    geom_sf(aes(fill=muutos_2015_2019), color = alpha("white", 1/3)) +
+    labs(fill="Asuntojen määrän muutos 2015-2019, kpl") +
+    scale_fill_gradient2(low = "red", high = "blue", space="Lab")
+```
+
+
 ## Lopuksi
 
-Tämän kirjoituksen tarkoituksena oli demonstroida, kuinka Turun julkistamaa pienaluedataa voidaan visualisoida yleisesti käytössä olevia R-paketteja hyödyntämällä. Jatkokehityskohteena joitakin blogissa esiteltyjä työvaiheita olisi epäilemättä hyvä kiteyttää helpommin käytettävämpään ja pysyvämpään muotoon, esimerkiksi erillisen R-paketin muodossa. [Koneellisesti luettava valmis lista Turun aluekoodeista](https://github.com/rOpenGov/homepage/blob/master/content/post/turku_aluekoodit.csv) on esimerkki tiedosta, joka olisi hyvä olla valmiina saatavilla. 
+Tämän kirjoituksen tarkoituksena oli demonstroida, kuinka Turun julkistamaa pienaluedataa voidaan visualisoida yleisesti käytössä olevia R-paketteja hyödyntämällä. 
 
-Yksinään Turun aluedata jää kuitenkin hieman ontoksi. Suomen kontekstissa esimerkiksi [6Aika-hankkeeseen](https://6aika.fi) osallistuvien suurempien kaupunkien (Helsinki, Espoo, Vantaa, Turku, Tampere, Oulu) tuottama avoin data voisi olla hyödyllistä saattaa yhden käyttöliittymän taakse, samaan tapaan kuin geofi-paketissa on tehty Suomen laajuisesti. Vertailu muihin pohjoismaisiin kaupunkeihin saattaisi myös olla mielenkiintoista.
+Jatkokehityskohteena joitakin blogissa esiteltyjä työvaiheita olisi epäilemättä hyvä kiteyttää helpommin käytettävämpään ja pysyvämpään muotoon, esimerkiksi erillisen R-paketin muodossa. [Koneellisesti luettava valmis lista Turun aluekoodeista](https://github.com/rOpenGov/homepage/blob/master/content/post/turku_aluekoodit.csv) on esimerkki tiedosta, josta on hyötyä monissa alueellisen dataan liittyvissä toimenpiteissä ja olisi hyvä olla helposti saatavilla. Toinen kehityskohde voisi olla nykyisellään hieman hankalasti käytettävissä olevan .px-muotoisen datan uudelleenpaketoiminen johonkin helpommin hyödynnettävään formaattiin.
 
-Aiheeseen varmasti palataan myöhemmissä kirjoituksissa.
+Yksinään Turun aluedata jää hieman ontoksi. Turun alueiden vertailu esimerkiksi muiden [6Aika-hankkeeseen](https://6aika.fi) osallistuvien suurempien kaupunkien (Helsinki, Espoo, Vantaa, Turku, Tampere, Oulu) alueisiin voisi olla jo mielekkäämpää.
+
+Aiheen äärelle varmasti palataan vielä.
