@@ -153,14 +153,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  Muu vuokra-asunto                 :7205   2h+k                    : 4585  
 ##  Asumisoikeusasunnot               :7205   3h+k/kk/kt              : 4585  
 ##  Muu tai tuntematon hallintaperuste:7205   (Other)                 :22925  
-##                            Osa.alue      Vuosi           value          
-##  853 Turku                     :  385   2015:10087   Min.   :     0.00  
-##  853101001 Rauhankatu VII      :  385   2016:10087   1st Qu.:     0.00  
-##  853101002 Ursininkatu pohj.   :  385   2017:10087   Median :     2.00  
-##  853101003 Ursininkatu et.     :  385   2018:10087   Mean   :    99.96  
-##  853101004 Kristiinankatu et.  :  385   2019:10087   3rd Qu.:    23.00  
-##  853101005 Kristiinankatu pohj.:  385                Max.   :119908.00  
-##  (Other)                       :48125                NA&#39;s   :4158</code></pre>
+##   Vuosi                                 Osa.alue         value          
+##  2015:10087   853 Turku                     :  385   Min.   :     0.00  
+##  2016:10087   853101001 Rauhankatu VII      :  385   1st Qu.:     0.00  
+##  2017:10087   853101002 Ursininkatu pohj.   :  385   Median :     2.00  
+##  2018:10087   853101003 Ursininkatu et.     :  385   Mean   :    99.96  
+##  2019:10087   853101004 Kristiinankatu et.  :  385   3rd Qu.:    23.00  
+##               853101005 Kristiinankatu pohj.:  385   Max.   :119908.00  
+##               (Other)                       :48125   NA&#39;s   :4158</code></pre>
 <p>dim-komennon tulos kertoo, että data.framessa on 50435 riviä ja 5 saraketta. Summaryn tulkitseminen on tässä yhteydessä hieman hankalampaa, mutta käytännössä luvut kertovat, kuinka monta kertaa kukin uniikki rivi esiintyy tässä pitkässä muodossa olevassa taulukossa. Numeroista ei siis voi tehdä päätelmiä minkään ryhmän jäsenten lukumäärästä vaan ennemmin siitä, kuinka monta kertaa kukin muuttuja esiintyy taulukossa.</p>
 <p>Olemme tällä kertaa kiinnostuneita eri pienalueiden tiedoista. Visualisoinnin yksinkertaistamiseksi tarkastelemme omistusasujien määrän suhdetta kaikkiin asumismuotoihin, joten valitsemme siis Hallintaperuste-sarakkeesta “Hallintaperusteet yhteensä”, “Omistaa talon” ja “Omistaa asunnon osakkeet”. Huoneistotyypin osalta emme tee erottelua. Osa.alue- ja Vuosi-sarakkeista voimme ottaa kaikki tiedot, sillä tarvittavat rajaukset voidaan tehdä samalla kun tilastotietoja yhdistetään paikkatietoon.</p>
 <p>Pelkästään pienalueita tarkasteltaessa uuden area_code -sarakkeen luominen ei ole välttämätöntä, sillä pienaluedatan sisältävät tietoaineistot sekä pienalueiden paikkatietoaineistot käyttävät toisiaan vastaavia nimikkeitä. Muiden aineistojen kanssa toimiessa on kuitenkin hyödyllistä, että numeromuodossa oleva aluekoodi ja alueen nimi erotellaan erillisiksi sarakkeiksi.</p>
@@ -176,32 +176,28 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  Muu vuokra-asunto                 :  0    2h+k                    :   0  
 ##  Asumisoikeusasunnot               :  0    3h+k/kk/kt              :   0  
 ##  Muu tai tuntematon hallintaperuste:  0    (Other)                 :   0  
-##                            Osa.alue     Vuosi         value         
-##  853 Turku                     :  15   2015:393   Min.   :     0.0  
-##  853101001 Rauhankatu VII      :  15   2016:393   1st Qu.:    40.5  
-##  853101002 Ursininkatu pohj.   :  15   2017:393   Median :   161.0  
-##  853101003 Ursininkatu et.     :  15   2018:393   Mean   :   918.0  
-##  853101004 Kristiinankatu et.  :  15   2019:393   3rd Qu.:   593.5  
-##  853101005 Kristiinankatu pohj.:  15              Max.   :119908.0  
-##  (Other)                       :1875              NA&#39;s   :162</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan vieraskielisten teksti lyhyemmäksi</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#turku_data2$Kieli &lt;- turku_data2$Kieli %&gt;% </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  recode(&quot;VIERASKIELISET YHTEENSÄ&quot; = &quot;muut&quot;)</span></span>
+##   Vuosi                               Osa.alue        value         
+##  2015:393   853 Turku                     :  15   Min.   :     0.0  
+##  2016:393   853101001 Rauhankatu VII      :  15   1st Qu.:    40.5  
+##  2017:393   853101002 Ursininkatu pohj.   :  15   Median :   161.0  
+##  2018:393   853101003 Ursininkatu et.     :  15   Mean   :   918.0  
+##  2019:393   853101004 Kristiinankatu et.  :  15   3rd Qu.:   593.5  
+##             853101005 Kristiinankatu pohj.:  15   Max.   :119908.0  
+##             (Other)                       :1875   NA&#39;s   :162</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">area_code =</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;</span>, <span class="st">&quot;&quot;</span>, turku_data2<span class="sc">$</span>Osa.alue))</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan pitkä datamuoto leveäksi</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">area_code =</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:alpha:]]*[[:punct:]]*[[:blank:]]*&quot;</span>, <span class="st">&quot;&quot;</span>, turku_data2<span class="sc">$</span>Osa.alue))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">&quot;Vuosi&quot;</span>, <span class="st">&quot;area_code&quot;</span>), <span class="at">names_from =</span> <span class="st">&quot;Hallintaperuste&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan pitkä datamuoto leveäksi</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Siivotaan sarakkeita käytettävämpään muotoon</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">&quot;Vuosi&quot;</span>, <span class="st">&quot;area_code&quot;</span>), <span class="at">names_from =</span> <span class="st">&quot;Hallintaperuste&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Siivotaan sarakkeita käytettävämpään muotoon</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>turku_data2 <span class="ot">&lt;-</span> turku_data2 <span class="sc">%&gt;%</span> </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">omistusasunto =</span> <span class="st">`</span><span class="at">Omistaa talon</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Omistaa asunnon osakkeet</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">muu_asumismuoto =</span> <span class="st">`</span><span class="at">Hallintaperusteet yhteensä</span><span class="st">`</span> <span class="sc">-</span> omistusasunto) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">hallintaperusteet_yhteensa =</span> <span class="st">`</span><span class="at">Hallintaperusteet yhteensä</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Omistaa talon</span><span class="st">`</span>, <span class="st">`</span><span class="at">Omistaa asunnon osakkeet</span><span class="st">`</span>))</span></code></pre></div>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">omistusasunto =</span> <span class="st">`</span><span class="at">Omistaa talon</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Omistaa asunnon osakkeet</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">muu_asumismuoto =</span> <span class="st">`</span><span class="at">Hallintaperusteet yhteensä</span><span class="st">`</span> <span class="sc">-</span> omistusasunto) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">hallintaperusteet_yhteensa =</span> <span class="st">`</span><span class="at">Hallintaperusteet yhteensä</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Omistaa talon</span><span class="st">`</span>, <span class="st">`</span><span class="at">Omistaa asunnon osakkeet</span><span class="st">`</span>))</span></code></pre></div>
 <p>Seuraavaksi yhdistämme datatiedot geospatiaaliseen dataan käyttämällä sf-pakettia sekä visualisointiin ggplot2-pakettia.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>url_geo <span class="ot">&lt;-</span> <span class="st">&quot;http://dev.turku.fi/datasets/aluejaot/pienalueet-4326.geojson&quot;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>

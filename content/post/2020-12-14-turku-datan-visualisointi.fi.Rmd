@@ -123,10 +123,6 @@ turku_data2 <- turku_data %>%
 
 summary(turku_data2)
 
-# Muutetaan vieraskielisten teksti lyhyemmäksi
-#turku_data2$Kieli <- turku_data2$Kieli %>% 
-#  recode("VIERASKIELISET YHTEENSÄ" = "muut")
-
 # Luodaan uusi muuttuja area_code poistamalla Osa.alue-muuttujasta aakkoset, välimerkit ja välilyönnit
 turku_data2 <- turku_data2 %>% 
   dplyr::mutate(area_code = gsub("[[:alpha:]]*[[:punct:]]*[[:blank:]]*", "", turku_data2$Osa.alue))
