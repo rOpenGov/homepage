@@ -3,7 +3,7 @@
 {{ if gt (len $posts) 0 }}
 <section>
     <h4>{{ i18n "recentPosts" }}</h4>
-    <ol class="list-unstyled">
+    <ol class="list">
         {{ range $posts }}
         <li>
             <a href="{{.RelPermalink}}">{{.Title | markdownify }}</a>
