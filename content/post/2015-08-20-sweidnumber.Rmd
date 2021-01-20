@@ -3,7 +3,7 @@ title: "R made personal (at least for swedes)!"
 author: "Mans Magnusson and Erik Bulow"
 date: "2015-08-20"
 categories: ["R"]
-tags: ["Sweden"]
+tags: ["Sweden", "R-bloggers"]
 ---
 
 

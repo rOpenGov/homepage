@@ -5,7 +5,7 @@ date: "2015-06-12"
 categories:
   - R
 tags:
-  - Computational humanities
+  - dh
 ---
 
 ```{r, echo=FALSE}

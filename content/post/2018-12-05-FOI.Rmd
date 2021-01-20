@@ -7,6 +7,7 @@ categories:
   - R
 tags: 
   - foi
+  - R-bloggers
 ---
 
 
@@ -134,20 +135,6 @@ dfs$Publisher = factor(dfs$Publisher, levels = rev(as.character(dfs$Publisher)))
 dfs$Percentage = round(100 * dfs$Costs/sum(dfs$Costs), 1)
 p <- ggplot(dfs[1:20,], aes(x = Publisher, y = Costs)) + geom_bar(stat = "identity", fill = "lightgray", color = "black") + ggtitle("Costs by publisher") + coord_flip() + xlab("") + ylab("Total Costs (MEUR)") + geom_text(aes(x=Publisher, y=32, label=paste(Percentage, "%", sep = ""), hjust=ifelse(sign(Percentage)>0, 0, 0)), position = position_dodge(width=1), size = 7)
 print(p)
-
-#dfs <- df %>% group_by(Publisher) %>% summarise(n = n()) %>% arrange(desc(n))
-#dfs$Publisher = factor(dfs$Publisher, levels = rev(as.character(dfs$Publisher)))
-#dfs$Percentage = round(100 * dfs$n/sum(dfs$n), 1)
-#p <- ggplot(dfs[1:20,], aes(x = Publisher, y = n)) +
-#        geom_bar(stat = "identity", fill = "lightgray", color = "black") +#
-#	ggtitle("Subscriptions by publisher") +
-#	coord_flip() + xlab("") + ylab("Subscriptions (n)") + 
-#	text(aes(x=Publisher, y=32, label=paste(Percentage, "%", sep = ""),
-#	     hjust=ifelse(sign(Percentage)>0, 0, 0)), position = position_dodge(width=1), size = 7)
-#print(p)
-#dfs = df %>% group_by(Way.of.acquisition) %>% summarise(Costs = sum(Cost)/1e6) %>% arrange(desc(Costs))
-#dfs$Way.of.acquisition = factor(dfs$Way.of.acquisition, levels = rev(as.character(dfs$Way.of.acquisition)))
-#dfs$Percentage = round(100 * dfs$Costs/sum(dfs$Costs), 1)
 ```
 
 
@@ -298,11 +285,4 @@ p1 <- ggplot(dfs, aes(x = Year, y = Costs_relative, color = Organization)) +
        scale_y_continuous(labels = scales::percent) +
        scale_x_continuous(breaks = 2010:2017, labels = c(2010:2017))        
 print(p1)
-
-
-#p2 <- ggplot(dfs, aes(x = Year, y = Costs_relative, fill = Organization)) +
-#       labs(title = "Relative share of the costs per organization", y = "Cost share (%)") +
-#       geom_bar(stat = "identity", position = "stack") +
-#       scale_y_continuous(labels = scales::percent)   
-#print(p2)
 ```
