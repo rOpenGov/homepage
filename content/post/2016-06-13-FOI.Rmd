@@ -7,8 +7,6 @@ tags: ["foi", "R-bloggers"]
 ---
 
 
-Scientific journal subscription costs in Finland: a preliminary analysis
-========================================
 
 ```{r foi-init, message=FALSE, echo=FALSE}
 library(dplyr)

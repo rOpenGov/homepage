@@ -7,8 +7,6 @@ tags: ["eurostat"]
 ---
 
 
-eurostat package published in R Journal
-========================================
 
 A formal publication on the `eurostat` [CRAN](http://cran.r-project.org/) R package has now appeared on-line in [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-019/index.html).
 

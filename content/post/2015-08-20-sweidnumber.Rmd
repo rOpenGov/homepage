@@ -7,9 +7,6 @@ tags: ["Sweden", "R-bloggers"]
 ---
 
 
-R made personal (at least for swedes)!
-=======================
-
 ### Background
 
  -- Who are you? asked Mr Doe.

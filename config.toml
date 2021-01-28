@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://ropengov.org"
 title = "rOpenGov - R packages for open government data analytics"
 languageCode = "en-us"
 #defaultContentLanguage = "en"
