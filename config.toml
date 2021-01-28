@@ -61,6 +61,11 @@ theme = "hugo-bootstrap"
       name = "Community"
       weight = 4
 
+    [[languages.en.menu.main]]
+      url = "/index.xml"
+      name = "RSS-feed"
+      weight = 5
+
 
   [languages.fi]
     languageName = "Suomi"
@@ -88,6 +93,11 @@ theme = "hugo-bootstrap"
       url = "/community/"
       name = "Yhteisö"
       weight = 4
+
+    [[languages.fi.menu.main]]
+      url = "/fi/index.xml"
+      name = "RSS-syöte"
+      weight = 5
 
 # Links format
 
