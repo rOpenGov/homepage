@@ -102,7 +102,7 @@ theme = "hugo-bootstrap"
 # Links format
 
 [permalinks]
-  post = "/:year/:month/:title/"
+  post = "/:year/:month/:slug/"
 
 [params]
   # Main sections (currently used for the recent posts in the sidebar)
