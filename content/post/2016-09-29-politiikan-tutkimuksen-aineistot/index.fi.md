@@ -1,7 +1,7 @@
 ---
 title: "Suuret ja avoimet aineistot politiikan tutkimuksessa"
-slug: "suuret_ja_avoimet_aineistot_politiikan_tutkimuksessa"
-author: Raimo Muurinen
+slug: "politiikan-tutkimuksen-aineistot"
+author: "Raimo Muurinen"
 date: "2016-09-29"
 categories:
   - news

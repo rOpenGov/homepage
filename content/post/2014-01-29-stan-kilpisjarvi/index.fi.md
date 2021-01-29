@@ -1,8 +1,8 @@
 ---
-title: STAN ja Kilpisjärven kesät
-date: 2014-01-29
-author: Janne Sinkkonen
-slug: "stan"
+title: "STAN ja Kilpisjärven kesät"
+date: "2014-01-29"
+author: "Janne Sinkkonen"
+slug: "stan-kilpisjarvi"
 categories:
   - R
   - visualisointi

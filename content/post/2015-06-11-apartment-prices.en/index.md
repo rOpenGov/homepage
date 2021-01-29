@@ -1,8 +1,14 @@
 ---
 title: A hierarchical model of Finnish apartment prices
-slug: "a_hierarchical_model_of_finnish_apartment_prices"
+slug: "regional-trends-in-finnish-apartment-prices"
 author: Janne Sinkkonen
 date: "2015-06-11"
+categories:
+  - news
+tags:
+  - news
+  - R
+  - stan
 ---
 
 Probabilistic programming approach for regional trends in apartment prices

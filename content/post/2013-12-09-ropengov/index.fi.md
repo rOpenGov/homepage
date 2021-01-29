@@ -1,8 +1,8 @@
 ---
 title: "rOpenGov: kansainvälinen R-ekosysteemi avoimelle datalle"
-slug: "r_open_gov_kansainvalinen_r_ekosysteemi_avoimelle_datalle"
+slug: "ropengov-ekosysteemi"
 date: "2013-12-09"
-author: Leo Lahti
+author: "Leo Lahti"
 categories:
   - news
 tags:

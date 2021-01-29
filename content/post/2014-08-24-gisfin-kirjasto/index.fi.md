@@ -1,7 +1,7 @@
 ---
 title: "gisfin - Avoimen suomalaisen paikkatiedon työkalupakki R-kielelle"
-slug: "gisfin_avoimen_suomalaisen_paikkatiedon_tyokalupakki_r_kielelle"
-author: Joona Lehtomäki
+slug: "gisfin-kirjasto"
+author: "Joona Lehtomäki"
 date: "2014-08-24"
 categories:
   - archive

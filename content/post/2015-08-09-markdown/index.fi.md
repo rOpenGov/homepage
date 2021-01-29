@@ -1,6 +1,6 @@
 ---
 title: "Tieteellisen kirjoittamisen uudet välineet: opaskokoelma tekeillä"
-slug: "tieteellisen_kirjoittamisen_uudet_valineet_opaskokoelma_tekeilla"
+slug: "tieteellisen-kirjoittamisen-opas"
 author: Leo Lahti
 date: "2015-08-11"
 categories:

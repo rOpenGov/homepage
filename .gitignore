@@ -4,3 +4,5 @@ homepage.Rproj
 .Rhistory
 public
 config_bak.toml
+.DS_Store
+.RData

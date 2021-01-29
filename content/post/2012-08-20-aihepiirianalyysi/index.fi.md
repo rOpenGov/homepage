@@ -1,6 +1,6 @@
 ---
 title: "Aihepiirianalyysi kansanedustajien puheista"
-slug: "aihepiirianalyysi_kansanedustajien_puheista"
+slug: "aihepiirianalyysi-kansanedustajien-puheista"
 date: "2012-08-20"
 author: Juuso Parkkinen
 categories:

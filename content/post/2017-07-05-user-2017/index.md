@@ -1,7 +1,7 @@
 ---
 date: "2017-07-05"
-slug: "presenting_at_use_r2017_in_brussels"
-title: Presenting at useR2017 in Brussels
+slug: "user2017"
+title: "Presenting at useR2017 in Brussels"
 author: Markus Kainu
 categories:
   - news

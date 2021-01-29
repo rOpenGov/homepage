@@ -1,6 +1,6 @@
 ---
 title: "Finnish Meteorological Institute open data added to rOpenGov"
-slug: "finnish_meteorological_institute_open_data_added_to_r_open_gov"
+slug: "finnish-meteorological-institute-open-data"
 author: "Jussi Jousimo"
 date: "2014-09-30"
 categories: ["R"]

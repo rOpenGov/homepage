@@ -1,6 +1,6 @@
 ---
 title: "R-paketti avoimen Suomi-datan louhintaan"
-slug: "r_paketti_avoimen_suomi_datan_louhintaan"
+slug: "sorvi"
 date: "2011-10-09"
 author: Leo Lahti
 categories:

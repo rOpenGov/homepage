@@ -1,8 +1,8 @@
 ---
-title: Kunnallisvaalit sosiaalisessa mediassa
-slug: "kunnallisvaalit_sosiaalisessa_mediassa"
-date: 2013-01-26
-author: Leo Lahti
+title: "Kunnallisvaalit sosiaalisessa mediassa"
+slug: "kunnallisvaalit-sosiaalisessa-mediassa"
+date: "2013-01-26"
+author: "Leo Lahti"
 categories:
   - R
   - visualisointi

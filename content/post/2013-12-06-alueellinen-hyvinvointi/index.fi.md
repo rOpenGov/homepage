@@ -1,8 +1,8 @@
 ---
-title: Alueellinen hyvinvointi – vuorovaikutteinen visualisointi Sotkanetin datasta
-slug: "alueellinen_hyvinvointi_vuorovaikutteinen_visualisointi_sotkanetin_datasta"
-date: 2013-12-06
-author: Leo Lahti
+title: "Alueellinen hyvinvointi – vuorovaikutteinen visualisointi Sotkanetin datasta"
+slug: "alueellinen-hyvinvointi"
+date: "2013-12-06"
+author: "Leo Lahti"
 categories:
   - uutinen
   - R

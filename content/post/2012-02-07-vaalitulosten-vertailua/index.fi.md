@@ -1,6 +1,6 @@
 ---
 title: "Vaalitulosten vertailua vuorovaikutteisena visualisaationa"
-slug: "vaalitulosten_vertailua_vuorovaikutteisena_visualisaationa"
+slug: "vaalitulosten-vertailua"
 date: 2012-02-07
 author: Juuso Parkkinen
 categories:

@@ -1,8 +1,8 @@
 ---
 title: "Kunnallisvaaliehdokkaiden aktiivisuus sosiaalisessa mediassa: puolueiden vertailua"
-slug: "kunnallisvaaliehdokkaiden_aktiivisuus_sosiaalisessa_mediassa_puolueiden_vertailua"
-date: 2012-10-26
-author: Leo Lahti
+slug: "kunnallisvaaliehdokkaiden-aktiivisuus-sosiaalisessa-mediassa"
+date: "2012-10-26"
+author: "Leo Lahti"
 categories:
   - R
   - sorvi

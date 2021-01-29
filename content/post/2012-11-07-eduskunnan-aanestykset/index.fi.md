@@ -1,8 +1,8 @@
 ---
 title: "Eduskunnan äänestysten hakurutiinit R-kielelle"
-slug: "eduskunnan_aanestysten_hakurutiinit_r_kielelle"
-date: 2012-11-07
-author: Juuso Haapanen
+slug: "eduskunnan-aanestysten-hakurutiinit-r-kielelle"
+date: "2012-11-07"
+author: "Juuso Haapanen"
 categories:
   - R
   - sorvi

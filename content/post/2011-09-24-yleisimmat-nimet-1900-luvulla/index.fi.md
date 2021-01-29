@@ -1,6 +1,6 @@
 ---
 title: "Yleisimmät nimet 1900-luvulla"
-slug: "yleisimmat_nimet_1900_luvulla"
+slug: "yleisimmat-nimet-1900-luvulla"
 date: "2011-09-24"
 author: Juuso Parkkinen
 categories:

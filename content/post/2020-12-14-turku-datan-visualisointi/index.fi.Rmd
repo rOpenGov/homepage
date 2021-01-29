@@ -1,6 +1,6 @@
 ---
 title: "Turun pienaluetilastojen visualisointi R:ssä"
-slug: "turun_pienaluetilastojen_visualisointi_r_ssa"
+slug: "turun-pienaluetilastojen-visualisointi"
 author: "Pyry Kantanen"
 date: 2020-12-23
 categories: ["paikkatieto", "visualisointi"]

@@ -1,8 +1,7 @@
 ---
 title: "Kuntatiedon visualisointi R:n gisfin-kirjastolla"
-slug: "kuntatiedon_visualisointi_r_n_gisfin_kirjastolla"
-slug: "number_define_the_region_and_color_variables_and_title"
-author: Leo Lahti
+slug: "kuntakartat"
+author: "Leo Lahti"
 date: "2015-06-06"
 categories:
   - archive

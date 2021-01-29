@@ -1,8 +1,8 @@
 ---
 title: "Berlin Open Knowledge Festival July 15-17, 2014"
-slug: "berlin_open_knowledge_festival_july_15_17_2014"
 date: "2014-07-18"
 author: "Leo Lahti"
+slug: "berlin-okfest"
 ---
 
 [rOpenGov](http://ropengov.github.io) developers met at the [Open

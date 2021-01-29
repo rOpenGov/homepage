@@ -1,8 +1,8 @@
 ---
 title: "Kunnallisvaalien vertailukelpoiset ehdokasdatat CSV-taulukkoina: 2004 / 2008 / 2012"
-slug: "kunnallisvaalien_vertailukelpoiset_ehdokasdatat_csv_taulukkoina_2004_2008_2012"
-date: 2012-10-05
-author: Leo Lahti
+slug: "datavaalit-vertailukelpoiset-ehdokasdatat"
+date: "2012-10-05"
+author: "Leo Lahti"
 categories:
   - R
   - sorvi

@@ -1,8 +1,8 @@
 ---
 title: "Reproducible posters with R, LaTeX, tikz and Sweave"
-slug: "reproducible_posters_with_r_la_te_x_tikz_and_sweave"
+slug: "reproducible-posters-with-r"
 author: "Leo Lahti and Juuso Parkkinen"
-date: 2015-06-07
+date: "2015-06-07"
 excerpt: International Conference on Computational Social Science (ICCSS 2015)
 categories: ["R", "poster", "LaTeX", "Sweave", "tikz"]
 tags: ["poster"]

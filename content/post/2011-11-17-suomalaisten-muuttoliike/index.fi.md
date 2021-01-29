@@ -1,6 +1,6 @@
 ---
 title: "Suomalaisten muuttoliike Maailmanpankin datoista maailmankartalla visualisoituna"
-slug: "suomalaisten_muuttoliike_maailmanpankin_datoista_maailmankartalla_visualisoituna"
+slug: "suomalaisten-muuttoliike"
 date: "2011-11-17"
 author: Juuso Parkkinen
 categories:

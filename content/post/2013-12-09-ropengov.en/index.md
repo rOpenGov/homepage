@@ -1,8 +1,8 @@
 ---
+title: "R Ecosystem for Open Government Data and Computational Social Science"
 date: "2013-12-09"
-slug: "r_ecosystem_for_open_government_data_and_computational_social_science"
-title: R Ecosystem for Open Government Data and Computational Social Science 
-author: Leo Lahti
+author: "Leo Lahti"
+slug: "r-ecosystem"
 categories:
   - news
 tags:

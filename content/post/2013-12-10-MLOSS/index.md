@@ -1,8 +1,8 @@
 ---
 title: "NIPS/MLOSS workshop on Machine Learning Open Source Software"
-slug: "nips_mloss_workshop_on_machine_learning_open_source_software"
 date: "2013-12-10"
 author: "Leo Lahti"
+slug: "nips-mloss-workshop"
 ---
 
 The [rOpenGov](http://ropengov.github.io) project was today highlighted at the Neural Information Processing Systems [(NIPS)](http://nips.cc/) conference, one of the main forums for machine learning and scientific computation. We gave a presentation at the [Machine Learning Open Source Software (MLOSS) workshop](http://nips.cc/Conferences/2013/Program/event.php?ID=3710).

@@ -1,9 +1,9 @@
 ---
 title: "Asuntohintojen alueellinen kehitys selviää todennäköisyysohjelmoinnilla"
-slug: "asuntohintojen_alueellinen_kehitys_selviaa_todennakoisyysohjelmoinnilla"
-date: 2015-05-07
+slug: "asuntohintojen-alueellinen-kehitys"
+date: "2015-05-07"
 language: fi
-author: Janne Sinkkonen
+author: "Janne Sinkkonen"
 categories:
   - news
 tags:

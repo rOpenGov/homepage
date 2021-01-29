@@ -1,8 +1,8 @@
 ---
 title: "Datavaalit: Oikeusministeriön vaalidatat sorvattu auki"
-slug: "datavaalit_oikeusministerion_vaalidatat_sorvattu_auki"
-date: 2012-09-28
-author: Leo Lahti
+slug: "datavaalit-oikeusministerion-vaalidatat"
+date: "2012-09-28"
+author: "Leo Lahti"
 categories:
   - R
   - sorvi

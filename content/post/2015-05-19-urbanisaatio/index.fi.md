@@ -1,7 +1,7 @@
 ---
-title: Urbaanien asuinympäristöjen suosio kasvaa
-slug: "urbaanien_asuinymparistojen_suosio_kasvaa"
-author: Jaakko Särelä
+title: "Urbaanien asuinympäristöjen suosio kasvaa"
+slug: "urbanisaatio"
+author: "Jaakko Särelä"
 date: "2015-05-19"
 categories:
   - news

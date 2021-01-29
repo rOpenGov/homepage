@@ -1,7 +1,7 @@
 ---
-title: Kenen joukoissa seisot - ennustaako kone ehdokkaan puoluekannan?
-slug: "kenen_joukoissa_seisot_ennustaako_kone_ehdokkaan_puoluekannan"
-author: Johan Himberg
+title: "Kenen joukoissa seisot - ennustaako kone ehdokkaan puoluekannan?"
+slug: "vaalit2015-luokittelu"
+author: "Johan Himberg"
 date: "2015-04-17"
 categories: 
   - news

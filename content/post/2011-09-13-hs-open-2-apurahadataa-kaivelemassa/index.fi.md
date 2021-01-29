@@ -1,6 +1,6 @@
 ---
 title: "HS Open 2: Apurahadataa kaivelemassa"
-slug: "hs_open_2_apurahadataa_kaivelemassa"
+slug: "hs-open-2-apurahadataa-kaivelemassa"
 date: "2011-09-13"
 author: Juuso Parkkinen
 categories:

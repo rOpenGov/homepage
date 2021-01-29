@@ -1,6 +1,6 @@
 ---
 title: "HS Open 3 lämmittely: Asuntojen myyntihinnat Helsingin kartalla"
-slug: "hs_open_3_lammittely_asuntojen_myyntihinnat_helsingin_kartalla"
+slug: "hs-open-3-asuntojen-myyntihinnat"
 date: "2011-10-05"
 author: Juuso Parkkinen
 categories:

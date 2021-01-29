@@ -1,6 +1,6 @@
 ---
 title: "Datavaalit osa 1 – vaali- ja kuntadatan kokoaminen ja paketointi"
-slug: "datavaalit_osa_1_vaali_ja_kuntadatan_kokoaminen_ja_paketointi"
+slug: "datavaalit-osa-1"
 date: 2012-05-21
 author: Leo Lahti
 categories:

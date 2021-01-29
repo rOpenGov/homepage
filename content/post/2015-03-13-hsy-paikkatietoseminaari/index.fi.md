@@ -1,8 +1,8 @@
 ---
-title: Avoimella paikkatiedolla kohti älykkäämpää kaupunkia
-slug: "avoimella_paikkatiedolla_kohti_alykkaampaa_kaupunkia"
-author: Juuso Parkkinen
-date: '2015-03-13'
+title: "Avoimella paikkatiedolla kohti älykkäämpää kaupunkia"
+slug: "hsy-paikkatietoseminaari"
+author: "Juuso Parkkinen"
+date: "2015-03-13"
 categories:
   - news
 tags:
