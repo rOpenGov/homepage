@@ -1,10 +1,10 @@
 ---
 title: Hetu-package for handling of Finnish personal identity codes
-author: Pyry Kantanen
+author: "Pyry Kantanen"
 date: 2020-10-29
 slug: "hetu"
 categories:
-  - R package
+  - R-package
   - R
 tags:
   - R-bloggers
@@ -178,15 +178,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in years</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2)</span></code></pre></div>
 <pre><code>## The age in years has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 58 60 57 63 54</code></pre>
+<pre><code>## [1] 69 64 63 60 40</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in months</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">timespan =</span> <span class="st">&quot;months&quot;</span>)</span></code></pre></div>
 <pre><code>## The age in months has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 696 722 688 757 654</code></pre>
+<pre><code>## [1] 831 770 761 723 491</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in 2011</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">date =</span> <span class="st">&quot;2011-01-01&quot;</span>)</span></code></pre></div>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 47 50 47 53 44</code></pre>
+<pre><code>## [1] 59 54 53 50 30</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: boxplot grouped by sex</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>example_pins3 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">20</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>, <span class="at">p.male =</span> <span class="fl">0.5</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">hetu_age</span>(example_pins3)<span class="sc">~</span><span class="fu">hetu_sex</span>(example_pins3), <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Age in years&quot;</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;magenta&quot;</span>))</span></code></pre></div>
@@ -213,7 +213,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>example_bids <span class="ot">&lt;-</span> <span class="fu">rbid</span>(<span class="dv">2</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>example_bids</span></code></pre></div>
-<pre><code>## [1] &quot;9802897-5&quot; &quot;0520734-2&quot;</code></pre>
+<pre><code>## [1] &quot;6929921-5&quot; &quot;8904621-5&quot;</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bid_ctrl</span>(example_bids)</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>

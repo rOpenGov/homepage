@@ -43,6 +43,21 @@ Kuulen usein vaikeuksista esittää Tilastokeskuksen [PxWeb](https://pxnet2.stat
 
 Tässä esimerkissä näytetään miten teet karttoja R-ohjelmalla PxWeb-rajapinnan datoista sekä kunta- että postinumeroaluepohjaisten aluejakojen mukaisesti.
 
+Aluksi ladataan paketit sekä datojen hakemiseen, käsittelyyn että visualisointiin.
+
+
+```{r libraries}
+# datat
+library(pxweb) # Tilastokeskuksen pxweb-rajapinta
+library(geofi) # Tilastokeskuksen wfs-rajapinta
+# käsittely
+library(dplyr) 
+library(tidyr)
+# visualisointi
+library(ggplot2)
+```
+
+
 ## Datan hakeminen Tilastokeskuksen PxWeb-rajapinnasta
 
 # Haetaan kuntatason taajama-aste vuoden 2020 aluejaolla
