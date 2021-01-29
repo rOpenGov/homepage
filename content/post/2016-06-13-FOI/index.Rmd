@@ -1,7 +1,7 @@
 ---
 title: "Scientific journal subscription costs in Finland 2010-2015"
 slug: "scientific-journal-subscription-costs-in-finland-2010-2015"
-author: Leo Lahti
+author: "Leo Lahti"
 date: 2016-06-10
 categories: ["R"]
 tags: ["foi", "R-bloggers"]

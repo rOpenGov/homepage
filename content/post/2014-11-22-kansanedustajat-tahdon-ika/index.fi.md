@@ -1,6 +1,6 @@
 ---
 title: Kansanedustajien Tahdon-kantojen ja iän korrelaatio
-slug: "kansanedustajat_tahdon_ika"
+slug: "kansanedustajat-tahdon-ika"
 author: "Jaakko Särelä"
 date: "2014-11-22"
 categories:

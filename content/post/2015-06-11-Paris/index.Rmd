@@ -1,12 +1,12 @@
 ---
-title: Digital humanities with R
+title: "Digital humanities with R"
 slug: "digital-humanities-with-r"
-author: Leo Lahti, Mikko Tolonen
+author: "Leo Lahti, Mikko Tolonen"
 date: "2015-06-12"
 categories:
   - R
 tags:
-  - dh
+  - ["digital-humanities"]
 ---
 
 ```{r, echo=FALSE}
