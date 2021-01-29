@@ -2,7 +2,7 @@
 title: "Hetu-package for handling of Finnish personal identity codes"
 author: "Pyry Kantanen"
 date: 2020-10-29
-slug: "hetu-package"
+slug: "hetu-package-for-handling-of-finnish-personal-identity-codes"
 categories:
   - R-package
   - R
