@@ -1,5 +1,5 @@
 ---
-title: Hetu-paketti suomalaisten henkilötunnusten käsittelyyn
+title: "Hetu-paketti suomalaisten henkilötunnusten käsittelyyn"
 author: "Pyry Kantanen"
 date: 2020-10-29
 slug: "hetu-paketti"
@@ -184,15 +184,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ikä vuosina</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2)</span></code></pre></div>
 <pre><code>## The age in years has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 34 32 61 49 27</code></pre>
+<pre><code>## [1] 43 52 61 49 31</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ikä kuukasina</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">timespan =</span> <span class="st">&quot;months&quot;</span>)</span></code></pre></div>
 <pre><code>## The age in months has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 411 395 739 594 326</code></pre>
+<pre><code>## [1] 526 630 740 598 381</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Minkä ikäisiä hetujen omistajat olivat 2011 puolivälissä?</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">date =</span> <span class="st">&quot;2011-01-01&quot;</span>)</span></code></pre></div>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 24 22 51 39 17</code></pre>
+<pre><code>## [1] 33 42 51 39 21</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisointi: laatikkojanakuvaaja sukupuolen mukaan ryhmiteltynä</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>example_pins3 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">20</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>, <span class="at">p.male =</span> <span class="fl">0.5</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">hetu_age</span>(example_pins3)<span class="sc">~</span><span class="fu">hetu_sex</span>(example_pins3), <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ikä vuosina&quot;</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>))</span></code></pre></div>
@@ -219,7 +219,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>example_bids <span class="ot">&lt;-</span> <span class="fu">rbid</span>(<span class="dv">2</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>example_bids</span></code></pre></div>
-<pre><code>## [1] &quot;1942276-4&quot; &quot;2300284-2&quot;</code></pre>
+<pre><code>## [1] &quot;4481699-2&quot; &quot;2368999-8&quot;</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bid_ctrl</span>(example_bids)</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>Toisin kuin henkilötunnusten tapauksessa, y-tunnuksista ei voida poimia mitään muuta lisäinformaatiota, esimerkiksi yrityksen perustamisajankohtaan tai toimialaan liittyen.</p>

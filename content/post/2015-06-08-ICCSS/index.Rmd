@@ -5,7 +5,8 @@ author: "Leo Lahti and Juuso Parkkinen"
 date: 2015-06-07
 excerpt: International Conference on Computational Social Science (ICCSS 2015)
 categories: ["R", "poster", "LaTeX", "Sweave", "tikz"]
-tags: ["poster"]
+tags:
+  - poster
 ---
 
 

@@ -16,7 +16,7 @@ output:
     highlight: tango
 ---
 
-## General information
+## General information 
 
 Hetu-package for R is meant for algorithmic handling of Finnish personal identity numbers (PINs). The package is especially useful for those who wish to extract information from or validate a large number of PINs at a time.
 
