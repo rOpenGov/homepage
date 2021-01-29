@@ -28,6 +28,6 @@ rOpenGov-yhteisön R-pakettien kehitys tapahtuu [GitHubissa](https://github.com/
 <tbody id="repo_tbl"></tbody>
 </table>
 
-<script src = "/scripts/project_tbl.js"></script>
+<script src = "./project_tbl.js"></script>
 
 

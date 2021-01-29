@@ -27,4 +27,4 @@ The rOpenGov R package development versions are maintained in [GitHub](https://g
 <tbody id="repo_tbl"></tbody>
 </table>
 
-<script src = "/scripts/project_tbl.js"></script>
+<script src = "./project_tbl.js"></script>
