@@ -12,6 +12,8 @@ tags:
 output:
   blogdown::html_page:
     highlight: tango
+editor_options: 
+  chunk_output_type: console
 ---
 
 <script src="{{< blogdown/postref >}}index.fi_files/header-attrs/header-attrs.js"></script>
@@ -80,166 +82,81 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p>Kuulen usein vaikeuksista esittää Tilastokeskuksen <a href="https://pxnet2.stat.fi/PXWeb/pxweb/fi/StatFin/">PxWeb</a>-rajapinnan kautta jaettavia tilastoaineistoja kartalla. <a href="https://ropengov.github.io/">ropengov</a>-projektissa on kehitetty R-kielen työkaluja sekä <a href="https://cran.r-project.org/web/packages/pxweb/index.html">pxweb</a>-rajapinnan hyödyntämiseen että Tilastokeskuksen <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot.html">paikkatietorajapinnan</a> hyödyntämiseen (<a href="https://ropengov.github.io/geofi/">geofi</a>).</p>
+<p>Kuulen usein vaikeuksista esittää Tilastokeskuksen <a href="https://pxnet2.stat.fi/PXWeb/pxweb/fi/">PxWeb</a>-rajapinnan kautta jaettavia tilastoaineistoja kartalla. <a href="https://ropengov.github.io/">ropengov</a>-projektissa on kehitetty R-kielen työkaluja sekä <a href="https://cran.r-project.org/web/packages/pxweb/index.html">pxweb</a>-rajapinnan hyödyntämiseen että Tilastokeskuksen <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot.html">paikkatietorajapinnan</a> hyödyntämiseen (<a href="https://ropengov.github.io/geofi/">geofi</a>).</p>
 <p>Tässä esimerkissä näytetään miten teet karttoja R-ohjelmalla PxWeb-rajapinnan datoista sekä kunta- että postinumeroaluepohjaisten aluejakojen mukaisesti.</p>
-<p>Aluksi ladataan paketit sekä datojen hakemiseen, käsittelyyn että visualisointiin.</p>
+<div id="väkiluku-kuntatasolla-vuoden-2020-aluejaolla" class="section level2">
+<h2>Väkiluku kuntatasolla vuoden 2020 aluejaolla</h2>
+<p>Tässä esimerkissä haemme viimeisimmän kuntatason tiedon <em>väkiluvusta</em> vuoden 2020 aluejaolla. Tieto löytyy <a href="https://pxnet2.stat.fi/PXWeb/pxweb/fi/Kuntien_avainluvut/Kuntien_avainluvut__2020/kuntien_avainluvut_2020_viimeisin.px/">kuntien avainluvut</a> osiosta.</p>
+<p>Alla olevassa giffistä saat käsityksen mitä prosessi edellyttää:</p>
+<p><img src="vakiluku.gif" /></p>
+<p>Aluksi siis ladataan paketit sekä datojen hakemiseen, käsittelyyn että visualisointiin.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># datat</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb) <span class="co"># Tilastokeskuksen pxweb-rajapinta</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geofi) <span class="co"># Tilastokeskuksen wfs-rajapinta</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># käsittely</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># käsittely &amp; siivoaminen</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># visualisointi</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
-<div id="datan-hakeminen-tilastokeskuksen-pxweb-rajapinnasta" class="section level2">
-<h2>Datan hakeminen Tilastokeskuksen PxWeb-rajapinnasta</h2>
-</div>
-<div id="haetaan-kuntatason-taajama-aste-vuoden-2020-aluejaolla" class="section level1">
-<h1>Haetaan kuntatason taajama-aste vuoden 2020 aluejaolla</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geofi)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>municipalities17 <span class="ot">&lt;-</span> <span class="fu">get_municipalities</span>(<span class="at">year =</span> <span class="dv">2017</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pull municipality data from Statistics Finland</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Alue 2019&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;M408&quot;</span>,<span class="st">&quot;M411&quot;</span>,<span class="st">&quot;M476&quot;</span>,<span class="st">&quot;M391&quot;</span>,<span class="st">&quot;M421&quot;</span>,<span class="st">&quot;M478&quot;</span>,<span class="st">&quot;M404&quot;</span>,<span class="st">&quot;M410&quot;</span>,<span class="st">&quot;M303&quot;</span>,<span class="st">&quot;M297&quot;</span>,<span class="st">&quot;M302&quot;</span>,<span class="st">&quot;M44&quot;</span>,<span class="st">&quot;M62&quot;</span>,<span class="st">&quot;M70&quot;</span>,<span class="st">&quot;M488&quot;</span>,<span class="st">&quot;M486&quot;</span>,<span class="st">&quot;M137&quot;</span>,<span class="st">&quot;M140&quot;</span>,<span class="st">&quot;M130&quot;</span>,<span class="st">&quot;M162&quot;</span>,<span class="st">&quot;M78&quot;</span>,<span class="st">&quot;M485&quot;</span>,<span class="st">&quot;M152&quot;</span>,<span class="st">&quot;M72&quot;</span>,<span class="st">&quot;M84&quot;</span>,<span class="st">&quot;M106&quot;</span>,<span class="st">&quot;M151&quot;</span>,<span class="st">&quot;M499&quot;</span>,<span class="st">&quot;M496&quot;</span>,<span class="st">&quot;M495&quot;</span>,<span class="st">&quot;M497&quot;</span>,<span class="st">&quot;M498&quot;</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Vuosi&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;2017&quot;</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># visualisointi</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>Sitten haetaan taajama-aste -data pxweb-rajapinnasta ja kuntajat wfs-rajapinnasta, ja liitetään data yhteen.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WFS-data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>muni20 <span class="ot">&lt;-</span> <span class="fu">get_municipalities</span>(<span class="at">year =</span> <span class="dv">2020</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># PXWEB-data</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Alue 2020&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;M411&quot;</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_viimeisin.px&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">query =</span> pxweb_query_list)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px&quot;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">query =</span> pxweb_query_list)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data.frame</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>tk_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(px_data, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>tk_data2 <span class="ot">&lt;-</span> tk_data <span class="sc">%&gt;%</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> <span class="st">`</span><span class="at">Alue 2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">as.character</span>(name),</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Paste Tiedot and Vuosi</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">Tiedot =</span> <span class="fu">paste</span>(Tiedot, Vuosi)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Vuosi) <span class="sc">%&gt;%</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Tiedot, <span class="st">`</span><span class="at">Kuntien avainluvut</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>tk_data3 <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(tk_data2)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Join with Statistics Finland attribute data</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(municipalities17, tk_data3)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre class="img-fluid"><code>## Simple feature collection with 10 features and 10 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: 83747.59 ymin: 6690809 xmax: 610975.5 ymax: 7133254
-## projected CRS:  ETRS89 / TM35FIN(E,N)
-##                gml_id vuosi kunta      nimi      namn      name
-## 1   kunta4500k_2017.1  2017     5  Alajärvi  Alajärvi  Alajärvi
-## 2   kunta4500k_2017.2  2017     9 Alavieska Alavieska Alavieska
-## 3   kunta4500k_2017.3  2017    10    Alavus    Alavus    Alavus
-## 4   kunta4500k_2017.4  2017    16  Asikkala  Asikkala  Asikkala
-## 5   kunta4500k_2017.5  2017    18    Askola    Askola    Askola
-## 6   kunta4500k_2017.6  2017    19      Aura      Aura      Aura
-## 7   kunta4500k_2017.7  2017    20      Akaa      Akaa      Akaa
-## 8   kunta4500k_2017.8  2017    35    Brändö    Brändö    Brändö
-## 9   kunta4500k_2017.9  2017    43    Eckerö    Eckerö    Eckerö
-## 10 kunta4500k_2017.10  2017    46 Enonkoski Enonkoski Enonkoski
-##    municipality_name_fi municipality_name_sv municipality_name_en
-## 1              Alajärvi             Alajärvi             Alajärvi
-## 2             Alavieska            Alavieska            Alavieska
-## 3                Alavus               Alavus               Alavus
-## 4              Asikkala             Asikkala             Asikkala
-## 5                Askola               Askola               Askola
-## 6                  Aura                 Aura                 Aura
-## 7                  Akaa                 Akaa                 Akaa
-## 8                Brändö               Brändö               Brändö
-## 9                Eckerö               Eckerö               Eckerö
-## 10            Enonkoski            Enonkoski            Enonkoski
-##    kuntaryhmitys_code                           geom
-## 1                   2 MULTIPOLYGON (((348733.2 69...
-## 2                   3 MULTIPOLYGON (((370424.7 71...
-## 3                   3 MULTIPOLYGON (((317245.3 69...
-## 4                   2 MULTIPOLYGON (((434407.9 67...
-## 5                   3 MULTIPOLYGON (((423421.8 67...
-## 6                   3 MULTIPOLYGON (((255415.5 67...
-## 7                   2 MULTIPOLYGON (((324952.6 67...
-## 8                   3 MULTIPOLYGON (((176037.2 67...
-## 9                   3 MULTIPOLYGON (((86806.42 66...
-## 10                  3 MULTIPOLYGON (((598384.5 68...</code></pre>
-<div id="aggregating-municipality-level-data-using-internal-municipality_key-files" class="section level2">
-<h2>Aggregating municipality level data using internal municipality_key-files</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets aggregate at maakunta level using column mk_name</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mk_data <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(maakunta_name_fi,maakunta_code) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># And compute population at maakunta level</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">vakiluku_2017 =</span> <span class="fu">sum</span>(vakiluku_2017))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mk_data) <span class="sc">+</span> </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> vakiluku_2017)) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(maakunta_name_fi, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,vakiluku_2017)), </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/municipalities_map-1.png" width="900" /></p>
-<p>Or if you prefer aggregating at seutukunta-level you can</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mk_data <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(seutukunta_code,seutukunta_name_fi) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># And compute population at maakunta level</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">vakiluku_2017 =</span> <span class="fu">sum</span>(vakiluku_2017))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mk_data) <span class="sc">+</span> </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> vakiluku_2017)) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(seutukunta_name_fi, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,vakiluku_2017)), </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/vaalipiiri_map-1.png" width="900" /></p>
-<p>Or if you want the population at the national level aggregated up from municipality level you can:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mk_data <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">vakiluku_2017 =</span> <span class="fu">sum</span>(vakiluku_2017))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mk_data) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> vakiluku_2017)) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> vakiluku_2017), </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/national_map-1.png" width="900" /></p>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data.frame </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">as.data.frame</span>(px_data, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">left_join</span>(muni20,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">clean_names</span>(px_data), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;name_fi&quot;</span> <span class="ot">=</span> <span class="st">&quot;alue_2020&quot;</span>))</span></code></pre></div>
+<p>Sitten tehdään kartta, jossa täyttövärinä käytetään muuttujaa kuntien_avainluvut, joka siis yhtä kuin <em>Väkiluku, 2019</em>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(map, <span class="fu">aes</span>(<span class="at">fill =</span> kuntien_avainluvut)) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/plot1-1.png" width="900" /></p>
+<div id="väkiluku-maakuntatasolla" class="section level3">
+<h3>Väkiluku maakuntatasolla</h3>
+<p>`geofi’-paketin kuntaluokitusavaimen avulla voi aggregoida datan kuntatasolta ylöspäin <a href="https://data.stat.fi/api/classifications/v2/#/classifications">Tilastokeskuksen luokittelurajapinnan</a> tietojen avulla. Seuraavassa koodikimpaleessa väkiluku aggregoidaan maakuntatasolle.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mk_map <span class="ot">&lt;-</span> map <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(maakunta_name_fi) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">kuntien_avainluvut =</span> <span class="fu">sum</span>(kuntien_avainluvut))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mk_map) <span class="sc">+</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> kuntien_avainluvut)) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(maakunta_name_fi, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,kuntien_avainluvut)), </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/maakuntakartta-1.png" width="900" /></p>
 </div>
-<div id="postinumeroalueittain" class="section level2">
-<h2>Postinumeroalueittain</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zipcodes <span class="ot">&lt;-</span> <span class="fu">get_zipcodes</span>(<span class="at">year =</span> <span class="dv">2020</span>) </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(zipcodes) <span class="sc">+</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.integer</span>(posti_alue)))</span></code></pre></div>
+</div>
+<div id="väkiluku-postinumeroalueittain" class="section level2">
+<h2>Väkiluku postinumeroalueittain</h2>
+<p>Postinumeroaluetasolla prosessi on pitkälti sama. Ensin haetaan datat ja yhdistellään</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>zipcodes <span class="ot">&lt;-</span> <span class="fu">get_zipcodes</span>(<span class="at">year =</span> <span class="dv">2020</span>) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Postinumeroalue&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;he_vakiy&quot;</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2020/paavo_pxt_12ey.px&quot;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">query =</span> pxweb_query_list)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>paavo <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">as.data.frame</span>(px_data, </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">postinumeroalue =</span> <span class="fu">sub</span>(<span class="st">&quot; .+$&quot;</span>, <span class="st">&quot;&quot;</span>, postinumeroalue))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">left_join</span>(zipcodes, paavo, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;posti_alue&quot;</span> <span class="ot">=</span> <span class="st">&quot;postinumeroalue&quot;</span>))</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(map) <span class="sc">+</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> asukkaat_yhteensa_2018_he), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>))</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/zipcode_map-1.png" width="900" /></p>
-<p>You can add variables from Paavo data (Statistics Finland) in following manner.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lets get all zipcodes and all variables</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Postinumeroalue&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px&quot;</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">query =</span> pxweb_query_list)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data.frame </span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>tk_data_zip <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(px_data, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>tk_data_zip2 <span class="ot">&lt;-</span> tk_data_zip <span class="sc">%&gt;%</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;region&quot;</span>,<span class="st">&quot;indicator&quot;</span>,<span class="st">&quot;value&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(indicator, value)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>tk_zipdata <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(tk_data_zip2)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>tk_zipdata<span class="sc">$</span>zipcode <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="at">x =</span> tk_zipdata<span class="sc">$</span>region, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">5</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>tk_zipdata<span class="sc">$</span>zipname <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;^.{6}&quot;</span>, <span class="st">&quot;&quot;</span>, tk_zipdata<span class="sc">$</span>region)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets join with spatial data and plot the area of each zipcode</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>zipcodes19 <span class="ot">&lt;-</span> <span class="fu">get_zipcodes</span>(<span class="at">year =</span> <span class="dv">2019</span>) </span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>zipcodes_new <span class="ot">&lt;-</span> <span class="fu">left_join</span>(zipcodes19, tk_zipdata, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;posti_alue&quot;</span> <span class="ot">=</span> <span class="st">&quot;zipcode&quot;</span>))</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(zipcodes_new) <span class="sc">+</span> </span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> pinta_ala), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>))</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/zipcode_with_statistics_finland-1.png" width="900" /></p>
-</div>
 </div>

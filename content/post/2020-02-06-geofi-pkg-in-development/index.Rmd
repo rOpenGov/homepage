@@ -1,5 +1,5 @@
 ---
-title:  "`geofi` R-package for accessing Statistics Finland spatial data"
+title:  "geofi R-package for accessing Statistics Finland spatial data"
 author: "Markus Kainu"
 date: 2020-02-11 10:53:45
 categories: 
@@ -17,6 +17,7 @@ editor_options:
   chunk_output_type: console
 output:
   blogdown::html_page:
+    toc: true
     highlight: tango
 ---
 
