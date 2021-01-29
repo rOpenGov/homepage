@@ -1,0 +1,182 @@
+---
+title:  "PXWeb-tilastot kartalla"
+date: 2021-01-28 10:02:45
+slug: "pxweb_geofi"
+categories:
+  - R
+tags:
+  - Finland
+  - spatial
+  - paikkatieto
+  - pxweb
+output:
+  blogdown::html_page:
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      warning = FALSE, 
+                      cache = FALSE,
+                      fig.width=12,
+                      fig.height=10,
+                      dpi = 60, 
+                      class.output = "img-fluid",
+                      out.width=900)
+
+# Oletusteema
+library(ggplot2)
+theme_set(
+  theme_minimal(base_family = "PT Sans", base_size = 12) +
+  theme(panel.grid = element_blank(),
+        strip.background = element_rect(fill = "#fffff0", color = alpha("black", 1/8)),
+        plot.title = element_text(family = "Pt Sans Caption"), 
+        panel.background = element_rect(fill = "#fffff0", color = "#fffff0"),
+        plot.background = element_rect(fill = "#fffff0", color = "#fffff0"),
+        panel.border = element_rect(color = alpha("black", 1/12), fill = NA))
+)
+options(scipen = 999)
+```
+
+Kuulen usein vaikeuksista esittää Tilastokeskuksen [PxWeb](https://pxnet2.stat.fi/PXWeb/pxweb/fi/StatFin/)-rajapinnan kautta jaettavia tilastoaineistoja kartalla. [ropengov](https://ropengov.github.io/)-projektissa on kehitetty R-kielen työkaluja sekä [pxweb](https://cran.r-project.org/web/packages/pxweb/index.html)-rajapinnan hyödyntämiseen että Tilastokeskuksen [paikkatietorajapinnan](https://www.stat.fi/org/avoindata/paikkatietoaineistot.html) hyödyntämiseen ([geofi](https://ropengov.github.io/geofi/)).
+
+Tässä esimerkissä näytetään miten teet karttoja R-ohjelmalla PxWeb-rajapinnan datoista sekä kunta- että postinumeroaluepohjaisten aluejakojen mukaisesti.
+
+## Datan hakeminen Tilastokeskuksen PxWeb-rajapinnasta
+
+# Haetaan kuntatason taajama-aste vuoden 2020 aluejaolla
+
+
+```{r municipalities_with_data}
+library(geofi)
+library(dplyr)
+library(tidyr)
+
+municipalities17 <- get_municipalities(year = 2017)
+
+# pull municipality data from Statistics Finland
+library(pxweb)
+pxweb_query_list <-
+  list("Alue 2019"=c("*"),
+       "Tiedot"=c("M408","M411","M476","M391","M421","M478","M404","M410","M303","M297","M302","M44","M62","M70","M488","M486","M137","M140","M130","M162","M78","M485","M152","M72","M84","M106","M151","M499","M496","M495","M497","M498"),
+       "Vuosi"=c("2017"))
+
+px_data <-
+  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
+            query = pxweb_query_list)
+
+# Convert to data.frame
+tk_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+tk_data2 <- tk_data %>%
+  rename(name = `Alue 2019`) %>%
+  mutate(name = as.character(name),
+         # Paste Tiedot and Vuosi
+         Tiedot = paste(Tiedot, Vuosi)) %>%
+  select(-Vuosi) %>%
+  spread(Tiedot, `Kuntien avainluvut`) %>%
+  as_tibble()
+tk_data3 <- janitor::clean_names(tk_data2)
+
+# Join with Statistics Finland attribute data
+dat <- left_join(municipalities17, tk_data3)
+dat[1:10,1:10]
+```
+
+
+## Aggregating municipality level data using internal municipality_key-files
+
+```{r municipalities_map, fig.height = 4, fig.width = 7}
+# Lets aggregate at maakunta level using column mk_name
+mk_data <- dat %>% 
+  group_by(maakunta_name_fi,maakunta_code) %>% 
+  # And compute population at maakunta level
+  summarise(vakiluku_2017 = sum(vakiluku_2017))
+
+ggplot(mk_data) + 
+  geom_sf(aes(fill = vakiluku_2017)) +
+  geom_sf_text(aes(label = paste(maakunta_name_fi, "\n",vakiluku_2017)), 
+               size = 3, 
+               color = "white")
+
+```
+
+
+Or if you prefer aggregating at seutukunta-level you can
+
+```{r vaalipiiri_map, fig.height = 4, fig.width = 7}
+mk_data <- dat %>% 
+  group_by(seutukunta_code,seutukunta_name_fi) %>% 
+  # And compute population at maakunta level
+  summarise(vakiluku_2017 = sum(vakiluku_2017))
+
+ggplot(mk_data) + 
+  geom_sf(aes(fill = vakiluku_2017)) +
+  geom_sf_text(aes(label = paste(seutukunta_name_fi, "\n",vakiluku_2017)), 
+               size = 3, 
+               color = "white")
+
+```
+
+
+Or if you want the population at the national level aggregated up from municipality level you can: 
+
+```{r, national_map, fig.height = 4, fig.width = 7}
+mk_data <- dat %>% 
+  summarise(vakiluku_2017 = sum(vakiluku_2017))
+
+ggplot(mk_data) + 
+  geom_sf(aes(fill = vakiluku_2017)) +
+  geom_sf_text(aes(label = vakiluku_2017), 
+               size = 3, 
+               color = "white")
+
+```
+
+
+## Postinumeroalueittain
+
+
+```{r zipcode_map, fig.height = 4, fig.width = 7}
+zipcodes <- get_zipcodes(year = 2020) 
+ggplot(zipcodes) + 
+  geom_sf(aes(fill = as.integer(posti_alue)))
+``` 
+
+
+You can add variables from Paavo data (Statistics Finland) in following manner.
+
+```{r zipcode_with_statistics_finland, fig.height = 4, fig.width = 7}
+library(pxweb)
+# lets get all zipcodes and all variables
+pxweb_query_list <- 
+  list("Postinumeroalue"=c("*"),
+                           "Tiedot"=c("*"))
+
+# Download data 
+px_data <- 
+ pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
+           query = pxweb_query_list)
+
+# Convert to data.frame 
+tk_data_zip <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+
+library(dplyr)
+library(tidyr)
+tk_data_zip2 <- tk_data_zip %>%
+  as_tibble() %>% 
+  setNames(c("region","indicator","value")) %>% 
+  spread(indicator, value)
+tk_zipdata <- janitor::clean_names(tk_data_zip2)
+tk_zipdata$zipcode <- substr(x = tk_zipdata$region, start = 1, stop = 5)
+tk_zipdata$zipname <- gsub("^.{6}", "", tk_zipdata$region)
+
+
+# Lets join with spatial data and plot the area of each zipcode
+zipcodes19 <- get_zipcodes(year = 2019) 
+zipcodes_new <- left_join(zipcodes19, tk_zipdata, by = c("posti_alue" = "zipcode"))
+ggplot(zipcodes_new) + 
+  geom_sf(aes(fill = pinta_ala), color = alpha("white", 1/3))
+```
+
+
