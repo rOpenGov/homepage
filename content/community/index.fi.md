@@ -1,12 +1,12 @@
 ---
 title: Yhteisö
 author: ~
-date: "2021-01-29"
+#date: "2021-01-29"
 slug: community
-categories:
-  -
-tags:
-  -  
+#categories:
+#  -
+#tags:
+#  -  
 noComment: TRUE
 ---
 

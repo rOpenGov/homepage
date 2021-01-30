@@ -1,12 +1,12 @@
 ---
 title: Projects
 author: ~
-date: "2020-10-29"
+#date: "2020-10-29"
 slug: projects
-categories:
-  -
-tags:
-  -  
+#categories:
+#  -
+#tags:
+#  -  
 noComment: TRUE
 ---
 
