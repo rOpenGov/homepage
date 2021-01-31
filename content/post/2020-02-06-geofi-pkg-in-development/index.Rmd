@@ -42,7 +42,7 @@ options(scipen = 999)
 We have slowly started developing a follow-up package with [ropengov](https://ropengov.github.io/)-posse for [gisfin](https://ropengov.github.io/gisfin/)-package named [`geofi`](https://ropengov.github.io/geofi/index.html). Package provides access to few sources of *Finnish open geospatial data* from R. We are focusing in administrative regions at the moment and our primary source of data is Statistics Finland and their `wfs`-api. You can use functions in  `geofi` fecth data such as *municipality borders*, *postal code areas* sekä *population grids*. 
 
 
-`geofi` is not published in CRAN yet and you cant install it using `intall.packages()`. But you can install it directly from Github with `remotes::install_github("ropengov/geofi")` and try out the following examples.  For quick access try our Shiny app at:  [`muuankarski.shinyapps.io/geofi_selain/`](https://muuankarski.shinyapps.io/geofi_selain/).
+`geofi` is not published in CRAN yet and you cant install it using `intall.packages()`. But you can install it directly from Github with `remotes::install_github("ropengov/geofi")` and try out the following examples.  For quick access try our Shiny app at:  [`https://muuankarski.shinyapps.io/geofi_selain/`](https://muuankarski.shinyapps.io/geofi_selain/).
 
 
 **Municipalility borders**
