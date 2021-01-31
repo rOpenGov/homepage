@@ -21,7 +21,7 @@ rOpenGov-yhteisön R-pakettien kehitys tapahtuu [GitHubissa](https://github.com/
 <th>Kotisivu</th>
 <th>Forkkeja</th>
 <th>Issueita</th>
-<th><i class="fa fa-star" aria-hidden="true"></i></th>
+<th><i class="fa fa-star"></i></th>
 <th>Päivitetty</th>
 </tr>
 </thead>

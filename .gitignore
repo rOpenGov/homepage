@@ -6,3 +6,5 @@ public
 config_bak.toml
 .DS_Store
 .RData
+maintenance.R
+teema.txt
