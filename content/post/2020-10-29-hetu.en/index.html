@@ -11,75 +11,10 @@ tags:
   - Finland
   - national identification number
   - personal identity code
-output:
-  blogdown::html_page:
-    highlight: tango
+output: blogdown::html_page
 ---
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <div id="general-information" class="section level2">
@@ -106,12 +41,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="use-of-hetu-package" class="section level3">
 <h3>Use of hetu-package</h3>
 <p>Installing the package in R from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;hetu&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>install.packages(&quot;hetu&quot;)</code></pre>
 <p>Loading the package and setting a few imaginary PINs for testing:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hetu)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>example_pins <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;010101-0101&quot;</span>, <span class="st">&quot;111111-111C&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>library(hetu)
+example_pins &lt;- c(&quot;010101-0101&quot;, &quot;111111-111C&quot;)</code></pre>
 <p>Hetu-function is the backbone of the package and majority of the information that can be extracted is available as a simple data frame:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">hetu</span>(example_pins))</span></code></pre></div>
+<pre class="r"><code>knitr::kable(hetu(example_pins))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -155,51 +90,51 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>There are several alternatives in extracting specific information about a group of PINs, for example date of birth. If the output of the hetu-function is saved as an object, all columns can be normally subsetted. For the convenience of the end user, the information in the data frame can also be extracted by using extract-parameter in the hetu-function or by using one of the specialized functions:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting sex</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;sex&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Extracting sex
+hetu(example_pins, extract = &quot;sex&quot;)</code></pre>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_sex</span>(example_pins)</span></code></pre></div>
+<pre class="r"><code>hetu_sex(example_pins)</code></pre>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting date of birth</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;date&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Extracting date of birth
+hetu(example_pins, extract = &quot;date&quot;)</code></pre>
 <pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_date</span>(example_pins)</span></code></pre></div>
+<pre class="r"><code>hetu_date(example_pins)</code></pre>
 <pre><code>## [1] &quot;1901-01-01&quot; &quot;1911-11-11&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting information on validity</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;valid.pin&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Extracting information on validity
+hetu(example_pins, extract = &quot;valid.pin&quot;)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_ctrl</span>(example_pins)</span></code></pre></div>
+<pre class="r"><code>hetu_ctrl(example_pins)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Information that can be extracted only with extract-parameter</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu</span>(example_pins, <span class="at">extract =</span> <span class="st">&quot;p.num&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Information that can be extracted only with extract-parameter
+hetu(example_pins, extract = &quot;p.num&quot;)</code></pre>
 <pre><code>## [1] &quot;010&quot; &quot;111&quot;</code></pre>
 <p>In contrast to other information, extracting age works only with a specialized function. In this example we will also introduce the ability to generate random PINs with rhetu-function:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>example_pins2 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">5</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in years</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2)</span></code></pre></div>
-<pre><code>## The age in years has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 65 38 45 66 30</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in months</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">timespan =</span> <span class="st">&quot;months&quot;</span>)</span></code></pre></div>
-<pre><code>## The age in months has been calculated at 2021-01-29.</code></pre>
-<pre><code>## [1] 788 458 543 800 367</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Age in 2011</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_age</span>(example_pins2, <span class="at">date =</span> <span class="st">&quot;2011-01-01&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>example_pins2 &lt;- rhetu(5, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;)
+# Age in years
+hetu_age(example_pins2)</code></pre>
+<pre><code>## The age in years has been calculated at 2021-01-31.</code></pre>
+<pre><code>## [1] 33 69 62 31 43</code></pre>
+<pre class="r"><code># Age in months
+hetu_age(example_pins2, timespan = &quot;months&quot;)</code></pre>
+<pre><code>## The age in months has been calculated at 2021-01-31.</code></pre>
+<pre><code>## [1] 403 839 752 383 521</code></pre>
+<pre class="r"><code># Age in 2011
+hetu_age(example_pins2, date = &quot;2011-01-01&quot;)</code></pre>
 <pre><code>## The age in years has been calculated at 2011-01-01.</code></pre>
-<pre><code>## [1] 55 28 35 56 20</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: boxplot grouped by sex</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>example_pins3 <span class="ot">&lt;-</span> <span class="fu">rhetu</span>(<span class="dv">20</span>, <span class="at">start =</span> <span class="st">&quot;1950-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;1995-05-07&quot;</span>, <span class="at">p.male =</span> <span class="fl">0.5</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">hetu_age</span>(example_pins3)<span class="sc">~</span><span class="fu">hetu_sex</span>(example_pins3), <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Age in years&quot;</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;magenta&quot;</span>))</span></code></pre></div>
-<pre><code>## The age in years has been calculated at 2021-01-29.</code></pre>
+<pre><code>## [1] 23 59 52 21 33</code></pre>
+<pre class="r"><code># Visualization: boxplot grouped by sex
+example_pins3 &lt;- rhetu(20, start = &quot;1950-01-01&quot;, end = &quot;1995-05-07&quot;, p.male = 0.5)
+boxplot(hetu_age(example_pins3)~hetu_sex(example_pins3), xlab = &quot;&quot;, ylab = &quot;Age in years&quot;, col=c(&quot;cyan&quot;, &quot;magenta&quot;))</code></pre>
+<pre><code>## The age in years has been calculated at 2021-01-31.</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In some cases diagnostics information for invalid PINs might be useful:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_diagnostic</span>(<span class="st">&quot;321399-000G&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>hetu_diagnostic(&quot;321399-000G&quot;)</code></pre>
 <pre><code>##           hetu is.temp valid.p.num valid.checksum correct.checksum valid.date
 ## 21 321399-000G   FALSE       FALSE          FALSE            FALSE      FALSE
 ##    valid.day valid.month valid.year valid.length valid.century
 ## 21     FALSE       FALSE       TRUE         TRUE          TRUE</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print only certain columns</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hetu_diagnostic</span>(<span class="st">&quot;321399-000G&quot;</span>, <span class="at">extract =</span> <span class="fu">c</span>(<span class="st">&quot;valid.p.num&quot;</span>, <span class="st">&quot;valid.length&quot;</span>))</span></code></pre></div>
+<pre class="r"><code># Print only certain columns
+hetu_diagnostic(&quot;321399-000G&quot;, extract = c(&quot;valid.p.num&quot;, &quot;valid.length&quot;))</code></pre>
 <pre><code>##           hetu valid.p.num valid.length
 ## 21 321399-000G       FALSE         TRUE</code></pre>
 </div>
@@ -211,10 +146,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>bid_ctrl(bid): checks the valiity of the BID, TRUE or FALSE</li>
 <li>rbid(n): generates n BIDs</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>example_bids <span class="ot">&lt;-</span> <span class="fu">rbid</span>(<span class="dv">2</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>example_bids</span></code></pre></div>
-<pre><code>## [1] &quot;4741105-0&quot; &quot;2996120-0&quot;</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bid_ctrl</span>(example_bids)</span></code></pre></div>
+<pre class="r"><code>example_bids &lt;- rbid(2)
+example_bids</code></pre>
+<pre><code>## [1] &quot;7128741-6&quot; &quot;1963928-5&quot;</code></pre>
+<pre class="r"><code>bid_ctrl(example_bids)</code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>No additional information can be extracted from BIDs.</p>
 </div>

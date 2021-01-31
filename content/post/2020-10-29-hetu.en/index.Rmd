@@ -11,9 +11,7 @@ tags:
   - Finland
   - national identification number
   - personal identity code
-output:
-  blogdown::html_page:
-    highlight: tango
+output: blogdown::html_page
 ---
 
 ## General information 
