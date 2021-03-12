@@ -1,5 +1,5 @@
 baseurl = "http://ropengov.org/"
-title = "rOpenGov: R packages for open government data analytics"
+title = "rOpenGov R packages for open government data analytics"
 languageCode = "en-us"
 #defaultContentLanguage = "en"
 
@@ -20,7 +20,7 @@ theme = "hugo-bootstrap"
   category = "categories"
 
 # Google analytics
-# googleAnalytics = ""
+googleAnalytics = "44262937"
 
 [[menu.main]]
     name = "GitHub"
