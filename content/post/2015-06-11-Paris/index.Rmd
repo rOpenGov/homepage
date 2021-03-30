@@ -6,7 +6,7 @@ date: "2015-06-12"
 categories:
   - R
 tags:
-  - ["digital-humanities"]
+  - "Digital-humanities"
   - R-bloggers
 ---
 
