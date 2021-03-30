@@ -9,11 +9,8 @@ tags:
   - news
   - R
   - stan
+  - R-bloggers
 ---
-
-Probabilistic programming approach for regional trends in apartment prices
-===================================
-
 
 <!-- for latex/mathjax equations -->
 <script type="text/x-mathjax-config">
@@ -41,6 +38,8 @@ MathJax.Hub.Config({
     }
 });
 </script>
+
+## Probabilistic programming approach for regional trends in apartment prices
 
 Basing on open data from [Statistics Finland](http://www.stat.fi/index_en.html), we at [Reaktor](http://reaktor.com/datascience) modelled Finnish apartment prices and their trends on zip-code level, in the years 2005–2014. Estimates from the model are available as an [interactive visualization](http://kannattaakokauppa.fi/#/en/).
 
