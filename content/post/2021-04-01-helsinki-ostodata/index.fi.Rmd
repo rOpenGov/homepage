@@ -1,0 +1,312 @@
+---
+title: Helsingin ostodatan visualisointi geofi-paketilla
+author: Pyry Kantanen
+date: '2021-04-01'
+slug: helsinki-ostodata
+draft: FALSE
+categories:
+  - visualisointi
+  - paikkatieto
+  - tiedonlouhinta
+tags:
+  - geofi
+  - kaupunkidata
+  - tidyverse
+  - ggplot2
+  - hetu
+output:
+  blogdown::html_page:
+    highlight: tango
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      warning = FALSE, 
+                      cache = FALSE,
+                      fig.width=12,
+                      fig.height=10,
+                      dpi = 60, 
+                      class.output = "img-fluid",
+                      out.width='80%')
+
+options(scipen = 1000)
+```
+
+Helsingin kaupungin tekemien palvelu-, tarvike- ja käyttöomaisuusostojen [data on ollut avoimesti saatavilla] vuodesta 2014 asti. Avattujen datojen joukossa kaupungin ostodata lukeutuu epäilemättä kiinnostavimpien joukkoon ja se on ollut [useiden erilaisten sovellusten ja visualisointien] lähtökohtana. Tuon oman lisäni näiden sovellusten jatkoksi yhdistämällä yritysdatan paikkatietoaineistoihin ja visualisoimalla tiedon CRANissa vasta äskettäin julkaistua [geofi-pakettia] hyödyntämällä.
+
+Tätä kirjoitusta varten olen yhdistänyt valmiiseen datasettiin tiedon yritysten kotipaikasta kaupungin, kadun ja postinumeroalueen tarkkuudella. Nämä tiedot saatiin haettua [Patentti- ja rekisterihallituksen avoimen datan palvelusta] aineistosta löytyneiden y-tunnusten avulla.
+
+R soveltuu melkein miljoona riviä sisältävän aineiston tarkasteluun ja käsittelyyn erinomaiseksi työkaluksi. Excelin VLOOKUP- ja Find & Replace -toiminnoilla aineiston käsittely vaati välillä kymmenien sekuntien odottelua, kun taas R:n dplyr-paketin join- ja mutate-operaatiot olivat salamannopeita.
+
+Menetelmän rajoitteena voi pitää sitä, että palvelusta oli saatavissa tietoja ainoastaan osakeyhtiöistä, osuuskunnista ja vakuutusyhtiöistä, joiden tiedot on kirjattu rekisteriin 7.11.2014 alkaen. Erilaiset julkiset instituutiot (esim. THL, Digi- ja väestötietovirasto), merkittävääkin toimintaa harjoittavat rekisteröidyt yhdistykset (esim. Suomen Kuntaliitto, Allergia-, Iho- ja Astmaliitto) tai toiminimet jäävät siis tästä tarkastelusta ulos. Jossain muussa kontekstissa tämä rajoite voisi olla ongelma, mutta tämän demonstraation / kirjoituksen puitteissa rajoitteen olemassaolo voidaan ainoastaan todeta ja siirtyä eteenpäin.
+
+Hadley Wickhamin httr-paketin vignette [Best practices for API packages] antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan "helposti". Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului. Valitettavasti 
+
+## Aineiston lataus ja käsittely
+
+Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiolla:
+
+```{r valmistelut1, eval = FALSE, purl = TRUE}
+library(hetu)
+library(dplyr)
+helsingin_ostot <- read.csv("http://openspending.hel.ninja/files/ostot/helsingin-ostot-all.csv")
+helsingin_ostot$valid_ytunnus <- bid_ctrl(helsingin_ostot$toimittaja_ytunnus)
+helsingin_ostot2 <- helsingin_ostot[which(helsingin_ostot$valid_ytunnus),]
+
+```
+
+Tässä vaiheessa prosessia PRH:n APIsta ladattaisiin uniikit y-tunnukset (jotta saman y-tunnuksen tietoja ei ladattaisi turhaan useaan kertaan) ja yhdistettäisiin nämä tiedot helsingin_ostot2-datasetin kanssa. Koska tietojen lataaminen y-tunnusten perusteella on kohtuuttoman aikaavievä operaatio, olen käyttänyt tässä kirjoituksessa etukäteen valmisteltua datasettiä. Seuraava koodinpätkä on ainoastaan esimerkkinä prosessista:
+
+```{r valmistelut2, eval = FALSE, purl = TRUE}
+# Uniikit y-tunnukset sisältävä vektori
+unique_ytunnus <- unique(helsingin_ostot2$toimittaja_ytunnus)
+
+# Esimerkki: Yhden y-tunnuksen tietojen lataaminen ja haluttujen tietojen suodattaminen
+
+yrityksen_tiedot <- jsonlite::fromJSON("http://avoindata.prh.fi/tr/v1/0494571-4", simplifyVector = TRUE)
+poimitut_tiedot <- NULL
+poimitut_tiedot$businessId <- yrityksen_tiedot$results$businessId
+poimitut_tiedot$street <- yrityksen_tiedot$results$addresses[[1]]$street[1]
+poimitut_tiedot$city <- yrityksen_tiedot$results$addresses[[1]]$city[1]
+poimitut_tiedot$postCode <- yrityksen_tiedot$results$addresses[[1]]$postCode[1]
+
+poimitut_tiedot <- as.data.frame(poimitut_tiedot)
+
+helsingin_ostot3 <- left_join(x = helsingin_ostot2, y = poimitut_tiedot, by = c("toimittaja_ytunnus" = "businessId"))
+```
+
+Kun y-tunnuksia on enemmän kuin yksi, yllä olevasta koodista voidaan muodostaa oma funktionsa, jota voidaan hyödyntää lapply-funktion kanssa.
+
+Mikäli yritykselle oli saatavissa postinumeroalue, sille oli pääsääntöisesti tallennettu myös tieto kadusta ja kaupungista. Ainoastaan muutamassa tapauksessa, esimerkiksi mikäli yrityksellä oli suomalainen y-tunnus mutta katuosoite oli Tallinnassa, eivät kentät näkyneet oikein. Aineiston kattavuutta voidaan tarkastella yksinkertaisella pylväsdiagrammilla.
+
+```{r puuttuvat_visualisointi}
+# Ladataan valmisteltu datasetti
+load("~/helsingin_ostot3.RData")
+library(ggplot2)
+ggplot(helsingin_ostot3, aes(fill=is.na(postCode), x=year)) +
+  geom_bar(position="stack", stat="count") +
+  labs(x = "Vuosi", y = "Rivien lkm", fill = "Puuttuva \npostinumero")
+```
+
+Huomataan, että puuttuvien postinumeroiden osuus pienenee mitä lähemmäksi nykyhetkeä tulemme.
+
+## Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät
+
+Yrityksen postinumeron tietäminen on hyvä lähtökohta lähteä selvittämään, mistä Helsingin kaupungin ostot tulevat. Postinumeroalueiden perusteella piirretty kartta-aineisto on kuitenkin ehkä liiankin yksityiskohtainen, joten tyydymme tässä tapauksessa kuntatason tarkasteluun.
+
+[Geofi-pakettia] hyödyntämällä postinumeron yhdistäminen kuntaan on helppoa. Tarkastelu ei ole aivan täydellinen, sillä postinumeroalueiden rajat eivät aina noudata kuntarajoja täydellisesti ja postinumeroalueelle määritelty kuntatunnus riippuu siitä, "minkä kunnan rakennuksia alueella on eniten (VTJ:n mukaan)" (ks. [Tilastokeskuksen sivut]). Tässä tapauksessa olisi voitu hyödyntää myös aineistoon jo ladattua tietoa yrityksen kotikunnasta (poimitut_tiedot$city), mutta kuntanimien vaihtelevien kirjoitusasujen, mahdollisten kirjoitusvirheiden tai ruotsinkielisten kuntanimien vuoksi pidin varmempana ratkaisuna kunnan määrittämistä postinumeron avulla. 
+
+```{r top20_kunnat_data_valmistelu}
+library(geofi)
+library(dplyr)
+zipcodes <- geofi::get_zipcodes(year = 2021)
+
+# Muutetaan sf-objekti tavalliseksi data frameksi, valitaan sopivat sarakkeet
+zipcodes <- as.data.frame(zipcodes) %>% 
+  select(kuntanro, posti_alue)
+helsingin_ostot4 <- dplyr::left_join(x = helsingin_ostot3, y = zipcodes, by=c("postCode" = "posti_alue"))
+
+municipalities <- geofi::get_municipalities(year = 2021)
+municipalities <- municipalities %>% 
+  select(kunta, kunta_name)
+
+# Valitaan sopivat sarakkeet kuntadatasta
+# Käytetään right_joinia siksi, että uuden muuttujan luokka säilyy "sf"
+helsingin_ostot4 <- dplyr::right_join(x = municipalities, y = helsingin_ostot4, by=c("kunta" = "kuntanro"))
+
+# Ryhmitellään ostot kunnan nimen mukaan
+helsingin_ostot5 <- helsingin_ostot4 %>% 
+  group_by(kunta_name) %>% 
+  summarise(kunta_summa = sum(as.numeric(summa), na.rm = FALSE)) 
+```
+
+Suurimmat ostot sijoittuvat odotetusti Helsinkiin, Espooseen ja Vantaalle. Hieman yllättäen Kuopio kiilaa lähempänä pääkaupunkiseutua sijaitsevien Kouvolan ja Tuusulan edelle.
+
+Kaikista suurin summa jyvittyy kuitenkin luokittelun ulkopuolelle jääneelle NA-joukolle, 12 miljardia euroa 8 vuoden ajalta. Tämä summa on itse asiassa suurempi kuin kaikkien kaupungeille jyvitettyjen hankintojen summa yhteensä, mikä osoittanee muilta kuin osakeyhtiöiltä tehtävien hankintojen merkityksen Helsingin kaupungille.
+
+## Kartta ja virtauskartta top-20-kaupungeista
+
+Merkitään vielä nämä 20 tärkeintä kuntaa kartalle:
+
+```{r top20_kunnat}  
+
+library(sf)
+library(dplyr)
+
+# Tarkastellaan missä kunnissa on suurimmat ostot
+slice_max(helsingin_ostot5, order_by = kunta_summa, n = 20)
+
+# Poistetaan NA-joukko eli yritykset, joiden kotipaikkaa ei pystytty määrittämään
+helsingin_ostot6 <- helsingin_ostot5 %>% 
+  filter(kunta_name %in% setdiff(helsingin_ostot5$kunta_name, c(NA)))
+
+kunnat_top20_summat <- slice_max(helsingin_ostot6, order_by = kunta_summa, n = 20)
+
+# Korostetaan top 20 kuntia
+ggplot() +
+  geom_sf(data = helsingin_ostot6, aes(fill = kunta_summa), color = alpha("white", 1/3)) +
+  labs(fill = "Helsingin ostot, €") +
+  scale_fill_gradient2(n.breaks = 6, trans = "log10") +
+  geom_sf(data = kunnat_top20_summat, col="red", size=1)
+```
+
+Geofi-paketissa on mahdollisuutena piirtää kartalle kuntakeskuksia merkitsevät pisteet. Pienellä muunnoksella näistä POINT-muotoisista geometrioista saadaan muodostettua LINESTRING-muotoisia viivoja, joiden alkupiste on halutussa kunnassa ja loppupiste Helsingissä. Kartan päälle lisättynä kartta ja viivasymbolit muodostavat [virtauskartan], jolla voidaan kuvata eri alueiden välisiä virtoja. Tällaiset kartat ovat [parhaimmillaan erittäin näyttäviä], mutta tässä tapauksessa tyydymme hyvin yksinkertaiseen esimerkkiin:
+
+```{r flowmap}
+# Luodaan kuntakeskusten välille LINESTRING-viivat
+keskukset <- geofi::municipality_central_localities
+
+# Hyödynnetään base-R:n tolower-funktion help filestä löytyvää capwords-funktiota
+# Toinen vaihtoehto olisi käyttää fuzzyjoin-pakettia
+capwords <- function(s, strict = FALSE) {
+    cap <- function(s) paste(toupper(substring(s, 1, 1)),
+                  {s <- substring(s, 2); if(strict) tolower(s) else s},
+                             sep = "", collapse = " " )
+    sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
+}
+
+# Muutetaan kuntien nimet ALL CAPS -> Capital Case
+keskukset$teksti <- capwords(keskukset$teksti, strict = TRUE)
+
+# Lisätään aineistoon ostosummat
+keskukset <- left_join(keskukset, as.data.frame(helsingin_ostot6)[,1:2], by = c("teksti" = "kunta_name"))
+
+# Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)
+keskukset$distance_to_hel <- NULL
+keskukset$distance_to_hel <- st_distance(keskukset$geom, y=keskukset$geom[210,])
+keskukset$distance_to_hel <- as.integer(keskukset$distance_to_hel / 1000)
+
+keskukset_linestring <- st_cast(st_union(keskukset$geom[1,], keskukset$geom[210,], by_feature=TRUE),"LINESTRING")
+for (i in 1:nrow(keskukset)) {
+  keskukset_linestring[i] <- st_cast(st_union(keskukset$geom[i,], keskukset$geom[210,], by_feature=TRUE),"LINESTRING") 
+}
+
+keskukset_helsinkiin <- keskukset
+
+keskukset_helsinkiin$geom <- keskukset_linestring
+
+keskukset_helsinkiin <- keskukset_helsinkiin[which(keskukset_helsinkiin$teksti %in% kunnat_top20_summat$kunta_name),]
+
+# Määritetään viivojen paksuudet siten, että Helsinki, Espoo ja Vantaa saavat 0
+# ja siitä eteenpäin 4, 3, 2, 2, 1, 1...
+ggplot() +
+  geom_sf(data = helsingin_ostot6, aes(fill = kunta_summa), color = alpha("white", 1/3)) +
+  labs(fill = "Helsingin ostot, €") +
+  scale_fill_gradient2(n.breaks = 6, trans = "log10") +
+  geom_sf(data = arrange(keskukset_helsinkiin, desc(kunta_summa)), col=alpha("red", 1/2), size=c(0,0,0,4,3,2,2,rep(1, 13)))
+
+```
+
+Eri muuttujia yhdisteltäessä on hyödyllistä säilyttää luotavien muuttujien luokkana "sf", mistä johtuen yllä olevassa esimerkissä käytettiin sekä left_join että right_join funktioita. Tämä johtuu siitä, että muuten [ggplot2 ei välttämättä osaa löytää geom-saraketta], jossa karttojen piirtämiseen tarvittavat koordinaatit sijaitsevat.
+
+## Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus
+
+Tarkastellaan lopuksi yksinkertaisilla sirontakuvioihin sovitetuilla suorilla, miten kunnassa sijaitsevien yritysten lukumäärä sekä kunnan etäisyys Helsingistä vaikuttaa Helsingin kaupungin tekemien ostojen suuruuteen.
+
+```{r scatterplotit_ja_regressiot}
+library(sf)
+
+# Ladataan Statfinista yritysten lukumäärä Suomen kunnissa
+# /PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px
+library(pxweb)
+library(fuzzyjoin)
+
+pxweb_query_list <- 
+  list("Vuosi"=c("2019"),
+       "Kunta"=c("*"),
+       "Tiedot"=c("Tplukumaara2"))
+
+# Download data 
+px_data <- 
+  pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px",
+            query = pxweb_query_list)
+
+# Convert to data.frame 
+px_data_frame <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+
+# Yhdistetään dataa
+yritykset <- left_join(x = px_data_frame, y = as.data.frame(helsingin_ostot5), by=c("Kunta"="kunta_name"))
+
+# Poistetaan "kunnat" KOKO SUOMI, Tuntematon ja kunnat joista ei ole tilauksia
+yritykset <- yritykset[which(!is.na(yritykset$kunta_summa)),]
+# Poistetaan kuntarajojen geometria
+yritykset <- as.data.frame(yritykset)
+yritykset <- yritykset[,-5]
+
+# Ladataan kuntakeskusten sijaintitiedot
+keskukset <- geofi::municipality_central_localities
+
+# Lisätään aineistoon ostosummat
+keskukset <- left_join(keskukset, as.data.frame(helsingin_ostot6)[,1:2], by = c("teksti" = "kunta_name"))
+
+# Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)
+keskukset$distance_to_hel <- NULL
+keskukset$distance_to_hel <- st_distance(keskukset$geom, y=keskukset$geom[210,])
+keskukset$distance_to_hel <- as.integer(keskukset$distance_to_hel / 1000)
+
+# Valitaan ainoastaan tarvittavat sarakkeet
+keskukset <- keskukset %>% 
+  dplyr::select(teksti, distance_to_hel, geom)
+  
+# Hyödynnetään fuzzyjoin-pakettia, jotta kuntien nimiä ei tarvitse erikseen siistiä
+yritykset <- fuzzyjoin::regex_left_join(x = yritykset, y = keskukset, by=c("Kunta" = "teksti"), ignore_case = TRUE)
+
+# Poistetaan aineistosta outlier, Helsinki
+yritykset <- yritykset[-which(yritykset$Kunta == "Helsinki"),]
+
+# Piirretään scatter-plotit, joihin on sovitettu LOESS-menetelmällä tasoitettu sovitekäyrä
+par(mfrow=c(1,2))
+scatter.smooth(x=yritykset$`Yritysten toimipaikat (lkm)`, y=log10(yritykset$kunta_summa), span = 1/5)
+scatter.smooth(x=yritykset$distance_to_hel, y=log10(yritykset$kunta_summa))
+
+# Vertaillaan kahta eri regressiomallia
+fit1 <- lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)`, data=yritykset)
+fit2 <- lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)` + distance_to_hel, data=yritykset)
+
+# Haluttaessa voidaan katsoa myös regressiosuorat
+# abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)`, data=yritykset))
+# abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)` + distance_to_hel, data=yritykset))
+
+summary(fit1)
+summary(fit2)
+
+```
+
+Huomataan, että kunnassa sijaitsevien yritysten lukumäärä ja kunnan etäisyys Helsingistä ovat yhteydessä siihen, kuinka paljon ostoja Helsingin kaupunki tekee kunnassa sijaitsevilta yrityksiltä. Jo visuaalisesta tarkastelusta kuitenkin huomaamme, että myös hieman kauempana sijaitsevista ja pienemmistä kunnista (esimerkiksi Kemi ja Padasjoki) tulevien yritysten on mahdollista myydä palveluitaan Helsingin kaupungille. 
+
+Kunnan yritystiheyden kasvattaminen on hidasta ja sijainnin muuttaminen mahdotonta, joten kuntien elinvoimaisuutta pohtivien poliitikkojen, viranhaltijoiden ja konsulttien kannattaa tarkastella sitä, mikä erottaa Kemin ja Padasjoen kaltaisten kuntien yritykset muista. Helsingin kaupungin ostot -aineisto onkin otollinen tämän kaltaisen yritystason tarkastelun lähtöpisteeksi.
+
+## Lopuksi
+
+Tieto eri kunnissa sijaitsevien yritysten menestymisestä Helsingin kaupungin tarjouskilpailuissa on mielenkiintoista monesta eri näkökulmasta. Huomaamme, että yrityksen sijainnilla on merkitystä, mutta aineisto ei yksinään vastaa kysymykseen, miksi näin on. 
+
+Asiaa voitaisiin selittää pk-seudulla toimivien yritysten ja Helsingin kaupungin hankinnoista päättävien ihmisten verkostoilla, muualla Suomessa sijaitsevien yritysten korkeammilla transaktiokustannuksilla ja vähäisemmällä informaatiolla. Myös se, että suurin osa yrityksistä on keskittynyt Suomessa pääkaupunkiseudulle (ks. [Manninen & Tölli 2019]) voi selittää sitä, miksi suuri osa Helsingin kaupungin hankinnoistakin keskittyy pääkaupunkiseudulle. Muiden kaupunkien tapauksissa merkittävä osa ostoista saattaisi tulla pääkaupunkiseudulta ja Helsingistä nimenomaan tästä syystä.
+
+Viime kädessä kyse ei tietenkään ole pelkästään Helsinki vs. muu Suomi -asetelmasta vaan siitä, millaisia todellisia tai kuviteltuja esteitä suomalaisilla yrityksillä on laajemmassa mittakaavassa osallistua koko EU:n sisämarkkina-alueen toimintaan. Vaikka EU:n sisämarkkinat ovat teoriassa avoimet, kaupankäynnin esteet tulevat eri tavalla vastaan, kun yhteistä kieltä ei välttämättä ole ja kansalliset lainsäädännöt vaihtelevat. Suomi liittyi EU:n jäseneksi vuonna 1995, mutta vielä yli 25 vuotta myöhemmin suomalaisten pk-yritysten valmiuksista osallistua sisämarkkinoille kannetaan huolta (ks. esim. [Teknologiateollisuus 2021]).
+
+Ulkomaankaupan tilastoihin liittyvää aineistoa ja asiaan liittyviä analyyseja on saatavilla runsaasti eri lähteistä, joten tähän aihepiiriin tuskin pureudutaan tämän blogin kontekstissa - paitsi jos asia saadaan yhdistettyä jonkin R-paketin yhteyteen.
+
+[data on ollut avoimesti saatavilla]: https://hri.fi/data/dataset//helsingin-kaupungin-ostot
+
+[useiden erilaisten sovellusten ja visualisointien]: https://hri.fi/data/dataset/showcases/helsingin-kaupungin-ostot
+
+[Tilastokeskuksen sivut]: https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html
+
+[ggplot2 ei välttämättä osaa löytää geom-saraketta]: https://github.com/tidyverse/ggplot2/issues/3391#issuecomment-508527985
+
+[Best practices for API packages]: https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html
+
+[Patentti- ja rekisterihallituksen avoimen datan palvelusta]: http://avoindata.prh.fi
+
+[Manninen & Tölli 2019]: https://kaks.fi/wp-content/uploads/2019/04/helsinki-vs-muu-suomi_manninen_tolli.pdf
+
+[Geofi-pakettia]: https://CRAN.R-project.org/package=geofi 
+
+[geofi-pakettia]: https://CRAN.R-project.org/package=geofi 
+
+[virtauskartan]: https://tilastokoulu.stat.fi/verkkokoulu_v2.xql?page_type=sisalto&course_id=tkoulu_teemak&lesson_id=6&subject_id=2
+
+[parhaimmillaan erittäin näyttäviä]: https://jcheshire.com/visualisation/mapping-flows/
+
+[Teknologiateollisuus 2021]: https://teknologiateollisuus.fi/fi/ajankohtaista/pk-yrityksille-tukea-eun-kotimarkkinoille-paasemiseksi-jos-olisin-ursula-von-der
