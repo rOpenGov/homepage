@@ -88,7 +88,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Tätä kirjoitusta varten olen yhdistänyt valmiiseen datasettiin tiedon yritysten kotipaikasta kaupungin, kadun ja postinumeroalueen tarkkuudella. Nämä tiedot saatiin haettua <a href="http://avoindata.prh.fi">Patentti- ja rekisterihallituksen avoimen datan palvelusta</a> aineistosta löytyneiden y-tunnusten avulla.</p>
 <p>R soveltuu melkein miljoona riviä sisältävän aineiston tarkasteluun ja käsittelyyn erinomaiseksi työkaluksi. Excelin VLOOKUP- ja Find &amp; Replace -toiminnoilla aineiston käsittely vaati välillä kymmenien sekuntien odottelua, kun taas R:n dplyr-paketin join- ja mutate-operaatiot olivat salamannopeita.</p>
 <p>Menetelmän rajoitteena voi pitää sitä, että palvelusta oli saatavissa tietoja ainoastaan osakeyhtiöistä, osuuskunnista ja vakuutusyhtiöistä, joiden tiedot on kirjattu rekisteriin 7.11.2014 alkaen. Erilaiset julkiset instituutiot (esim. THL, Digi- ja väestötietovirasto), merkittävääkin toimintaa harjoittavat rekisteröidyt yhdistykset (esim. Suomen Kuntaliitto, Allergia-, Iho- ja Astmaliitto) tai toiminimet jäävät siis tästä tarkastelusta ulos. Jossain muussa kontekstissa tämä rajoite voisi olla ongelma, mutta tämän demonstraation / kirjoituksen puitteissa rajoitteen olemassaolo voidaan ainoastaan todeta ja siirtyä eteenpäin.</p>
-<p>Hadley Wickhamin httr-paketin vignette <a href="https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html">Best practices for API packages</a> antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan “helposti”. Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului. Valitettavasti</p>
+<p>Hadley Wickhamin httr-paketin vignette <a href="https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html">Best practices for API packages</a> antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan “helposti”. Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului.</p>
 <div id="aineiston-lataus-ja-käsittely" class="section level3">
 <h3>Aineiston lataus ja käsittely</h3>
 <p>Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiolla:</p>
@@ -114,7 +114,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>helsingin_ostot3 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> helsingin_ostot2, <span class="at">y =</span> poimitut_tiedot, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;toimittaja_ytunnus&quot;</span> <span class="ot">=</span> <span class="st">&quot;businessId&quot;</span>))</span></code></pre></div>
 <p>Kun y-tunnuksia on enemmän kuin yksi, yllä olevasta koodista voidaan muodostaa oma funktionsa, jota voidaan hyödyntää lapply-funktion kanssa.</p>
-<p>Mikäli yritykselle oli saatavissa postinumeroalue, sille oli pääsääntöisesti tallennettu myös tieto kadusta ja kaupungista. Ainoastaan muutamassa tapauksessa, esimerkiksi mikäli yrityksellä oli suomalainen y-tunnus mutta katuosoite oli Tallinnassa, eivät kentät näkyneet oikein. Aineiston kattavuutta voidaan tarkastella yksinkertaisella pylväsdiagrammilla.</p>
+<p>Mikäli yritykselle oli saatavissa postinumeroalue, sille oli pääsääntöisesti tallennettu myös tieto kadusta ja kaupungista. Aineiston kattavuutta voidaan näin ollen tarkastella yksinkeraisesti aineistossa olevien ja puuttuvien postinumeroiden suhdelukuna, joka visualisoidaan pylväsdiagrammeilla.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan valmisteltu datasetti</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/helsingin_ostot3.RData&quot;</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -124,8 +124,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/puuttuvat_visualisointi-1.png" width="80%" /></p>
 <p>Huomataan, että puuttuvien postinumeroiden osuus pienenee mitä lähemmäksi nykyhetkeä tulemme.</p>
 </div>
-<div id="top-20--lista-mihin-kuntiin-helsingin-ostot-keskittyvät" class="section level3">
-<h3>Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät</h3>
+<div id="top-20--lista-mistä-kunnista-helsinki-ostaa-eniten" class="section level3">
+<h3>Top-20 -lista: Mistä kunnista Helsinki ostaa eniten</h3>
 <p>Yrityksen postinumeron tietäminen on hyvä lähtökohta lähteä selvittämään, mistä Helsingin kaupungin ostot tulevat. Postinumeroalueiden perusteella piirretty kartta-aineisto on kuitenkin ehkä liiankin yksityiskohtainen, joten tyydymme tässä tapauksessa kuntatason tarkasteluun.</p>
 <p><a href="https://CRAN.R-project.org/package=geofi">Geofi-pakettia</a> hyödyntämällä postinumeron yhdistäminen kuntaan on helppoa. Tarkastelu ei ole aivan täydellinen, sillä postinumeroalueiden rajat eivät aina noudata kuntarajoja täydellisesti ja postinumeroalueelle määritelty kuntatunnus riippuu siitä, “minkä kunnan rakennuksia alueella on eniten (VTJ:n mukaan)” (ks. <a href="https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html">Tilastokeskuksen sivut</a>). Tässä tapauksessa olisi voitu hyödyntää myös aineistoon jo ladattua tietoa yrityksen kotikunnasta (poimitut_tiedot$city), mutta kuntanimien vaihtelevien kirjoitusasujen, mahdollisten kirjoitusvirheiden tai ruotsinkielisten kuntanimien vuoksi pidin varmempana ratkaisuna kunnan määrittämistä postinumeron avulla.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geofi)</span>
@@ -148,18 +148,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Ryhmitellään ostot kunnan nimen mukaan</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>helsingin_ostot5 <span class="ot">&lt;-</span> helsingin_ostot4 <span class="sc">%&gt;%</span> </span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(kunta_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">kunta_summa =</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(summa), <span class="at">na.rm =</span> <span class="cn">FALSE</span>)) </span></code></pre></div>
-<p>Suurimmat ostot sijoittuvat odotetusti Helsinkiin, Espooseen ja Vantaalle. Hieman yllättäen Kuopio kiilaa lähempänä pääkaupunkiseutua sijaitsevien Kouvolan ja Tuusulan edelle.</p>
-<p>Kaikista suurin summa jyvittyy kuitenkin luokittelun ulkopuolelle jääneelle NA-joukolle, 12 miljardia euroa 8 vuoden ajalta. Tämä summa on itse asiassa suurempi kuin kaikkien kaupungeille jyvitettyjen hankintojen summa yhteensä, mikä osoittanee muilta kuin osakeyhtiöiltä tehtävien hankintojen merkityksen Helsingin kaupungille.</p>
-</div>
-<div id="kartta-ja-virtauskartta-top-20-kaupungeista" class="section level3">
-<h3>Kartta ja virtauskartta top-20-kaupungeista</h3>
-<p>Merkitään vielä nämä 20 tärkeintä kuntaa kartalle:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tarkastellaan missä kunnissa on suurimmat ostot</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_max</span>(helsingin_ostot5, <span class="at">order_by =</span> kunta_summa, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">kunta_summa =</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(summa), <span class="at">na.rm =</span> <span class="cn">FALSE</span>)) </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Tarkastellaan missä kunnissa on suurimmat ostot</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_max</span>(helsingin_ostot5, <span class="at">order_by =</span> kunta_summa, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
 <pre class="img-fluid"><code>## Simple feature collection with 20 features and 2 fields (with 1 geometry empty)
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
@@ -188,131 +180,140 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 18 Raisio        20195233. (((239031.6 6717088, 236093.7 6712495, 230992.2 6711…
 ## 19 Porvoo        18877028. (((441843.9 6673817, 440194.5 6673207, 436276.1 6673…
 ## 20 Padasjoki     18830945. (((422133.8 6800321, 420573.8 6797563, 415159 679860…</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan NA-joukko eli yritykset, joiden kotipaikkaa ei pystytty määrittämään</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>helsingin_ostot6 <span class="ot">&lt;-</span> helsingin_ostot5 <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kunta_name <span class="sc">%in%</span> <span class="fu">setdiff</span>(helsingin_ostot5<span class="sc">$</span>kunta_name, <span class="fu">c</span>(<span class="cn">NA</span>)))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>kunnat_top20_summat <span class="ot">&lt;-</span> <span class="fu">slice_max</span>(helsingin_ostot6, <span class="at">order_by =</span> kunta_summa, <span class="at">n =</span> <span class="dv">20</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Korostetaan top 20 kuntia</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> helsingin_ostot6, <span class="fu">aes</span>(<span class="at">fill =</span> kunta_summa), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Helsingin ostot, €&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">n.breaks =</span> <span class="dv">6</span>, <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> kunnat_top20_summat, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Suurimmat ostot sijoittuvat odotetusti Helsinkiin, Espooseen ja Vantaalle. Hieman yllättäen Kuopio kiilaa lähempänä pääkaupunkiseutua sijaitsevien Kouvolan ja Tuusulan edelle.</p>
+<p>Kaikista suurin summa jyvittyy kuitenkin luokittelun ulkopuolelle jääneelle NA-joukolle, 12 miljardia euroa 8 vuoden ajalta. Tämä summa on itse asiassa suurempi kuin kaikkien kaupungeille jyvitettyjen hankintojen summa yhteensä, mikä osoittanee muilta kuin osakeyhtiöiltä tehtävien hankintojen merkityksen Helsingin kaupungille.</p>
+</div>
+<div id="kartta-ja-virtauskartta-top-20-kaupungeista" class="section level3">
+<h3>Kartta ja virtauskartta top-20-kaupungeista</h3>
+<p>Merkitään vielä nämä 20 tärkeintä kuntaa kartalle:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan NA-joukko eli yritykset, joiden kotipaikkaa ei pystytty määrittämään</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>helsingin_ostot6 <span class="ot">&lt;-</span> helsingin_ostot5 <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kunta_name <span class="sc">%in%</span> <span class="fu">setdiff</span>(helsingin_ostot5<span class="sc">$</span>kunta_name, <span class="fu">c</span>(<span class="cn">NA</span>)))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>kunnat_top20_summat <span class="ot">&lt;-</span> <span class="fu">slice_max</span>(helsingin_ostot6, <span class="at">order_by =</span> kunta_summa, <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Korostetaan top 20 kuntia</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> helsingin_ostot6, <span class="fu">aes</span>(<span class="at">fill =</span> kunta_summa), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Helsingin ostot, €&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">n.breaks =</span> <span class="dv">6</span>, <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> kunnat_top20_summat, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/top20_kunnat-1.png" width="80%" /></p>
 <p>Geofi-paketissa on mahdollisuutena piirtää kartalle kuntakeskuksia merkitsevät pisteet. Pienellä muunnoksella näistä POINT-muotoisista geometrioista saadaan muodostettua LINESTRING-muotoisia viivoja, joiden alkupiste on halutussa kunnassa ja loppupiste Helsingissä. Kartan päälle lisättynä kartta ja viivasymbolit muodostavat <a href="https://tilastokoulu.stat.fi/verkkokoulu_v2.xql?page_type=sisalto&amp;course_id=tkoulu_teemak&amp;lesson_id=6&amp;subject_id=2">virtauskartan</a>, jolla voidaan kuvata eri alueiden välisiä virtoja. Tällaiset kartat ovat <a href="https://jcheshire.com/visualisation/mapping-flows/">parhaimmillaan erittäin näyttäviä</a>, mutta tässä tapauksessa tyydymme hyvin yksinkertaiseen esimerkkiin:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan kuntakeskusten välille LINESTRING-viivat</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> geofi<span class="sc">::</span>municipality_central_localities</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyödynnetään base-R:n tolower-funktion help filestä löytyvää capwords-funktiota</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Toinen vaihtoehto olisi käyttää fuzzyjoin-pakettia</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>capwords <span class="ot">&lt;-</span> <span class="cf">function</span>(s, <span class="at">strict =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    cap <span class="ot">&lt;-</span> <span class="cf">function</span>(s) <span class="fu">paste</span>(<span class="fu">toupper</span>(<span class="fu">substring</span>(s, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                  {s <span class="ot">&lt;-</span> <span class="fu">substring</span>(s, <span class="dv">2</span>); <span class="cf">if</span>(strict) <span class="fu">tolower</span>(s) <span class="cf">else</span> s},</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sep =</span> <span class="st">&quot;&quot;</span>, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span> )</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(<span class="fu">strsplit</span>(s, <span class="at">split =</span> <span class="st">&quot; &quot;</span>), cap, <span class="at">USE.NAMES =</span> <span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">names</span>(s)))</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan kuntien nimet ALL CAPS -&gt; Capital Case</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>teksti <span class="ot">&lt;-</span> <span class="fu">capwords</span>(keskukset<span class="sc">$</span>teksti, <span class="at">strict =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisätään aineistoon ostosummat</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(keskukset, <span class="fu">as.data.frame</span>(helsingin_ostot6)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;teksti&quot;</span> <span class="ot">=</span> <span class="st">&quot;kunta_name&quot;</span>))</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(keskukset<span class="sc">$</span>geom, <span class="at">y=</span>keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,])</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(keskukset<span class="sc">$</span>distance_to_hel <span class="sc">/</span> <span class="dv">1000</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>keskukset_linestring <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(<span class="fu">st_union</span>(keskukset<span class="sc">$</span>geom[<span class="dv">1</span>,], keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,], <span class="at">by_feature=</span><span class="cn">TRUE</span>),<span class="st">&quot;LINESTRING&quot;</span>)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(keskukset)) {</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  keskukset_linestring[i] <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(<span class="fu">st_union</span>(keskukset<span class="sc">$</span>geom[i,], keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,], <span class="at">by_feature=</span><span class="cn">TRUE</span>),<span class="st">&quot;LINESTRING&quot;</span>) </span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin <span class="ot">&lt;-</span> keskukset</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin<span class="sc">$</span>geom <span class="ot">&lt;-</span> keskukset_linestring</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin <span class="ot">&lt;-</span> keskukset_helsinkiin[<span class="fu">which</span>(keskukset_helsinkiin<span class="sc">$</span>teksti <span class="sc">%in%</span> kunnat_top20_summat<span class="sc">$</span>kunta_name),]</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Määritetään viivojen paksuudet siten, että Helsinki, Espoo ja Vantaa saavat 0</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ja siitä eteenpäin 4, 3, 2, 2, 1, 1...</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> helsingin_ostot6, <span class="fu">aes</span>(<span class="at">fill =</span> kunta_summa), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Helsingin ostot, €&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">n.breaks =</span> <span class="dv">6</span>, <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">arrange</span>(keskukset_helsinkiin, <span class="fu">desc</span>(kunta_summa)), <span class="at">col=</span><span class="fu">alpha</span>(<span class="st">&quot;red&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">size=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">13</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan kuntakeskusten välille LINESTRING-viivat</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> geofi<span class="sc">::</span>municipality_central_localities</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyödynnetään base-R:n tolower-funktion help filestä löytyvää capwords-funktiota</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Toinen vaihtoehto olisi käyttää fuzzyjoin-pakettia</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>capwords <span class="ot">&lt;-</span> <span class="cf">function</span>(s, <span class="at">strict =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    cap <span class="ot">&lt;-</span> <span class="cf">function</span>(s) <span class="fu">paste</span>(<span class="fu">toupper</span>(<span class="fu">substring</span>(s, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                  {s <span class="ot">&lt;-</span> <span class="fu">substring</span>(s, <span class="dv">2</span>); <span class="cf">if</span>(strict) <span class="fu">tolower</span>(s) <span class="cf">else</span> s},</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sep =</span> <span class="st">&quot;&quot;</span>, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span> )</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(<span class="fu">strsplit</span>(s, <span class="at">split =</span> <span class="st">&quot; &quot;</span>), cap, <span class="at">USE.NAMES =</span> <span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">names</span>(s)))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan kuntien nimet ALL CAPS -&gt; Capital Case</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>teksti <span class="ot">&lt;-</span> <span class="fu">capwords</span>(keskukset<span class="sc">$</span>teksti, <span class="at">strict =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisätään aineistoon ostosummat</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(keskukset, <span class="fu">as.data.frame</span>(helsingin_ostot6)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;teksti&quot;</span> <span class="ot">=</span> <span class="st">&quot;kunta_name&quot;</span>))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(keskukset<span class="sc">$</span>geom, <span class="at">y=</span>keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,])</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(keskukset<span class="sc">$</span>distance_to_hel <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>keskukset_linestring <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(<span class="fu">st_union</span>(keskukset<span class="sc">$</span>geom[<span class="dv">1</span>,], keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,], <span class="at">by_feature=</span><span class="cn">TRUE</span>),<span class="st">&quot;LINESTRING&quot;</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(keskukset)) {</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  keskukset_linestring[i] <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(<span class="fu">st_union</span>(keskukset<span class="sc">$</span>geom[i,], keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,], <span class="at">by_feature=</span><span class="cn">TRUE</span>),<span class="st">&quot;LINESTRING&quot;</span>) </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin <span class="ot">&lt;-</span> keskukset</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin<span class="sc">$</span>geom <span class="ot">&lt;-</span> keskukset_linestring</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>keskukset_helsinkiin <span class="ot">&lt;-</span> keskukset_helsinkiin[<span class="fu">which</span>(keskukset_helsinkiin<span class="sc">$</span>teksti <span class="sc">%in%</span> kunnat_top20_summat<span class="sc">$</span>kunta_name),]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Määritetään viivojen paksuudet siten, että Helsinki, Espoo ja Vantaa saavat 0</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ja siitä eteenpäin 4, 3, 2, 2, 1, 1...</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> helsingin_ostot6, <span class="fu">aes</span>(<span class="at">fill =</span> kunta_summa), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">&quot;white&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Helsingin ostot, €&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">n.breaks =</span> <span class="dv">6</span>, <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">arrange</span>(keskukset_helsinkiin, <span class="fu">desc</span>(kunta_summa)), <span class="at">col=</span><span class="fu">alpha</span>(<span class="st">&quot;red&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">size=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">13</span>)))</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/flowmap-1.png" width="80%" /></p>
 <p>Eri muuttujia yhdisteltäessä on hyödyllistä säilyttää luotavien muuttujien luokkana “sf”, mistä johtuen yllä olevassa esimerkissä käytettiin sekä left_join että right_join funktioita. Tämä johtuu siitä, että muuten <a href="https://github.com/tidyverse/ggplot2/issues/3391#issuecomment-508527985">ggplot2 ei välttämättä osaa löytää geom-saraketta</a>, jossa karttojen piirtämiseen tarvittavat koordinaatit sijaitsevat.</p>
 </div>
 <div id="kunnan-etäisyyden-ja-kunnassa-sijaitsevien-yritysten-lukumäärän-vaikutus" class="section level3">
 <h3>Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus</h3>
 <p>Tarkastellaan lopuksi yksinkertaisilla sirontakuvioihin sovitetuilla suorilla, miten kunnassa sijaitsevien yritysten lukumäärä sekä kunnan etäisyys Helsingistä vaikuttaa Helsingin kaupungin tekemien ostojen suuruuteen.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan Statfinista yritysten lukumäärä Suomen kunnissa</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fuzzyjoin)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Vuosi&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;2019&quot;</span>),</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Kunta&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Tplukumaara2&quot;</span>))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data </span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px&quot;</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">query =</span> pxweb_query_list)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data.frame </span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>px_data_frame <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(px_data, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Yhdistetään dataa</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> px_data_frame, <span class="at">y =</span> <span class="fu">as.data.frame</span>(helsingin_ostot5), <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Kunta&quot;</span><span class="ot">=</span><span class="st">&quot;kunta_name&quot;</span>))</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan &quot;kunnat&quot; KOKO SUOMI, Tuntematon ja kunnat joista ei ole tilauksia</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(yritykset<span class="sc">$</span>kunta_summa)),]</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan kuntarajojen geometria</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(yritykset)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[,<span class="sc">-</span><span class="dv">5</span>]</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan kuntakeskusten sijaintitiedot</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> geofi<span class="sc">::</span>municipality_central_localities</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisätään aineistoon ostosummat</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(keskukset, <span class="fu">as.data.frame</span>(helsingin_ostot6)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;teksti&quot;</span> <span class="ot">=</span> <span class="st">&quot;kunta_name&quot;</span>))</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(keskukset<span class="sc">$</span>geom, <span class="at">y=</span>keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,])</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(keskukset<span class="sc">$</span>distance_to_hel <span class="sc">/</span> <span class="dv">1000</span>)</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Valitaan ainoastaan tarvittavat sarakkeet</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> keskukset <span class="sc">%&gt;%</span> </span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(teksti, distance_to_hel, geom)</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyödynnetään fuzzyjoin-pakettia, jotta kuntien nimiä ei tarvitse erikseen siistiä</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> fuzzyjoin<span class="sc">::</span><span class="fu">regex_left_join</span>(<span class="at">x =</span> yritykset, <span class="at">y =</span> keskukset, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Kunta&quot;</span> <span class="ot">=</span> <span class="st">&quot;teksti&quot;</span>), <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan aineistosta outlier, Helsinki</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[<span class="sc">-</span><span class="fu">which</span>(yritykset<span class="sc">$</span>Kunta <span class="sc">==</span> <span class="st">&quot;Helsinki&quot;</span>),]</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Piirretään scatter-plotit, joihin on sovitettu LOESS-menetelmällä tasoitettu sovitekäyrä</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter.smooth</span>(<span class="at">x=</span>yritykset<span class="sc">$</span><span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span>, <span class="at">y=</span><span class="fu">log10</span>(yritykset<span class="sc">$</span>kunta_summa), <span class="at">span =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter.smooth</span>(<span class="at">x=</span>yritykset<span class="sc">$</span>distance_to_hel, <span class="at">y=</span><span class="fu">log10</span>(yritykset<span class="sc">$</span>kunta_summa))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan Statfinista yritysten lukumäärä Suomen kunnissa</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fuzzyjoin)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Vuosi&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;2019&quot;</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Kunta&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tiedot&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Tplukumaara2&quot;</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>px_data <span class="ot">&lt;-</span> </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pxweb_get</span>(<span class="at">url =</span> <span class="st">&quot;https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/yri/alyr/statfin_alyr_pxt_11dc.px&quot;</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">query =</span> pxweb_query_list)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data.frame </span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>px_data_frame <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(px_data, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Yhdistetään dataa</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> px_data_frame, <span class="at">y =</span> <span class="fu">as.data.frame</span>(helsingin_ostot5), <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Kunta&quot;</span><span class="ot">=</span><span class="st">&quot;kunta_name&quot;</span>))</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan &quot;kunnat&quot; KOKO SUOMI, Tuntematon ja kunnat joista ei ole tilauksia</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(yritykset<span class="sc">$</span>kunta_summa)),]</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan kuntarajojen geometria</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(yritykset)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[,<span class="sc">-</span><span class="dv">5</span>]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan kuntakeskusten sijaintitiedot</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> geofi<span class="sc">::</span>municipality_central_localities</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisätään aineistoon ostosummat</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> <span class="fu">left_join</span>(keskukset, <span class="fu">as.data.frame</span>(helsingin_ostot6)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;teksti&quot;</span> <span class="ot">=</span> <span class="st">&quot;kunta_name&quot;</span>))</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Lasketaan Helsingin ja kuntakeskusten välinen välimatka (km)</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(keskukset<span class="sc">$</span>geom, <span class="at">y=</span>keskukset<span class="sc">$</span>geom[<span class="dv">210</span>,])</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>keskukset<span class="sc">$</span>distance_to_hel <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(keskukset<span class="sc">$</span>distance_to_hel <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Valitaan ainoastaan tarvittavat sarakkeet</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>keskukset <span class="ot">&lt;-</span> keskukset <span class="sc">%&gt;%</span> </span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(teksti, distance_to_hel, geom)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyödynnetään fuzzyjoin-pakettia, jotta kuntien nimiä ei tarvitse erikseen siistiä</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> fuzzyjoin<span class="sc">::</span><span class="fu">regex_left_join</span>(<span class="at">x =</span> yritykset, <span class="at">y =</span> keskukset, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Kunta&quot;</span> <span class="ot">=</span> <span class="st">&quot;teksti&quot;</span>), <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan aineistosta outlier, Helsinki</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>yritykset <span class="ot">&lt;-</span> yritykset[<span class="sc">-</span><span class="fu">which</span>(yritykset<span class="sc">$</span>Kunta <span class="sc">==</span> <span class="st">&quot;Helsinki&quot;</span>),]</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Piirretään scatter-plotit, joihin on sovitettu LOESS-menetelmällä tasoitettu sovitekäyrä</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter.smooth</span>(<span class="at">x=</span>yritykset<span class="sc">$</span><span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span>, <span class="at">y=</span><span class="fu">log10</span>(yritykset<span class="sc">$</span>kunta_summa), <span class="at">span =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter.smooth</span>(<span class="at">x=</span>yritykset<span class="sc">$</span>distance_to_hel, <span class="at">y=</span><span class="fu">log10</span>(yritykset<span class="sc">$</span>kunta_summa))</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/scatterplotit_ja_regressiot-1.png" width="80%" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vertaillaan kahta eri regressiomallia</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(kunta_summa) <span class="sc">~</span> <span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span>, <span class="at">data=</span>yritykset)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(kunta_summa) <span class="sc">~</span> <span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span> <span class="sc">+</span> distance_to_hel, <span class="at">data=</span>yritykset)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Haluttaessa voidaan katsoa myös regressiosuorat</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)`, data=yritykset))</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)` + distance_to_hel, data=yritykset))</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vertaillaan kahta eri regressiomallia</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(kunta_summa) <span class="sc">~</span> <span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span>, <span class="at">data=</span>yritykset)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(kunta_summa) <span class="sc">~</span> <span class="st">`</span><span class="at">Yritysten toimipaikat (lkm)</span><span class="st">`</span> <span class="sc">+</span> distance_to_hel, <span class="at">data=</span>yritykset)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Haluttaessa voidaan katsoa myös regressiosuorat</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)`, data=yritykset))</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># abline(lm(log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)` + distance_to_hel, data=yritykset))</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code></pre></div>
 <pre class="img-fluid"><code>## 
 ## Call:
 ## lm(formula = log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)`, 
@@ -335,7 +336,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 1.159 on 294 degrees of freedom
 ## Multiple R-squared:  0.312,  Adjusted R-squared:  0.3097 
 ## F-statistic: 133.3 on 1 and 294 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
 <pre class="img-fluid"><code>## 
 ## Call:
 ## lm(formula = log10(kunta_summa) ~ `Yritysten toimipaikat (lkm)` + 
