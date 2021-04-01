@@ -1,9 +1,8 @@
 ---
-title: Helsingin ostodatan visualisointi geofi-paketilla
-author: Pyry Kantanen
-date: '2021-04-01'
+title: "Helsingin ostodatan visualisointi geofi-paketilla"
+author: "Pyry Kantanen"
+date: 2021-04-01
 slug: helsinki-ostodata
-draft: FALSE
 categories:
   - visualisointi
   - paikkatieto
@@ -43,7 +42,7 @@ Menetelmän rajoitteena voi pitää sitä, että palvelusta oli saatavissa tieto
 
 Hadley Wickhamin httr-paketin vignette [Best practices for API packages] antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan "helposti". Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului. Valitettavasti 
 
-## Aineiston lataus ja käsittely
+### Aineiston lataus ja käsittely
 
 Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiolla:
 
@@ -91,7 +90,7 @@ ggplot(helsingin_ostot3, aes(fill=is.na(postCode), x=year)) +
 
 Huomataan, että puuttuvien postinumeroiden osuus pienenee mitä lähemmäksi nykyhetkeä tulemme.
 
-## Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät
+### Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät
 
 Yrityksen postinumeron tietäminen on hyvä lähtökohta lähteä selvittämään, mistä Helsingin kaupungin ostot tulevat. Postinumeroalueiden perusteella piirretty kartta-aineisto on kuitenkin ehkä liiankin yksityiskohtainen, joten tyydymme tässä tapauksessa kuntatason tarkasteluun.
 
@@ -125,7 +124,7 @@ Suurimmat ostot sijoittuvat odotetusti Helsinkiin, Espooseen ja Vantaalle. Hiema
 
 Kaikista suurin summa jyvittyy kuitenkin luokittelun ulkopuolelle jääneelle NA-joukolle, 12 miljardia euroa 8 vuoden ajalta. Tämä summa on itse asiassa suurempi kuin kaikkien kaupungeille jyvitettyjen hankintojen summa yhteensä, mikä osoittanee muilta kuin osakeyhtiöiltä tehtävien hankintojen merkityksen Helsingin kaupungille.
 
-## Kartta ja virtauskartta top-20-kaupungeista
+### Kartta ja virtauskartta top-20-kaupungeista
 
 Merkitään vielä nämä 20 tärkeintä kuntaa kartalle:
 
@@ -200,7 +199,7 @@ ggplot() +
 
 Eri muuttujia yhdisteltäessä on hyödyllistä säilyttää luotavien muuttujien luokkana "sf", mistä johtuen yllä olevassa esimerkissä käytettiin sekä left_join että right_join funktioita. Tämä johtuu siitä, että muuten [ggplot2 ei välttämättä osaa löytää geom-saraketta], jossa karttojen piirtämiseen tarvittavat koordinaatit sijaitsevat.
 
-## Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus
+### Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus
 
 Tarkastellaan lopuksi yksinkertaisilla sirontakuvioihin sovitetuilla suorilla, miten kunnassa sijaitsevien yritysten lukumäärä sekä kunnan etäisyys Helsingistä vaikuttaa Helsingin kaupungin tekemien ostojen suuruuteen.
 
@@ -277,7 +276,7 @@ Huomataan, että kunnassa sijaitsevien yritysten lukumäärä ja kunnan etäisyy
 
 Kunnan yritystiheyden kasvattaminen on hidasta ja sijainnin muuttaminen mahdotonta, joten kuntien elinvoimaisuutta pohtivien poliitikkojen, viranhaltijoiden ja konsulttien kannattaa tarkastella sitä, mikä erottaa Kemin ja Padasjoen kaltaisten kuntien yritykset muista. Helsingin kaupungin ostot -aineisto onkin otollinen tämän kaltaisen yritystason tarkastelun lähtöpisteeksi.
 
-## Lopuksi
+### Lopuksi
 
 Tieto eri kunnissa sijaitsevien yritysten menestymisestä Helsingin kaupungin tarjouskilpailuissa on mielenkiintoista monesta eri näkökulmasta. Huomaamme, että yrityksen sijainnilla on merkitystä, mutta aineisto ei yksinään vastaa kysymykseen, miksi näin on. 
 

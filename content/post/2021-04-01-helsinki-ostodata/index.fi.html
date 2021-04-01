@@ -1,9 +1,8 @@
 ---
-title: Helsingin ostodatan visualisointi geofi-paketilla
-author: Pyry Kantanen
-date: '2021-04-01'
+title: "Helsingin ostodatan visualisointi geofi-paketilla"
+author: "Pyry Kantanen"
+date: 2021-04-01
 slug: helsinki-ostodata
-draft: FALSE
 categories:
   - visualisointi
   - paikkatieto
@@ -90,8 +89,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>R soveltuu melkein miljoona riviä sisältävän aineiston tarkasteluun ja käsittelyyn erinomaiseksi työkaluksi. Excelin VLOOKUP- ja Find &amp; Replace -toiminnoilla aineiston käsittely vaati välillä kymmenien sekuntien odottelua, kun taas R:n dplyr-paketin join- ja mutate-operaatiot olivat salamannopeita.</p>
 <p>Menetelmän rajoitteena voi pitää sitä, että palvelusta oli saatavissa tietoja ainoastaan osakeyhtiöistä, osuuskunnista ja vakuutusyhtiöistä, joiden tiedot on kirjattu rekisteriin 7.11.2014 alkaen. Erilaiset julkiset instituutiot (esim. THL, Digi- ja väestötietovirasto), merkittävääkin toimintaa harjoittavat rekisteröidyt yhdistykset (esim. Suomen Kuntaliitto, Allergia-, Iho- ja Astmaliitto) tai toiminimet jäävät siis tästä tarkastelusta ulos. Jossain muussa kontekstissa tämä rajoite voisi olla ongelma, mutta tämän demonstraation / kirjoituksen puitteissa rajoitteen olemassaolo voidaan ainoastaan todeta ja siirtyä eteenpäin.</p>
 <p>Hadley Wickhamin httr-paketin vignette <a href="https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html">Best practices for API packages</a> antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan “helposti”. Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului. Valitettavasti</p>
-<div id="aineiston-lataus-ja-käsittely" class="section level2">
-<h2>Aineiston lataus ja käsittely</h2>
+<div id="aineiston-lataus-ja-käsittely" class="section level3">
+<h3>Aineiston lataus ja käsittely</h3>
 <p>Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiolla:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hetu)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -125,8 +124,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/puuttuvat_visualisointi-1.png" width="80%" /></p>
 <p>Huomataan, että puuttuvien postinumeroiden osuus pienenee mitä lähemmäksi nykyhetkeä tulemme.</p>
 </div>
-<div id="top-20--lista-mihin-kuntiin-helsingin-ostot-keskittyvät" class="section level2">
-<h2>Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät</h2>
+<div id="top-20--lista-mihin-kuntiin-helsingin-ostot-keskittyvät" class="section level3">
+<h3>Top-20 -lista: Mihin kuntiin Helsingin ostot keskittyvät</h3>
 <p>Yrityksen postinumeron tietäminen on hyvä lähtökohta lähteä selvittämään, mistä Helsingin kaupungin ostot tulevat. Postinumeroalueiden perusteella piirretty kartta-aineisto on kuitenkin ehkä liiankin yksityiskohtainen, joten tyydymme tässä tapauksessa kuntatason tarkasteluun.</p>
 <p><a href="https://CRAN.R-project.org/package=geofi">Geofi-pakettia</a> hyödyntämällä postinumeron yhdistäminen kuntaan on helppoa. Tarkastelu ei ole aivan täydellinen, sillä postinumeroalueiden rajat eivät aina noudata kuntarajoja täydellisesti ja postinumeroalueelle määritelty kuntatunnus riippuu siitä, “minkä kunnan rakennuksia alueella on eniten (VTJ:n mukaan)” (ks. <a href="https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html">Tilastokeskuksen sivut</a>). Tässä tapauksessa olisi voitu hyödyntää myös aineistoon jo ladattua tietoa yrityksen kotikunnasta (poimitut_tiedot$city), mutta kuntanimien vaihtelevien kirjoitusasujen, mahdollisten kirjoitusvirheiden tai ruotsinkielisten kuntanimien vuoksi pidin varmempana ratkaisuna kunnan määrittämistä postinumeron avulla.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geofi)</span>
@@ -153,8 +152,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Suurimmat ostot sijoittuvat odotetusti Helsinkiin, Espooseen ja Vantaalle. Hieman yllättäen Kuopio kiilaa lähempänä pääkaupunkiseutua sijaitsevien Kouvolan ja Tuusulan edelle.</p>
 <p>Kaikista suurin summa jyvittyy kuitenkin luokittelun ulkopuolelle jääneelle NA-joukolle, 12 miljardia euroa 8 vuoden ajalta. Tämä summa on itse asiassa suurempi kuin kaikkien kaupungeille jyvitettyjen hankintojen summa yhteensä, mikä osoittanee muilta kuin osakeyhtiöiltä tehtävien hankintojen merkityksen Helsingin kaupungille.</p>
 </div>
-<div id="kartta-ja-virtauskartta-top-20-kaupungeista" class="section level2">
-<h2>Kartta ja virtauskartta top-20-kaupungeista</h2>
+<div id="kartta-ja-virtauskartta-top-20-kaupungeista" class="section level3">
+<h3>Kartta ja virtauskartta top-20-kaupungeista</h3>
 <p>Merkitään vielä nämä 20 tärkeintä kuntaa kartalle:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -247,8 +246,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="{{< blogdown/postref >}}index.fi_files/figure-html/flowmap-1.png" width="80%" /></p>
 <p>Eri muuttujia yhdisteltäessä on hyödyllistä säilyttää luotavien muuttujien luokkana “sf”, mistä johtuen yllä olevassa esimerkissä käytettiin sekä left_join että right_join funktioita. Tämä johtuu siitä, että muuten <a href="https://github.com/tidyverse/ggplot2/issues/3391#issuecomment-508527985">ggplot2 ei välttämättä osaa löytää geom-saraketta</a>, jossa karttojen piirtämiseen tarvittavat koordinaatit sijaitsevat.</p>
 </div>
-<div id="kunnan-etäisyyden-ja-kunnassa-sijaitsevien-yritysten-lukumäärän-vaikutus" class="section level2">
-<h2>Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus</h2>
+<div id="kunnan-etäisyyden-ja-kunnassa-sijaitsevien-yritysten-lukumäärän-vaikutus" class="section level3">
+<h3>Kunnan etäisyyden ja kunnassa sijaitsevien yritysten lukumäärän vaikutus</h3>
 <p>Tarkastellaan lopuksi yksinkertaisilla sirontakuvioihin sovitetuilla suorilla, miten kunnassa sijaitsevien yritysten lukumäärä sekä kunnan etäisyys Helsingistä vaikuttaa Helsingin kaupungin tekemien ostojen suuruuteen.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -365,8 +364,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Huomataan, että kunnassa sijaitsevien yritysten lukumäärä ja kunnan etäisyys Helsingistä ovat yhteydessä siihen, kuinka paljon ostoja Helsingin kaupunki tekee kunnassa sijaitsevilta yrityksiltä. Jo visuaalisesta tarkastelusta kuitenkin huomaamme, että myös hieman kauempana sijaitsevista ja pienemmistä kunnista (esimerkiksi Kemi ja Padasjoki) tulevien yritysten on mahdollista myydä palveluitaan Helsingin kaupungille.</p>
 <p>Kunnan yritystiheyden kasvattaminen on hidasta ja sijainnin muuttaminen mahdotonta, joten kuntien elinvoimaisuutta pohtivien poliitikkojen, viranhaltijoiden ja konsulttien kannattaa tarkastella sitä, mikä erottaa Kemin ja Padasjoen kaltaisten kuntien yritykset muista. Helsingin kaupungin ostot -aineisto onkin otollinen tämän kaltaisen yritystason tarkastelun lähtöpisteeksi.</p>
 </div>
-<div id="lopuksi" class="section level2">
-<h2>Lopuksi</h2>
+<div id="lopuksi" class="section level3">
+<h3>Lopuksi</h3>
 <p>Tieto eri kunnissa sijaitsevien yritysten menestymisestä Helsingin kaupungin tarjouskilpailuissa on mielenkiintoista monesta eri näkökulmasta. Huomaamme, että yrityksen sijainnilla on merkitystä, mutta aineisto ei yksinään vastaa kysymykseen, miksi näin on.</p>
 <p>Asiaa voitaisiin selittää pk-seudulla toimivien yritysten ja Helsingin kaupungin hankinnoista päättävien ihmisten verkostoilla, muualla Suomessa sijaitsevien yritysten korkeammilla transaktiokustannuksilla ja vähäisemmällä informaatiolla. Myös se, että suurin osa yrityksistä on keskittynyt Suomessa pääkaupunkiseudulle (ks. <a href="https://kaks.fi/wp-content/uploads/2019/04/helsinki-vs-muu-suomi_manninen_tolli.pdf">Manninen &amp; Tölli 2019</a>) voi selittää sitä, miksi suuri osa Helsingin kaupungin hankinnoistakin keskittyy pääkaupunkiseudulle. Muiden kaupunkien tapauksissa merkittävä osa ostoista saattaisi tulla pääkaupunkiseudulta ja Helsingistä nimenomaan tästä syystä.</p>
 <p>Viime kädessä kyse ei tietenkään ole pelkästään Helsinki vs. muu Suomi -asetelmasta vaan siitä, millaisia todellisia tai kuviteltuja esteitä suomalaisilla yrityksillä on laajemmassa mittakaavassa osallistua koko EU:n sisämarkkina-alueen toimintaan. Vaikka EU:n sisämarkkinat ovat teoriassa avoimet, kaupankäynnin esteet tulevat eri tavalla vastaan, kun yhteistä kieltä ei välttämättä ole ja kansalliset lainsäädännöt vaihtelevat. Suomi liittyi EU:n jäseneksi vuonna 1995, mutta vielä yli 25 vuotta myöhemmin suomalaisten pk-yritysten valmiuksista osallistua sisämarkkinoille kannetaan huolta (ks. esim. <a href="https://teknologiateollisuus.fi/fi/ajankohtaista/pk-yrityksille-tukea-eun-kotimarkkinoille-paasemiseksi-jos-olisin-ursula-von-der">Teknologiateollisuus 2021</a>).</p>
