@@ -139,6 +139,9 @@ googleAnalytics = "44262937"
 
     # Whether to show the taxonomies or not (default: true)
     showTaxonomy = true
+    
+    # Manually configured URLs to external sites
+    showLinks = true
 
     # How many posts to show on the sidebar (Default: 5)
     num_recent_posts = 5

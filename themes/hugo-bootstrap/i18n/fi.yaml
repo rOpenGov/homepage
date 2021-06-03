@@ -39,3 +39,6 @@
 
 - id: blog_title
   translation: "Blogi"  
+
+- id: links
+  translation: "Linkit"
