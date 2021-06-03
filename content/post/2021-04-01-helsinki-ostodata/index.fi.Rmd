@@ -40,11 +40,11 @@ R soveltuu melkein miljoona riviä sisältävän aineiston tarkasteluun ja käsi
 
 Menetelmän rajoitteena voi pitää sitä, että palvelusta oli saatavissa tietoja ainoastaan osakeyhtiöistä, osuuskunnista ja vakuutusyhtiöistä, joiden tiedot on kirjattu rekisteriin 7.11.2014 alkaen. Erilaiset julkiset instituutiot (esim. THL, Digi- ja väestötietovirasto), merkittävääkin toimintaa harjoittavat rekisteröidyt yhdistykset (esim. Suomen Kuntaliitto, Allergia-, Iho- ja Astmaliitto) tai toiminimet jäävät siis tästä tarkastelusta ulos. Jossain muussa kontekstissa tämä rajoite voisi olla ongelma, mutta tämän demonstraation / kirjoituksen puitteissa rajoitteen olemassaolo voidaan ainoastaan todeta ja siirtyä eteenpäin.
 
-Hadley Wickhamin httr-paketin vignette [Best practices for API packages] antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan "helposti". Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin jokainen voi nopeasti laskea, kuinka monta tuntia operaatiossa kului. 
+Hadley Wickhamin httr-paketin vignette [Best practices for API packages] antoi hyvät lähtökohdat rakentaa oma kustomoitu funktio prh_api, jonka avulla yritysten tiedot pystyttiin lataamaan "helposti". Helposti-sana on lainausmerkeissä, sillä vaikka aineiston lataaminen oli sinänsä vaivatonta, PRH:n APIin tehtävien kutsujen lukumäärä oli rajattu 300 kutsuun minuutissa, kaikille käyttäjille jaettuna. En ollut todennäköisesti ainoa käyttäjä linjoilla, sillä yhden yrityksen tietojen lataamisessa kesti keskimäärin 4 sekuntia, jolloin 30000 uniikin y-tunnuksen läpikäymisessä vierähti tovi.
 
 ### Aineiston lataus ja käsittely
 
-Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiolla:
+Ladataan aluksi aineisto ja poistetaan ne rivit, joissa on epävalidi y-tunnus hetu-paketin bid_ctrl-funktiota hyödyntämällä:
 
 ```{r valmistelut1, eval = FALSE, purl = TRUE}
 library(hetu)
@@ -55,7 +55,7 @@ helsingin_ostot2 <- helsingin_ostot[which(helsingin_ostot$valid_ytunnus),]
 
 ```
 
-Tässä vaiheessa prosessia PRH:n APIsta ladattaisiin uniikit y-tunnukset (jotta saman y-tunnuksen tietoja ei ladattaisi turhaan useaan kertaan) ja yhdistettäisiin nämä tiedot helsingin_ostot2-datasetin kanssa. Koska tietojen lataaminen y-tunnusten perusteella on kohtuuttoman aikaavievä operaatio, olen käyttänyt tässä kirjoituksessa etukäteen valmisteltua datasettiä. Seuraava koodinpätkä on ainoastaan esimerkkinä prosessista:
+Tässä vaiheessa prosessia PRH:n APIsta ladattaisiin uniikit y-tunnukset (jotta saman y-tunnuksen tietoja ei ladattaisi turhaan useaan kertaan) ja yhdistettäisiin nämä tiedot ostodatan kanssa. Koska tietojen lataaminen y-tunnusten perusteella on kohtuuttoman aikaavievä operaatio, olen käyttänyt tässä kirjoituksessa etukäteen valmisteltua datasettiä. Seuraava koodinpätkä on ainoastaan esimerkkinä prosessista:
 
 ```{r valmistelut2, eval = FALSE, purl = TRUE}
 # Uniikit y-tunnukset sisältävä vektori
