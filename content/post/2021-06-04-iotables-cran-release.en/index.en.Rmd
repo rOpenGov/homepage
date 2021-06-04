@@ -1,7 +1,7 @@
 ---
 title: "Economic and environmental impact analysis with iotables"
 author: "Daniel Antal, CFA"
-date: "2021-06-03"
+date: "2021-06-04"
 slug: iotables-cran-release
 categories:
   - news

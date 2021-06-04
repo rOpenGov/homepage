@@ -1,7 +1,7 @@
 ---
 title: "Economic and environmental impact analysis with iotables"
 author: "Daniel Antal, CFA"
-date: "2021-06-03"
+date: "2021-06-04"
 slug: iotables-cran-release
 categories:
   - news
@@ -89,7 +89,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2>Accessing and tidying the data programmatically</h2>
 <p>The iotables package is in a way an extension to the <em>eurostat</em> R package, which provides programmatic access to the <a href="https://ec.europa.eu/eurostat">Eurostat</a> data warehouse. The reason for releasing a new package is that working with SIOTs requires plenty of meticulous data wrangling based on various <em>metadata</em> sources, apart from only accessing the <em>data</em> itself. When working with matrix equations, the bar is higher than with tidy data. Not only must your rows and columns match, but their ordering must strictly conform to the quadrants of the matrix system, including the connecting trade or tax matrices.</p>
 <p>When you download a country’s SIOT table, you receive a long form data frame, a very-very long one, which contains the matrix values and their labels like this:</p>
-<pre><code>## Table naio_10_cp1700 cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
+<pre><code>## Table naio_10_cp1700 cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we save it for further reference here </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(naio_10_cp1700, <span class="st">&quot;not_included/naio_10_cp1700_date_code_FF.rds&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -112,7 +112,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2>Example</h2>
 <p>Let’s take Slovakia’s employment data as an example and match it with the latest structural information on from the <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&amp;dataset=naio_10_cp1700">Symmetric input-output table at basic prices (product by product)</a> Eurostat product.</p>
 <pre><code>## Downloading employment data from the Eurostat database.</code></pre>
-<pre><code>## Table lfsq_egan22d cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v/eurostat/lfsq_egan22d_date_code_FF.rds</code></pre>
+<pre><code>## Table lfsq_egan22d cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa/eurostat/lfsq_egan22d_date_code_FF.rds</code></pre>
 <p>A quick look at the Eurostat website already shows that there is a lot of work ahead to make the data look like an actual symmetric input-output table.</p>
 <p>iotable’s <code>iotable_get()</code> function downloads the data and does basic labelling and preprocessing on the raw Eurostat files. Because of the size of the unfiltered dataset on Eurostat, the following code may take several minutes to run.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sk_io <span class="ot">&lt;-</span>  <span class="fu">iotable_get</span> ( <span class="at">labelled_io_data =</span> <span class="cn">NULL</span>, </span>
@@ -120,11 +120,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">year =</span> <span class="dv">2015</span>, <span class="at">unit =</span> <span class="st">&quot;MIO_EUR&quot;</span>, </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stk_flow =</span> <span class="st">&quot;TOTAL&quot;</span>,</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labelling =</span> <span class="st">&quot;iotables&quot;</span> )</span></code></pre></div>
-<pre><code>## Reading cache file /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
-<pre><code>## Table  naio_10_cp1700  read from cache file:  /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
+<pre><code>## Reading cache file /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
+<pre><code>## Table  naio_10_cp1700  read from cache file:  /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa/eurostat/naio_10_cp1700_date_code_FF.rds</code></pre>
 <pre><code>## Saving 808 input-output tables into the temporary directory
-## /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v</code></pre>
-<pre><code>## Saved the raw data of this table type in temporary directory /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp6z8H6v/naio_10_cp1700.rds.</code></pre>
+## /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa</code></pre>
+<pre><code>## Saved the raw data of this table type in temporary directory /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//Rtmp7lAZZa/naio_10_cp1700.rds.</code></pre>
 <p>The <code>input_coefficient_matrix_create()</code> creates an input coefficient matrix, which is used for most of the analytical functions.</p>
 <p><span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_j\)</span></p>
 <p>It checks that the columns are in correct order and additionally it fills up 0 values with 0.000001 to avoid division with zero.</p>
