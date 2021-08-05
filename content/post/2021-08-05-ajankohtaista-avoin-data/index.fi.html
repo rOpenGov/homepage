@@ -1,0 +1,237 @@
+---
+title: Ajankohtaista avoimen hallinnollisen datan avaamisessa
+author: Pyry Kantanen
+date: '2021-08-05'
+slug: ajankohtaista-avoin-data
+categories:
+  - uutinen
+tags:
+  - avoin data
+output:
+  blogdown::html_page:
+    highlight: tango
+    toc: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+<script src="{{< blogdown/postref >}}index.fi_files/header-attrs/header-attrs.js"></script>
+<script src="{{< blogdown/postref >}}index.fi_files/kePrint/kePrint.js"></script>
+<link href="{{< blogdown/postref >}}index.fi_files/lightable/lightable.css" rel="stylesheet" />
+
+<div id="TOC">
+<ul>
+<li><a href="#julkisen-hallinnon-api-linjaukset"><span class="toc-section-number">1</span> Julkisen hallinnon API-linjaukset</a></li>
+<li><a href="#avoimen-datan-direktiivin-täytäntöönpano-kansallisessa-lainsäädännössä"><span class="toc-section-number">2</span> Avoimen datan direktiivin täytäntöönpano kansallisessa lainsäädännössä</a></li>
+<li><a href="#viro-avaa-valtio-omisteisen-lähdekoodin"><span class="toc-section-number">3</span> Viro avaa valtio-omisteisen lähdekoodin</a>
+<ul>
+<li><a href="#julkisen-sektorin-avoin-lähdekoodi-suomessa"><span class="toc-section-number">3.1</span> Julkisen sektorin avoin lähdekoodi Suomessa</a></li>
+</ul></li>
+<li><a href="#ostolaskudatan-avaamisen-edistyminen-varsinais-suomessa"><span class="toc-section-number">4</span> Ostolaskudatan avaamisen edistyminen Varsinais-Suomessa</a></li>
+</ul>
+</div>
+
+<p>Aika ajoin on hyödyllistä koostaa yhteen paikkaan uutisia ajankohtaisista kotimaisista ja ulkomaisista datan avaamiseen liittyvistä kehityskuluista.</p>
+<p>Tässä kirjoituksessa esittämät näkemykset ja tulkinnat ovat omiani eikä kirjoitusta kannata käyttää autoritatiivisena lähteenä.</p>
+<div id="julkisen-hallinnon-api-linjaukset" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Julkisen hallinnon API-linjaukset</h1>
+<p>Marinin <a href="https://julkaisut.valtioneuvosto.fi/bitstream/handle/10024/161931/VN_2019_31.pdf?sequence=1&amp;isAllowed=y">hallitusohjelman</a> Elinvoimainen Suomi -osiossa digitalisaation hyödyntäminen ja uusien yksityisen ja julkisen sektorin yhteistyön toimintamallien kehittäminen ja käyttöönotto nähdään yhtenä tulevaisuuden menestyksen rakennuspalikkana.</p>
+<p>Tavoitteeksi on asetettu, että Suomi tunnettaisiin tulevaisuudessa ”teknologisen kehityksen, innovatiivisten hankintojen ja kokeilukulttuurin edelläkävijänä”. Tavoitteen saavuttamiseksi määritellään useita keinoja, joista yksi on pyrkimys edistää julkisen sektorin teknologia- ja digitalisaatiokyvykkyyttä sekä kehittämään julkisen ja yksityisen sektorin yhteistyötä.</p>
+<p>Edellä mainitun tavoitteen alle hallitusohjelmassa on listattu useampia tiukemmin määriteltyjä osatavoitteita, esimerkiksi:</p>
+<blockquote>
+<ul>
+<li>Laaditaan julkisen sektorin datan avaamisen ja hyödynnettävyyden strategia toimenpidesuunnitelmineen ottaen huomioon tietosuojavaikutukset ja mahdolliset lainsäädäntötarpeet. Lähtökohtana on, että julkiset toimijat avaavat julkiset rajapinnat, jos niitä ei ole erityistä syytä pitää niitä suljettuna.</li>
+<li>Edistetään yritysten ja yrittäjien datan jakamista ekosysteemien sisällä.</li>
+<li>Edistetään reaaliaikataloutta rakenteisten sähköisten laskujen ja kuittien laajalla käyttöönotolla.</li>
+<li>Jatketaan arjesta ja liiketoiminnasta sujuvampaa tekevän AuroraAI-verkon kehittämistä tietoturvallisesti ja eettisesti kestävällä tavalla menokehyksen sen salliessa.</li>
+</ul>
+</blockquote>
+<p>Listassa ensimmäiseksi mainittua tavoitetta edistämään on erillinen Valtiovarainministeriön Tiedon hyödyntämisen ja avaamisen hallitusohjelmahanke (hierarkia on siis Hallitusohjelma &gt; Strategiset kokonaisuudet &gt; Tavoitteet &gt; Hankkeet). Hankkeen tavoitteena on edistää ”tietojen ja toimintojen hyödyntämistä yhteneväisellä tavalla ensisijaisesti ohjelmointirajapintojen (API) kautta”, mikä rOpenGovin pakettien kehitystyön kannalta tämä onkin kiinnostavaa.</p>
+<p>API-linjausten kommentointi päättyi jo 31.1.2021. API-linjausten toimeenpano-ohjeiden valmistelu on aloitettu keväällä 2021 ja valmista pitäisi tulla vuoden lopulla.</p>
+<p>Lisätietoja <a href="https://vm.fi/tiedon-hyodyntaminen-ja-avaaminen">hankesivulta</a> sekä API-linjauksiin liittyvästä <a href="https://vm.fi/-/alustavat-api-linjaukset-ovat-nyt-avoimesti-kommentoitavissa">Valtiovarainministeriön tiedotteesta</a>.</p>
+</div>
+<div id="avoimen-datan-direktiivin-täytäntöönpano-kansallisessa-lainsäädännössä" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Avoimen datan direktiivin täytäntöönpano kansallisessa lainsäädännössä</h1>
+<p>EU:n avoimen datan direktiivi 2019/1024 on pantu täytäntöön ja tullut voimaan kansallisessa lainsäädännössä 17.7.2021 alkaen. Direktiivin tarkoituksena on edistää julkisen sektorin toimijoiden hallussa olevan ja julkisen sektorin tuottaman datan uudelleenkäyttöä kaupallisissa tai muissa kuin kaupallisissa tarkoituksissa.</p>
+<p>Hankkeen pohjalta annetut lait ovat:</p>
+<ul>
+<li><a href="https://www.finlex.fi/fi/laki/alkup/2021/20210710">710/2021 Laki julkisen hallinnon tiedonhallinnasta annetun lain muuttamisesta</a> (alkuperäinen laki: <a href="https://www.finlex.fi/fi/laki/ajantasa/2019/20190906">9.8.2019/906</a>)</li>
+<li><a href="https://www.finlex.fi/fi/laki/alkup/2021/20210711">711/2021 Laki viranomaisten toiminnan julkisuudesta annetun lain 16 ja 34 §:n muuttamisesta</a> (alkuperäinen laki: <a href="https://www.finlex.fi/fi/laki/ajantasa/1999/19990621">21.5.1999/621</a>)</li>
+<li><a href="https://www.finlex.fi/fi/laki/alkup/2021/20210712">712/2021 Laki eräitä yleishyödyllisiä palveluita tuottavien yritysten tiedon uudelleenkäytöstä</a></li>
+<li><a href="https://www.finlex.fi/fi/laki/alkup/2021/20210713">713/2021 Laki julkisin varoin tuotettujen tutkimusaineistojen uudelleenkäytöstä</a></li>
+</ul>
+<p>Direktiivin täytäntöönpanon keskeiset vaikutukset on tiivistetty seuraavanlaisesti (lihavoinnit omia):</p>
+<blockquote>
+<ul>
+<li>Tiheästi tai reaaliaikaisesti päivittyvien tietojen eli niin sanotun dynaamisen datan on jatkossa oltava <strong>tietyin ehdoin</strong> saatavilla teknisen rajapinnan kautta.</li>
+<li><strong>Arvokkaiden tietoaineistojen</strong> on oltava saatavilla teknisen rajapinnan kautta maksutta. Euroopan komissio antaa myöhemmin luettelon näistä tietoaineistoista täytäntöönpanosäädöksessään.</li>
+<li>Sellaisten tutkimusaineistojen, jotka on tuotettu julkisin varoin ja jotka on asetettu julkisesti saataville tietovaraston kautta, on oltava saatavilla maksutta, sekä tietyin ehdoin koneluettavassa muodossa.</li>
+<li>Tiettyjen yleishyödyllisten palveluiden tuottamista koskevien asiakirjojen uudelleenkäytön ehtoja yhdenmukaistetaan.</li>
+</ul>
+</blockquote>
+<p>Tiheästi tai reaaliaikaisesti päivittyvän tiedon osalta <strong>tietyin ehdoin</strong> vaikuttaisi viittaavan siihen, että viranomainen voi olla tarjoamatta tietoa teknisen rajapinnan kautta mikäli tämä aiheuttaisi ”kohtuutonta vaivaa taloudellisista tai teknisistä syistä”.</p>
+<p>Tällöin tiedon tulee kuitenkin olla saatavilla ”sellaisella aikavälillä tai sellaisin tilapäisin teknisin rajoituksin, jotka eivät tarpeettomasti haittaa sen hyödyntämistä”, minkä tulkitsen tarkoittavan sitä, että tiheästi päivittyneet tiedot voidaan julkaista myös jälkikäteen ja/tai säännöllisin väliajoin vaikkapa csv-muotoisina tiedostoina netissä. Tämä voinee tulla myös kyseeseen, mikäli teknisen rajapinnan toiminnassa ilmenisi väliaikaisia teknisiä ongelmia. Tiedostojen ja rajapintayhteyden eroja on käsitellyt esimerkiksi Helsinki Region Infoshare <a href="https://hri.fi/fi/ohjeet/datan-avaajalle/tiedosto-vai-rajapinta/">ohjeissaan datan avaajalle</a>.</p>
+<p>Olettaisin lain hengen olevan kuitenkin sellainen, että julkisten organisaatioiden tulisi pitkällä aikavälillä budjetoida varoja rajapintojen käyttöönottoon ja riittävään tekniseen infrastruktuuriin. Tiedon loppukäyttäjien antama palaute voi toimia tässä kirittäjänä.</p>
+<p><strong>Arvokkaiden tietoaineistojen</strong> osalta Euroopan komission täytäntöönpanosäädökset lienevät vielä tuloillaan. Arvokkaista tietoaineistosta tullaan säätämään valtioneuvoston asetuksella tai muualla lainsäädännössä.</p>
+<p><a href="https://api.hankeikkuna.fi/asiakirjat/4e165171-966d-485c-962f-e9071beed9e1/7b1454af-defc-4b3e-940e-c0c5b815ed7c/LAUSUNTO_20201123121314.PDF">Open Knowledge Finland</a> nosti 23.11.2020 antamassaan lausunnossa esille, että lakiesityksessä on tehty ainoastaan minimi ja että tavoitteet on asetettu aivan liian matalalle, jotta Suomea voisi aidosti kutsua edelläkävijämaaksi.</p>
+<p>Suomen ongelmana pidetään avoimeen dataan pohjautuvan tietoperustaisen päätöksenteon puuttumista ja eri ministeriöiden alaisten organisaatioiden tekemää päällekkäistä työtä. Lainsäädäntöä ja toimintatapoja pidetään ”paperiaikaisina”, joissa viranomainen edelleen ”luovuttaa tietoa” pyynnöstä ja avoimen datan etuja ei ole täysimääräisesti ulosmitattu julkisen sektorin tietotyön kehittämisessä.</p>
+<p>Ongelmallisena pidetään myös tutkimusjulkaisujen rajaamista julkisin varoin tuotettujen tutkimusaineistojen uudelleenkäytöstä annetun lain ulkopuolelle. Julkaisemme tässä blogissa toisen tekstin avoimen tieteen kehityskuluista.</p>
+<p>Lisätietoja <a href="https://vm.fi/-/julkisen-tiedon-luovuttaminen-muuttuu-avoimen-datan-direktiivi-pannaan-taytantoon">Valtiovarainministeriön tiedotteessa</a>, <a href="https://vm.fi/hanke?tunnus=VM043:00/2020">hankesivulla</a> ja <a href="https://www.eduskunta.fi/FI/naineduskuntatoimii/kirjasto/aineistot/kotimainen_oikeus/LATI/Sivut/avoimen-datan-direktiivin-kansallinen-taytantoonpano.aspx">Eduskunnan kirjaston Lakihankkeiden tietopaketit -sivuilta</a></p>
+</div>
+<div id="viro-avaa-valtio-omisteisen-lähdekoodin" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Viro avaa valtio-omisteisen lähdekoodin</h1>
+<p>Virossa <a href="https://www.riigiteataja.ee/akt/122052021002">1.6.2021 voimaan tulleen lain</a> perusteella kokonaan julkisessa omistuksessa olevat ohjelmistot tai näiden lähdekoodi on julkaistava kokonaan tai osittain. Mikäli ainoastaan osa lähdekoodista on julkisessa omistuksessa, tämä osa on tehtävä julkiseksi. Lisäksi ohjelmistosta vastuussa olevan tahon on julkaistava kuvaus ohjelmistosta sekä määriteltävä selkeät ehdot ohjelmiston käytölle.</p>
+<p>Virolla on ohjelmiston julkaisua varten oma GitLab-alustalla toteutettu julkinen versionhallinnan varastojen (repository) hosting-palvelussa: <a href="https://koodivaramu.eesti.ee/explore">koodivaramu.eesti.ee</a>. Kirjoitushetkellä koodivaramussa on 109 erillistä projektia, joista merkittävässä osassa käytetään esimerkiksi vapaata <a href="https://opensource.org/licenses/mit-license.php">MIT-lisenssiä</a>.</p>
+<p>Lisätietoja Viron mallista <a href="https://joinup.ec.europa.eu/collection/open-source-observatory-osor/news/estonia-makes-public-software-public">Open Source Observatoryn (OSOR) uutisesta</a> ja <a href="https://www.riigiteataja.ee/akt/122052021002">Riigi Teataja virallisessa lehdessä julkaistusta lakitekstistä (viroksi)</a>.</p>
+<div id="julkisen-sektorin-avoin-lähdekoodi-suomessa" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Julkisen sektorin avoin lähdekoodi Suomessa</h2>
+<p>Suomessa täysin vastaavaa palvelua ei ole. Suomessa on lain sijasta Julkisen hallinnon tietohallinnon neuvottelukunnan (JUHTA) alaisen JHS-jaoston muotoilema suositus <a href="https://www.suomidigi.fi/ohjeet-ja-tuki/jhs-suositukset/jhs-169-avoimen-lahdekoodin-ohjelmien-kaytto-julkisessa-hallinnossa">JHS 169 Avoimen lähdekoodin ohjelmien käyttö julkisessa hallinnossa</a>. JHS-suosituksia valmisteltiin 1992-2019 valtion ja kuntien yhteistyönä, mutta JHS-järjestelmä lakkautettiin 2020 tiedonhallintalain voimaantulon myötä.</p>
+<p>Solita Oy:n aloitteesta avattu <a href="http://avoinkoodi.fi">avoinkoodi.fi-sivusto</a> täyttää osittain saman tavoitteen kuin koodivaramu. Sivuston vetovastuu näyttää sittemmin siirtyneen <a href="https://coss.fi">Suomen avoimien tietojärjestelmien keskus - COSS ry:lle</a>. Käyttäjät voivat ehdottaa sivuston listauksista puuttuvia projekteja tai tehdä pull requestin projektin GitHub-repoon.</p>
+</div>
+</div>
+<div id="ostolaskudatan-avaamisen-edistyminen-varsinais-suomessa" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Ostolaskudatan avaamisen edistyminen Varsinais-Suomessa</h1>
+<p>Julkisten hankintojen ja ostolaskujen avaaminen etenee hitaasti mutta vääjäämättömästi. Valtion ja kuntien (Helsinki ja Vantaa) ostolaskuja on julkaistu <a href="https://tutkihankintoja.fi">tutkihankintoja.fi-sivustolla</a> vuodesta 2016 lähtien. Helsingin kaupungin ostoista on dataa myös <a href="https://www.avoindata.fi/data/fi/dataset/helsingin-kaupungin-ostot">avoindata.fi-sivustolla</a> vuodesta 2012 alkaen. Käsittelin kyseistä aineistoa <a href="http://ropengov.org/fi/2021/04/helsinki-ostodata/">blogikirjoituksessa tänä keväänä</a>.</p>
+<p>Ostolaskudata on ilmeisen mielenkiintoista monelle eri taholle, esimerkiksi kilpailutuksiin osallistuville yrittäjille. Varsinais-Suomen Yrittäjät onkin avannut vuonna 2019 <a href="https://handata.fi">handata.fi-sivuston</a>, jossa pystyy kirjautumisen jälkeen tarkastelemaan manner-Suomen 295 kunnan ostotietoja (<a href="https://www.yrittajat.fi/uutiset/605998-uusi-verkkopalvelu-paljastaa-puutteet-kuntien-taloudenpidossa">Yrittäjäsanomat 2019</a>). Tiedot ovat osittain (maksuttoman) rekisteröitymisen takana.</p>
+<p>Vuonna 2021 <a href="https://www.yrittajat.fi/varsinais-suomen-yrittajat/a/uutiset/651506-yha-useampi-kunta-avaamassa-ostolaskudatansa-varsinais-suomessa">monet kunnat ovat edelleen vasta avaamassa ostolaskudataansa</a>. Ainoastaan <a href="https://lieto.fi/hallinto-ja-osallistuminen/talous-ja-strategiat/avoin-data/">Lieto</a>, <a href="http://www.paimio.fi/paatoksenteko/talous/ostolaskut">Paimio</a> ja <a href="https://kaarina.fi/fi/talous-ja-hankinnat/kaarinan-kaupungin-ostolaskut">Kaarina</a> ovat kirjoitushetkellä julkaisseet ostolaskunsa. Alla olevassa taulukossa esitetään, mistä lähtien dataa on ollut saatavilla tai milloin kuntien ostolaskudatan voidaan tämän hetkisten tietojen perusteella odottaa tulevan julkiseksi:</p>
+<table class=" lightable-classic-2" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 4.1: </span>Varsinais-Suomen kuntien ostolaskujen julkaisuvuosi / odotettu julkaisuvuosi
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Kunta
+</th>
+<th style="text-align:left;">
+Julkaisuvuosi
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lieto
+</td>
+<td style="text-align:left;">
+2015
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Paimio
+</td>
+<td style="text-align:left;">
+2018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kaarina
+</td>
+<td style="text-align:left;">
+2021
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Turku
+</td>
+<td style="text-align:left;">
+2021 (kesken)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Loimaa
+</td>
+<td style="text-align:left;">
+2021 (kesken)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Masku
+</td>
+<td style="text-align:left;">
+2021 (kesken)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salo
+</td>
+<td style="text-align:left;">
+2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uusikaupunki
+</td>
+<td style="text-align:left;">
+2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raisio
+</td>
+<td style="text-align:left;">
+Selvitystyö käynnistetty
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Parainen
+</td>
+<td style="text-align:left;">
+Selvitystyö käynnistetty
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mynämäki
+</td>
+<td style="text-align:left;">
+Selvitystyö käynnistetty
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kemiönsaari
+</td>
+<td style="text-align:left;">
+Selvitystyö käynnistetty
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Laitila
+</td>
+<td style="text-align:left;">
+Ei valmistelussa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kustavi
+</td>
+<td style="text-align:left;">
+Ei valmistelussa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nousiainen
+</td>
+<td style="text-align:left;">
+Kielteinen päätös
+</td>
+</tr>
+</tbody>
+</table>
+<p>Ostolaskudatan avaamisen edistämiseksi Suomen Kuntaliitto julkaisi toukokuussa 2021 <a href="https://www.avoindata.fi/data/fi/dataset/kuntien-ja-kuntayhtymien-ostolaskudatan-avaamisen-ohje/resource/6b07039a-262c-4e77-b39a-b99599ef8395">kuntalaskudatan avaamista käsittelevän ohjeen</a>, joka korvasi vuonna 2016 julkaistun aiemman ohjeen.</p>
+<p>Ohjeistuksessa käydään läpi perustietoja ostolaskuista ja asiaan liittyvistä standardeihin ja ohjeisiin. Ostolaskulla esimerkiksi tarkoitetaan sellaista laskua, joka liittyy hankittuun tuotteeseen, investointiin tai palveluun, minkä hankinnassa on noudatettu hankintalakia tai kunnan pienhankintaohjeita. Tämä rajaa ulkopuolelle esimerkiksi avustukset, palkat, veromaksut ja muut tilitykset. Melko merkittävä osa kunnan menoista, esimerkiksi henkilöstömenot, siis jäävät luonnollisesti ostolaskujen ulkopuolelle.</p>
+<p>Ostolaskudatan sisältämät tiedot tileistä ja palveluluokituksista saadaan Valtiovarainministeriön ylläpitämästä <a href="https://www.valtiokonttori.fi/maaraykset-ja-ohjeet/kuntien-ja-kuntayhtymien-automaattisen-talousraportoinnin-kasikirja-aura/">Kuntien ja kuntayhtymien automatisoidun talousraportoinnin käsikirjasta (AURA)</a>. Kuntien sote-menojen osalta sensitiivisiä sote-sektoriin liittyviä tietojen yhdistely taas perustuu Valtiokonttorin ylläpitämään ohjeistukseen.</p>
+</div>
