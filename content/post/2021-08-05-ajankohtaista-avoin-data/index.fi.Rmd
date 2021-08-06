@@ -92,12 +92,12 @@ Julkisten hankintojen ja ostolaskujen avaaminen etenee hitaasti mutta vääjää
 
 Ostolaskudata on ilmeisen mielenkiintoista monelle eri taholle, esimerkiksi kilpailutuksiin osallistuville yrittäjille. Varsinais-Suomen Yrittäjät onkin avannut vuonna 2019 [handata.fi-sivuston](https://handata.fi), jossa pystyy kirjautumisen jälkeen tarkastelemaan manner-Suomen 295 kunnan ostotietoja ([Yrittäjäsanomat 2019](https://www.yrittajat.fi/uutiset/605998-uusi-verkkopalvelu-paljastaa-puutteet-kuntien-taloudenpidossa)). Tiedot ovat osittain (maksuttoman) rekisteröitymisen takana.
 
-Vuonna 2021 [monet kunnat ovat edelleen vasta avaamassa ostolaskudataansa](https://www.yrittajat.fi/varsinais-suomen-yrittajat/a/uutiset/651506-yha-useampi-kunta-avaamassa-ostolaskudatansa-varsinais-suomessa). Ainoastaan [Lieto](https://lieto.fi/hallinto-ja-osallistuminen/talous-ja-strategiat/avoin-data/), [Paimio](http://www.paimio.fi/paatoksenteko/talous/ostolaskut) ja [Kaarina](https://kaarina.fi/fi/talous-ja-hankinnat/kaarinan-kaupungin-ostolaskut) ovat kirjoitushetkellä julkaisseet ostolaskunsa. Alla olevassa taulukossa esitetään, mistä lähtien dataa on ollut saatavilla tai milloin kuntien ostolaskudatan voidaan tämän hetkisten tietojen perusteella odottaa tulevan julkiseksi:
+Vuonna 2021 [monet kunnat ovat edelleen vasta avaamassa ostolaskudataansa](https://www.yrittajat.fi/varsinais-suomen-yrittajat/a/uutiset/651506-yha-useampi-kunta-avaamassa-ostolaskudatansa-varsinais-suomessa). Ainoastaan [Lieto](https://lieto.fi/hallinto-ja-osallistuminen/talous-ja-strategiat/avoin-data/), [Paimio](http://www.paimio.fi/paatoksenteko/talous/ostolaskut) ja [Kaarina](https://kaarina.fi/fi/talous-ja-hankinnat/kaarinan-kaupungin-ostolaskut) ovat kirjoitushetkellä julkaisseet ostolaskunsa. Alla olevassa taulukossa esitetään, mistä lähtien dataa on ollut saatavilla tai milloin kuntien ostolaskudatan voidaan tämän hetkisten tietojen perusteella odottaa tulevan julkiseksi (Lähde: em. yrittajat.fi-uutisartikkeli ja [TS.fi 9.6.2021](https://www.ts.fi/uutiset/paikalliset/5336213/Turun+ostojen+julkaisu+venyy+ensi+vuoteenKuntaliitto+avoimuus+voi+tukea+kunnan+kustannustietoisuutta)):
 
 ``` {r, echo = FALSE}
 library(kableExtra)
-Kunta <- c("Lieto", "Paimio", "Kaarina", "Turku", "Loimaa", "Masku", "Salo", "Uusikaupunki", "Raisio", "Parainen", "Mynämäki", "Kemiönsaari", "Laitila", "Kustavi", "Nousiainen")
-Julkaisuvuosi <- c(2015, 2018, 2021, rep("2021 (kesken)", times = 3), 2022, 2022, rep("Selvitystyö käynnistetty", times = 4), rep("Ei valmistelussa", times = 2), "Ei julkaista")
+Kunta <- c("Lieto", "Paimio", "Kaarina", "Loimaa", "Masku", "Turku", "Salo", "Uusikaupunki", "Raisio", "Parainen", "Mynämäki", "Kemiönsaari", "Laitila", "Kustavi", "Nousiainen")
+Julkaisuvuosi <- c(2015, 2018, 2021, rep("2021 (kesken)", times = 2), rep(2022, times = 3), rep("Selvitystyö käynnistetty", times = 4), rep("Ei valmistelussa", times = 2), "Ei julkaista")
 data_frame <- cbind.data.frame(Kunta, Julkaisuvuosi)
 # names(data_frame) <- c("Kunta", "Julkaisuvuosi")
 
