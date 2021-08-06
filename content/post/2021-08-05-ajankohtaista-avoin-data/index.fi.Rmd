@@ -15,7 +15,7 @@ output:
     number_sections: TRUE
 ---
 
-Aika ajoin on hyödyllistä koostaa yhteen paikkaan uutisia ajankohtaisista kotimaisista ja ulkomaisista datan avaamiseen liittyvistä kehityskuluista. 
+Aika ajoin on hyödyllistä koostaa yhteen paikkaan uutisia ajankohtaisista kotimaisista ja ulkomaisista datan avaamiseen liittyvistä kehityskuluista. Tähän kirjoitukseen on koottu tietoa meneillään olevista tai juuri päättyneistä lakihankkeita tai muista uutisista, joilla saattaa olla relevanssia rOpenGov-verkoston työn kannalta. 
 
 Tässä kirjoituksessa esittämät näkemykset ja tulkinnat ovat omiani eikä kirjoitusta kannata käyttää autoritatiivisena lähteenä.
 
@@ -116,6 +116,6 @@ Jäämme mielenkiinnolla seuraamaan, kuinka yhdenmukaisesti ostolaskudata julkai
 
 # Lopuksi
 
-Tämä listaus ei ole missään nimessä tyhjentävä. Toisaalta kirjoituksen tarkoitus ei ollut toisintaa [Open Source Observatoryn](https://joinup.ec.europa.eu/collection/open-source-observatory-osor) tai vastaavien sivustojen uutistulvaa suomen kielellä vaan poimia note-to-self -tyylisesti joitakin mielenkiintoisia kehityskulkuja, jotka saattavat vaikuttaa rOpenGovin paketteihin ja toimintaan tulevaisuudessa.
+Tämä listaus ei ole missään nimessä tyhjentävä. Toisaalta kirjoituksen tarkoitus ei ollut toisintaa [Open Source Observatoryn](https://joinup.ec.europa.eu/collection/open-source-observatory-osor) tai vastaavien sivustojen uutistulvaa suomen kielellä vaan poimia note-to-self -tyylisesti joitakin mielenkiintoisia kehityskulkuja, jotka saattavat vaikuttaa rOpenGovin pakettikehitykseen ja tarjontaan tulevaisuudessa.
 
-Kommenteissa voi mielellään jakaa listalta pois jääneitä uutisia, jotka olisivat teidän mielestänne tänne kuuluneet.
+Jäikö lista mielestäsi vajaaksi? Kerro se kommenteissa!
