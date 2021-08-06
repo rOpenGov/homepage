@@ -1,7 +1,7 @@
 ---
 title: Ajankohtaista avoimen hallinnollisen datan avaamisessa
 author: Pyry Kantanen
-date: '2021-08-05'
+date: '2021-08-06'
 slug: ajankohtaista-avoin-data
 categories:
   - uutinen
@@ -86,7 +86,7 @@ Suomessa täysin vastaavaa palvelua ei ole. Suomessa on lain sijasta Julkisen ha
 
 Solita Oy:n aloitteesta avattu [avoinkoodi.fi-sivusto](http://avoinkoodi.fi) täyttää osittain saman tavoitteen kuin koodivaramu. Sivuston vetovastuu näyttää sittemmin siirtyneen [Suomen avoimien tietojärjestelmien keskus - COSS ry:lle](https://coss.fi). Käyttäjät voivat ehdottaa sivuston listauksista puuttuvia projekteja tai tehdä pull requestin projektin GitHub-repoon.
 
-# Ostolaskudatan avaamisen edistyminen Varsinais-Suomessa
+# Ostolaskudatan avaaminen Varsinais-Suomessa
 
 Julkisten hankintojen ja ostolaskujen avaaminen etenee hitaasti mutta vääjäämättömästi. Valtion ja kuntien (Helsinki ja Vantaa) ostolaskuja on julkaistu [tutkihankintoja.fi-sivustolla](https://tutkihankintoja.fi) vuodesta 2016 lähtien. Helsingin kaupungin ostoista on dataa myös [avoindata.fi-sivustolla](https://www.avoindata.fi/data/fi/dataset/helsingin-kaupungin-ostot) vuodesta 2012 alkaen. Käsittelin kyseistä aineistoa [blogikirjoituksessa tänä keväänä](http://ropengov.org/fi/2021/04/helsinki-ostodata/).
 
@@ -97,12 +97,12 @@ Vuonna 2021 [monet kunnat ovat edelleen vasta avaamassa ostolaskudataansa](https
 ``` {r, echo = FALSE}
 library(kableExtra)
 Kunta <- c("Lieto", "Paimio", "Kaarina", "Turku", "Loimaa", "Masku", "Salo", "Uusikaupunki", "Raisio", "Parainen", "Mynämäki", "Kemiönsaari", "Laitila", "Kustavi", "Nousiainen")
-Julkaisuvuosi <- c(2015, 2018, 2021, rep("2021 (kesken)", times = 3), 2022, 2022, rep("Selvitystyö käynnistetty", times = 4), rep("Ei valmistelussa", times = 2), "Kielteinen päätös")
+Julkaisuvuosi <- c(2015, 2018, 2021, rep("2021 (kesken)", times = 3), 2022, 2022, rep("Selvitystyö käynnistetty", times = 4), rep("Ei valmistelussa", times = 2), "Ei julkaista")
 data_frame <- cbind.data.frame(Kunta, Julkaisuvuosi)
 # names(data_frame) <- c("Kunta", "Julkaisuvuosi")
 
 data_frame %>% 
-  kbl(caption = "Varsinais-Suomen kuntien ostolaskujen julkaisuvuosi / odotettu julkaisuvuosi") %>% 
+  kbl(caption = "Varsinais-Suomen kuntien ostolaskujen julkaisuvuosi tai odotettu julkaisuvuosi") %>% 
   kable_classic_2(full_width = FALSE)
 ```
 
@@ -111,3 +111,11 @@ Ostolaskudatan avaamisen edistämiseksi Suomen Kuntaliitto julkaisi toukokuussa 
 Ohjeistuksessa käydään läpi perustietoja ostolaskuista ja asiaan liittyvistä standardeihin ja ohjeisiin. Ostolaskulla esimerkiksi tarkoitetaan sellaista laskua, joka liittyy hankittuun tuotteeseen, investointiin tai palveluun, minkä hankinnassa on noudatettu hankintalakia tai kunnan pienhankintaohjeita. Tämä rajaa ulkopuolelle esimerkiksi avustukset, palkat, veromaksut ja muut tilitykset. Melko merkittävä osa kunnan menoista, esimerkiksi henkilöstömenot, siis jäävät luonnollisesti ostolaskujen ulkopuolelle.
 
 Ostolaskudatan sisältämät tiedot tileistä ja palveluluokituksista saadaan Valtiovarainministeriön ylläpitämästä [Kuntien ja kuntayhtymien automatisoidun talousraportoinnin käsikirjasta (AURA)](https://www.valtiokonttori.fi/maaraykset-ja-ohjeet/kuntien-ja-kuntayhtymien-automaattisen-talousraportoinnin-kasikirja-aura/). Kuntien sote-menojen osalta sensitiivisiä sote-sektoriin liittyviä tietojen yhdistely taas perustuu Valtiokonttorin ylläpitämään ohjeistukseen.
+
+Jäämme mielenkiinnolla seuraamaan, kuinka yhdenmukaisesti ostolaskudata julkaistaan eri puolilla Suomea. Yhtenäiset ohjeistukset ja standardit helpottavat datan vertailua ja pienentävät datan käsittelyä helpottavien ratkaisujen kehitysaikaa.
+
+# Lopuksi
+
+Tämä listaus ei ole missään nimessä tyhjentävä. Toisaalta kirjoituksen tarkoitus ei ollut toisintaa [Open Source Observatoryn](https://joinup.ec.europa.eu/collection/open-source-observatory-osor) tai vastaavien sivustojen uutistulvaa suomen kielellä vaan poimia note-to-self -tyylisesti joitakin mielenkiintoisia kehityskulkuja, jotka saattavat vaikuttaa rOpenGovin paketteihin ja toimintaan tulevaisuudessa.
+
+Kommenteissa voi mielellään jakaa listalta pois jääneitä uutisia, jotka olisivat teidän mielestänne tänne kuuluneet.
