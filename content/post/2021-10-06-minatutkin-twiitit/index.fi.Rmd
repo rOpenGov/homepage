@@ -1,6 +1,6 @@
 ---
 title: "#minätutkin-twiittien aiheet"
-date: "2021-10-05"
+date: "2021-10-06"
 author: "Tuija Sonkkila"
 slug: "mina-tutkin"
 categories:
@@ -77,9 +77,7 @@ Asiasanoituksen koodi on tiedostossa [finto_ai_keywording.R](https://github.com/
 
 ### Ryhmittely
 
-Idea tähän koko harjoitukseen tuli Helsingin yliopiston Ekosysteemit ja ympäristö -tutkimusohjelman professori Sakari Kuikalta. Hän [ehdotti](https://twitter.com/Sakari_Kuikka/status/1435905714455814148) puolileikillään (näin ymmärsin), että twiittien perusteella katsottaisiin
-
->mitkä tieteen alat tulivat esiin, paljonko ne saivat kannatusta ja kuinka suuri niiden rahoitusosuus Suomessa on?
+Idea tähän koko harjoitukseen tuli Helsingin yliopiston Ekosysteemit ja ympäristö -tutkimusohjelman professori Sakari Kuikalta. Hän [ehdotti](https://twitter.com/Sakari_Kuikka/status/1435905714455814148) puolileikillään (näin ymmärsin), että twiittien perusteella katsottaisiin "mitkä tieteen alat tulivat esiin, paljonko ne saivat kannatusta ja kuinka suuri niiden rahoitusosuus Suomessa on?"
 
 Miten erottaa twiittien vapaasta kielenkäytöstä tieteenala? Vaikeasti. Ilman luonnollisen kielen käsittelyn menetelmiä erotuskyky on enintään "sinne päin". Seuraavalla #minätutkin-kierroksella tutkijoiden tulee käyttää twiiteissään Tilastokeskuksen tieteenalaluokitusta!
 
