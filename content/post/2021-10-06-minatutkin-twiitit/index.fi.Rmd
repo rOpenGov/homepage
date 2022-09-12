@@ -93,8 +93,9 @@ Olen seurannut R-ekosysteemin [#tidytuesday](https://github.com/rfordatascience/
 
 Karamanisilla musiikkityylit ovat nimen mukaisessa aakkosjärjestyksessä, suuruuserot käyvät ilmi kirjasimen koosta. #minätutkin-esitykseen halusin sen sijaan käsiteryhmät koon mukaisessa järjestyksessä, mielellään niin että samalla ryhmällä on aina sama väri. Ollaan faktoreiden (factor) järjestelyn alueella. Lopputuloksessa on parantamisen varaa, sillä löytämäni [keino tehdä tämä](https://stackoverflow.com/a/53598064) rikkoo ryhmävärityksen, kun ryhmiä on enemmän kuin 35. Näin ollen rajasin niiden lukumäärää niin, että jätin pois harvemmin esiintyneet. 
 
-![minatutkintweets](/images/minatutkintweets.png)
-*#minätutkin-twiittien aiheet 6-12.9.2021*
+```{r, echo=FALSE}
+blogdown::shortcode_html("img", src="/images/minatutkintweets.png", caption="#minätutkin-twiittien aiheet 6-12.9.2021", width="800", alt="Pylväsdiagrammi, jossa jokainen pylväs kuvastaa kunkin aiheen päivittäistä osuutta 100 %:sta (englanniksi 100 % stacked columns). Tarkastelujakson ensimmäisenä päivänä (6.9.2021) psykologia, klimatologia, väestötiede ja historia ovat edustettuina suunnilleen tasaosuuksin, jonka jälkeen aiheiden määrä kasvaa seuraavina päivinä merkittävästi. Viimeisenä päivänä (12.9.2021) on havaittu ainoastaan historia-aiheisia twiittejä.", align="center")
+```
 
 Visualisoinnin koodi on tiedostossa [viz.R](https://github.com/tts/minatutkintweets/blob/main/viz.R) ja visualisoinnin kohteena ollut data tiedostossa [day_group_n.csv](https://github.com/tts/minatutkintweets/blob/main/day_group_n.csv).
 
