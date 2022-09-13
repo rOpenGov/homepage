@@ -16,7 +16,6 @@ output:
     highlight: tango
 ---
 
-<script src="{{< blogdown/postref >}}index.fi_files/header-attrs/header-attrs.js"></script>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -135,8 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h3>Visualisointi</h3>
 <p>Olen seurannut R-ekosysteemin <a href="https://github.com/rfordatascience/tidytuesday">#tidytuesday</a>-tapahtumaa. Viikolla 37 julkaistu datasetti käsitteli USA:n <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-09-14/readme.md">Billboard Top 100</a> -listaa. Sen visualisoinneista huomio kiinnittyi Georgios Karamanisin näyttävään <a href="https://github.com/gkaramanis/tidytuesday/tree/master/2021/2021-week37">toteutukseen</a>, jossa vaaka-akselilla on vuosi ja pystyakselilla jaettu pylväsgraafi musiikkityylien suhteellisista osuuksista kunakin vuonna. Otin hänen <code>ggplot2</code>-koodistaan mallia.</p>
 <p>Karamanisilla musiikkityylit ovat nimen mukaisessa aakkosjärjestyksessä, suuruuserot käyvät ilmi kirjasimen koosta. #minätutkin-esitykseen halusin sen sijaan käsiteryhmät koon mukaisessa järjestyksessä, mielellään niin että samalla ryhmällä on aina sama väri. Ollaan faktoreiden (factor) järjestelyn alueella. Lopputuloksessa on parantamisen varaa, sillä löytämäni <a href="https://stackoverflow.com/a/53598064">keino tehdä tämä</a> rikkoo ryhmävärityksen, kun ryhmiä on enemmän kuin 35. Näin ollen rajasin niiden lukumäärää niin, että jätin pois harvemmin esiintyneet.</p>
-<p><img src="/images/minatutkintweets.png" alt="minatutkintweets" />
-<em>#minätutkin-twiittien aiheet 6-12.9.2021</em></p>
+{{< img src="/images/minatutkintweets.png" caption="#minätutkin-twiittien aiheet 6-12.9.2021" width="800" alt="Pylväsdiagrammi, jossa jokainen pylväs kuvastaa kunkin aiheen päivittäistä osuutta 100 %:sta (englanniksi 100 % stacked columns). Tarkastelujakson ensimmäisenä päivänä (6.9.2021) psykologia, klimatologia, väestötiede ja historia ovat edustettuina suunnilleen tasaosuuksin, jonka jälkeen aiheiden määrä kasvaa seuraavina päivinä merkittävästi. Viimeisenä päivänä (12.9.2021) on havaittu ainoastaan historia-aiheisia twiittejä." align="center" >}}
 <p>Visualisoinnin koodi on tiedostossa <a href="https://github.com/tts/minatutkintweets/blob/main/viz.R">viz.R</a> ja visualisoinnin kohteena ollut data tiedostossa <a href="https://github.com/tts/minatutkintweets/blob/main/day_group_n.csv">day_group_n.csv</a>.</p>
 </div>
 <div id="lopuksi" class="section level3">
