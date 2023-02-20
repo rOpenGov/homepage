@@ -10,7 +10,9 @@ slug: projects
 noComment: TRUE
 ---
 
-rOpenGov-yhteisön R-pakettien kehitys tapahtuu [GitHubissa](https://github.com/ropengov/). Mikäli haluat kontribuoida, katso lisätietoja [Yhteisö-sivulta](/fi/community/) tai tee pull request GitHubissa.
+
+Lisätietoa paketeista löytyy myös [R-Universen kautta](https://ropengov.r-universe.dev/packages). Mikäli haluat kontribuoida, katso lisätietoja [Yhteisö-sivulta](/fi/community/).
+
 
 
 <table class="table-striped table">

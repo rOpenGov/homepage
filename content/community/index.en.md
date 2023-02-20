@@ -14,11 +14,12 @@ noComment: TRUE
 
 ### Developers
 
-The network is coordinated [Leo Lahti](http://www.iki.fi/Leo.Lahti), [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), and [Juuso Parkkinen](http://ouzor.github.io/). It all started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
+The network is coordinated [Leo Lahti](http://www.iki.fi/Leo.Lahti), [Pyry Kantanen](https://github.com/pitkant) and [Markus Kainu](https://github.com/muuankarski). It all started from the Finnish [Louhos blog](http://louhos.github.io) back in 2010.
 
-We are grateful to all contributors, including [Daniel Antal](https://github.com/antaldaniel), [Przemyslaw Biececk](https://github.com/pbiecek), [Francois Briatte](https://github.com/briatte), [Christopher Gandrud](https://github.com/christophergandrud), [Janne Huovari](https://github.com/jhuovari), [Pyry Kantanen](https://github.com/pitkant), [Thomas J. Leeper](https://github.com/mansmeg), [Måns Magnusson](https://github.com/mansmeg), Kenneth Rose, and many others.. The full list and activities of contributors varies over time, and can be found through the individual projects in [github](http://github.com/ropengov). 
+We are grateful to all contributors! For a full list, see [R-Universe](https://ropengov.r-universe.dev/contributors) and the individual projects pages in [github](http://github.com/ropengov). 
 
 The rOpenGov blog is part of [R bloggers](http://r-bloggers.com).
+
 
 ### Contact
 
@@ -29,7 +30,20 @@ In administrative matters, **contact** the coordinators or other developers as r
 
 ### How to contribute?
 
-[rOpenGov](http://ropengov.org) </a> is a community of independent R package developers. If you are working on related projects, don't hesitate to get in touch! 
+[rOpenGov](http://ropengov.org) </a> is a community of independent R package developers. If you are working on related projects, don't hesitate to get in touch!
+
+Adding new packages to rOpenGov:
+
+- Open a new repository or transfer existing repository under the rOpenGov [Github-organization](https://github.com/ropengov/) (contact the coordinators to obtain necessary permissions). 
+
+- Add the package under [R-Universe](https://github.com/rOpenGov/universe)
+
+
+Contribute to the existing rOpenGov packages:
+
+- Open Issue or Pull Request to the package of your choice in [GitHubissa](https://github.com/ropengov/)
+
+
 Possible ways to contribute:
 
 1. **Use the R-packages in your projects**. 
