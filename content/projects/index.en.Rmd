@@ -10,7 +10,10 @@ slug: projects
 noComment: TRUE
 ---
 
-The rOpenGov R package development versions are maintained in [GitHub](https://github.com/ropengov/). For contributions, check out our [Community-page](/community/) to get in touch or simply just make a pull request in GitHub.
+More information on tha packages is also available through [R-Universe](https://ropengov.r-universe.dev/packages).  For contributions, check out our [Community-page](/community/).
+
+
+
 
 <table class="table-striped table">
 <thead>
