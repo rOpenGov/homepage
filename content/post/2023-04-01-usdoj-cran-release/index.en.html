@@ -3,7 +3,7 @@
 <p>usdoj, a package for fetching data from the United States (US) Department of Justice (DOJ) API, was released as part of the rOpenGov project. usdoj provides easy access to US DOJ press releases, blog entries, and speeches. Optional parameters allow users to specify the number of results starting from the earliest or latest entries, and whether these results contain keywords. Data is cleaned for analysis and returned in a data frame.</p>
 <p>US DOJ press releases, blog posts, and speeches are an official media through which the United States government publicizes front line information about law, enforcement, and crime that may be of interest to members of the public, researchers and analysts, and members of other government branches. They include coverage for divisions such as the Federal Bureau of Investigation (FBI), the Offices of the United States Attorneys (USAO), the National Security Division (NSD), the Civil Division, the Tax Division, the Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF), the Drug Enforcement Administration (DEA), and more. New media are published on a regular basis</p>
 <p>usdoj makes this media accessible in an analysis-ready format through three functions that search for and return relevant results: <code>doj_press_releases()</code>, <code>doj_blog_posts()</code>, and <code>doj_speeches()</code>. Data is cleaned and structured before it is returned as a data frame with fields for the body text, date, title, url, the name of the corresponding division, to name just a few.</p>
-<p><img src="usdoj_intro_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div id="demonstration-text-mining-united-states-department-of-justice-open-data" class="section level2">
 <h2>Demonstration: Text Mining United States Department of Justice Open Data</h2>
 <p>The data returned by usdoj is in a format that can easily undergo additional processing for analysis. The purpose of this section is to show one way of doing this while walking through the steps for performing a TF-IDF (term frequency-inverse document frequency) analysis in order to see which words are characteristic to certain divisions, and not others.</p>
@@ -78,6 +78,6 @@ counts_and_totals &lt;- left_join(counted_tokenized_press_releases, total_words_
 usao_press_releases_tf_idf &lt;- counts_and_totals %&gt;%
   bind_tf_idf(word, name, n)</code></pre>
 <p>We can now visualize which words are characteristic of one “name” grouping and not another. In the following code we take the top 10 words per name grouping and plot them based on their TF-IDF scores.</p>
-<p><img src="usdoj_intro_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="index.en_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
