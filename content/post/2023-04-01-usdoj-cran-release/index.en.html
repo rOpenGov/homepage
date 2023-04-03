@@ -1,0 +1,83 @@
+
+
+<p>usdoj, a package for fetching data from the United States (US) Department of Justice (DOJ) API, was released as part of the rOpenGov project. usdoj provides easy access to US DOJ press releases, blog entries, and speeches. Optional parameters allow users to specify the number of results starting from the earliest or latest entries, and whether these results contain keywords. Data is cleaned for analysis and returned in a data frame.</p>
+<p>US DOJ press releases, blog posts, and speeches are an official media through which the United States government publicizes front line information about law, enforcement, and crime that may be of interest to members of the public, researchers and analysts, and members of other government branches. They include coverage for divisions such as the Federal Bureau of Investigation (FBI), the Offices of the United States Attorneys (USAO), the National Security Division (NSD), the Civil Division, the Tax Division, the Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF), the Drug Enforcement Administration (DEA), and more. New media are published on a regular basis</p>
+<p>usdoj makes this media accessible in an analysis-ready format through three functions that search for and return relevant results: <code>doj_press_releases()</code>, <code>doj_blog_posts()</code>, and <code>doj_speeches()</code>. Data is cleaned and structured before it is returned as a data frame with fields for the body text, date, title, url, the name of the corresponding division, to name just a few.</p>
+<p><img src="index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div id="demonstration-text-mining-united-states-department-of-justice-open-data" class="section level2">
+<h2>Demonstration: Text Mining United States Department of Justice Open Data</h2>
+<p>The data returned by usdoj is in a format that can easily undergo additional processing for analysis. The purpose of this section is to show one way of doing this while walking through the steps for performing a TF-IDF (term frequency-inverse document frequency) analysis in order to see which words are characteristic to certain divisions, and not others.</p>
+<div id="installing-and-loading-libraries" class="section level4">
+<h4>Installing and Loading Libraries</h4>
+<p>usdoj can be installed from CRAN (using <code>install.packages("usdoj")</code>) or from rOpenGov’s r-universe. For this tutorial we will also use the tidyverse and tidytext libraries.</p>
+<pre class="r"><code>library(usdoj)
+library(usmap)
+library(tidyverse)
+library(tidytext)
+library(lubridate)</code></pre>
+<p>We will start by collecting US DOJ press releases with the corresponding function, <code>doj_press_releases()</code>. By default, the most recently published records are returned. Passing <code>search_direction = "ASC"</code> to the function will instead return data starting at the earliest published records. usdoj automatically flattens nested fields. The resulting data frame is easily text mined.</p>
+<pre class="r"><code>press_releases &lt;- doj_press_releases(n_results = 700)</code></pre>
+<p>We will also save the date range present in the data for use in our visualization (later on).</p>
+<pre class="r"><code>earliest_date &lt;- ymd(min(press_releases$date))
+earliest_date &lt;- paste0(month(earliest_date, label = TRUE), &quot; &quot;, day(earliest_date), &quot;, &quot;, year(earliest_date))
+  
+latest_date &lt;- ymd(max(press_releases$date))
+latest_date &lt;- paste0(month(latest_date, label = TRUE), &quot; &quot;, day(latest_date), &quot;, &quot;, year(latest_date))</code></pre>
+<p>A single field may contain multiple values. For example, the field “name” contains the (sometimes multiple) US DOJ divisions related to a press release, as shown by lines 7 and 9. A single press release may relate to USAOs across multiple states or may implicate multiple offices.</p>
+<pre class="r"><code>head(press_releases$name, 10)</code></pre>
+<pre><code>##  [1] &quot;Civil Division&quot;                                                                                                                                          
+##  [2] &quot;Drug Enforcement Administration (DEA), Federal Bureau of Investigation (FBI), USAO - District of Columbia, USAO - Florida, Southern, USAO - Rhode Island&quot;
+##  [3] &quot;USAO - New York, Southern&quot;                                                                                                                               
+##  [4] &quot;USAO - New Hampshire&quot;                                                                                                                                    
+##  [5] &quot;Federal Bureau of Investigation (FBI), Office of the Deputy Attorney General, Office of the Inspector General, USAO - California, Northern&quot;              
+##  [6] &quot;Tax Division&quot;                                                                                                                                            
+##  [7] &quot;Environment and Natural Resources Division, USAO - Massachusetts&quot;                                                                                        
+##  [8] &quot;USAO - Kansas&quot;                                                                                                                                           
+##  [9] &quot;Criminal Division, Criminal - Human Rights and Special Prosecution Section, Criminal - Office of International Affairs, USAO - Arizona&quot;                  
+## [10] &quot;USAO - Oklahoma, Western&quot;</code></pre>
+<p>In this demonstration we will process the text body, transforming the dense blocks of natural language text into a structure that is more easily quantifiable.</p>
+<pre class="r"><code>tail(press_releases$body, 2)</code></pre>
+<pre><code>## [1] &quot;SOUTH BEND - The United States Attorney for the Northern District of Indiana, Thomas L. Kirsch II, announced that Larry D. Cole, age 46, of South Bend, Indiana was sentenced before District Court Judge Jon E. DeGuilio for one count of possession of a firearm in furtherance of a drug trafficking crimeCole was sentenced to 60 months imprisonment and 2 years of supervised release. According to documents in this case, in May of 2017, Cole sold 3.6 grams of cocaine to an individual working for the St. Joseph County Drug Interdiction Unit.  When officers executed a search warrant on an address in South Bend where the drugs were sold, they observed Cole running from the rear of the house to the living room and reaching under the couch for a .45 caliber handgun.  Cole also had $1,188 in cash and a small amount of marijuana and cocaine.  Some of the cash was from the sale of drugs the day before to the individual working with the Drug Interdiction Unit.   This case was investigated by the Bureau of Alcohol, Tobacco, Firearms and Explosives with the assistance of the St. Joseph County Drug Interdiction Unit which is comprised of officers from the Mishawaka Police Department; the South Bend Police Department and the St. Joseph County Sheriff’s Department. This case was handled by Assistant U.S. Attorney John M. Maciejczyk.###&quot;
+## [2] &quot;U.S. Attorney Duane A. Evans announced that MICHAEL SANDERS, age 36, of Reserve, pled guilty today to charges relating to narcotics trafficking. According to court documents, SANDERS conspired with others to distribute cocaine base (“crack”). SANDERS faces a term of imprisonment of up to twenty years, a fine of $1,000,000, and at least three years of supervised release following any term of imprisonment. Judge Jane Triche Milazzo set sentencing for May 3, 2018. U.S. Attorney Evans praised the work of the Drug Enforcement Administration and the St. John the Baptist Parish Sheriff’s Office.  Assistant U.S. Attorney Nicholas D. Moses is in charge of the prosecution.&quot;</code></pre>
+<p>For this demonstration, we will just compare the words relating to United States Attorney Offices (USAOs) across different states. We will do this by removing mentions of the other divisions from the “name” field and filtering for just press releases that contain USAO as a division.</p>
+<pre class="r"><code>state_names &lt;- paste(statepop$full, collapse = &quot;|USAO - &quot;)
+
+press_releases$name &lt;-  str_extract(press_releases$name, paste0(&quot;USAO - &quot;, state_names))
+
+usao_press_releases &lt;- press_releases %&gt;%
+  filter(str_detect(name, &quot;USAO&quot;))</code></pre>
+<p>The following code tokenizes the body text, a process through which dense paragraphs are separated into one-word-per-row.</p>
+<pre class="r"><code>tokenized_press_releases &lt;- usao_press_releases %&gt;%
+  select(body, name) %&gt;%
+  unnest_tokens(word, body)</code></pre>
+<p>For this demonstration we will remove digits because they occur frequently in the data set and, for our purposes, they don’t reveal much meaningful information.</p>
+<pre class="r"><code>cleaned_tokenized_press_releases &lt;- tokenized_press_releases %&gt;%
+  slice(which(!str_detect(word, &quot;[[:digit:]]&quot;)))</code></pre>
+<p>In preparation of performing a TF-IDF analysis, we will count the number of times a word appears in each unique “name” grouping. In other words, if the same word appears in “Civil Division” and “Antitrust Division,” then the count will be “one” for each division (as opposed to “two,” reflecting the overall count). To remove typos and other such errors, we will also remove words that have been stated less than 5 times.</p>
+<pre class="r"><code>counted_tokenized_press_releases &lt;- cleaned_tokenized_press_releases %&gt;%
+  count(name, word) %&gt;%
+  filter(n &gt; 5)</code></pre>
+<pre class="r"><code>head(counted_tokenized_press_releases)</code></pre>
+<pre><code>## # A tibble: 6 × 3
+##   name           word          n
+##   &lt;chr&gt;          &lt;chr&gt;     &lt;int&gt;
+## 1 USAO - Alabama a         12815
+## 2 USAO - Alabama a.m          23
+## 3 USAO - Alabama aaron        12
+## 4 USAO - Alabama abandon       6
+## 5 USAO - Alabama abandoned    11
+## 6 USAO - Alabama abassi       13</code></pre>
+<p>We will now gather the overall word count per “name” grouping and use <code>bind_tf_idf()</code> to see which words are characteristic of one grouping and not the others.</p>
+<pre class="r"><code>total_words_per_group &lt;- counted_tokenized_press_releases %&gt;% 
+  group_by(name) %&gt;% 
+  summarize(total = sum(n)) %&gt;%
+  ungroup()
+
+counts_and_totals &lt;- left_join(counted_tokenized_press_releases, total_words_per_group)
+
+usao_press_releases_tf_idf &lt;- counts_and_totals %&gt;%
+  bind_tf_idf(word, name, n)</code></pre>
+<p>We can now visualize which words are characteristic of one “name” grouping and not another. In the following code we take the top 10 words per name grouping and plot them based on their TF-IDF scores.</p>
+<p><img src="index.en_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
