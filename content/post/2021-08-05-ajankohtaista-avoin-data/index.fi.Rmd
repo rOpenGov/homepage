@@ -68,7 +68,7 @@ Olettaisin lain hengen olevan kuitenkin sellainen, että julkisten organisaatioi
 
 Suomen ongelmana pidetään avoimeen dataan pohjautuvan tietoperustaisen päätöksenteon puuttumista ja eri ministeriöiden alaisten organisaatioiden tekemää päällekkäistä työtä. Lainsäädäntöä ja toimintatapoja pidetään ”paperiaikaisina”, joissa viranomainen edelleen ”luovuttaa tietoa” pyynnöstä ja avoimen datan etuja ei ole täysimääräisesti ulosmitattu julkisen sektorin tietotyön kehittämisessä. 
 
-Ongelmallisena pidetään myös tutkimusjulkaisujen rajaamista julkisin varoin tuotettujen tutkimusaineistojen uudelleenkäytöstä annetun lain ulkopuolelle. Julkaisemme tässä blogissa toisen tekstin avoimen tieteen kehityskuluista.
+Ongelmallisena pidetään myös tutkimusjulkaisujen rajaamista julkisin varoin tuotettujen tutkimusaineistojen uudelleenkäytöstä annetun lain ulkopuolelle.
 
 Lisätietoja [Valtiovarainministeriön tiedotteessa](https://vm.fi/-/julkisen-tiedon-luovuttaminen-muuttuu-avoimen-datan-direktiivi-pannaan-taytantoon), [hankesivulla](https://vm.fi/hanke?tunnus=VM043:00/2020) ja [Eduskunnan kirjaston Lakihankkeiden tietopaketit -sivuilta](https://www.eduskunta.fi/FI/naineduskuntatoimii/kirjasto/aineistot/kotimainen_oikeus/LATI/Sivut/avoimen-datan-direktiivin-kansallinen-taytantoonpano.aspx)
 
