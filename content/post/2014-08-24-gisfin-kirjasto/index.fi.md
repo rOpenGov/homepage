@@ -38,7 +38,7 @@ Seuraavaksi aiomme laajentaa yksittäisistä kaupungeista saatavilla olevan data
 Kuntarajat ovat tarpeellisia erilaisissa vaikkappa vaaleihin tai tilastotietoihin liittyvissä visualisoinneissa. Toisaalta kuntarajat muuttuvat lähes vuosittain. Ajantasainen kuntaraja-aineisto on saatavissa Maanmittauslaitokslta, mutta verrattain hankalassa GML-formaatissa. Alla oleva esimerkki näyttää, kuinka `list_mml_datasets`-funktiota voidaan käyttää listaamaan saatavilla olevat MML:n avoimet aineistot. Tämä jälkeen kuntaraja-aineisto (hallintoalueet) haetaan `get_mml`  -funktiolla.
 
 
-``` {% highlight r %}
+```r
 library(gisfin)
 
 list_mml_datasets()
@@ -46,7 +46,7 @@ list_mml_datasets()
 
 
 
-``` {% highlight text %}
+```r
 ## $`2012`
 ## character(0)
 ## 
@@ -84,7 +84,7 @@ list_mml_datasets()
 
 
 
-```{% highlight r %}
+```r
 # Haetaan hallinto-alue aineisto
 sp.mml <- get_mml(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 
@@ -101,7 +101,7 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
 Maamme suuremmat kaupungit kuten Helsinki, Turku ja Tampere tarjoavat monenlaisia avoimia aineistoja, joista osa on myös paikkaan sidottuja. Helsingissä paikkatietoaineistoja on saatavilla esimerkiksi [Helsingin kaupungin paikkatietopalveluiden](http://ptp.hel.fi/) kautta. Seuraava esimerkki noutaa kaupungin sivuilta pääkaupunkiseudun äänestysalueet ja visualisoi kartan kunnittain.
 
 
-```{% highlight r %}
+```r
 sp.aanestys <- get_helsinki_aluejakokartat(map.specifier="aanestysalue")
 spplot(sp.aanestys, zcol="KUNTA", col.regions=rainbow(length(levels(sp.aanestys@data$KUNTA))), colorkey=FALSE)
 ```
@@ -111,19 +111,19 @@ spplot(sp.aanestys, zcol="KUNTA", col.regions=rainbow(length(levels(sp.aanestys@
 Seuraava esimerkki puolestaan näyttää, kuinka Helsingin peruspiirijako voidaan piirtää Googlen karttapalvelusta saadun taustakartan päälle. Haetaan ensin aineisto:
 
 
-```{% highlight r %}
+```r
 library(ggmap)
 ```
 
 
 
-```{% highlight text %}
+```r
 ## Error in library(ggmap): there is no package called 'ggmap'
 ```
 
 
 
-```{% highlight r %}
+```r
 library(ggplot2)
 
 sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_PERUSPIIRI")
@@ -135,13 +135,13 @@ koordinaattijärjestelmässä. Peruspiirien piirtämistä varten selvitetään e
 missä koordinaattijärjestelmässä peruspiiriaineisto on:
 
 
-```{% highlight r %}
+```r
 sp.piiri@proj4string
 ```
 
 
 
-```{% highlight text %}
+```
 ## CRS arguments:
 ##  +init=epsg:3879 +proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000
 ## +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
@@ -153,7 +153,7 @@ Aineiston saamiseksi yhteismitalliseksi Googlen taustakartan kanssa, on se ensin
 projisoitava maantieteelliseen koordinaattijärjestelmään:
 
 
-```{% highlight r %}
+```r
 sp.piiri <- sp::spTransform(sp.piiri, CRS("+proj=longlat +datum=WGS84"))
 ```
 
@@ -161,7 +161,7 @@ Lopuksi piirretään peruspiirit ja taustakartta käyttäen suosittua
 `ggplot2`-pakettia ja sen karttalaajennosta, `ggmap`-pakettia:
 
 
-```{% highlight r %}
+```r
 # Syötetään keskikoordinaatit peruspiirien maaantieteelliselle ulottuvuudelle
 hel.center <- apply(bbox(sp.piiri), 1, mean)
 
@@ -171,13 +171,13 @@ hel.map <- ggmap::get_map(location=hel.center, source="google", zoom=10, scale=2
 
 
 
-```{% highlight text %}
+```
 ## Error in loadNamespace(name): there is no package called 'ggmap'
 ```
 
 
 
-```{% highlight r %}
+```r
 # Muokataan paikkatietoaineisto ggplot2:lle sopivaan muotoon ja piirretään
 # aineistot
 df.piiri <- sp2df(sp.piiri, region="NIMI")
@@ -186,7 +186,7 @@ ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alph
 
 
 
-```{% highlight text %}
+```
 ## Error in eval(expr, envir, enclos): could not find function "ggmap"
 ```
 

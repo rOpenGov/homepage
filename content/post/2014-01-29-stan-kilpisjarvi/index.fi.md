@@ -54,7 +54,7 @@ Muista todennäköisyysohjelmoinnin projekteja ovat mm. [PyMC](https://github.co
 
 Sarjaan on helppo sovittaa [trendi R:ssä](https://github.com/euxoa/kilpisjarvi/blob/master/kj.R):
 
-```
+```r
 m <- lm(temp ~ year, data=d)
 summary(m)
 10*(c(-1.96, 1.96)*sqrt(diag(vcov(m))["year"])+coef(m)["year"])
@@ -70,7 +70,7 @@ Eli näinkin yksinkertaisella datalla saadaan aikaan hankala tilanne, jossa ratk
 
 Kokeilemme siis mallintamista [Stanilla](http://mc-stan.org/). Aluksi lineaarinen regressio, eli sama malli jonka sovitimme yllä lm()-funktiolla. [Mallin kuvaus](https://github.com/euxoa/kilpisjarvi/blob/master/kj-lm.stan) on alla. Huomaa että malliin ei ole yksinkertaisuuden vuoksi määritelty prioreita. Yleensä ne kannattaa määritellä.
 
-```
+```r
 data {
  int<lower=1> N; real y[N]; }
 parameters {
@@ -81,7 +81,7 @@ model {
 
 … ja R-koodi:
 
-```
+```r
 library(rstan)
 sdat <- list(N = nrow(d), y = d$temp)
 m.slm <- stan_model("kj-lm.stan")
@@ -97,7 +97,7 @@ Vähempikin määrä iteraatioita riittäisi, esim. 1000 näytettä per ketju an
 
 Mallin residuaali on helppo vaihtaa [t-jakaumaksi](http://en.wikipedia.org/wiki/Student's_t-distribution#Robust_parametric_modeling):
 
-```
+```r
 data {
  int<lower=1> N; real y[N]; }
 parameters {
@@ -120,7 +120,7 @@ Yksi vaihtoehto olisi parametrisoida residuaaleille korrelaatiomatriisi. Helpomp
 
 Stan-koodissa joka vuodelle lasketaan virhe, ensin ottaen koko estimointivirhe (havainto miinus trendi) ja vähentäen tästä vanhat, ikäänkuin muistetut virheet:
 
-```
+```r
 data {
  int<lower=1> N; real y[N]; 
  int<lower=1> D; // Maximum lag. }
@@ -151,7 +151,7 @@ Ongelmana on ehkä trendin ja autokorrelaation keskinäinen epäidentifioituvuus
 
 [Malliin on helppo lisätä](https://github.com/euxoa/kilpisjarvi/blob/master/kj-correlated-pooled-theta.stan)oletus theta-kerrointen mahdollisesta pienuudesta ja samankaltaisuudesta:
 
-```
+```r
 theta ~ normal(0, theta_sd); theta_sd ~ normal(0, .5);
 ```
 
