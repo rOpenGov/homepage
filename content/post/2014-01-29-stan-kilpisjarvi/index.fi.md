@@ -54,7 +54,7 @@ caption="Kilpisjärven kesäkuukausien keskilämpötiloja viime vuosikymmeniltä
 width="800"
 alt="Nouseva regressiosuora pistepilvessä, joka kuvaa kesäkuukausien lämpötilojen muutosta vuodesta 1900-luvun puolivälistä eteenpäin."
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/kilpisjarvi-raw.png"
->}}
+align="center" >}}
 
 Sarjaan on helppo sovittaa [trendi R:ssä](https://github.com/euxoa/kilpisjarvi/blob/master/kj.R):
 
@@ -114,11 +114,11 @@ model {
 p-arvo (0.0092) ja trendin luottamusväli  (0.05–0.37) eivät juurikaan muuttuneet, mutta hieman sarjan isot alkupään poikkeamat ovat häirinneet trendin estimointia. Tähän viittaa myös virhejakauman vapausasteiden posteriori: vapausasteilla 1–10 jakaumasta tulee jo selvästi normaalijakaumaa [pitkähäntäisempi](http://en.wikipedia.org/wiki/Student's_t-distribution#Probability_density_function).
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
-width="800"
-link="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
 caption="Virhejakauman vapausasteiden posteriorijakauma. Koska massaa on selkeästi alle 30:n arvoilla, virhejakaumasta tulee normaalijakaumaa pitkähäntäisempi."
+width="800"
 alt="Virhejakauman vapausasteiden posteriorijakauma. Jakauma on positiivisesti vino (positive skew), mikä tarkoittaa että sen oikealla puolella oleva häntä on pidempi."
->}}
+link="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
+align="center" >}}
 
 ![posteriorijakauma](/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png)
 *Virhejakauman vapausasteiden posteriorijakauma. Koska massaa on selkeästi alle 30:n arvoilla, virhejakaumasta tulee normaalijakaumaa pitkähäntäisempi.*
@@ -155,9 +155,11 @@ Koko mallikoodi on tiedostossa [kj-correlated.stan](https://github.com/euxoa/kil
 Nyt vastassa on ongelmia: 3000 MCMC-iteraatiota ei näytä riittävän virheiden (*err*) ja *theta*-parametrien kunnolliseen estimointiin. Sovitettu malliobjekti *fit* kertoo samaa: kovin montaa riippumatonta näytettä ei ole saatu, ja neljästä eri ketjusta saadut theta-estimaatit poikkeavat liikaa toisistaan. Alla ruutukaappaus kommennon *plot(fit, pars=”theta”)* jäljiltä. Viivat ovat 80% luottamusvälejä ja pisteet yksittäisten ketjujen mediaaneja:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png"
-link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png">
+caption=""
 width="800"
-alt="theta-badfit"}}
+alt="theta-badfit"
+link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png">
+align="center" >}}
 
 ### Aikasarjakerrointen paimennusyrityksiä
 
@@ -180,27 +182,33 @@ Näiden muutosten jälkeen useimmat ketjut satunnaisalustuksilla konvergoituvat 
 P-arvon tuijottamisen jälkeen on hyvä pitää mielessä (vuosi)trendin posteriorijakauma:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/trend.png"
-link="/post/2014-01-29-stan-kilpisjarvi.fi_files/trend.png"
+caption=""
 width="800"
-alt="Vuositrendin posteriorijakauma">}}
+alt="Vuositrendin posteriorijakauma"
+link="/post/2014-01-29-stan-kilpisjarvi.fi_files/trend.png"
+align="center" >}}
 
 P-arvolla on teoreettista mielenkiintoa malleja vertailtaessa ja pyhitettyjen rajojen (0.01, 0.05) alittaminen on tietenkin vakuuttavaa. Mutta johtopäätösten kannalta oleellista on, että trendi on luultavasti ollut luokkaa 0.1°–0.3° per vuosikymmen.
 
 Autokorrelaatioiden olemassaolo jää epäselväksi, mutta päätöstä niiden suhteen ei tarvitse tehdäkään: malli integroi eri mahdollisuuksien yli. *theta*-kerrointen posteriorit eivät poikkea merkitsevästi nollasta. Toisaalta esim. ensimmäinen kerroin on luultavasti positiivinen:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-posteriors.png"
+caption=""
+width="800"
+alt="theta-posteriors"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-posteriors.png"
-width="800",
-alt="theta-posteriors">}}
+align="center" >}}
 
 ### Sovittuiko data
 
 Lopuksi vielä vilkaisemme mallin residuaaleita (residuaaliposteriorin keskiarvo, vrt. koodi tiedostossa [kj.R](https://github.com/euxoa/kilpisjarvi/blob/master/kj.R)):
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png"
-link="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png"
+caption=""
 width="800"
-alt="residuals">}}
+alt="residuals"
+link="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png" 
+align="center" >}}
 
 Residuaaleissa ei näy merkillisyyksiä, joskin keskivaiheilla aikasarjaa näkyy aavistus notkahduksesta. Tiedostossa [kj2.stan](https://github.com/euxoa/kilpisjarvi/blob/master/kj2.stan) on vielä rikkaampi malli, jossa on ajan suhteen myös toisen asteen termi. Sen kerroin on positiivinen 80% todennäköisyyllä.
 
