@@ -10,9 +10,6 @@ categories:
   - tiedonlouhinta
 tags:
   - stan
-output:
-  blogdown::html_page:
-    highlight: tango
 ---
 
 Johtopäätöksiä tai edes käyttökelpoista visualisaatiota ei useinkaan pysty tekemään datasta suoraan, vaan tarvitaan mallintamista. Mallintaminen erottaa kiinnostavan ja ei-kiinnostavan variaation, ja auttaa johtopäätösten luotettavuuden arvioinnissa.
