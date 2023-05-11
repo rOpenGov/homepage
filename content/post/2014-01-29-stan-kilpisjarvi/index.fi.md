@@ -155,7 +155,7 @@ Koko mallikoodi on tiedostossa [kj-correlated.stan](https://github.com/euxoa/kil
 Nyt vastassa on ongelmia: 3000 MCMC-iteraatiota ei näytä riittävän virheiden (*err*) ja *theta*-parametrien kunnolliseen estimointiin. Sovitettu malliobjekti *fit* kertoo samaa: kovin montaa riippumatonta näytettä ei ole saatu, ja neljästä eri ketjusta saadut theta-estimaatit poikkeavat liikaa toisistaan. Alla ruutukaappaus kommennon *plot(fit, pars=”theta”)* jäljiltä. Viivat ovat 80% luottamusvälejä ja pisteet yksittäisten ketjujen mediaaneja:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png"
-caption=""
+caption="Theta-estimaattien tarkastelua"
 width="800"
 alt="theta-badfit"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png">
@@ -182,7 +182,7 @@ Näiden muutosten jälkeen useimmat ketjut satunnaisalustuksilla konvergoituvat 
 P-arvon tuijottamisen jälkeen on hyvä pitää mielessä (vuosi)trendin posteriorijakauma:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/trend.png"
-caption=""
+caption="Vuositrendin posteriorijakauma"
 width="800"
 alt="Vuositrendin posteriorijakauma"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/trend.png"
@@ -193,7 +193,7 @@ P-arvolla on teoreettista mielenkiintoa malleja vertailtaessa ja pyhitettyjen ra
 Autokorrelaatioiden olemassaolo jää epäselväksi, mutta päätöstä niiden suhteen ei tarvitse tehdäkään: malli integroi eri mahdollisuuksien yli. *theta*-kerrointen posteriorit eivät poikkea merkitsevästi nollasta. Toisaalta esim. ensimmäinen kerroin on luultavasti positiivinen:
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-posteriors.png"
-caption=""
+caption="Theta-kerrointen posteriorit"
 width="800"
 alt="theta-posteriors"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-posteriors.png"
@@ -204,7 +204,7 @@ align="center" >}}
 Lopuksi vielä vilkaisemme mallin residuaaleita (residuaaliposteriorin keskiarvo, vrt. koodi tiedostossa [kj.R](https://github.com/euxoa/kilpisjarvi/blob/master/kj.R)):
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png"
-caption=""
+caption="Mallin residuaalit"
 width="800"
 alt="residuals"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png" 
