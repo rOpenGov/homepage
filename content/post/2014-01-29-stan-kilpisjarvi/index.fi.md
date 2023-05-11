@@ -12,8 +12,6 @@ tags:
   - stan
 ---
 
-Testi1 testi2
-
 Johtopäätöksiä tai edes käyttökelpoista visualisaatiota ei useinkaan pysty tekemään datasta suoraan, vaan tarvitaan mallintamista. Mallintaminen erottaa kiinnostavan ja ei-kiinnostavan variaation, ja auttaa johtopäätösten luotettavuuden arvioinnissa.
 
 Pienehköissä projekteissa mallintaminen perustuu valmiisiin mallikohtaisiin ohjelmistopaketteihin. Esim. jos työskennellään [R](http://www.r-project.org/):ssä, regressiomalli syntyy [lm()](http://stat.ethz.ch/R-manual/R-patched/library/stats/html/lm.html)-funktiolla. Jos ennustettavassa on patologisen oloisia poikkeamia, voidaan lm():n sijaan käyttää [robustia](http://cran.r-project.org/web/views/Robust.html) regressiota. Epälineaaristen vaikutusten huomiointi onnistuu parhaiten [mgcv](http://cran.r-project.org/web/packages/mgcv/index.html)-paketin gam()-funktiolla. Jos selittäjissä on kovin moniarvoisia nominaalimuuttujia ja data on harva ja iso, turvaudutaan [lme4](http://cran.r-project.org/web/packages/lme4/index.html)-pakettiin, jne. Pakettia valitessa pitää päättää mitkä datan piirteet unohtaa, koska mikään paketti ei ole tarpeeksi joustava.
@@ -154,7 +152,7 @@ Nyt vastassa on ongelmia: 3000 MCMC-iteraatiota ei näytä riittävän virheiden
 caption="Theta-estimaattien tarkastelua"
 width="800"
 alt="theta-badfit"
-link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png">
+link="/post/2014-01-29-stan-kilpisjarvi.fi_files/theta-badfit.png"
 align="center" >}}
 
 ### Aikasarjakerrointen paimennusyrityksiä
