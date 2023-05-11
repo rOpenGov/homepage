@@ -10,9 +10,6 @@ tags:
   - open-data
   - R-bloggers
   - usdoj
-output:
-  blogdown::html_page:
-    highlight: tango
 ---
 
 usdoj, a package for fetching data from the United States (US) Department of Justice (DOJ) API, was released as part of the rOpenGov project. usdoj provides easy access to US DOJ press releases, blog entries, and speeches. Optional parameters allow users to specify the number of results starting from the earliest or latest entries, and whether these results contain keywords. Data is cleaned for analysis and returned in a data frame.
@@ -21,7 +18,7 @@ US DOJ press releases, blog posts, and speeches are an official media through wh
 
 usdoj makes this media accessible in an analysis-ready format through three functions that search for and return relevant results: `doj_press_releases()`, `doj_blog_posts()`, and `doj_speeches()`. Data is cleaned and structured before it is returned as a data frame with fields for the body text, date, title, url, the name of the corresponding division, to name just a few.
 
-```{% highlight r %}
+```r
 library(usmap)
 library(lubridate)
 library(tidyverse)
@@ -71,7 +68,7 @@ The data returned by usdoj is in a format that can easily undergo additional pro
 #### Installing and Loading Libraries
 usdoj can be installed from CRAN (using `install.packages("usdoj")`) or from rOpenGov's r-universe. For this tutorial we will also use the tidyverse and tidytext libraries. 
 
-```{% highlight r %}
+```r
 library(usdoj)
 library(usmap)
 library(tidyverse)
@@ -81,13 +78,13 @@ library(lubridate)
 
 We will start by collecting US DOJ press releases with the corresponding function, `doj_press_releases()`. By default, the most recently published records are returned. Passing `search_direction = "ASC"` to the function will instead return data starting at the earliest published records. usdoj automatically flattens nested fields. The resulting data frame is easily text mined.
 
-```{% highlight r %}
+```r
 press_releases <- doj_press_releases(n_results = 700)
 ```
 
 We will also save the date range present in the data for use in our visualization (later on).
 
-```{% highlight r %}
+```r
 earliest_date <- ymd(min(press_releases$date))
 earliest_date <- paste0(month(earliest_date, label = TRUE), " ", day(earliest_date), ", ", year(earliest_date))
   
@@ -95,14 +92,14 @@ latest_date <- ymd(max(press_releases$date))
 latest_date <- paste0(month(latest_date, label = TRUE), " ", day(latest_date), ", ", year(latest_date))
 ```
 
-```{r, eval = FALSE, echo = FALSE, show_col_types = FALSE}
+```r
 write_csv(press_releases, "intro_pt_2.csv")
 press_releases <- read_csv("intro_pt_2.csv", show_col_types = FALSE)
 ```
 
 A single field may contain multiple values. For example, the field "name" contains the (sometimes multiple) US DOJ divisions related to a press release, as shown by lines 7 and 9. A single press release may relate to USAOs across multiple states or may implicate multiple offices.
 
-```{% highlight r %}
+```r
 head(press_releases$name, 10)
 ```
 
@@ -121,13 +118,13 @@ head(press_releases$name, 10)
 
 In this demonstration we will process the text body, transforming the dense blocks of natural language text into a structure that is more easily quantifiable. 
 
-```{% highlight r %}
+```r
 tail(press_releases$body, 2)
 ```
 
 For this demonstration, we will just compare the words relating to United States Attorney Offices (USAOs) across different states. We will do this by removing mentions of the other divisions from the "name" field and filtering for just press releases that contain USAO as a division.
 
-```{% highlight r %}
+```r
 state_names <- paste(statepop$full, collapse = "|USAO - ")
 
 press_releases$name <-  str_extract(press_releases$name, paste0("USAO - ", state_names))
@@ -138,7 +135,7 @@ usao_press_releases <- press_releases %>%
 
 The following code tokenizes the body text, a process through which dense paragraphs are separated into one-word-per-row.
 
-```{% highlight r %}
+```r
 tokenized_press_releases <- usao_press_releases %>%
   select(body, name) %>%
   unnest_tokens(word, body)
@@ -146,26 +143,26 @@ tokenized_press_releases <- usao_press_releases %>%
 
 For this demonstration we will remove digits because they occur frequently in the data set and, for our purposes, they don't reveal much meaningful information.
 
-```{% highlight r %}
+```r
 cleaned_tokenized_press_releases <- tokenized_press_releases %>%
   slice(which(!str_detect(word, "[[:digit:]]")))
 ```
 
 In preparation of performing a TF-IDF analysis, we will count the number of times a word appears in each unique "name" grouping. In other words, if the same word appears in "Civil Division" and "Antitrust Division," then the count will be "one" for each division (as opposed to "two," reflecting the overall count). To remove typos and other such errors, we will also remove words that have been stated less than 5 times. 
 
-```{% highlight r %}
+```r
 counted_tokenized_press_releases <- cleaned_tokenized_press_releases %>%
   count(name, word) %>%
   filter(n > 5)
 ```
 
-```{% highlight r %}
+```r
 head(counted_tokenized_press_releases)
 ```
 
 We will now gather the overall word count per "name" grouping and use `bind_tf_idf()` to see which words are characteristic of one grouping and not the others. 
 
-```{% highlight r %}
+```r
 total_words_per_group <- counted_tokenized_press_releases %>% 
   group_by(name) %>% 
   summarize(total = sum(n)) %>%
@@ -179,7 +176,7 @@ usao_press_releases_tf_idf <- counts_and_totals %>%
 
 We can now visualize which words are characteristic of one "name" grouping and not another. In the following code we take the top 10 words per name grouping and plot them based on their TF-IDF scores.
 
-```{% highlight r %}
+```r
 top_usao_press_releases <- usao_press_releases_tf_idf %>%
   group_by(name) %>%
   arrange(desc(tf_idf)) %>%
