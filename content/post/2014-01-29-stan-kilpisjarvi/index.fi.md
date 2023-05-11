@@ -111,7 +111,7 @@ model {
 p-arvo (0.0092) ja trendin luottamusväli  (0.05–0.37) eivät juurikaan muuttuneet, mutta hieman sarjan isot alkupään poikkeamat ovat häirinneet trendin estimointia. Tähän viittaa myös virhejakauman vapausasteiden posteriori: vapausasteilla 1–10 jakaumasta tulee jo selvästi normaalijakaumaa [pitkähäntäisempi](http://en.wikipedia.org/wiki/Student's_t-distribution#Probability_density_function).
 
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
-caption="Virhejakauman vapausasteiden posteriorijakauma. Koska massaa on selkeästi alle 30:n arvoilla, virhejakaumasta tulee normaalijakaumaa pitkähäntäisempi."
+caption="Virhejakauman vapausasteiden posteriorijakauma."
 width="800"
 alt="Virhejakauman vapausasteiden posteriorijakauma. Jakauma on positiivisesti vino (positive skew), mikä tarkoittaa että sen oikealla puolella oleva häntä on pidempi."
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
@@ -200,7 +200,7 @@ Lopuksi vielä vilkaisemme mallin residuaaleita (residuaaliposteriorin keskiarvo
 {{< img src="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png"
 caption="Mallin residuaalit"
 width="800"
-alt="residuals"
+alt="Mallin residuaalit"
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/residuals.png" 
 align="center" >}}
 
