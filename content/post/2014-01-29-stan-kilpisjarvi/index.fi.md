@@ -120,9 +120,6 @@ alt="Virhejakauman vapausasteiden posteriorijakauma. Jakauma on positiivisesti v
 link="/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png"
 align="center" >}}
 
-![posteriorijakauma](/post/2014-01-29-stan-kilpisjarvi.fi_files/df-posterior.png)
-*Virhejakauman vapausasteiden posteriorijakauma. Koska massaa on selkeästi alle 30:n arvoilla, virhejakaumasta tulee normaalijakaumaa pitkähäntäisempi.*
-
 ### Autokorrelaatiot
 
 Unohdamme hetkeksi residuaalit, ja siirrymme [autokorrelaatioiden](http://en.wikipedia.org/wiki/Autocorrelation) ongelmaan. Lämpötilasarjassa voisi olla pitkän aikavälin syklisyyttä, mutta datassa ei silmämääräisesti näy kummempia kuoppia, ja sellaisten erottaminen trendistä on jo määritelmällisesti vaikeaa. Keskitymme siis lyhyen aikavälin (1–10 vuotta) korrelaatioihin.
