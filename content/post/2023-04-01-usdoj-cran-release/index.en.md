@@ -10,6 +10,9 @@ tags:
   - open-data
   - R-bloggers
   - usdoj
+output:
+  blogdown::html_page:
+    highlight: tango
 ---
 
 usdoj, a package for fetching data from the United States (US) Department of Justice (DOJ) API, was released as part of the rOpenGov project. usdoj provides easy access to US DOJ press releases, blog entries, and speeches. Optional parameters allow users to specify the number of results starting from the earliest or latest entries, and whether these results contain keywords. Data is cleaned for analysis and returned in a data frame.
@@ -56,7 +59,11 @@ plot_usmap(data = df,
        as involving both the FBI and a state's office of the United States Attorney.") 
 ```
 
-![center](/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-1-1.png)
+{{< img src="/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-1-1.png"
+width="800"
+alt="A choropleth map of the United States, visualizing the number of press releases containing mentions to the FBI in each state"
+link="/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-1-1.png"
+align="center">}}
 
 ## Demonstration: Text Mining United States Department of Justice Open Data
 The data returned by usdoj is in a format that can easily undergo additional processing for analysis. The purpose of this section is to show one way of doing this while walking through the steps for performing a TF-IDF (term frequency-inverse document frequency) analysis in order to see which words are characteristic to certain divisions, and not others. 
@@ -190,5 +197,10 @@ ggplot(top_usao_press_releases,
   labs(x = "tf-idf", y = NULL)
 ```
 
-![center](/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-14-1.png)
+{{< img src="/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-14-1.png"
+width="800"
+alt="A graph containing barcharts for each US state, visualizing the TF-IDF Scores by USAO Grouping"
+link="/post/2023-04-01-usdoj-cran-release.en_files/unnamed-chunk-14-1.png"
+align="center">}}
+
 
