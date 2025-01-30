@@ -4,7 +4,7 @@ $.ajax({
     url: "https://api.github.com/orgs/ropengov/repos?per_page=100&sort=updated",
     dataType: "json",
     success: function(result) {
-	var whitelist = ['homepage','geofi','hetu','eurostat','rqog','fmi2','pxweb','openthl','sweidnumbr','regions','sotkanet','vipunen','digitransit','europarl', 'iotables', 'psData', 'pollstR', 'rwfs', 'hansard', 'europarl', 'RPublica', 'dkstat', 'usbroadband', 'mpg', 'federalregister', 'ogdindiar','helsinki', 'giscoR', 'retroharmonize', 'usdoj', 'oldbailey', 'kelaopendata', 'r311', 'sorvi', 'geodk', 'finna']
+	var whitelist = ['homepage','geofi','hetu','eurostat','rqog','fmi2','pxweb','openthl','sweidnumbr','regions','sotkanet','vipunen','digitransit','europarl', 'iotables', 'psData', 'rwfs', 'hansard', 'europarl', 'RPublica', 'dkstat', 'mpg', 'federalregister', 'ogdindiar','helsinki', 'giscoR', 'retroharmonize', 'usdoj', 'oldbailey', 'kelaopendata', 'r311', 'sorvi', 'geodk', 'finna']
 
 	// edu,
 	// eurostat_geodata
@@ -13,6 +13,7 @@ $.ajax({
 	// election
 
         // Remove: fmi, edudata, rustfare
+	// Archived (removed): pollstR, usbroadband
 
         for( i in result ) {
 
